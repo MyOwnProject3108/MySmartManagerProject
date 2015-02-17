@@ -383,6 +383,7 @@ public class COREManager {
 		
 		try{
 			Thread.sleep(time);
+			driverInstance.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
 		}
 		
 		catch(Exception e){

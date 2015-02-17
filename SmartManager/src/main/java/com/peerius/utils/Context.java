@@ -63,7 +63,7 @@ public class Context extends COREManager {
 		Select droplistOptions = new Select(selectElement);
 
 		droplistOptions.selectByVisibleText(option);
-
+		
 	}
 	
 	public static void selectMenuOption(String mainMenuLabel, String subMenu) {
@@ -101,7 +101,7 @@ public class Context extends COREManager {
 	public static void clickButton(String name) {
 
 		WebElement button = COREManager.driverInstance.findElement(By
-				.xpath("//button[.='" + name + "']"));
+				.xpath("//button[contains(.,'"+name+"')]"));
 
 		button = new WebDriverWait(COREManager.driverInstance,
 				COREManager.elementWaitTime).until(ExpectedConditions
