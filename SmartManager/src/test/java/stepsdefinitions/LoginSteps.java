@@ -1,6 +1,7 @@
 package stepsdefinitions;
 
 
+import com.peerius.SmartMerchandising;
 import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
 
@@ -8,7 +9,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class LoginSteps extends Context {
+public class LoginSteps extends SmartMerchandising {
 
 	@Given("^I login as \"([^\"]*)\"$")
 	public void I_login_as(String arg1) throws Throwable {
@@ -30,6 +31,27 @@ public class LoginSteps extends Context {
 	selectMenuOption(arg2,arg1);
 
 	}
+	
+	@Then("^I should be on Merchandising \"([^\"]*)\" page$")
+	public void I_should_be_on_Merchandising_page(String page){
+		
+		//deleteCampaign("AutoCreate");
+		verifyMerchandisingPage(page);
+
+	}
+	
+	@Then("^I Create Simple Campaign with name \"([^\"]*)\"$")
+	public void I_Create_Simple_Campaign(String campaign) throws Throwable {
+		
+		createCampaign(campaign, "Product Page", "product", "(r.gender=\"male\")");
+	    
+	}
+
+	@Then("^I Should See Campaign \"([^\"]*)\" on Overview Page$")
+	public void I_Should_See_Campaign_on_Overview_Page(String campaign) throws Throwable {
+	    verifyCampaign(campaign);
+	}
+
 	
 }
 

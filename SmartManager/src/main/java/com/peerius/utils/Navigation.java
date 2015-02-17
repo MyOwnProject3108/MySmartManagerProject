@@ -23,6 +23,13 @@ public class Navigation extends COREManager {
 
 		return url;
 	}
+	
+	public static void gotoURL(String url){
+		
+		driverInstance.get(siteUrl+"/"+url+"");
+		
+		
+	}
 
 	public static void gotoSite(String sitename) {
 
