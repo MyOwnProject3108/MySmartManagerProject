@@ -1,6 +1,7 @@
 package stepsdefinitions;
 import java.net.MalformedURLException;
 
+import org.junit.AfterClass;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriverException;
@@ -40,7 +41,7 @@ public class TestHook {
 	public void shutdownBrowser(){
 		Navigation.closeBrowser();
 	}
-	//@AfterClass
+	@AfterClass
 	//TODO 
 	//Need to check driverInstance and Enable ScreenShot Accordingly
 	@After

@@ -1,5 +1,6 @@
 package stepsdefinitions;
 
+import org.openqa.selenium.By;
 
 import com.peerius.SmartMerchandising;
 import com.peerius.utils.Context;
@@ -28,30 +29,84 @@ public class LoginSteps extends SmartMerchandising {
 
 	@When("^I click on \"([^\"]*)\" option in \"([^\"]*)\"$")
 	public void I_click_on_option_in(String arg1, String arg2) throws Throwable {
-	selectMenuOption(arg2,arg1);
+		selectMenuOption(arg2, arg1);
 
 	}
-	
+
 	@Then("^I should be on Merchandising \"([^\"]*)\" page$")
-	public void I_should_be_on_Merchandising_page(String page){
-		
-		//deleteCampaign("AutoCreate");
+	public void I_should_be_on_Merchandising_page(String page) {
+
+	
 		verifyMerchandisingPage(page);
 
 	}
-	
+
 	@Then("^I Create Simple Campaign with name \"([^\"]*)\"$")
 	public void I_Create_Simple_Campaign(String campaign) throws Throwable {
-		
-		createCampaign(campaign, "Product Page", "product", "(r.gender=\"male\")");
-	    
+
+		createCampaign(campaign, "Product Page", "product",
+				"(r.gender=\"male\")");
+
 	}
 
 	@Then("^I Should See Campaign \"([^\"]*)\" on Overview Page$")
-	public void I_Should_See_Campaign_on_Overview_Page(String campaign) throws Throwable {
-	    verifyCampaign(campaign);
+	public void I_Should_See_Campaign_on_Overview_Page(String campaign)
+			throws Throwable {
+		verifyCampaign(campaign);
 	}
 
-	
-}
+	@Given("^I goto Campaign \"([^\"]*)\"$")
+	public void I_goto_Campaign(String campaign) throws Throwable {
+		gotoCampaign(campaign);
 
+	}
+
+	@Given("^Edit Campaign \"([^\"]*)\"$")
+	public void Edit_Campaign(String campaign) throws Throwable {
+		editCampaign(campaign);
+
+	}
+
+	@Then("^I should be on \"([^\"]*)\" Page$")
+	public void I_should_be_on_Page(String arg1) throws Throwable {
+
+		verifyURlText("edit");
+
+	}
+
+	@Given("^I activate Campaign \"([^\"]*)\"$")
+	public void I_activate_Campaign(String campaign) throws Throwable {
+
+		activateCampaign(campaign);
+
+	}
+
+	@Then("^\"([^\"]*)\" should be Activated$")
+	public void should_be_Activated(String arg1) throws Throwable {
+
+		elemementIsPresent(By
+				.xpath("//td//a[@data-original-title=' Pause it ']"));
+
+	}
+
+	@Given("^I Duplicate Campaign \"([^\"]*)\"$")
+	public void I_Duplicate_Campaign(String campaign) throws Throwable {
+
+		duplicateCampaign(campaign);
+	}
+
+	@Given("^I Delete Campaign \"([^\"]*)\"$")
+	public void I_Delete_Campaign(String name) throws Throwable {
+
+		deleteCampaign(name);
+
+	}
+
+	@Then("^I should not see \"([^\"]*)\"$")
+	public void I_should_not_see(String campaign) throws Throwable {
+
+		elementNotPresent(By.linkText(campaign));
+
+	}
+
+}

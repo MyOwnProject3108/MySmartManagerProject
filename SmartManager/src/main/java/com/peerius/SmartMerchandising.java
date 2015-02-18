@@ -77,6 +77,15 @@ public class SmartMerchandising extends Context {
 		
 		
 	}
+	
+	public static void gotoCampaign(String campaign){
+		
+		Navigation.gotoURL("/smartmanager/merchandising/list.page");
+		elemementIsPresent(By.linkText(campaign));
+		clickLink(campaign);
+		
+		
+	}
 
 	public static void verifyCampaign(String campaign){
 		
