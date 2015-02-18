@@ -94,4 +94,13 @@ public class SmartMerchandising extends Context {
 		
 		
 	}
+	
+	public static void verifyMandatoryField(){
+		
+		
+	}
+public static void gotoCreateCampaign(){
+	
+}
+
 }
