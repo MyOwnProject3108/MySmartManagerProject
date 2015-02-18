@@ -22,8 +22,8 @@ Feature: S-Merchandising
     Then "" should be Activated
 
   Scenario: Pause Campaign
-  Given I Pause Campaign ""
- Then Campaign Should be Paused
+    Given I Pause Campaign "AutoCreate"
+    Then Campaign Should be Paused
 
   Scenario: Duplicate Campaign
     Given I goto Campaign "AutoCreate"
@@ -35,4 +35,3 @@ Feature: S-Merchandising
     Given I Delete Campaign "AutoCreate"
     Then I should not see "AutoCreate copy"
     Then I should not see "AutoCreate"
-
