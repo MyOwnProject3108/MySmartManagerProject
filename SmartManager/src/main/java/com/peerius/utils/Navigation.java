@@ -98,9 +98,10 @@ public class Navigation extends COREManager {
 		
 		final Thread KILL_BROWSER_THREAD = new Thread() {
 			
-			@Override 
+			
 			public void run(){
 				driverInstance.quit();
+		
 			}
 		};
 			
@@ -132,5 +133,10 @@ public class Navigation extends COREManager {
     	}
     	
 }
+	
+	public static void closeWindow(){
+		
+		driverInstance.close();
+	}
 	
 }

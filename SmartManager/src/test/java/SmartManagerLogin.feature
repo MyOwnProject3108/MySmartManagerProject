@@ -33,3 +33,4 @@ Feature: S-Merchandising
     Given I Delete Campaign "AutoCreate"
     Then I should not see "AutoCreate copy"
     Then I should not see "AutoCreate"
+

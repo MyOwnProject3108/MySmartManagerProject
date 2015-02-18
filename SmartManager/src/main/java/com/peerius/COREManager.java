@@ -10,7 +10,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -33,6 +35,8 @@ import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.opera.core.systems.OperaDriver;
 import com.peerius.utils.Navigation;
+
+import cucumber.api.Scenario;
 
 /**
  * CORE Operations for Browser operations.
@@ -367,9 +371,6 @@ public class COREManager {
 			logout.moveToElement(logoutLink).click().build().perform();
 			
 		}
-
-	
-
 	}
 	
 	
@@ -390,6 +391,24 @@ public class COREManager {
 			
 			System.err.println("Error In Thread - Sleep");
 		}
+	}
+	
+	public static  void tearDownAndtakeErrorScreenshot(Scenario scenario) {
+
+		if(scenario.isFailed()){
+			
+        try {
+        	
+            scenario.write(scenario.getName() + COREManager.getCurrentUrl());
+        	
+        	byte[] screenshot =((TakesScreenshot)COREManager.driverInstance).getScreenshotAs(OutputType.BYTES);
+          scenario.embed(screenshot, "image/png");
+             
+        } catch (WebDriverException screenShotException) {
+            System.err.println(screenShotException.getMessage());
+        }
+		}
+          
 	}
 
 }
