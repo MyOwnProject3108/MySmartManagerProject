@@ -27,6 +27,7 @@ public class TestHook {
 		
 		COREManager.tearDownAndtakeErrorScreenshot(scenario);
 		Navigation.closeWindow();
+		Navigation.closeBrowser();
 		
 		
 	}

@@ -22,6 +22,8 @@ Feature: S-Merchandising
     Then "" should be Activated
 
   Scenario: Pause Campaign
+  Given I Pause Campaign ""
+ Then Campaign Should be Paused
 
   Scenario: Duplicate Campaign
     Given I goto Campaign "AutoCreate"

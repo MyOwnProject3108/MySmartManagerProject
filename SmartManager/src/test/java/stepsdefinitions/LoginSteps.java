@@ -36,7 +36,6 @@ public class LoginSteps extends SmartMerchandising {
 	@Then("^I should be on Merchandising \"([^\"]*)\" page$")
 	public void I_should_be_on_Merchandising_page(String page) {
 
-	
 		verifyMerchandisingPage(page);
 
 	}
@@ -109,4 +108,15 @@ public class LoginSteps extends SmartMerchandising {
 
 	}
 
+	@Given("^I Pause Campaign \"(.*?)\"$")
+	public void i_Pause_Campaign(String campaign) throws Throwable {
+		pauseCampaign(campaign);
+	}
+
+	@Then("^Campaign Should be Paused$")
+	public void campaign_Should_be_Paused() throws Throwable {
+		elemementIsPresent(By
+				.xpath("//td//a[@data-original-title=' Activate it ']"));
+
+	}
 }

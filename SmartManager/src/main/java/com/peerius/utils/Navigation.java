@@ -96,17 +96,11 @@ public class Navigation extends COREManager {
 
 	public static void closeBrowser() {
 		
-		final Thread KILL_BROWSER_THREAD = new Thread() {
+		if(driverInstance!=null){
 			
+			driverInstance.quit();
 			
-			public void run(){
-				driverInstance.quit();
-		
-			}
-		};
-			
-		Runtime.getRuntime().addShutdownHook( KILL_BROWSER_THREAD);
-		
+		}
 	}
 	
 	public static void refreshPage() {
