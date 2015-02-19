@@ -413,5 +413,12 @@ class Locator extends Context {
 		return webElement != null
 				&& webElement.getAttribute("class").contains(className);
 	}
+	public static void uploadFile(By by, String filePath){
+		
+		WebElement fileBrowser = driverInstance.findElement(by);
+		fileBrowser.sendKeys(filePath);
+		
+		
+	}
 
 }
