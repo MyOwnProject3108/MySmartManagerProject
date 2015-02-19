@@ -3,7 +3,7 @@ Feature: S-Merchandising
   Background: Pre-requisite
     Given I login as "zach"
     Then I should be on "Peerius Smart Manager" page
-    And I search for site "demostoredev"
+    And I search for site "craftcompany"
 
   Scenario: Create Simple Merchandising Campaign
     When I click on "Create a New Campaign" option in "Merchandising"
@@ -36,7 +36,6 @@ Feature: S-Merchandising
     Then I should not see "AutoCreate copy"
     Then I should not see "AutoCreate"
 
-  @Validation
   Scenario Outline: Message Validation
     Given I Create Campaign with "<Name>"
     Then I should see Message "<Message>"
@@ -45,3 +44,37 @@ Feature: S-Merchandising
       | Name          | Message               |
       |               | Name must be provided |
       | Test_Selenium | Recommendation Rules  |
+
+ 
+  Scenario: Error validation for Duplicate Merchandising Campaign name
+    Given I Create Simple Campaign with name "AutoCreate"
+    And I Create Simple Campaign with name "AutoCreate"
+    Then I should see Message "The name you have chosen is already in use"
+    
+      
+    Scenario: Error validation for Invalid Expression 
+    Given I Create invalid Campaign with name "AutoCreate"
+    Then I should see Message "Invalid rule"
+    
+
+    Scenario: Error validation for Empty Expression on Edit 
+    Given I Create Simple Campaign with name "AutoCreate"
+    And Edit Campaign "AutoCreate"
+   	When I click on link "3. Recommendation Rules"
+   	And I click on button " Edit Rule..."
+   	And I Enter Text ""
+   	And click on button "Save Campaign"
+    Then I should see Message "no expression was specified"
+    
+    @Validation
+    Scenario: Error validation for invalid Expression in master rule 
+ 	Given I Create Simple Campaign with name "AutoCreate"
+ 	When I click on link "5.  Activation & Preview"
+
+    
+    
+    
+    
+    
+    
+    
