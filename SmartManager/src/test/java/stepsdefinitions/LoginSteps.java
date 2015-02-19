@@ -119,4 +119,21 @@ public class LoginSteps extends SmartMerchandising {
 				.xpath("//td//a[@data-original-title=' Activate it ']"));
 
 	}
+	
+	@Then("^I should see Message \"(.*?)\"$")
+	public void i_should_see_Message(String message) throws Throwable {
+		verifyErrorMessage(By.className("notifications"), message);
+	  
+	}
+	
+	@Given("^I Create Campaign with \"(.*?)\"$")
+	public void i_Create_Campaign_with_Test_Selenium(String name) throws Throwable {
+		SmartMerchandising.gotoCreateCampaign();
+		setText(By.id("name"), name);
+		clickButton("Save Campaign");
+	
+	}
+
+
+
 }

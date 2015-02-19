@@ -101,6 +101,8 @@ public class SmartMerchandising extends Context {
 	}
 public static void gotoCreateCampaign(){
 	
+	Navigation.gotoURL("/smartmanager/merchandising/edit.page");
+	
 }
 
 }
