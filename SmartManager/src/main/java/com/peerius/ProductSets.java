@@ -15,6 +15,11 @@ public class ProductSets extends Context{
 		clickButton("Save Product set");
 
 	}
+	
+	public static void createProductSetCSV(String title, String filePath){
+		
+		
+	}
 
 	public static void verifyProductSet(String name){
 		
@@ -25,7 +30,21 @@ public class ProductSets extends Context{
 		
 	}
 
-	public static void editProductset(){
+	public static void editProductset(String name){
+		
+	}
+	
+	public static void duplicateProductSet(String name){
+		
+		
+	}
+	
+	public static void clearProducts(){
+		
+		
+	}
+	
+	public static void deleteProductSet(){
 		
 	}
 
