@@ -7,7 +7,7 @@ import cucumber.api.junit.Cucumber;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(format = {"pretty", "html:build/cucumber-html-report"}, features="./src")
+@CucumberOptions( features="./src", plugin={"pretty", "html:target/cucumber-html-report", "rerun:target/rerun.txt"})
 public class TestRunner {
 
 }
