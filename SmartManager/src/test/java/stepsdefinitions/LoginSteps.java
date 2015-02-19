@@ -80,8 +80,8 @@ public class LoginSteps extends SmartMerchandising {
 
 	}
 
-	@Then("^\"([^\"]*)\" should be Activated$")
-	public void should_be_Activated(String arg1) throws Throwable {
+	@Then("^Campaign should be Activated$")
+	public void campaign_should_be_Activated() throws Throwable {
 
 		elemementIsPresent(By
 				.xpath("//td//a[@data-original-title=' Pause it ']"));

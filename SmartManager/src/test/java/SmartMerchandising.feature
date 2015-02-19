@@ -19,7 +19,7 @@ Feature: S-Merchandising
   Scenario: Activate Campaign
     Given I goto Campaign "AutoCreate"
     And I activate Campaign "AutoCreate"
-    Then "" should be Activated
+    Then Campaign should be Activated
 
   Scenario: Pause Campaign
     Given I Pause Campaign "AutoCreate"
