@@ -105,4 +105,27 @@ public static void gotoCreateCampaign(){
 	
 }
 
+public static void createProductSet(String title, String productSKU){
+	
+	clickButton("Add Product set");
+	verifyPageText(By.tagName("h4"), "Define Product set");
+	setText(By.name("name"), title);
+	setText(By.className("visual-input"), productSKU);
+	clickButton("Save Product set");
+
+}
+
+public static void verifyProductSet(String name){
+	
+}
+
+public static void gotoProductSet(String name){
+	
+	
+}
+
+public static void editProductset(){
+	
+}
+
 }
