@@ -35,3 +35,13 @@ Feature: S-Merchandising
     Given I Delete Campaign "AutoCreate"
     Then I should not see "AutoCreate copy"
     Then I should not see "AutoCreate"
+  Scenario Outline: Message Validation
+    Given I Create Campaign with <Name>
+    Then I should see Message <Message>
+
+    Examples: Validation Messages
+      | Name   | Message | Field |
+      | Auto_1 | Error   |       |
+      | Auto3  | Error   |       |
+      | 1234   | Error   |       |
+    
