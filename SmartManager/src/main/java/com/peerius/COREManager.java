@@ -399,7 +399,7 @@ public class COREManager {
 			
         try {
         	
-            scenario.write(scenario.getName() + COREManager.getCurrentUrl());
+            scenario.write(scenario.getName() +"----" + scenario.getId()+ "-------" + scenario.getStatus() + "/n"+ COREManager.getCurrentUrl());
         	
         	byte[] screenshot =((TakesScreenshot)COREManager.driverInstance).getScreenshotAs(OutputType.BYTES);
           scenario.embed(screenshot, "image/png");
