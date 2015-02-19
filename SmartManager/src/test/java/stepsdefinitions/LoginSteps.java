@@ -47,6 +47,15 @@ public class LoginSteps extends SmartMerchandising {
 				"(r.gender=\"male\")");
 
 	}
+	
+	@Then("^I Create invalid Campaign with name \"(.*?)\"$")
+	public void i_Create_invalid_Campaign_with_name(String campaign) throws Throwable {
+		createCampaign(campaign, "Product Page", "product",
+				"(r.productset<>\"AJ10043\")");
+	    
+	}
+	
+	
 
 	@Then("^I Should See Campaign \"([^\"]*)\" on Overview Page$")
 	public void I_Should_See_Campaign_on_Overview_Page(String campaign)
@@ -131,9 +140,26 @@ public class LoginSteps extends SmartMerchandising {
 		SmartMerchandising.gotoCreateCampaign();
 		setText(By.id("name"), name);
 		clickButton("Save Campaign");
+		}
 	
+	@When("^I click on link \"(.*?)\"$")
+	public void i_click_on_link(String linkName) throws Throwable {
+		clickLink(linkName);
 	}
-
-
-
+	
+	@When("^I click on button \"(.*?)\"$")
+	public void i_click_on_button(String editRule) throws Throwable {
+	   clickButton(editRule);
+	}
+	
+	@When("^I Enter Text \"(.*?)\"$")
+	public void i_enter_as(String text) throws Throwable {
+	   setText(By.xpath("//textarea[contains(@id,'rec')]"), text);
+		
+	}
+	
+	@When("^click on button \"(.*?)\"$")
+	public void click_on_button(String SaveCampaign) throws Throwable {
+	  clickButton(SaveCampaign);
+	}
 }
