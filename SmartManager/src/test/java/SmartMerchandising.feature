@@ -136,6 +136,11 @@ Feature: S-Merchandising
     When I click on "Define Product Sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
     Then I Should verify Product Sets "TestSet"
+    
+    @delete
+    Scenario: Delete Product Set
+    Given I Delete Product Set "TestSet"
+    Then Product Set "TestSet" Should be Deleted
 
     
     

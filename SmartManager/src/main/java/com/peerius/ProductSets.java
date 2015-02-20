@@ -60,8 +60,7 @@ public class ProductSets extends Context {
 
 	public static void gotoProductSet(String name) {
 
-		Navigation
-				.gotoURL("/smartmanager/sku/selectedproductsets/list.page?smartproduct=merchandising");
+		SmartMerchandising.selectMenuOption("Merchandising", "Define Product Sets");
 		elemementIsPresent(By.linkText(name));
 		clickLink(name);
 

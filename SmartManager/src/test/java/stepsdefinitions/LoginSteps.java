@@ -217,10 +217,24 @@ public class LoginSteps extends SmartMerchandising {
 	
 	@Then("^I Should verify Product Sets \"(.*?)\"$")
 	public void i_Should_verify_Product_Sets(String name) throws Throwable {
-		ProductSets.gotoProductSet(name);
+		SmartMerchandising.selectMenuOption("Merchandising", "Define Product Sets");
+		clickLink(name);
 		elemementIsPresent(By.xpath("//div[@class='visual-tags']//descendant::div"));
 		
 	}
+	
+	@Given("^I Delete Product Set \"(.*?)\"$")
+	public void i_Delete_Product_Set(String productSet) throws Throwable {
+	   ProductSets.deleteProductSet(productSet);
+	}
+
+	@Then("^Product Set \"(.*?)\" Should be Deleted$")
+	public void product_Set_Should_be_Deleted(String productSet) throws Throwable {
+	 SmartMerchandising.selectMenuOption("Merchandising", "Define Product Sets");
+	 elementNotPresent(By.linkText(productSet));
+	}
+
+
 
 
 }
