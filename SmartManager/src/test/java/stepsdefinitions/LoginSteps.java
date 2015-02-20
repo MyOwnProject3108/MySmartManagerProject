@@ -199,7 +199,11 @@ public class LoginSteps extends SmartMerchandising {
 	public void i_Set_Master_Rule(String rule) throws Throwable {
 	 setText(By.id("master_advanced"), rule);
 	}
-
+	
+	@Then("^I Add New Rule \"(.*?)\"$")
+	public void i_Add_New_Rule(String newrule) throws Throwable {
+	    
+	}
 	
 }
 
