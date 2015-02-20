@@ -101,10 +101,34 @@ Feature: S-Merchandising
     And click on button "Save Campaign"
     Then I should see Message "no expression was specified"
 
-  @Validation
-  Scenario: Error validation for invalid Expression in master rule
+  Scenario: Error validation for empty preview
     Given I Create Simple Campaign with name "AutoCreate"
     And Edit Campaign "AutoCreate"
     When I click on link "5. Activation & Preview"
     When I click on link "Preview"
     Then I should preview Message "Please fill in the preview product reference code"
+
+  
+  Scenario: Error validation for empty productset name
+    When I click on "Define Product Sets" option in "Merchandising"
+    And I click on button "Add Product set"
+    And click on button "Save Product set"
+    Then I should see Message "Name is required"
+    
+        
+   Scenario: Error validation for empty productset
+    When I click on "Define Product Sets" option in "Merchandising"
+    And I click on button "Add Product set"
+    And I enter title "AutoproductSet"
+    And click on button "Save Product set"
+    Then I should see Message "An SKU set must have at least one valid product"
+    
+   @Validation
+   Scenario: Error validation for invalid productset name
+    When I click on "Define Product Sets" option in "Merchandising"
+    And I click on button "Add Product set"
+    And I enter title "AutoproductSet@123"
+    And click on button "Save Product set"
+    Then I should see Message "Name accepts alphanumeric and spaces only"
+    
+    

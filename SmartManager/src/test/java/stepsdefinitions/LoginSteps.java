@@ -188,6 +188,14 @@ public class LoginSteps extends SmartMerchandising {
 		createCampaign(campaign, position, "Product Page", "product", "(r.gender=\"male\")");
 
 	}
+	
+	@When("^I enter title \"(.*?)\"$")
+	public void i_enter_title(String text) throws Throwable {
+	   setText(By.id("sku_title"), text);
+	}
+
+	
+	
 
 	@Then("^I should see Master Rule \"(.*?)\"$")
 	public void i_should_see_Master_Rule(String rule) throws Throwable {
