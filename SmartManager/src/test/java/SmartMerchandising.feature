@@ -18,14 +18,16 @@ Feature: S-Merchandising
     Then I should be on "edit" Page
 
   @masterrule
-  Scenario: Create Simple Campaign With Master Rule OR Add Master rule
+  Scenario: Add Master rule
     Given I goto Campaign "AutoCreate"
-    And Edit Campaign "AutoCreate"
     Then I click on link "2. Master Rules"
-    And I click on button "Toggle Advanced"
-    Then I Enter Text ""
+    And I click on link "Toggle Advanced"
+    Then I Set Master Rule "(r.saleprice<20)"
     And click on button "Save Campaign"
     Then I should see Message "Successfully saved"
+    When I goto Campaign "AutoCreate"
+    And I click on link "2. Master Rules"
+    Then I should see Master Rule "(r.saleprice<20)"
 
   @positions
   Scenario Outline: Apply Rule to Campaign Positions
