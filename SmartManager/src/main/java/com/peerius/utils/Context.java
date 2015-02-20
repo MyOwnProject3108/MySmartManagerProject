@@ -362,6 +362,15 @@ public class Context extends COREManager {
 	
 		dragAndDrop.clickAndHold(source).moveToElement(target).release(target).build().perform();
 	}
+	
+	public static void uploadFile(By by, String filePath){
+		
+		WebElement fileBrowser = driverInstance.findElement(by);
+		fileBrowser.sendKeys(filePath);
+		
+		
+	}
+	
 
 //Locator class to find elements. Will contain helper methods.
 
@@ -425,16 +434,7 @@ static class Locator extends Context {
 		return webElement != null
 				&& webElement.getAttribute("class").contains(className);
 	}
-	public static void uploadFile(By by, String filePath){
-		
-		WebElement fileBrowser = driverInstance.findElement(by);
-		fileBrowser.sendKeys(filePath);
-		
-		
-	}
-	
-	
-		
+
 	}
 
 
