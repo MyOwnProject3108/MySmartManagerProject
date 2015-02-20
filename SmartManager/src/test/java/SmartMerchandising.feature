@@ -42,6 +42,18 @@ Feature: S-Merchandising
       | AutoCreatePosition2 | 2        |
       | AutoCreatePosition3 | 3        |
 
+  @diffrules
+  Scenario Outline: Different Rules At Different Positions
+    Given I Create Campaign "<Campaign>" For "<Position>"
+    Then I goto Campaign "<Campaign>"
+    And I click on link "3. Recommendation Rules"
+    And I click on button "Add New Rule"
+    Then I Add New Rule "(r.saleprice<20)"
+
+    Examples: Rule Positions
+      | Campaign            | Position |
+      | AutoCreatePosition1 | 1        |
+
   Scenario: Activate Campaign
     Given I goto Campaign "AutoCreate"
     And I activate Campaign "AutoCreate"
