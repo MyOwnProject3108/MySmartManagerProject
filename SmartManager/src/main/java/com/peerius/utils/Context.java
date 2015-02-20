@@ -220,7 +220,7 @@ public class Context extends COREManager {
 		driverInstance.switchTo().alert().dismiss();
 	}
 	
-	public void verifyInnerHTML(By elementlocator, String text) {
+	public static void verifyInnerHTML(By elementlocator, String text) {
 		
 		WebElement innerHTML = driverInstance.findElement(elementlocator);
 		
