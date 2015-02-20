@@ -90,4 +90,7 @@ Feature: S-Merchandising
   @Validation
   Scenario: Error validation for invalid Expression in master rule
     Given I Create Simple Campaign with name "AutoCreate"
-    When I click on link "5.  Activation & Preview"
+    And Edit Campaign "AutoCreate"
+    When I click on link "5. Activation & Preview"
+    When I click on link "Preview"
+    Then I should preview Message "Please fill in the preview product reference code"
