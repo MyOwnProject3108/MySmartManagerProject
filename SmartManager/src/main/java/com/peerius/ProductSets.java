@@ -107,6 +107,8 @@ public class ProductSets extends Context {
 		clickElement(By.xpath("//td/a[text()='" + productSet
 				+ "']//following::td[1]//div/a[contains(@class,'delete')]"));
 		elemementIsPresent(By.linkText(productSet));
+		clickElement(By.className("yes"));
+		
 
 	}
 
