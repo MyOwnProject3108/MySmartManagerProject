@@ -182,8 +182,16 @@ public class LoginSteps extends SmartMerchandising {
 
 	}
 
+	@Then("^I should see Master Rule \"(.*?)\"$")
+	public void i_should_see_Master_Rule(String rule) throws Throwable {
+	verifyInnerHTML(By.id("master_advanced"), rule);
 	
+	}
 	
+	@When("^I Set Master Rule \"(.*?)\"$")
+	public void i_Set_Master_Rule(String rule) throws Throwable {
+	 setText(By.id("master_advanced"), rule);
+	}
 
 	
 }
