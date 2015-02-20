@@ -349,11 +349,23 @@ public class Context extends COREManager {
 		Assert.assertTrue(textPresent);
 
 	}
-}
+	
+	public static void dragAndDrop(By sourceTo, By targetTo){
+		
+		WebElement source = new WebDriverWait(driverInstance, elementWaitTime)
+		.until(ExpectedConditions.presenceOfElementLocated(sourceTo));
+				
+		WebElement target = new WebDriverWait(driverInstance, elementWaitTime)
+		.until(ExpectedConditions.presenceOfElementLocated(targetTo));
+		
+		Actions dragAndDrop = new Actions(driverInstance);
+	
+		dragAndDrop.clickAndHold(source).moveToElement(target).release(target).build().perform();
+	}
 
 //Locator class to find elements. Will contain helper methods.
 
-class Locator extends Context {
+static class Locator extends Context {
 
 	private WebDriver webDriver;
 	private WebElement webElement;
@@ -420,5 +432,10 @@ class Locator extends Context {
 		
 		
 	}
+	
+	
+		
+	}
+
 
 }

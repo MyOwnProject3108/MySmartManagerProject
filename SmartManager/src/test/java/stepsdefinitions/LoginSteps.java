@@ -43,14 +43,14 @@ public class LoginSteps extends SmartMerchandising {
 	@Then("^I Create Simple Campaign with name \"([^\"]*)\"$")
 	public void I_Create_Simple_Campaign(String campaign) throws Throwable {
 
-		createCampaign(campaign, "Product Page", "product",
+		createCampaignSimple(campaign, "Product Page", "product",
 				"(r.gender=\"male\")");
 
 	}
 	
 	@Then("^I Create invalid Campaign with name \"(.*?)\"$")
 	public void i_Create_invalid_Campaign_with_name(String campaign) throws Throwable {
-		createCampaign(campaign, "Product Page", "product",
+		createCampaignSimple(campaign, "Product Page", "product",
 				"(r.productset<>\"AJ10043\")");
 	    
 	}
@@ -161,5 +161,30 @@ public class LoginSteps extends SmartMerchandising {
 	@When("^click on button \"(.*?)\"$")
 	public void click_on_button(String SaveCampaign) throws Throwable {
 	  clickButton(SaveCampaign);
+	
 	}
+	
+	@Given("^I Save the Campaign$")
+	public void i_Save_the_Campaign() throws Throwable {
+	    
+	}
+
+	@Then("^I Should Verify \"(.*?)\"$")
+	public void i_Should_Verify(String position) throws Throwable {
+		
+		elemementIsPresent(By.xpath("//li["+position+"]//div[contains(@class,'selected')]"));
+
+	}
+	
+	@Given("^I Create Campaign \"(.*?)\" For \"(.*?)\"$")
+	public void i_Create_Campaign_For(String campaign, String position) throws Throwable {
+		createCampaign(campaign, position, "Product Page", "product", "(r.gender=\"male\")");
+
+	}
+
+	
+	
+
+	
 }
+

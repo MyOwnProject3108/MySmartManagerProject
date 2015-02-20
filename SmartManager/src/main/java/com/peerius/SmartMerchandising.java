@@ -10,7 +10,7 @@ public class SmartMerchandising extends Context {
 	
 	
 	
-	public static void createCampaign(String name, String location, String widget, String ruleExpression){
+	public static void createCampaignSimple(String name, String location, String widget, String ruleExpression){
 		
 		Navigation.gotoURL("/smartmanager/merchandising/edit.page");
 		setText(By.id("name"), name);
@@ -22,6 +22,22 @@ public class SmartMerchandising extends Context {
 		setText(By.id("advanced_btn_rec_default"), ruleExpression);
 		clickLink("Apply to all");
 		clickElement(By.xpath("//button[contains(.,' Save Campaign')]"));
+		threadSleep(5000);
+		Navigation.refreshPage();
+	}
+	
+public static void createCampaign(String name, String position, String location, String widget, String ruleExpression){
+		
+		Navigation.gotoURL("/smartmanager/merchandising/edit.page");
+		setText(By.id("name"), name);
+		selectDropList(By.id("location"), location);
+		selectDropList(By.id("widget"), widget);
+		clickButton("Next");
+		clickButton("Next");
+		clickElement(By.xpath("//button[contains(@class,'edit-rule')]"));
+		setText(By.id("advanced_btn_rec_default"), ruleExpression);
+		dragAndDrop(By.xpath("//div[contains(@data-original-title,'Drag')]"), By.xpath("//ul[@class='rules-grid']/li["+position+"]"));
+		clickButton("Save Campaign");
 		threadSleep(5000);
 		Navigation.refreshPage();
 	}
