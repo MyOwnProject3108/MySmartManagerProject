@@ -158,6 +158,13 @@ public class LoginSteps extends SmartMerchandising {
 		
 	}
 	
+	@Then("^I should preview Message \"(.*?)\"$")
+	public void i_should_preview_Message(String text) throws Throwable {
+	 verifyInnerHTML(By.className("prev-ajax-error"), text);
+	}
+
+
+	
 	@When("^click on button \"(.*?)\"$")
 	public void click_on_button(String SaveCampaign) throws Throwable {
 	  clickButton(SaveCampaign);
