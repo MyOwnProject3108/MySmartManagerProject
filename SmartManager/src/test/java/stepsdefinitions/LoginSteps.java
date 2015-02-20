@@ -2,6 +2,7 @@ package stepsdefinitions;
 
 import org.openqa.selenium.By;
 
+import com.peerius.ProductSets;
 import com.peerius.SmartMerchandising;
 import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
@@ -148,8 +149,8 @@ public class LoginSteps extends SmartMerchandising {
 	}
 	
 	@When("^I click on button \"(.*?)\"$")
-	public void i_click_on_button(String editRule) throws Throwable {
-	   clickButton(editRule);
+	public void i_click_on_button(String name) throws Throwable {
+	   clickButton(name);
 	}
 	
 	@When("^I Enter Text \"(.*?)\"$")
@@ -207,6 +208,29 @@ public class LoginSteps extends SmartMerchandising {
 	public void i_Set_Master_Rule(String rule) throws Throwable {
 	 setText(By.id("master_advanced"), rule);
 	}
+	
+	@When("^I Add Product \"(.*?)\" and \"(.*?)\"$")
+	public void i_Add_Product_and(String productPrefix, String numberOfProduct) throws Throwable {
+		
+	// ProductSets.addProductSet(productPrefix, numberOfProduct);
+	}
+	
+	@When("^I Create Product Set \"(.*?)\" and products number \"(.*?)\" with Suffix \"(.*?)\"$")
+	public void i_Create_Product_Set_and_products_number_with_Suffix(String name, String productNumber, String productSuffix) throws Throwable {
+		
+		ProductSets.createProductSet(name, productSuffix,productNumber);
+	
+	}
+
+	
+	@Then("^I Should verify Product Sets \"(.*?)\"$")
+	public void i_Should_verify_Product_Sets(String name) throws Throwable {
+		ProductSets.gotoProductSet(name);
+		elemementIsPresent(By.xpath("//div[@class='visual-tags']//descendant::div"));
+		
+	}
+
+
 
 	
 }
