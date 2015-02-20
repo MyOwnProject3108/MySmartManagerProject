@@ -195,9 +195,6 @@ public class LoginSteps extends SmartMerchandising {
 	   setText(By.id("sku_title"), text);
 	}
 
-	
-	
-
 	@Then("^I should see Master Rule \"(.*?)\"$")
 	public void i_should_see_Master_Rule(String rule) throws Throwable {
 	verifyInnerHTML(By.id("master_advanced"), rule);
@@ -208,12 +205,7 @@ public class LoginSteps extends SmartMerchandising {
 	public void i_Set_Master_Rule(String rule) throws Throwable {
 	 setText(By.id("master_advanced"), rule);
 	}
-	
-	@When("^I Add Product \"(.*?)\" and \"(.*?)\"$")
-	public void i_Add_Product_and(String productPrefix, String numberOfProduct) throws Throwable {
-		
-	// ProductSets.addProductSet(productPrefix, numberOfProduct);
-	}
+
 	
 	@When("^I Create Product Set \"(.*?)\" and products number \"(.*?)\" with Suffix \"(.*?)\"$")
 	public void i_Create_Product_Set_and_products_number_with_Suffix(String name, String productNumber, String productSuffix) throws Throwable {
@@ -231,7 +223,5 @@ public class LoginSteps extends SmartMerchandising {
 	}
 
 
-
-	
 }
 
