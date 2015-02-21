@@ -108,6 +108,7 @@ public class ProductSets extends Context {
 				+ "']//following::td[1]//div/a[contains(@class,'delete')]"));
 		elemementIsPresent(By.linkText(productSet));
 		clickElement(By.className("yes"));
+		Navigation.refreshPage();
 		
 
 	}
