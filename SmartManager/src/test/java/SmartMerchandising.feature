@@ -49,7 +49,7 @@ Feature: S-Merchandising
     Then I goto Campaign "<Campaign>"
     And I click on link "3. Recommendation Rules"
     And I click on button "Add New Rule"
-    Then I Add New Rule "(r.saleprice<20)"
+    Then I Add New Rule "2" with Rule "(r.saleprice<20)"
 
     Examples: Rule Positions
       | Campaign            | Position |
@@ -105,7 +105,7 @@ Feature: S-Merchandising
     Given I Create Simple Campaign with name "AutoCreate"
     And Edit Campaign "AutoCreate"
     When I click on link "3. Recommendation Rules"
-    And I click on button " Edit Rule..."
+    And I click on button "Edit Rule..."
     And I Enter Text ""
     And click on button "Save Campaign"
     Then I should see Message "no expression was specified"

@@ -233,6 +233,14 @@ public class LoginSteps extends SmartMerchandising {
 	 SmartMerchandising.selectMenuOption("Merchandising", "Define Product Sets");
 	 elementNotPresent(By.linkText(productSet));
 	}
+	
+	@Then("^I Add New Rule \"(.*?)\" with Rule \"(.*?)\"$")
+	public void i_Add_New_Rule(String ruleNumber, String rule) throws Throwable {
+	   clickButton("Edit Rule...");
+	   clickLink("Toggle advanced");
+	   setText(By.xpath("//div/textarea[contains(@id,'advanced_btn_rec_"+ruleNumber+"')]"), rule	);
+	   clickButton("Save Campaign");
+	}
 
 
 
