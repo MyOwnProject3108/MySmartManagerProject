@@ -175,9 +175,12 @@ Feature: S-Merchandising
     Then I should preview Message "Please fill in the preview product reference code"
     
     @merchpreview    
+    Scenario: Merchandising Preview Product Refcode
     Given I goto Campaign "AutoCreate"
     And Edit Campaign "AutoCreate"
     When I click on link "5. Activation & Preview"
+    And Select Preview Products "2" with Ref "A"
+    And Select Preview Category "Tops"
 
   @emptyskuname
   Scenario: Error validation for empty productset name

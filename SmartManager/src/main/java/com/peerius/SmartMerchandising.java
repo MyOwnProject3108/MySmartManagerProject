@@ -1,6 +1,11 @@
 package com.peerius;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
@@ -119,6 +124,44 @@ public static void gotoCreateCampaign(){
 	
 	Navigation.gotoURL("/smartmanager/merchandising/edit.page");
 	
+}
+
+public static void selectPreviewProductList(String productPrefix, String number){
+	
+	int numberOfProduct = Integer.parseInt(number);
+
+	setText(By.className("visual-input"), productPrefix);
+	pressKey("Enter");
+	elemementIsPresent(By.xpath("//ul[contains(@class,'tags')]"));
+	List<WebElement> products = driverInstance.findElements(By.xpath("//textarea[@id='previewProducts']/following::ul[1]"));
+
+	for (int i = 0; i < numberOfProduct; i++) {
+
+		for (WebElement product : products) {
+
+			Actions doubleClick = new Actions(driverInstance);
+
+			doubleClick.moveToElement(product).click().sendKeys(Keys.ENTER).build().perform();
+		}
+	}
+	clickLink("Finished");
+
+}
+
+public static void selectPreviewCategory(String category){
+	
+	setText(By.id("previewCategory"), category);
+	
+	List<WebElement> products = driverInstance.findElements(By.xpath("//input[@id='previewCategory']/following::ul[1]"));
+	for (int i = 0; i < 5; i++) {
+	
+	for (WebElement product : products) {
+
+		Actions doubleClick = new Actions(driverInstance);
+
+		doubleClick.moveToElement(product).click().sendKeys(Keys.ENTER).build().perform();
+	}
+	}
 }
 
 }

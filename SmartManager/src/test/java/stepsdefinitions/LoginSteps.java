@@ -285,6 +285,21 @@ public class LoginSteps extends SmartMerchandising {
 	public void i_Enter_rule_Text(String text) throws Throwable {
 		setText(By.xpath("//*[@id='sidebar']//input[@type='text']"),text);
 	}
+	
+	@When("^Select Preview Products \"(.*?)\" with Ref \"(.*?)\"$")
+	public void select_Preview_Products_with_Ref(String numberofproduct, String refcode) throws Throwable {
+		
+		selectPreviewProductList(refcode, numberofproduct);
+	   
+	}
+
+	@When("^Select Preview Category \"(.*?)\"$")
+	public void select_Preview_Category(String category) throws Throwable {
+		
+		select_Preview_Category(category);
+	 
+	}
+
 
 }
 
