@@ -243,6 +243,14 @@ public class LoginSteps extends SmartMerchandising {
 	 elementNotPresent(By.linkText(productSet));
 	}
 	
+	@Then("^Product Set \"(.*?)\" is not Deleted$")
+	public void product_Set_is_not_Deleted(String productset) throws Throwable {
+		SmartMerchandising.selectMenuOption("Merchandising", "Define Product Sets");
+		elemementIsPresent(By.linkText(productset));
+	}
+
+	
+	
 	@Then("^I Add New Rule \"(.*?)\" with Rule \"(.*?)\"$")
 	public void i_Add_New_Rule(String ruleNumber, String rule) throws Throwable {
 	   clickButton("Edit Rule...");
@@ -261,9 +269,17 @@ public class LoginSteps extends SmartMerchandising {
 	@When("^I select operator \"(.*?)\"$")
 	public void i_select_operator(String condOperator) throws Throwable {
 		clickElement(By.xpath("//*[@id='sidebar']/ul/li//option[.='"+condOperator+"']"));
-		//option[.='NOT equals to']
-
+		
 	} 
+	
+	@When("^I click Delete On Product Set \"(.*?)\"$")
+	public void click_delete_button_productset(String productset){
+		
+		ProductSets.deleteButton(productset);
+		clickElement(By.className("yes"));
+	
+	}
+	
 	
 	@When("^I Enter rule Text \"(.*?)\"$")
 	public void i_Enter_rule_Text(String text) throws Throwable {

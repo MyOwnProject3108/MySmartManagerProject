@@ -85,7 +85,14 @@ Feature: S-Merchandising
     Then I should see Message "Successfully saved"
     When I goto Campaign "AutoCreate"
     When I click on link "3. Recommendation Rules"
-    Then I should see Rule "(r.colour="black")" on Position "1"
+    Then I should see Rule "(r.productset="TestSet")" on Position "1"
+    
+      @deleteproductsetusedinrule
+  Scenario: Delete Product Set with is used as a rule in merch campaign
+    When I click on "Define Product Sets" option in "Merchandising"
+    And I click Delete On Product Set "TestSet"
+    Then I should see Message "SKU set is in use and cannot be deleted"
+    
     
 
   @activecamp
@@ -197,7 +204,7 @@ Feature: S-Merchandising
     Then I Should verify Product Sets "TestSet"
 
   @delete
-  Scenario: Delete Product Set
+  Scenario: Delete Product Set with simple rule
     Given I Delete Product Set "TestSet"
     Then Product Set "TestSet" Should be Deleted
 
