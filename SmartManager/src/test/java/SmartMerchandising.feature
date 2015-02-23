@@ -55,6 +55,39 @@ Feature: S-Merchandising
       | Campaign            | Position |
       | AutoCreatePosition1 | 1        |
 
+  @selectrule
+  Scenario: Create Simple Merchandising Campaign using select list for the rules
+    Given I goto Campaign "AutoCreate"
+    And Edit Campaign "AutoCreate"
+    When I click on link "3. Recommendation Rules"
+    And I click on button "Edit Rule..."
+    And I select option "r.colour"
+    And I select operator "equals to"
+    And I Enter rule Text "black"
+    And click on button "Save Campaign"
+    Then I should see Message "Successfully saved"
+    When I goto Campaign "AutoCreate"
+    When I click on link "3. Recommendation Rules"
+    Then I should see Rule "(r.colour="black")" on Position "1"
+    
+    @productsetrule
+  Scenario: Create Simple Merchandising Campaign using productset as a rule
+  	When I click on "Define Product Sets" option in "Merchandising"
+    And I Create Product Set "TestSet" and products number "2" with Suffix "D"
+    Given I goto Campaign "AutoCreate"
+    And Edit Campaign "AutoCreate"
+    When I click on link "3. Recommendation Rules"
+    And I click on button "Edit Rule..."
+    And I select option "r.productset"
+    And I select operator "equals to"
+    And I Enter rule Text "TestSet"
+    And click on button "Save Campaign"
+    Then I should see Message "Successfully saved"
+    When I goto Campaign "AutoCreate"
+    When I click on link "3. Recommendation Rules"
+    Then I should see Rule "(r.colour="black")" on Position "1"
+    
+
   @activecamp
   Scenario: Activate Campaign
     Given I goto Campaign "AutoCreate"
@@ -76,8 +109,14 @@ Feature: S-Merchandising
   Scenario: Delete Campaign
     Given I Delete Campaign "AutoCreate copy"
     Given I Delete Campaign "AutoCreate"
+    Given I Delete Campaign "AutoCreatePosition1"
+    Given I Delete Campaign "AutoCreatePosition2"
+    Given I Delete Campaign "AutoCreatePosition3"
     Then I should not see "AutoCreate copy"
     Then I should not see "AutoCreate"
+    Then I should not see "AutoCreatePosition1"
+    Then I should not see "AutoCreatePosition2"
+    Then I should not see "AutoCreatePosition3"
 
   @validation
   Scenario Outline: Message Validation

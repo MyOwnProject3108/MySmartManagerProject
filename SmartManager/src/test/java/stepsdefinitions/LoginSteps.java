@@ -159,6 +159,8 @@ public class LoginSteps extends SmartMerchandising {
 		
 	}
 	
+	
+	
 	@Then("^I should preview Message \"(.*?)\"$")
 	public void i_should_preview_Message(String text) throws Throwable {
 	 verifyInnerHTML(By.className("prev-ajax-error"), text);
@@ -199,6 +201,13 @@ public class LoginSteps extends SmartMerchandising {
 	public void i_should_see_Master_Rule(String rule) throws Throwable {
 	verifyInnerHTML(By.id("master_advanced"), rule);
 	
+	}
+	
+	@Then("^I should see Rule \"(.*?)\" on Position \"(.*?)\"$")
+	public void i_shoud_see_rule(String rule, String position){
+		
+		verifyInnerHTML(By.xpath("//div/textarea[contains(@id,'advanced_btn_rec_"+position+"')]"), rule);
+		
 	}
 	
 	@When("^I Set Master Rule \"(.*?)\"$")
@@ -243,7 +252,23 @@ public class LoginSteps extends SmartMerchandising {
 	}
 
 
+	@When("^I select option \"(.*?)\"$")
+	public void i_select_option(String rule) throws Throwable {
+		clickElement(By.xpath("//option[.='"+rule+"']"));
+	}
 
+	
+	@When("^I select operator \"(.*?)\"$")
+	public void i_select_operator(String condOperator) throws Throwable {
+		clickElement(By.xpath("//*[@id='sidebar']/ul/li//option[.='"+condOperator+"']"));
+		//option[.='NOT equals to']
+
+	} 
+	
+	@When("^I Enter rule Text \"(.*?)\"$")
+	public void i_Enter_rule_Text(String text) throws Throwable {
+		setText(By.xpath("//*[@id='sidebar']//input[@type='text']"),text);
+	}
 
 }
 
