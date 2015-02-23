@@ -234,7 +234,7 @@ public class Context extends COREManager {
 		
 		boolean elementPresent = new WebDriverWait(driverInstance, elementWaitTime)
 		.pollingEvery(implicitWait, TimeUnit.SECONDS)
-				.until(ExpectedConditions.visibilityOfElementLocated(locator)) != null;
+				.until(ExpectedConditions.visibilityOfElementLocated(locator)).isEnabled();
 				
 		Assert.assertTrue(elementPresent);
 				

@@ -111,5 +111,11 @@ public class ProductSets extends Context {
 		elementNotPresent(By.linkText(productSet));
 
 	}
+	
+	public static void deleteButton(String productSet){
+		
+		clickElement(By.xpath("//td/a[text()='"+productSet+"']//following::td[1]//div/a[contains(@class,'delete')]"));
+		
+	}
 
 }
