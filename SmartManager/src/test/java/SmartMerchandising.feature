@@ -166,6 +166,11 @@ Feature: S-Merchandising
     When I click on link "5. Activation & Preview"
     When I click on link "Preview"
     Then I should preview Message "Please fill in the preview product reference code"
+    
+    @merchpreview    
+    Given I goto Campaign "AutoCreate"
+    And Edit Campaign "AutoCreate"
+    When I click on link "5. Activation & Preview"
 
   @emptyskuname
   Scenario: Error validation for empty productset name
@@ -182,7 +187,7 @@ Feature: S-Merchandising
     And click on button "Save Product set"
     Then I should see Message "An SKU set must have at least one valid product"
 
-  @Validation
+  @productsetvalidation
   Scenario: Error validation for invalid productset name
     When I click on "Define Product Sets" option in "Merchandising"
     And I click on button "Add Product set"
