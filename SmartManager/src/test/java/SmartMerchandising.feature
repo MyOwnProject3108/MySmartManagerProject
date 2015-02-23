@@ -181,6 +181,8 @@ Feature: S-Merchandising
     When I click on link "5. Activation & Preview"
     And Select Preview Products "2" with Ref "A"
     And Select Preview Category "Tops"
+    When I click on link "Preview"
+    And click on button "Save Campaign"
 
   @emptyskuname
   Scenario: Error validation for empty productset name

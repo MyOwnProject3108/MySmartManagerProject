@@ -152,16 +152,21 @@ public static void selectPreviewCategory(String category){
 	
 	setText(By.id("previewCategory"), category);
 	
-	List<WebElement> products = driverInstance.findElements(By.xpath("//input[@id='previewCategory']/following::ul[1]"));
-	for (int i = 0; i < 5; i++) {
+	elemementIsPresent(By.xpath("//input[@id='previewCategory']/following::ul[1]"));
+		
+	List<WebElement> categories = driverInstance.findElements(By.xpath("//input[@id='previewCategory']/following::ul[1]"));
 	
-	for (WebElement product : products) {
+	
+	for (WebElement cat : categories) {
 
 		Actions doubleClick = new Actions(driverInstance);
 
-		doubleClick.moveToElement(product).click().sendKeys(Keys.ENTER).build().perform();
+		doubleClick.moveToElement(cat).doubleClick(cat).build().perform();
+		
 	}
-	}
+	
+	
+
 }
 
 }
