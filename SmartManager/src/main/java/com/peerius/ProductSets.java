@@ -103,13 +103,12 @@ public class ProductSets extends Context {
 		Navigation
 				.gotoURL("/smartmanager/sku/selectedproductsets/list.page?smartproduct=merchandising");
 		elemementIsPresent(By.linkText(productSet));
-		clickLink(productSet);
 		clickElement(By.xpath("//td/a[text()='" + productSet
 				+ "']//following::td[1]//div/a[contains(@class,'delete')]"));
-		elemementIsPresent(By.linkText(productSet));
-		clickElement(By.className("yes"));
+		clickElement(By.xpath("//div[contains(@class,'yes')]"));
+		threadSleep(2000);
 		Navigation.refreshPage();
-		
+		elementNotPresent(By.linkText(productSet));
 
 	}
 
