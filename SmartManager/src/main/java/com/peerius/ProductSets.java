@@ -132,5 +132,24 @@ public class ProductSets extends Context {
 			}
 		}
 	}
+	
+	public static void verifyProductsInset(String productSet, String products){
+		
+		Navigation
+		.gotoURL("/smartmanager/sku/selectedproductsets/list.page?smartproduct=merchandising");
+			elemementIsPresent(By.linkText(productSet));
+		
+		int number = Integer.parseInt(products);
+		List<WebElement> productList = driverInstance.findElements(By.className("visual-tags"));
+		
+		if(number<=productList.size()){
+			
+			for(WebElement product: productList){
+				
+				System.out.println(product.getText());	
+			}
+		}
+		
+	}
 
 }
