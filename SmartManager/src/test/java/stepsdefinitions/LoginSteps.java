@@ -253,10 +253,10 @@ public class LoginSteps extends SmartMerchandising {
 	
 	@Then("^I Add New Rule \"(.*?)\" with Rule \"(.*?)\"$")
 	public void i_Add_New_Rule(String ruleNumber, String rule) throws Throwable {
-	   clickButton("Edit Rule...");
-	   clickLink("Toggle advanced");
+	   clickElement(By.xpath("//ul/li["+ruleNumber+"]//div[contains(@class,'actions')]/button[contains(.,'Edit Rule')]"));
+	   clickLink("Toggle Advanced");
 	   setText(By.xpath("//div/textarea[contains(@id,'advanced_btn_rec_"+ruleNumber+"')]"), rule	);
-	   clickButton("Save Campaign");
+	   clickButton("Save Campaign");	
 	}
 
 
@@ -303,6 +303,11 @@ public class LoginSteps extends SmartMerchandising {
 		
 		SmartMerchandising.selectPreviewCategory(category);
 	 
+	}
+	
+		@Then("^I Should See Preview with \"(.*?)\" Products$")
+	public void i_Should_See_Preview_with_Products(String productNum) throws Throwable {
+	    ProductSets.verifyPreview(productNum);
 	}
 
 

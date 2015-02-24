@@ -111,10 +111,44 @@ public class ProductSets extends Context {
 		elementNotPresent(By.linkText(productSet));
 
 	}
-	
+		
 	public static void deleteButton(String productSet){
 		
 		clickElement(By.xpath("//td/a[text()='"+productSet+"']//following::td[1]//div/a[contains(@class,'delete')]"));
+		
+	}
+
+	public static void verifyPreview(String numberoFpreview) {
+		List<WebElement> previewList = driverInstance.findElements(By.cssSelector(".preview-ajax-products"));
+		
+		int number =Integer.parseInt(numberoFpreview);
+	
+	
+		if(previewList.size()<=number){
+			
+			for(WebElement preview: previewList){
+				
+				System.out.println(preview.getText());
+			}
+		}
+	}
+	
+	public static void verifyProductsInset(String productSet, String products){
+		
+		Navigation
+		.gotoURL("/smartmanager/sku/selectedproductsets/list.page?smartproduct=merchandising");
+			elemementIsPresent(By.linkText(productSet));
+		
+		int number = Integer.parseInt(products);
+		List<WebElement> productList = driverInstance.findElements(By.className("visual-tags"));
+		
+		if(number<=productList.size()){
+			
+			for(WebElement product: productList){
+				
+				System.out.println(product.getText());	
+			}
+		}
 		
 	}
 
