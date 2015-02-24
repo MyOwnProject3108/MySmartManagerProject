@@ -49,11 +49,11 @@ Feature: S-Merchandising
     Then I goto Campaign "<Campaign>"
     And I click on link "3. Recommendation Rules"
     And I click on button "Add New Rule"
-    Then I Add New Rule "2" with Rule "(r.saleprice<20)"
+    Then I Add New Rule "2" with Rule "<Rule>"
 
     Examples: Rule Positions
-      | Campaign            | Position |
-      | AutoCreatePosition1 | 1        |
+      | Campaign            | Position |Rule|
+      | AutoCreatePosition1 | 1        |(r.saleprice<20)|
 
   @selectrule
   Scenario: Create Simple Merchandising Campaign using select list for the rules
