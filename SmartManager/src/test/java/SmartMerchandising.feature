@@ -52,8 +52,8 @@ Feature: S-Merchandising
     Then I Add New Rule "2" with Rule "<Rule>"
 
     Examples: Rule Positions
-      | Campaign            | Position |Rule|
-      | AutoCreatePosition1 | 1        |(r.saleprice<20)|
+      | Campaign            | Position | Rule             |
+      | AutoCreatePosition1 | 1        | (r.saleprice<20) |
 
   @selectrule
   Scenario: Create Simple Merchandising Campaign using select list for the rules
@@ -69,10 +69,10 @@ Feature: S-Merchandising
     When I goto Campaign "AutoCreate"
     When I click on link "3. Recommendation Rules"
     Then I should see Rule "(r.colour="black")" on Position "1"
-    
-    @productsetrule
+
+  @productsetrule
   Scenario: Create Simple Merchandising Campaign using productset as a rule
-  	When I click on "Define Product Sets" option in "Merchandising"
+    When I click on "Define Product Sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
     Given I goto Campaign "AutoCreate"
     And Edit Campaign "AutoCreate"
@@ -86,14 +86,12 @@ Feature: S-Merchandising
     When I goto Campaign "AutoCreate"
     When I click on link "3. Recommendation Rules"
     Then I should see Rule "(r.productset="TestSet")" on Position "1"
-    
-      @deleteproductsetusedinrule
+
+  @deleteproductsetusedinrule
   Scenario: Delete Product Set with is used as a rule in merch campaign
     When I click on "Define Product Sets" option in "Merchandising"
     And I click Delete On Product Set "TestSet"
     Then I should see Message "SKU set is in use and cannot be deleted"
-    
-    
 
   @activecamp
   Scenario: Activate Campaign
@@ -106,7 +104,7 @@ Feature: S-Merchandising
     Given I Pause Campaign "AutoCreate"
     Then Campaign Should be Paused
 
-  @duplicamp
+  @dupliecamp
   Scenario: Duplicate Campaign
     Given I goto Campaign "AutoCreate"
     And I Duplicate Campaign "AutoCreate"
@@ -125,7 +123,7 @@ Feature: S-Merchandising
     Then I should not see "AutoCreatePosition2"
     Then I should not see "AutoCreatePosition3"
 
-  @validation
+  @createcapvalidation
   Scenario Outline: Message Validation
     Given I Create Campaign with "<Name>"
     Then I should see Message "<Message>"
@@ -135,7 +133,7 @@ Feature: S-Merchandising
       |               | Name must be provided |
       | Test_Selenium | Recommendation Rules  |
 
-  @duplicampaign
+  @duplicatenamecamp
   Scenario: Error validation for Duplicate Merchandising Campaign name
     Given I Create Simple Campaign with name "AutoCreate"
     And I Create Simple Campaign with name "AutoCreate"
@@ -173,15 +171,16 @@ Feature: S-Merchandising
     When I click on link "5. Activation & Preview"
     When I click on link "Preview"
     Then I should preview Message "Please fill in the preview product reference code"
-    
-    @merchpreview    
-    Scenario: Merchandising Preview Product Refcode
+
+  @merchpreview
+  Scenario: Merchandising Preview Product Refcode
     Given I goto Campaign "AutoCreate"
     And Edit Campaign "AutoCreate"
     When I click on link "5. Activation & Preview"
     And Select Preview Products "2" with Ref "A"
     And Select Preview Category "Tops"
     When I click on link "Preview"
+    Then I Should See Preview with "2" Products
     And click on button "Save Campaign"
 
   @emptyskuname

@@ -145,7 +145,6 @@ public static void selectPreviewProductList(String productPrefix, String number)
 		}
 	}
 	clickLink("Finished");
-
 }
 
 public static void selectPreviewCategory(String category){
@@ -156,17 +155,11 @@ public static void selectPreviewCategory(String category){
 		
 	List<WebElement> categories = driverInstance.findElements(By.xpath("//input[@id='previewCategory']/following::ul[1]"));
 	
-	
 	for (WebElement cat : categories) {
 
 		Actions doubleClick = new Actions(driverInstance);
-
-		doubleClick.moveToElement(cat).doubleClick(cat).build().perform();
-		
+		doubleClick.moveToElement(cat).doubleClick(cat).click(cat).build().perform();
 	}
-	
-	
-
 }
 
 }

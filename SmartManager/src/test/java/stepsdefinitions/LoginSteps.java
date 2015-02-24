@@ -299,6 +299,11 @@ public class LoginSteps extends SmartMerchandising {
 		SmartMerchandising.selectPreviewCategory(category);
 	 
 	}
+	
+		@Then("^I Should See Preview with \"(.*?)\" Products$")
+	public void i_Should_See_Preview_with_Products(String productNum) throws Throwable {
+	    ProductSets.verifyPreview(productNum);
+	}
 
 
 }
