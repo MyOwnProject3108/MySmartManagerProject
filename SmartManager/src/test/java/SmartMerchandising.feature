@@ -92,8 +92,7 @@ Feature: S-Merchandising
     When I click on "Define Product Sets" option in "Merchandising"
     And I click Delete On Product Set "TestSet"
     Then I should see Message "SKU set is in use and cannot be deleted"
-    
-    
+   
 
   @activecamp
   Scenario: Activate Campaign
@@ -198,7 +197,7 @@ Feature: S-Merchandising
     And I enter title "AutoproductSet"
     And click on button "Save Product set"
     Then I should see Message "An SKU set must have at least one valid product"
-
+   
   @productsetvalidation
   Scenario: Error validation for invalid productset name
     When I click on "Define Product Sets" option in "Merchandising"
@@ -212,11 +211,19 @@ Feature: S-Merchandising
     When I click on "Define Product Sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
     Then I Should verify Product Sets "TestSet"
-
+      
   @delete
   Scenario: Delete Product Set with simple rule
     Given I Delete Product Set "TestSet"
     Then Product Set "TestSet" Should be Deleted
+         
+   @ClearAllTags
+  Scenario: Add Product Set
+    When I click on "Define Product Sets" option in "Merchandising"
+    And I Create Product Set "TestSet" and products number "2" with Suffix "D"
+     And I click Edit On Product Set "TestSet"
+    Then I click on link "Clear All Tags"
+    Then I should see Message "An SKU set must have at least one valid product"
 
   @skuduplicate
   Scenario: Error message validation for duplicate sku

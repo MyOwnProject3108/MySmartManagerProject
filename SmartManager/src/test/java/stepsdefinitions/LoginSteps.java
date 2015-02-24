@@ -280,6 +280,11 @@ public class LoginSteps extends SmartMerchandising {
 	
 	}
 	
+	@When("^I click Edit On Product Set \"(.*?)\"$")
+	public void i_click_Edit_On_Product_Set(String productset) throws Throwable {
+	  ProductSets.editProductset(productset);
+	}
+	
 	
 	@When("^I Enter rule Text \"(.*?)\"$")
 	public void i_Enter_rule_Text(String text) throws Throwable {
