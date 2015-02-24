@@ -251,12 +251,12 @@ public class LoginSteps extends SmartMerchandising {
 
 	
 	
-	@Then("^I Add New Rule \"(.*?)\" with Rule \"(.*?)\"$")
+		@Then("^I Add New Rule \"(.*?)\" with Rule \"(.*?)\"$")
 	public void i_Add_New_Rule(String ruleNumber, String rule) throws Throwable {
-	   clickButton("Edit Rule...");
+	   clickElement(By.xpath("//ul/li["+ruleNumber+"]//div[contains(@class,'actions')]/button[contains(.,'Edit Rule')]"));
 	   clickLink("Toggle advanced");
 	   setText(By.xpath("//div/textarea[contains(@id,'advanced_btn_rec_"+ruleNumber+"')]"), rule	);
-	   clickButton("Save Campaign");
+	   clickButton("Save Campaign");	
 	}
 
 
