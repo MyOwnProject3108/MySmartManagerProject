@@ -219,12 +219,29 @@ Feature: S-Merchandising
     Then Product Set "TestSet" Should be Deleted
          
    @ClearAllTags
-  Scenario: Add Product Set
+  Scenario: Save productset by clearing products from ProductSet
     When I click on "Define Product Sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
      And I click Edit On Product Set "TestSet"
     Then I click on link "Clear All Tags"
     Then I should see Message "An SKU set must have at least one valid product"
+    
+    @EditProductSet
+    Scenario: Edit productset
+    Given I goto ProductSet "TestSet"
+    And I click Edit On Product Set "TestSet"
+    Then I click on link "Clear All Tags"
+    And I Add "1" Products with Suffix "dora"
+    Then I should see "1" products in "TestSet"
+    
+     @CopyEditProductSet
+    Scenario: Duplicate and Edit productset
+    Given I Duplicate ProductSet "TestSet"
+    And I click Edit On Product Set "TestSet copy"
+    Then I click on link "Clear All Tags"
+    And I Add "1" Products with Suffix "dora"
+    Then I should see "1" products in "TestSet"
+    
 
   @skuduplicate
   Scenario: Error message validation for duplicate sku

@@ -309,7 +309,32 @@ public class LoginSteps extends SmartMerchandising {
 	public void i_Should_See_Preview_with_Products(String productNum) throws Throwable {
 	    ProductSets.verifyPreview(productNum);
 	}
+		
+		@Given("^I goto ProductSet \"(.*?)\"$")
+		public void i_goto_ProductSet(String productset) throws Throwable {
+			
+			ProductSets.gotoProductSet(productset);
+		
+		}
 
+		@Given("^I Add \"(.*?)\" Products with Suffix \"(.*?)\"$")
+		public void i_Add_Products_with_Suffix(String productnumber, String productSuffix) throws Throwable {
+			
+			ProductSets.addProductsTo(productnumber, productSuffix);
+		  
+		}
+		
+
+		@Then("^I should see \"(.*?)\" products in \"(.*?)\"$")
+		public void i_should_see_products_in(String products, String productSet) throws Throwable {
+			ProductSets.verifyProductsInset(productSet, products);
+		}
+
+
+		@Given("^I Duplicate ProductSet \"(.*?)\"$")
+		public void i_Duplicate_ProductSet(String productset) throws Throwable {
+		   ProductSets.duplicateProductSet(productset);
+		}
 
 }
 

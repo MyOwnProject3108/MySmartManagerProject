@@ -83,20 +83,13 @@ public class ProductSets extends Context {
 				.gotoURL("/smartmanager/sku/selectedproductsets/list.page?smartproduct=merchandising");
 		elemementIsPresent(By.linkText(name));
 		clickLink(name);
-		clickElement(By.xpath("//td/a[text()='" + name
-				+ "']//following::td[1]//div/a[contains(@class,'duplicate')]"));
+		clickElement(By.xpath("//td/a[text()='" + name+ "']//following::td[1]//div/a[contains(@class,'duplicate')]"));
+		Navigation.refreshPage();
+		elemementIsPresent(By.linkText(name+" copy"));
 
 	}
 
-	public static void clearProducts(String productSet) {
 
-		Navigation
-				.gotoURL("/smartmanager/sku/selectedproductsets/list.page?smartproduct=merchandising");
-		elemementIsPresent(By.linkText(productSet));
-		clickLink(productSet);
-		clickLink("Clear All Tags");
-
-	}
 
 	public static void deleteProductSet(String productSet) {
 
@@ -149,6 +142,29 @@ public class ProductSets extends Context {
 				System.out.println(product.getText());	
 			}
 		}
+		
+	}
+
+	public static void addProductsTo(String productnumber, String productprefix) {
+		
+		int numberOfProduct = Integer.parseInt(productnumber);
+		setText(By.className("visual-input"), productprefix);
+		pressKey("Enter");
+		elemementIsPresent(By.xpath("//ul[contains(@class,'tags')]"));
+		
+		List<WebElement> products = driverInstance.findElements(By.cssSelector(".tags-list.context-menu"));
+
+		for (int i = 0; i < numberOfProduct; i++) {
+
+			for (WebElement product : products) {
+
+				Actions doubleClick = new Actions(driverInstance);
+
+				doubleClick.moveToElement(product).doubleClick().sendKeys(Keys.ENTER).build().perform();
+			}
+		}
+		clickLink("Finished");
+		clickButton("Save Product set");
 		
 	}
 
