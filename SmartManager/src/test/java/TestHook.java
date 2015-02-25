@@ -1,4 +1,3 @@
-package stepsdefinitions;
 
 
 import java.net.MalformedURLException;
@@ -18,8 +17,6 @@ public class TestHook {
 
 		System.out.println("Starting --- Scenario --- " + scenario.getName());
 		COREManager.openBrowser();
-		COREManager.deleteCookie();
-		COREManager.addCookie("peerius_pass_peeriusdebug", "1");
 		COREManager.maximize();
 
 	}

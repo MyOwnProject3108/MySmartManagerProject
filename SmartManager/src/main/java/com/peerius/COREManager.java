@@ -1,15 +1,16 @@
 package com.peerius;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
@@ -61,20 +62,24 @@ public class COREManager {
 	public static int scriptLoadTime;
 	public static int elementWaitTime;
 	public static int implicitWait;
+	public static File trackerPlugIn;
+	public static String addSiteToPlugin;
 
 	static {
 		currentDir = System.getProperty("user.dir");
-		System.out.println(currentDir);
+		System.out.println("Curreny System Directory ----- "+currentDir);
 		prop = new Properties();
 		ImmutableMap.Builder<String, Credential> builder = ImmutableMap
 				.builder();
 		try (InputStream input = new FileInputStream(
 				currentDir
-				+ "\\src\\main\\resources\\config.properties")) {
+				+ "/src/main/resources/config.properties")) {
 			prop.load(input);
 
 			// siteUrl
 			siteUrl = prop.getProperty("siteUrl", "").trim();
+			//Tracker Plugin Site
+			addSiteToPlugin = prop.getProperty("pluginSite", "").trim();
 
 			// remoteHubUrl and remoteBrowserName
 			remoteDriverUrl = prop.getProperty("remoteDriverUrl", "").trim();
@@ -91,6 +96,10 @@ public class COREManager {
 			scriptLoadTime = Integer.parseInt( prop.getProperty("scriptToLoad", "").trim());
 			elementWaitTime = Integer.parseInt( prop.getProperty("elementToLoad", "").trim());
 			implicitWait = Integer.parseInt(prop.getProperty("browserImplicitWait", "").trim());
+			
+			//load Plugin File
+			trackerPlugIn = new File(currentDir+"/drivers/PeeriusPlugIn.xpi");
+			System.out.print("TrackerPlugin Directory ---- "+trackerPlugIn);
 			
 			// User profiles
 			for (String profile : prop.getProperty("userprofile", "")
@@ -113,7 +122,7 @@ public class COREManager {
 	public enum BrowserName {
 		FIREFOX("firefox"), CHROME("chrome"), OPERA("opera"), SAFARI("safari"), IE(
 				"ie"), HTMLUNIT("htmlunit"), PHANTOMJS("phantomjs"), REMOTEDRIVER(
-						"remoteMachine");
+						"remoteMachine"), BROWSERSTACK("browserstack");
 
 		String name;
 
@@ -146,20 +155,22 @@ public class COREManager {
 			case FIREFOX:
 
 				FirefoxProfile profile = new FirefoxProfile();
+				profile.addExtension(trackerPlugIn);
 				profile.setEnableNativeEvents(true);
-				profile.setPreference(
-						"browser.download.manager.showWhenStarting", false);
-				profile.setPreference("browser.helperApps.neverAsk.saveToDisk",
-						"image/jpg,text/csv,text,application/excel,application/pdf");
-				profile.setPreference("browser.download.dir",
-						System.getProperty("user.home"));
+				profile.setPreference("browser.download.manager.showWhenStarting", false);
+				profile.setPreference("browser.helperApps.neverAsk.saveToDisk","image/jpg,text/csv,text,application/excel,application/pdf");
+				profile.setPreference("browser.download.dir",System.getProperty("user.home"));
+				profile.setPreference("extensions.tracker.url", siteUrl+"/peerius.page");
+				profile.setPreference("extensions.tracker.sites", addSiteToPlugin);
+				profile.setPreference("extensions.tracker.enabled", true);
+				profile.setPreference("extensions.tracker.debugenabled", true);
 				driverInstance = new FirefoxDriver(profile);
 				driverInstance.manage().timeouts()
-				.pageLoadTimeout(5, TimeUnit.SECONDS);
+				.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.setScriptTimeout(5, TimeUnit.SECONDS);
+				.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.implicitlyWait(10, TimeUnit.SECONDS);
+				.implicitlyWait(implicitWait, TimeUnit.SECONDS);
 				break;
 
 			case OPERA:
@@ -285,22 +296,36 @@ public class COREManager {
 				driverInstance.manage().timeouts()
 				.implicitlyWait(implicitWait, TimeUnit.SECONDS);
 				break;
+				
+			case BROWSERSTACK:
+				
+				DesiredCapabilities browserStack = new DesiredCapabilities();
+				browserStack.setPlatform(Platform.valueOf(remotePlatform));
+				browserStack.setBrowserName(remoteBrowserName);
+				browserStack.setVersion(remoteBrowserVersion);
+				driverInstance = new RemoteWebDriver(new URL(remoteDriverUrl),
+						browserStack);
+				((RemoteWebDriver) driverInstance)
+				.setFileDetector(new LocalFileDetector());
+
+				driverInstance.manage().timeouts()
+				.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
+				driverInstance.manage().timeouts()
+				.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
+				driverInstance.manage().timeouts()
+				.implicitlyWait(implicitWait, TimeUnit.SECONDS);
+				break;
+				
+			
 			}
 
-		} catch (WebDriverException e) {
+		} catch (WebDriverException|NullPointerException|IOException e) {
 
 			System.out.println("Cannot Be Open Browser\n" + e.getMessage());
-
-		} catch (NullPointerException e) {
 			System.out
 			.println("No Driver Found, Check for Approriate DRIVERS (Internet Explorer & Chrome)\n");
-
-		} catch (MalformedURLException e) {
-			System.out.println(e.getMessage()
-					+ "Check RemoteDriver Information\n");
-
-		}
-
+			System.out.println(e.getMessage()+ "Check RemoteDriver Information\n");}
+		
 	}
 
 	public static void openBrowser() {
@@ -380,6 +405,18 @@ public class COREManager {
 		
 	}
 	
+	public static void deleteCookie(){
+		
+		driverInstance.manage().deleteAllCookies();
+		
+	}
+	
+	
+	public static void addCookie(String name, String value){
+		
+		Cookie cookie = new Cookie(name, value);		
+		driverInstance.manage().addCookie(cookie);
+	}
 	public static void threadSleep(int time){
 		
 		try{

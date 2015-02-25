@@ -8,7 +8,7 @@ Feature: End to End Tests for Merchandising
   @setup1
   Scenario: End to End Test With Simple Rule alongwith Master Rule
     Given I Create Simple Campaign with name "E2EAutoCreate"
-    Then I click on Link "2.  Master Rules"
+    Then I click on link "2.  Master Rules"
     And I click on button "Toggle Advanced"
     Then I Set Master Rule "(r.saleprice<20)"
     And I click on button "Save Campaign"
@@ -38,4 +38,4 @@ Feature: End to End Tests for Merchandising
   Scenario: Verify merch rule on client site
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
     Then I should see "producthorizontal" in the debug
-    Then I should see Rule "(r.productset="TestSet")" in "5" Positions
+    Then I should see Rule "(r.productset="TestSet")" in "2" Positions

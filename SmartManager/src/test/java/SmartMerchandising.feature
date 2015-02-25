@@ -133,9 +133,9 @@ Feature: S-Merchandising
     Then I should see Message "<Message>"
 
     Examples: Validation Messages
-      | Name          | Message               |
-      |               | Name must be provided |
-      | Auto_Create   | Recommendation Rules  |
+      | Name        | Message               |
+      |             | Name must be provided |
+      | Auto_Create | Recommendation Rules  |
 
   @duplicatenamecamp
   Scenario: Error validation for Duplicate Merchandising Campaign name
