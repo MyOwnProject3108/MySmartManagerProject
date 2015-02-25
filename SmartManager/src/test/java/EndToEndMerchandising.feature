@@ -24,4 +24,4 @@ Feature: End to End Tests for Merchandising
   Scenario: Verify merch rule on client site
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
     Then I should see "producthorizontal" in the debug
-    Then I should see Rule "(r.productset="TestSet")" in all Positions
+    Then I should see Rule "(r.productset="TestSet")" in "5" Positions
