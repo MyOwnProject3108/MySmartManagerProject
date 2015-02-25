@@ -6,7 +6,7 @@ Feature: End to End Tests for Merchandising
     And I search for site "demostoredev"
 
   @setup
-  Scenario: Setup with simple rule with productset for End-End scenario
+  Scenario: Setup simple rule with productset for End-End scenario
     When I click on "Define Product Sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
     And I Create Simple Campaign with name "AutoCreate"
