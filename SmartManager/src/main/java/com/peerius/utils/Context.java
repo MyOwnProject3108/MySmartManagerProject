@@ -230,7 +230,7 @@ public class Context extends COREManager {
 
 	}
 
-	public static void elemementIsPresent(By locator) {
+	public static void elementIsPresent(By locator) {
 		
 		boolean elementPresent = new WebDriverWait(driverInstance, elementWaitTime)
 		.pollingEvery(implicitWait, TimeUnit.SECONDS)

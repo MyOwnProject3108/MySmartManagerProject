@@ -93,7 +93,7 @@ public class LoginSteps extends SmartMerchandising {
 	@Then("^Campaign should be Activated$")
 	public void campaign_should_be_Activated() throws Throwable {
 
-		elemementIsPresent(By
+		elementIsPresent(By
 				.xpath("//td//a[@data-original-title=' Pause it ']"));
 
 	}
@@ -125,7 +125,7 @@ public class LoginSteps extends SmartMerchandising {
 
 	@Then("^Campaign Should be Paused$")
 	public void campaign_Should_be_Paused() throws Throwable {
-		elemementIsPresent(By
+		elementIsPresent(By
 				.xpath("//td//a[@data-original-title=' Activate it ']"));
 
 	}
@@ -182,7 +182,7 @@ public class LoginSteps extends SmartMerchandising {
 	@Then("^I Should Verify \"(.*?)\"$")
 	public void i_Should_Verify(String position) throws Throwable {
 		
-		elemementIsPresent(By.xpath("//li["+position+"]//div[contains(@class,'selected')]"));
+		elementIsPresent(By.xpath("//li["+position+"]//div[contains(@class,'selected')]"));
 
 	}
 	
@@ -228,7 +228,7 @@ public class LoginSteps extends SmartMerchandising {
 	public void i_Should_verify_Product_Sets(String name) throws Throwable {
 		SmartMerchandising.selectMenuOption("Merchandising", "Define Product Sets");
 		clickLink(name);
-		elemementIsPresent(By.xpath("//div[@class='visual-tags']//descendant::div"));
+		elementIsPresent(By.xpath("//div[@class='visual-tags']//descendant::div"));
 		
 	}
 	
@@ -246,7 +246,7 @@ public class LoginSteps extends SmartMerchandising {
 	@Then("^Product Set \"(.*?)\" is not Deleted$")
 	public void product_Set_is_not_Deleted(String productset) throws Throwable {
 		SmartMerchandising.selectMenuOption("Merchandising", "Define Product Sets");
-		elemementIsPresent(By.linkText(productset));
+		elementIsPresent(By.linkText(productset));
 	}
 
 	
@@ -334,6 +334,22 @@ public class LoginSteps extends SmartMerchandising {
 		@Given("^I Duplicate ProductSet \"(.*?)\"$")
 		public void i_Duplicate_ProductSet(String productset) throws Throwable {
 		   ProductSets.duplicateProductSet(productset);
+		}
+
+		@Then("^Apply Rule \"(.*?)\" To Position \"(.*?)\"$")
+		public void apply_To_Position(String ruleNumber, String position) throws Throwable {
+		
+				dragAndDrop(By.xpath("//div[contains(@data-original-title,'Drag')]/p[contains(.,'"+ruleNumber+"')]"), 
+						By.xpath("//ul[@class='rules-grid']/li["+position+"]"));
+				
+				clickButton("Save Campaign");
+		}
+		
+		@Then("^Should Verify Rule  \"(.*?)\" at \"(.*?)\"$")
+		public void should_verify_Rule_at_position(String position, String ruleNumber){
+			
+			elementIsPresent(By.xpath("//ul[@class='rules-grid']/li["+position+"]//p[contains(.,'"+ruleNumber+"')]"));
+			
 		}
 
 }

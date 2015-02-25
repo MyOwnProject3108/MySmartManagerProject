@@ -45,15 +45,19 @@ Feature: S-Merchandising
 
   @diffrules
   Scenario Outline: Different Rules At Different Positions
-    Given I Create Campaign "<Campaign>" For "<Position>"
-    Then I goto Campaign "<Campaign>"
+    Given I goto Campaign "AutoCreate"
     And I click on link "3. Recommendation Rules"
     And I click on button "Add New Rule"
-    Then I Add New Rule "2" with Rule "<Rule>"
+    Then I Add New Rule "<RuleNumber>" with Rule "<Rule>"
+    And Apply Rule "<RuleNumber>" To Position "<Position>"
+    Given I goto Campaign "AutoCreate"
+    And I click on link "3. Recommendation Rules"
+    Then Should Verify Rule  "<RuleNumber>" at "<Position>"
 
     Examples: Rule Positions
-      | Campaign            | Position | Rule             |
-      | AutoCreatePosition1 | 1        | (r.saleprice<20) |
+      | RuleNumber | Rule             | Position |
+      | 2          | (r.saleprice<20) | 2        |
+      | 3          | (r.saleprice<20) | 3        |
 
   @selectrule
   Scenario: Create Simple Merchandising Campaign using select list for the rules
@@ -92,7 +96,6 @@ Feature: S-Merchandising
     When I click on "Define Product Sets" option in "Merchandising"
     And I click Delete On Product Set "TestSet"
     Then I should see Message "SKU set is in use and cannot be deleted"
-
 
   @activecamp
   Scenario: Activate Campaign
@@ -198,7 +201,7 @@ Feature: S-Merchandising
     And I enter title "AutoproductSet"
     And click on button "Save Product set"
     Then I should see Message "An SKU set must have at least one valid product"
-   
+
   @productsetvalidation
   Scenario: Error validation for invalid productset name
     When I click on "Define Product Sets" option in "Merchandising"
@@ -212,36 +215,35 @@ Feature: S-Merchandising
     When I click on "Define Product Sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
     Then I Should verify Product Sets "TestSet"
-      
+
   @delete
   Scenario: Delete Product Set with simple rule
     Given I Delete Product Set "TestSet"
     Then Product Set "TestSet" Should be Deleted
-         
-   @ClearAllTags
+
+  @ClearAllTags
   Scenario: Save productset by clearing products from ProductSet
     When I click on "Define Product Sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
-     And I click Edit On Product Set "TestSet"
+    And I click Edit On Product Set "TestSet"
     Then I click on link "Clear All Tags"
     Then I should see Message "An SKU set must have at least one valid product"
-    
-    @EditProductSet
-    Scenario: Edit productset
+
+  @EditProductSet
+  Scenario: Edit productset
     Given I goto ProductSet "TestSet"
     And I click Edit On Product Set "TestSet"
     Then I click on link "Clear All Tags"
     And I Add "1" Products with Suffix "dora"
     Then I should see "1" products in "TestSet"
-    
-     @CopyEditProductSet
-    Scenario: Duplicate and Edit productset
+
+  @CopyEditProductSet
+  Scenario: Duplicate and Edit productset
     Given I Duplicate ProductSet "TestSet"
     And I click Edit On Product Set "TestSet copy"
     Then I click on link "Clear All Tags"
     And I Add "1" Products with Suffix "dora"
     Then I should see "1" products in "TestSet"
-    
 
   @skuduplicate
   Scenario: Error message validation for duplicate sku

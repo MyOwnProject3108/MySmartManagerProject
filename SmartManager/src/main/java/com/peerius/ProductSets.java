@@ -22,7 +22,7 @@ public class ProductSets extends Context {
 
 		setText(By.className("visual-input"), productPrefix);
 		pressKey("Enter");
-		elemementIsPresent(By.xpath("//ul[contains(@class,'tags')]"));
+		elementIsPresent(By.xpath("//ul[contains(@class,'tags')]"));
 		List<WebElement> products = driverInstance.findElements(By.cssSelector(".tags-list.context-menu"));
 
 		for (int i = 0; i < numberOfProduct; i++) {
@@ -54,14 +54,14 @@ public class ProductSets extends Context {
 
 		Navigation
 				.gotoURL("/smartmanager/sku/selectedproductsets/list.page?smartproduct=merchandising");
-		elemementIsPresent(By.linkText(name));
+		elementIsPresent(By.linkText(name));
 
 	}
 
 	public static void gotoProductSet(String name) {
 
 		SmartMerchandising.selectMenuOption("Merchandising", "Define Product Sets");
-		elemementIsPresent(By.linkText(name));
+		elementIsPresent(By.linkText(name));
 		clickLink(name);
 
 	}
@@ -70,7 +70,7 @@ public class ProductSets extends Context {
 
 		Navigation
 				.gotoURL("/smartmanager/sku/selectedproductsets/list.page?smartproduct=merchandising");
-		elemementIsPresent(By.linkText(name));
+		elementIsPresent(By.linkText(name));
 		clickLink(name);
 		clickElement(By.xpath("//td/a[text()='" + name
 				+ "']//following::td[1]//div/a[contains(@class,'edit')]"));
@@ -81,11 +81,11 @@ public class ProductSets extends Context {
 
 		Navigation
 				.gotoURL("/smartmanager/sku/selectedproductsets/list.page?smartproduct=merchandising");
-		elemementIsPresent(By.linkText(name));
+		elementIsPresent(By.linkText(name));
 		clickLink(name);
 		clickElement(By.xpath("//td/a[text()='" + name+ "']//following::td[1]//div/a[contains(@class,'duplicate')]"));
 		Navigation.refreshPage();
-		elemementIsPresent(By.linkText(name+" copy"));
+		elementIsPresent(By.linkText(name+" copy"));
 
 	}
 
@@ -95,7 +95,7 @@ public class ProductSets extends Context {
 
 		Navigation
 				.gotoURL("/smartmanager/sku/selectedproductsets/list.page?smartproduct=merchandising");
-		elemementIsPresent(By.linkText(productSet));
+		elementIsPresent(By.linkText(productSet));
 		clickElement(By.xpath("//td/a[text()='" + productSet
 				+ "']//following::td[1]//div/a[contains(@class,'delete')]"));
 		clickElement(By.xpath("//div[contains(@class,'yes')]"));
@@ -130,7 +130,7 @@ public class ProductSets extends Context {
 		
 		Navigation
 		.gotoURL("/smartmanager/sku/selectedproductsets/list.page?smartproduct=merchandising");
-			elemementIsPresent(By.linkText(productSet));
+			elementIsPresent(By.linkText(productSet));
 		
 		int number = Integer.parseInt(products);
 		List<WebElement> productList = driverInstance.findElements(By.className("visual-tags"));
@@ -150,7 +150,7 @@ public class ProductSets extends Context {
 		int numberOfProduct = Integer.parseInt(productnumber);
 		setText(By.className("visual-input"), productprefix);
 		pressKey("Enter");
-		elemementIsPresent(By.xpath("//ul[contains(@class,'tags')]"));
+		elementIsPresent(By.xpath("//ul[contains(@class,'tags')]"));
 		
 		List<WebElement> products = driverInstance.findElements(By.cssSelector(".tags-list.context-menu"));
 
