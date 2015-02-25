@@ -64,6 +64,12 @@ public class COREManager {
 	public static int implicitWait;
 	public static File trackerPlugIn;
 	public static String addSiteToPlugin;
+	public static String localTesting;
+	public static boolean local;
+	public static String projectName;
+	public static String buildVersion;
+	public static String browserStackuser;
+	public static String automationKey;
 
 	static {
 		currentDir = System.getProperty("user.dir");
@@ -85,6 +91,20 @@ public class COREManager {
 			remoteDriverUrl = prop.getProperty("remoteDriverUrl", "").trim();
 			remoteBrowserName = prop.getProperty("remoteBrowserName", "")
 					.trim();
+			
+			//BrowserStack Config
+			browserStackuser = prop.getProperty("username", "").trim();
+			automationKey = prop.getProperty("AutomateKey", "").trim();
+			projectName = prop.getProperty("projectName", "").trim();
+			buildVersion = prop.getProperty("buildVersion", "").trim();
+			localTesting = prop.getProperty("localTesting", "").trim();
+			if (localTesting.contains("true")){
+				local=true;
+			}
+			else{
+				local=false;
+			}
+			
 
 			// Remote Driver Platform and Browser Version
 			remotePlatform = prop.getProperty("remotePlatform", "").trim();
@@ -301,19 +321,18 @@ public class COREManager {
 				
 				DesiredCapabilities browserStack = new DesiredCapabilities();
 				browserStack.setPlatform(Platform.valueOf(remotePlatform));
+				browserStack.setCapability("browserstack.local", local);
 				browserStack.setBrowserName(remoteBrowserName);
 				browserStack.setVersion(remoteBrowserVersion);
-				driverInstance = new RemoteWebDriver(new URL(remoteDriverUrl),
-						browserStack);
-				((RemoteWebDriver) driverInstance)
-				.setFileDetector(new LocalFileDetector());
-
-				driverInstance.manage().timeouts()
-				.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
-				driverInstance.manage().timeouts()
-				.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
-				driverInstance.manage().timeouts()
-				.implicitlyWait(implicitWait, TimeUnit.SECONDS);
+				browserStack.setCapability("browserstack.debug", true);
+				browserStack.setCapability("project", projectName);
+				browserStack.setCapability("build","'"+buildVersion+"'");
+				driverInstance = new RemoteWebDriver(new URL( "http://" + browserStackuser + ":" + automationKey + "@hub.browserstack.com/wd/hub"), browserStack);
+				((RemoteWebDriver) driverInstance).setFileDetector(new LocalFileDetector());
+		
+				driverInstance.manage().timeouts().pageLoadTimeout(60,TimeUnit.SECONDS);
+				driverInstance.manage().timeouts().setScriptTimeout(60,TimeUnit.SECONDS);
+				driverInstance.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 				break;
 				
 			
@@ -321,10 +340,9 @@ public class COREManager {
 
 		} catch (WebDriverException|NullPointerException|IOException e) {
 
-			System.out.println("Cannot Be Open Browser\n" + e.getMessage());
-			System.out
-			.println("No Driver Found, Check for Approriate DRIVERS (Internet Explorer & Chrome)\n");
-			System.out.println(e.getMessage()+ "Check RemoteDriver Information\n");}
+			System.out.println("Browser Cannot be Opened Please Check Your Drivers(Maybe Config.properties is not loaded)\n" + e.getMessage());
+			System.out.println("No Driver Found, Check for Approriate DRIVERS (Internet Explorer & Chrome)\n");
+			System.out.println(e.getMessage()+ "Check RemoteDriver Information (Using RemoteDriver)\n");}
 		
 	}
 
