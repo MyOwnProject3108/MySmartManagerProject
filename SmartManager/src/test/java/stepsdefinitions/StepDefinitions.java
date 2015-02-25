@@ -11,7 +11,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class LoginSteps extends SmartMerchandising {
+public class StepDefinitions extends SmartMerchandising {
 
 	@Given("^I login as \"([^\"]*)\"$")
 	public void I_login_as(String arg1) throws Throwable {
