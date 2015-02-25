@@ -1,14 +1,13 @@
 Feature: End to End Tests for Merchandising
 
   Background: Pre-requisite
-<<<<<<< HEAD
-    Given I login as "Zach"
+    Given I login as "zach"
     Then I should be on "Peerius Smart Manager" page
     And I search for site "demostoredev"
 
-@setup
+  @setup1
   Scenario: End to End Test With Simple Rule alongwith Master Rule
-  	Given I Create Simple Campaign with name "E2EAutoCreate"
+    Given I Create Simple Campaign with name "E2EAutoCreate"
     Then I click on Link "2.  Master Rules"
     And I click on button "Toggle Advanced"
     Then I Set Master Rule "(r.saleprice<20)"
@@ -16,13 +15,9 @@ Feature: End to End Tests for Merchandising
     Then I Should See Campaign "E2EAutoCreate" on Overview Page
     And I activate Campaign "E2EAutoCreate"
     Then Campaign should be Activated
-     
- @E2E
+
+  @E2E
   Scenario: Verify rules on client's website
-=======
-    Given I login as "zach"
-    Then I should be on "Peerius Smart Manager" page
-    And I search for site "demostoredev"
 
   @setup
   Scenario: Setup simple rule with productset for End-End scenario
@@ -44,4 +39,3 @@ Feature: End to End Tests for Merchandising
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
     Then I should see "producthorizontal" in the debug
     Then I should see Rule "(r.productset="TestSet")" in all Positions
->>>>>>> e0f5de2190dab608b4f982838a2dd75c2ce06198
