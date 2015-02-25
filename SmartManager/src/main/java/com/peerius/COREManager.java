@@ -73,54 +73,55 @@ public class COREManager {
 
 	static {
 		currentDir = System.getProperty("user.dir");
-		System.out.println("Curreny System Directory ----- "+currentDir);
+		System.out.println("Curreny System Directory ----- " + currentDir);
 		prop = new Properties();
 		ImmutableMap.Builder<String, Credential> builder = ImmutableMap
 				.builder();
-		try (InputStream input = new FileInputStream(
-				currentDir
+		try (InputStream input = new FileInputStream(currentDir
 				+ "/src/main/resources/config.properties")) {
 			prop.load(input);
 
 			// siteUrl
 			siteUrl = prop.getProperty("siteUrl", "").trim();
-			//Tracker Plugin Site
+			// Tracker Plugin Site
 			addSiteToPlugin = prop.getProperty("pluginSite", "").trim();
 
 			// remoteHubUrl and remoteBrowserName
 			remoteDriverUrl = prop.getProperty("remoteDriverUrl", "").trim();
 			remoteBrowserName = prop.getProperty("remoteBrowserName", "")
 					.trim();
-			
-			//BrowserStack Config
+
+			// BrowserStack Config
 			browserStackuser = prop.getProperty("username", "").trim();
 			automationKey = prop.getProperty("AutomateKey", "").trim();
 			projectName = prop.getProperty("projectName", "").trim();
 			buildVersion = prop.getProperty("buildVersion", "").trim();
 			localTesting = prop.getProperty("localTesting", "").trim();
-			if (localTesting.contains("true")){
-				local=true;
+			if (localTesting.contains("true")) {
+				local = true;
+			} else {
+				local = false;
 			}
-			else{
-				local=false;
-			}
-			
 
 			// Remote Driver Platform and Browser Version
 			remotePlatform = prop.getProperty("remotePlatform", "").trim();
 			remoteBrowserVersion = prop.getProperty("remoteBrowserVersion", "")
 					.trim();
-			
-			//Browser Wait Times
-			pageLoadTime  = Integer.parseInt( prop.getProperty("pageToLoad", "").trim());
-			scriptLoadTime = Integer.parseInt( prop.getProperty("scriptToLoad", "").trim());
-			elementWaitTime = Integer.parseInt( prop.getProperty("elementToLoad", "").trim());
-			implicitWait = Integer.parseInt(prop.getProperty("browserImplicitWait", "").trim());
-			
-			//load Plugin File
-			trackerPlugIn = new File(currentDir+"/drivers/PeeriusPlugIn.xpi");
-			System.out.print("TrackerPlugin Directory ---- "+trackerPlugIn);
-			
+
+			// Browser Wait Times
+			pageLoadTime = Integer.parseInt(prop.getProperty("pageToLoad", "")
+					.trim());
+			scriptLoadTime = Integer.parseInt(prop.getProperty("scriptToLoad",
+					"").trim());
+			elementWaitTime = Integer.parseInt(prop.getProperty(
+					"elementToLoad", "").trim());
+			implicitWait = Integer.parseInt(prop.getProperty(
+					"browserImplicitWait", "").trim());
+
+			// load Plugin File
+			trackerPlugIn = new File(currentDir + "/drivers/PeeriusPlugIn.xpi");
+			System.out.print("TrackerPlugin Directory ---- " + trackerPlugIn);
+
 			// User profiles
 			for (String profile : prop.getProperty("userprofile", "")
 					.split(",")) {
@@ -142,7 +143,7 @@ public class COREManager {
 	public enum BrowserName {
 		FIREFOX("firefox"), CHROME("chrome"), OPERA("opera"), SAFARI("safari"), IE(
 				"ie"), HTMLUNIT("htmlunit"), PHANTOMJS("phantomjs"), REMOTEDRIVER(
-						"remoteMachine"), BROWSERSTACK("browserstack");
+				"remoteMachine"), BROWSERSTACK("browserstack");
 
 		String name;
 
@@ -177,20 +178,25 @@ public class COREManager {
 				FirefoxProfile profile = new FirefoxProfile();
 				profile.addExtension(trackerPlugIn);
 				profile.setEnableNativeEvents(true);
-				profile.setPreference("browser.download.manager.showWhenStarting", false);
-				profile.setPreference("browser.helperApps.neverAsk.saveToDisk","image/jpg,text/csv,text,application/excel,application/pdf");
-				profile.setPreference("browser.download.dir",System.getProperty("user.home"));
-				profile.setPreference("extensions.tracker.url", siteUrl+"/peerius.page");
-				profile.setPreference("extensions.tracker.sites", addSiteToPlugin);
+				profile.setPreference(
+						"browser.download.manager.showWhenStarting", false);
+				profile.setPreference("browser.helperApps.neverAsk.saveToDisk",
+						"image/jpg,text/csv,text,application/excel,application/pdf");
+				profile.setPreference("browser.download.dir",
+						System.getProperty("user.home"));
+				profile.setPreference("extensions.tracker.url", siteUrl
+						+ "/peerius.page");
+				profile.setPreference("extensions.tracker.sites",
+						addSiteToPlugin);
 				profile.setPreference("extensions.tracker.enabled", true);
 				profile.setPreference("extensions.tracker.debugenabled", true);
 				driverInstance = new FirefoxDriver(profile);
 				driverInstance.manage().timeouts()
-				.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
+						.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
+						.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.implicitlyWait(implicitWait, TimeUnit.SECONDS);
+						.implicitlyWait(implicitWait, TimeUnit.SECONDS);
 				break;
 
 			case OPERA:
@@ -216,11 +222,11 @@ public class COREManager {
 				capability.setCapability("handlesAlerts", true);
 
 				driverInstance.manage().timeouts()
-				.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
+						.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
+						.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.implicitlyWait(implicitWait, TimeUnit.SECONDS);
+						.implicitlyWait(implicitWait, TimeUnit.SECONDS);
 				break;
 
 			case IE:
@@ -231,21 +237,21 @@ public class COREManager {
 				ie.setCapability("handlesAlerts", true);
 				driverInstance = new InternetExplorerDriver();
 				driverInstance.manage().timeouts()
-				.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
+						.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
+						.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.implicitlyWait(implicitWait, TimeUnit.SECONDS);
+						.implicitlyWait(implicitWait, TimeUnit.SECONDS);
 				break;
 
 			case HTMLUNIT:
 				driverInstance = new HtmlUnitDriver();
 				driverInstance.manage().timeouts()
-				.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
+						.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
+						.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.implicitlyWait(implicitWait, TimeUnit.SECONDS);
+						.implicitlyWait(implicitWait, TimeUnit.SECONDS);
 				break;
 
 			case PHANTOMJS:
@@ -262,24 +268,23 @@ public class COREManager {
 				}
 
 				if (System.getProperty("os.name").contains("Windows")) {
-					phantom.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+					phantom.setCapability(
+							PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
 							currentDir + "\\phantomjs\\phantomjs.exe");
 				}
-				
-				
 
 				else if (System.getProperty("os.name").contains("Linux")) {
 					phantom.setCapability(
 							PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
 							"/usr/local/bin/phantomjs");
-				} 
+				}
 				driverInstance = new PhantomJSDriver(phantom);
 				driverInstance.manage().timeouts()
-				.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
+						.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
+						.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.implicitlyWait(implicitWait, TimeUnit.SECONDS);
+						.implicitlyWait(implicitWait, TimeUnit.SECONDS);
 				break;
 
 			case SAFARI:
@@ -291,11 +296,11 @@ public class COREManager {
 				driverInstance = new SafariDriver(safari);
 
 				driverInstance.manage().timeouts()
-				.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
+						.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
+						.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.implicitlyWait(implicitWait, TimeUnit.SECONDS);
+						.implicitlyWait(implicitWait, TimeUnit.SECONDS);
 				break;
 
 			case REMOTEDRIVER:
@@ -307,18 +312,18 @@ public class COREManager {
 				driverInstance = new RemoteWebDriver(new URL(remoteDriverUrl),
 						remoteDriver);
 				((RemoteWebDriver) driverInstance)
-				.setFileDetector(new LocalFileDetector());
+						.setFileDetector(new LocalFileDetector());
 
 				driverInstance.manage().timeouts()
-				.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
+						.pageLoadTimeout(pageLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
+						.setScriptTimeout(scriptLoadTime, TimeUnit.SECONDS);
 				driverInstance.manage().timeouts()
-				.implicitlyWait(implicitWait, TimeUnit.SECONDS);
+						.implicitlyWait(implicitWait, TimeUnit.SECONDS);
 				break;
-				
+
 			case BROWSERSTACK:
-				
+
 				DesiredCapabilities browserStack = new DesiredCapabilities();
 				browserStack.setPlatform(Platform.valueOf(remotePlatform));
 				browserStack.setCapability("browserstack.local", local);
@@ -326,24 +331,34 @@ public class COREManager {
 				browserStack.setVersion(remoteBrowserVersion);
 				browserStack.setCapability("browserstack.debug", true);
 				browserStack.setCapability("project", projectName);
-				browserStack.setCapability("build","'"+buildVersion+"'");
-				driverInstance = new RemoteWebDriver(new URL( "http://" + browserStackuser + ":" + automationKey + "@hub.browserstack.com/wd/hub"), browserStack);
-				((RemoteWebDriver) driverInstance).setFileDetector(new LocalFileDetector());
-		
-				driverInstance.manage().timeouts().pageLoadTimeout(60,TimeUnit.SECONDS);
-				driverInstance.manage().timeouts().setScriptTimeout(60,TimeUnit.SECONDS);
-				driverInstance.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+				browserStack.setCapability("build", "'" + buildVersion + "'");
+				driverInstance = new RemoteWebDriver(new URL("http://"
+						+ browserStackuser + ":" + automationKey
+						+ "@hub.browserstack.com/wd/hub"), browserStack);
+				((RemoteWebDriver) driverInstance)
+						.setFileDetector(new LocalFileDetector());
+
+				driverInstance.manage().timeouts()
+						.pageLoadTimeout(60, TimeUnit.SECONDS);
+				driverInstance.manage().timeouts()
+						.setScriptTimeout(60, TimeUnit.SECONDS);
+				driverInstance.manage().timeouts()
+						.implicitlyWait(30, TimeUnit.SECONDS);
 				break;
-				
-			
+
 			}
 
-		} catch (WebDriverException|NullPointerException|IOException e) {
+		} catch (WebDriverException | NullPointerException | IOException e) {
 
-			System.out.println("Browser Cannot be Opened Please Check Your Drivers(Maybe Config.properties is not loaded)\n" + e.getMessage());
-			System.out.println("No Driver Found, Check for Approriate DRIVERS (Internet Explorer & Chrome)\n");
-			System.out.println(e.getMessage()+ "Check RemoteDriver Information (Using RemoteDriver)\n");}
-		
+			System.out
+					.println("Browser Cannot be Opened Please Check Your Drivers(Maybe Config.properties is not loaded)\n"
+							+ e.getMessage());
+			System.out
+					.println("No Driver Found, Check for Approriate DRIVERS (Internet Explorer & Chrome)\n");
+			System.out.println(e.getMessage()
+					+ "Check RemoteDriver Information (Using RemoteDriver)\n");
+		}
+
 	}
 
 	public static void openBrowser() {
@@ -380,7 +395,7 @@ public class COREManager {
 			this.username = username;
 			this.password = password;
 		}
-		
+
 		public static void smartManagerLogin(String userprofile) {
 
 			Credential userCredentials = userProfiles.get(userprofile);
@@ -395,75 +410,80 @@ public class COREManager {
 				driverInstance.findElement(By.tagName("button")).click();
 
 				Boolean pageTitle = new WebDriverWait(driverInstance, 15L)
-				.until(ExpectedConditions
-						.titleContains("Peerius Smart Manager"));
+						.until(ExpectedConditions
+								.titleContains("Peerius Smart Manager"));
 				Assert.assertTrue("Page Title Exist", pageTitle);
 
 			}
-	}
-		
-		public static void logOutUser(){
-			
-			WebElement accountLink = driverInstance.findElement(By.xpath("//button[contains(@class,'dropdown')]"));
-			
+		}
+
+		public static void logOutUser() {
+
+			WebElement accountLink = driverInstance.findElement(By
+					.xpath("//button[contains(@class,'dropdown')]"));
+
 			Actions logout = new Actions(driverInstance);
-			
+
 			logout.moveToElement(accountLink).click().build().perform();
-			WebElement logoutLink = driverInstance.findElement(By.linkText("Log Out"));
-			
+			WebElement logoutLink = driverInstance.findElement(By
+					.linkText("Log Out"));
+
 			logout.moveToElement(logoutLink).click().build().perform();
-			
+
 		}
 	}
-	
-	
-	public static void maximize(){
-		
+
+	public static void maximize() {
+
 		driverInstance.manage().window().maximize();
-		
+
 	}
-	
-	public static void deleteCookie(){
-		
+
+	public static void deleteCookie() {
+
 		driverInstance.manage().deleteAllCookies();
-		
+
 	}
-	
-	
-	public static void addCookie(String name, String value){
-		
-		Cookie cookie = new Cookie(name, value);		
+
+	public static void addCookie(String name, String value) {
+
+		Cookie cookie = new Cookie(name, value);
 		driverInstance.manage().addCookie(cookie);
 	}
-	public static void threadSleep(int time){
-		
-		try{
+
+	public static void threadSleep(int time) {
+
+		try {
 			Thread.sleep(time);
-			driverInstance.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
+			driverInstance.manage().timeouts()
+					.implicitlyWait(implicitWait, TimeUnit.SECONDS);
 		}
-		
-		catch(Exception e){
-			
+
+		catch (Exception e) {
+
 			System.err.println("Error In Thread - Sleep");
 		}
 	}
-	
-	public static  void tearDownAndtakeErrorScreenshot(Scenario scenario) {
 
-		if(scenario.isFailed()){
-			
-        try {
-        	
-            scenario.write(scenario.getName() +"----" + scenario.getId()+ "-------" + scenario.getStatus() + "/n"+ COREManager.getCurrentUrl());
-        	
-        	byte[] screenshot =((TakesScreenshot)COREManager.driverInstance).getScreenshotAs(OutputType.BYTES);
-          scenario.embed(screenshot, "image/png");
-             
-        } catch (WebDriverException screenShotException) {
-            System.err.println(screenShotException.getMessage());
-        }
+	public static void tearDownAndtakeErrorScreenshot(Scenario scenario) {
+
+		if (scenario.isFailed()) {
+
+			try {
+
+				scenario.write(scenario.getName() + "----" + scenario.getId()
+						+ "-------" + scenario.getStatus() + "/n"
+						+ COREManager.getCurrentUrl());
+
+				byte[] screenshot = ((TakesScreenshot) COREManager.driverInstance)
+						.getScreenshotAs(OutputType.BYTES);
+				scenario.embed(screenshot, "image/png");
+
+			} catch (WebDriverException screenShotException) {
+				System.err.println(screenShotException.getMessage());
+			}
 		}
-          
+
 	}
 
 }
