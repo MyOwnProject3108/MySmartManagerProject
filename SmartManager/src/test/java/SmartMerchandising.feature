@@ -132,7 +132,7 @@ Feature: S-Merchandising
     Examples: Validation Messages
       | Name          | Message               |
       |               | Name must be provided |
-      | Test_Selenium | Recommendation Rules  |
+      | Auto_Create   | Recommendation Rules  |
 
   @duplicatenamecamp
   Scenario: Error validation for Duplicate Merchandising Campaign name
