@@ -31,7 +31,7 @@ public class PeeriusDebugInfo extends Context {
 		}
 			else{
 				
-				Assert.fail("Expected "+size+"But Rule "+"Was Found");
+				Assert.fail("Expected "+size+" But Rule "+number+" Was Found");
 				
 			}		
 		}
