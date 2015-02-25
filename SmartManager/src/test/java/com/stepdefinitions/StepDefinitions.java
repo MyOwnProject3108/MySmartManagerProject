@@ -1,4 +1,4 @@
-package stepsdefinitions;
+package com.stepdefinitions;
 
 import org.openqa.selenium.By;
 
@@ -44,7 +44,7 @@ public class StepDefinitions extends SmartMerchandising {
 	@Then("^I Create Simple Campaign with name \"([^\"]*)\"$")
 	public void I_Create_Simple_Campaign(String campaign) throws Throwable {
 
-		createCampaignSimple(campaign, "Product Page", "product",
+		createCampaignSimple(campaign, "Product Page", "producthorizontal",
 				"(r.gender=\"male\")");
 
 	}
