@@ -162,4 +162,13 @@ public static void selectPreviewCategory(String category){
 	}
 }
 
+public static void createABgroup(String group, String page, String widget, String group_a_percent, String group_b_percent){
+	
+	Navigation.gotoURL("/shop-admin/abtesting/abtests.page");
+	setText(By.id("group_a"), group_a_percent);
+	setText(By.id("group_b"), group_b_percent);
+	clickElement(By.xpath("//*[@class='box widgets_"+group+"']//em[.='"+page+"']/following::select[@name='self[PRODUCT-"+group+"-0]']/option[.='"+widget+"']"));
+	clickElement(By.className("submit120"));	
+}
+
 }

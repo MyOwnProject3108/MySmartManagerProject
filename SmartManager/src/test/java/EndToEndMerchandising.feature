@@ -19,7 +19,7 @@ Feature: End to End Tests for Merchandising
   @E2E
   Scenario: Verify rules on client's website
 
-  @setup
+  @setupproductset
   Scenario: Setup simple rule with productset for End-End scenario
     When I click on "Define Product Sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
@@ -39,3 +39,13 @@ Feature: End to End Tests for Merchandising
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
     Then I should see "producthorizontal" in the debug
     Then I should see Rule "(r.productset="TestSet")" in "2" Positions
+
+  @setupABgroup
+  Scenario: Setup simple rule with productset for End-End scenario
+    Given I Create AB Group with Details
+      | Group | Page    | Widget            | Group A Percent | Group B Percent |
+      | A     | Product | producthorizontal | 100             | 0               |
+      
+    @deactivateABgroup
+    Scenario Deactivate AB Group
+    
