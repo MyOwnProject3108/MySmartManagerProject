@@ -41,12 +41,12 @@ Feature: End to End Tests for Merchandising
     Then I should see Rule "(r.productset="TestSet")" in "2" Positions
 
   @setupABgroup
-  Scenario Outline: Activate AB group
+  Scenario: Activate AB group
     Given I Create AB Group with Details
       | Group | Page    | Widget            | Group A Percent | Group B Percent |
       | A     | Product | producthorizontal | 100             | 0               |
-    Given I Create Simple Campaign with name "E2EAutoCreate"
-      When I click on link "3. Recommendation Rules"
+    And I Create Simple Campaign with name "E2EAutoCreate"
+    When I click on link "3. Recommendation Rules"
     And I click on button "Edit Rule..."
     And I select option "Sale Price"
     And I select operator "less than"
@@ -59,5 +59,3 @@ Feature: End to End Tests for Merchandising
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/clothing/mens/tops/10457232.html"
     Then I should see "producthorizontal" in the debug
     Then I should see Rule "(r.saleprice<"10")" in "5" Positions
-    
-

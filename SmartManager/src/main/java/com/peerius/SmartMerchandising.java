@@ -165,10 +165,12 @@ public static void selectPreviewCategory(String category){
 public static void createABgroup(String group, String page, String widget, String group_a_percent, String group_b_percent){
 	
 	Navigation.gotoURL("/shop-admin/abtesting/abtests.page");
-	setText(By.id("group_a"), group_a_percent);
-	setText(By.id("group_b"), group_b_percent);
+	javaScriptExe("$(\"#group_a\").val("+group_a_percent+")");
+	javaScriptExe("$(\"#group_b\").val("+group_b_percent+")");
 	clickElement(By.xpath("//*[@class='box widgets_"+group+"']//em[.='"+page+"']/following::select[@name='self[PRODUCT-"+group+"-0]']/option[.='"+widget+"']"));
-	clickElement(By.className("submit120"));	
+	javaScriptExe("$(\"input[value='Create']\").click()");
+	COREManager.threadSleep(2000);
+	elementNotPresent(By.xpath("//input[.='Create']"));
 }
 
 }
