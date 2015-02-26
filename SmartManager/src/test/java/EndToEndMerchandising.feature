@@ -41,11 +41,23 @@ Feature: End to End Tests for Merchandising
     Then I should see Rule "(r.productset="TestSet")" in "2" Positions
 
   @setupABgroup
-  Scenario: Setup simple rule with productset for End-End scenario
+  Scenario: Activate AB group
     Given I Create AB Group with Details
       | Group | Page    | Widget            | Group A Percent | Group B Percent |
       | A     | Product | producthorizontal | 100             | 0               |
-      
-    @deactivateABgroup
-    Scenario Deactivate AB Group
+     Given I Create Simple Campaign with name "E2EAutoCreate"
+     When I click on link "3. Recommendation Rules"
+    And I click on button "Edit Rule..."
+    And I select option "Sale Price"
+    And I select operator "greater than or equals"
+    And I Enter rule Text "20"
+    And click on button "Save Campaign"
+    And I activate Campaign "AutoCreate"
+    
+    @end2endABGroup
+    Scenario: Verify merch rule on client site
+    Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
+    Then I should see "producthorizontal" in the debug
+    Then I should see Rule "(r.saleprice<"20")" in "5" Positions   
+
     
