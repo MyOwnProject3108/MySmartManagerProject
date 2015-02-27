@@ -41,7 +41,7 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 	public void i_should_not_see_Rule_in_Positions(String rule, String positions)
 			throws Throwable {
 		
-		verifyNoRule(rule, positions);
+	
 	    
 	}
 	
