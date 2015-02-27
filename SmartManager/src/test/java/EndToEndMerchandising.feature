@@ -90,7 +90,6 @@ Feature: End to End Tests for Merchandising
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/clothing/mens/tops/10457232.html"
     Then I should see "producthorizontal" in the debug
     Then I should see Rule "(r.saleprice<"10")" in "5" Positions
-<<<<<<< HEAD
     
     
    @deactivateABgroup
@@ -98,7 +97,4 @@ Feature: End to End Tests for Merchandising
     Given I goto URL "/shop-admin/abtesting/abtests.page"
     And I deactivate AB group
     Then AB Group should be Deactivated
-    
 
-=======
->>>>>>> 3047fdc9b53f52ce3751cbc964ef03058a343676
