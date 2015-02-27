@@ -199,14 +199,14 @@ public class StepDefinitions extends SmartMerchandising {
 
 	@Then("^I should see Master Rule \"(.*?)\"$")
 	public void i_should_see_Master_Rule(String rule) throws Throwable {
-	verifyInnerHTML(By.id("master_advanced"), rule);
+	verifytextContent(By.id("master_advanced"), rule);
 	
 	}
 	
 	@Then("^I should see Rule \"(.*?)\" on Position \"(.*?)\"$")
 	public void i_shoud_see_rule(String rule, String position){
 		
-		verifyInnerHTML(By.xpath("//div/textarea[contains(@id,'advanced_btn_rec_"+position+"')]"), rule);
+		verifytextContent(By.xpath("//div/textarea[contains(@id,'advanced_btn_rec_"+position+"')]"), rule);
 		
 	}
 	

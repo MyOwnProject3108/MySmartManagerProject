@@ -37,6 +37,14 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 
 	}	
 	
+	@Then("^I should not see Rule \"(.*?)\" in \"(.*?)\" Positions$")
+	public void i_should_not_see_Rule_in_Positions(String rule, String positions)
+			throws Throwable {
+		
+		verifyNoRule(rule, positions);
+	    
+	}
+	
 	@Given("^I Create AB Group with Details$")
 	public void i_Create_AB_Group_with_Details(List<String> dataInfo) throws Throwable {
 		

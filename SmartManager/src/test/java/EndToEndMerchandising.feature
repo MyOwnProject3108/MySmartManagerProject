@@ -8,10 +8,9 @@ Feature: End to End Tests for Merchandising
   @setup1
   Scenario: End to End Test With Simple Rule alongwith Master Rule
     Given I Create Simple Campaign with name "E2EAutoCreate"
-    Then I click on link "2.  Master Rules"
-    And I click on button "Toggle Advanced"
+    And I click on link "Toggle Advanced"
     Then I Set Master Rule "(r.saleprice<20)"
-    And I click on button "Save Campaign"
+    And click on button "Save Campaign"
     Then I Should See Campaign "E2EAutoCreate" on Overview Page
     And I activate Campaign "E2EAutoCreate"
     Then Campaign should be Activated
@@ -20,9 +19,9 @@ Feature: End to End Tests for Merchandising
   Scenario: Verify merch rule on client site
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
     Then I should see "producthorizontal" in the debug
-    Then I should see Rule "(r.saleprice<20)" in "5" Positions
+    Then I should see Rule "(r.gender=\"male\")" in "5" Positions
     When I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10599547.html"
-    Then I should not see Rule "(r.saleprice<20)" in "5" Positions
+    Then I should not see Rule "(r.gender=\"male\")" in "5" Positions
     
     
   @setup2
@@ -38,13 +37,15 @@ Feature: End to End Tests for Merchandising
     Then Campaign should be Activated
   
   Examples: Rule Positions
-      | RuleNumber | Rule             | Position |
+      | RuleNumber | Rule             											   | Position |
       | 2          | (r.category="Electricals>Audio" and r.pricerange="expensive") | 2        |
       
    @E2E
   Scenario: Verify merch rule on client site
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
     Then I should see "producthorizontal" in the debug
+    Then I should see Rule "(r.saleprice<20)" in "1" Position
+    And I should see Rule "(r.category="Electricals>Audio" and r.pricerange="expensive")" in "1" Position
     
     
   @setup
