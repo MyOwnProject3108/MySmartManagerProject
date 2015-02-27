@@ -17,7 +17,6 @@ Feature: End to End Tests for Merchandising
     Then Campaign should be Activated
 
   @E2E
-<<<<<<< HEAD
   Scenario: Verify merch rule on client site
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
     Then I should see "producthorizontal" in the debug
@@ -49,11 +48,9 @@ Feature: End to End Tests for Merchandising
     
     
   @setup
-=======
   Scenario: Verify rules on client's website
 
   @setupproductset
->>>>>>> a0a4653a4f82bdb674be3f383bbe3b086e77a15f
   Scenario: Setup simple rule with productset for End-End scenario
     When I click on "Define Product Sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
