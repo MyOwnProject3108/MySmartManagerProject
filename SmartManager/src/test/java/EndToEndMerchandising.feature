@@ -56,9 +56,7 @@ Feature: End to End Tests for Merchandising
     When I click on "Define Product Sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
     And I Create Simple Campaign with name "E2EAutoCreate"
-    When I click on link "3. Recommendation Rules"
     And I select option "Handpick"
-    And I click on button "Edit Rule..."
     And I select option "r.productset"
     And I select operator "equals to"
     And I Enter rule Text "TestSet"
@@ -78,8 +76,6 @@ Feature: End to End Tests for Merchandising
       | Group | Page    | Widget            | Group A Percent | Group B Percent |
       | A     | Product | producthorizontal | 100             | 0               |
     And I Create Simple Campaign with name "E2EAutoABCreate"
-    When I click on link "3. Recommendation Rules"
-    And I click on button "Edit Rule..."
     And I select option "Sale Price"
     And I select operator "less than"
     And I Enter rule Text "10"
