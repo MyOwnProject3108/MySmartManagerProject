@@ -230,8 +230,17 @@ public class Context extends COREManager {
 		WebElement innerHTML = driverInstance.findElement(elementlocator);
 		
 		boolean innerText =	innerHTML.getAttribute("innerHTML").contains(text);
-		
+			
 		Assert.assertTrue("Text Does Not Exist -- "+text+"",innerText);
+
+	}
+	
+public static void verifytextContent(By elementlocator, String text) {
+		
+		WebElement innerContent = driverInstance.findElement(elementlocator);
+		
+		boolean innerText =	innerContent.getAttribute("textContent").contains(text);
+		Assert.assertTrue("Text Does Not Exist -- "+text+"--Actual Text",innerText);
 
 	}
 
