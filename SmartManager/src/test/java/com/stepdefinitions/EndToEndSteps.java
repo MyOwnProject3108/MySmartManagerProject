@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.peerius.PeeriusDebugInfo;
 import com.peerius.SmartMerchandising;
+import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
 
 import cucumber.api.java.en.Given;
@@ -58,17 +59,13 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 
 	@Given("^I deactivate AB group$")
 	public void i_deactivate_AB_group() throws Throwable {
-		clickElement(By.className("_deactivate"));
-		Actions abDelete = new Actions(driverInstance);
-		abDelete.sendKeys(Keys.ENTER).build().perform();
+		javaScriptExe("$(\"input[value='Deactivate']\").click()");
+		acceptAlert();
+		elementNotPresent(By.className("box widgets_A"));
 		
 	}
 
-	@Then("^AB Group should be Deactivated$")
-	public void ab_Group_should_be_Deactivated() throws Throwable {
-		System.out.println("its deleted");
 	
-	}
 	
 	
 
