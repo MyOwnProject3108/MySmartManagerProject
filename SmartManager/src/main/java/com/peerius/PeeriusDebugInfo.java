@@ -17,21 +17,20 @@ public class PeeriusDebugInfo extends Context {
 		
 		
 		
-		List<WebElement> rulePositions =driverInstance.findElements(By.xpath("//tr[contains(.,'Rule')]//td"));
+		List<WebElement> rulePositions =driverInstance.findElements(By.xpath("//tr[contains(.,'Rules')]//td[contains(.,'Product matched')]"));
 
-		//tr[contains(.,'Rule')]//td[contains(.,'"+rule+"']
 		int size = rulePositions.size();
 		
 		if(number==size){
 			
 			for(WebElement singleElement: rulePositions){
-				
-					Assert.assertTrue(singleElement.getAttribute("innerHTML").contains(rule));
+			
+				Assert.assertTrue(singleElement.getAttribute("textContent").contains(rule));
 			}
 		}
 			else{
 				
-				Assert.fail("Expected "+size+" But Rule "+number+" Was Found");
+				Assert.fail("Expected "+number+" But Rule "+size+" Was Found");
 				
 			}		
 		}

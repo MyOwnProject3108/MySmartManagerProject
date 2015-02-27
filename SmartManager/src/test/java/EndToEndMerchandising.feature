@@ -57,7 +57,7 @@ Feature: End to End Tests for Merchandising
   Scenario: Setup simple rule with productset for End-End scenario
     When I click on "Define Product Sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
-    And I Create Simple Campaign with name "AutoCreate"
+    And I Create Simple Campaign with name "E2EAutoCreate"
     When I click on link "3. Recommendation Rules"
     And I select option "Handpick"
     And I click on button "Edit Rule..."
@@ -66,7 +66,7 @@ Feature: End to End Tests for Merchandising
     And I Enter rule Text "TestSet"
     And click on button "Save Campaign"
     Then I should see Message "Successfully saved"
-    And I activate Campaign "AutoCreate"
+    And I activate Campaign "E2EAutoCreate"
 
   @end2end
   Scenario: Verify merch rule on client site
@@ -75,11 +75,21 @@ Feature: End to End Tests for Merchandising
     Then I should see Rule "(r.productset="TestSet")" in "2" Positions
 
   @setupABgroup
-  Scenario: Setup simple rule with productset for End-End scenario
+  Scenario: Activate AB group
     Given I Create AB Group with Details
       | Group | Page    | Widget            | Group A Percent | Group B Percent |
       | A     | Product | producthorizontal | 100             | 0               |
-      
-    @deactivateABgroup
-    Scenario Deactivate AB Group
-    
+    And I Create Simple Campaign with name "E2EAutoCreate"
+    When I click on link "3. Recommendation Rules"
+    And I click on button "Edit Rule..."
+    And I select option "Sale Price"
+    And I select operator "less than"
+    And I Enter rule Text "10"
+    And click on button "Save Campaign"
+    And I activate Campaign "E2EAutoCreate"
+
+  @end2endABGroup
+  Scenario: Verify merch rule on client site
+    Given I navigate to URL "http://showcase-dev.peerius.com/index.php/clothing/mens/tops/10457232.html"
+    Then I should see "producthorizontal" in the debug
+    Then I should see Rule "(r.saleprice<"10")" in "5" Positions
