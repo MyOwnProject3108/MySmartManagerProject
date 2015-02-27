@@ -28,7 +28,7 @@ Feature: End to End Tests for Merchandising
   @setup2
   Scenario Outline: End to End Test With Simple Rule alongwith Master Rule
     Given I Create Simple Campaign with name "E2EAutoCreate"
-    Then I click on link "3. Recommendation Rules"
+    And I click on link "3. Recommendation Rules"
     And I click on button "Add New Rule"
     Then I Add New Rule "<RuleNumber>" with Rule "<Rule>"
     And Apply Rule "<RuleNumber>" To Position "<Position>"
@@ -45,12 +45,12 @@ Feature: End to End Tests for Merchandising
   Scenario: Verify merch rule on client site
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
     Then I should see "producthorizontal" in the debug
-    Then I should see Rule "(r.saleprice<20)" in "1" Position
-    And I should see Rule "(r.category="Electricals>Audio" and r.pricerange="expensive")" in "1" Position
+    Then I should see Rule "(r.saleprice<20)" in "1" Positions
+    And I should see Rule "(r.category="Electricals>Audio" and r.pricerange="expensive")" in "1" Positions
     
     
   @setup
-  Scenario: Verify rules on client's website
+  Scenario: Verify rules on client website
 
   @setupproductset
   Scenario: Setup simple rule with productset for End-End scenario
@@ -99,5 +99,9 @@ Feature: End to End Tests for Merchandising
     Given I goto URL "/shop-admin/abtesting/abtests.page"
     And I deactivate AB group
   
-  
+  @InactiveCampaign
+  Scenario: Rules should not be applied if campaign is not active
+  	Given I Create Simple Campaign with name "E2EAutoCreate1"
+  	And I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/accessories/10364791.html"
+  	Then I should see Rule "(r.pricerange="expensive")" in "0" Positions
 

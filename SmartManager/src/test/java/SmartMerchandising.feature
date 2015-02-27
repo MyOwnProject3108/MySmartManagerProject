@@ -52,7 +52,7 @@ Feature: S-Merchandising
     And Apply Rule "<RuleNumber>" To Position "<Position>"
     Given I goto Campaign "AutoCreate"
     And I click on link "3. Recommendation Rules"
-    Then Should Verify Rule  "<RuleNumber>" at "<Position>"
+    Then I Should Verify Rule  "<RuleNumber>" at "<Position>"
 
     Examples: Rule Positions
       | RuleNumber | Rule             | Position |
