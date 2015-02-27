@@ -26,7 +26,7 @@ Feature: End to End Tests for Merchandising
     
     
   @setup2
-  Scenario: End to End Test With Simple Rule alongwith Master Rule
+  Scenario Outline: End to End Test With Simple Rule alongwith Master Rule
     Given I Create Simple Campaign with name "E2EAutoCreate"
     Then I click on link "3. Recommendation Rules"
     And I click on button "Add New Rule"
