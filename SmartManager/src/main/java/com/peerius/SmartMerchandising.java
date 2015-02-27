@@ -27,8 +27,8 @@ public class SmartMerchandising extends Context {
 		setText(By.id("advanced_btn_rec_default"), ruleExpression);
 		clickLink("Apply to all");
 		clickElement(By.xpath("//button[contains(.,' Save Campaign')]"));
-		threadSleep(5000);
-		Navigation.refreshPage();
+		verifyErrorMessage(By.className("notifications"), "Successfully saved");
+		
 	}
 	
 public static void createCampaign(String name, String position, String location, String widget, String ruleExpression){

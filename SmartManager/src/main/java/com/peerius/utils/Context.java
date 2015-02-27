@@ -166,7 +166,7 @@ public class Context extends COREManager {
 	}
 
 
-	protected void verifyErrorMessage(By by, String errorMesage) {
+	public static void verifyErrorMessage(By by, String errorMesage) {
 		Locator locator = Locator.by(by);
 		if (locator.hasClass("notifications")) {
 				

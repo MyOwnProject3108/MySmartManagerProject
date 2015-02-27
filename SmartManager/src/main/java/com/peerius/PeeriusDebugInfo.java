@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import com.peerius.utils.Context;
+import com.peerius.utils.Navigation;
 
 public class PeeriusDebugInfo extends Context {
 	
@@ -16,7 +18,7 @@ public class PeeriusDebugInfo extends Context {
 	int number = Integer.parseInt(positions);
 		
 		
-		
+		try{
 		List<WebElement> rulePositions =driverInstance.findElements(By.xpath("//tr[contains(.,'Rules')]//td[contains(.,'Product matched')]"));
 
 		int size = rulePositions.size();
@@ -35,6 +37,14 @@ public class PeeriusDebugInfo extends Context {
 			}		
 		}
 
+	catch(NoSuchElementException e){
+		
+		Navigation.refreshPage();
+		
+	}
+		
+	}
+	
 
 	public static void verifyWidgetName(String widget){
 		

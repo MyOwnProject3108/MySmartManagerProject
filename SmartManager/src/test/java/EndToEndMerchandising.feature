@@ -8,20 +8,21 @@ Feature: End to End Tests for Merchandising
   @setup1
   Scenario: End to End Test With Simple Rule alongwith Master Rule
     Given I Create Simple Campaign with name "E2EAutoCreate"
+    Then I click on link "2. Master Rules"
     And I click on link "Toggle Advanced"
-    Then I Set Master Rule "(r.saleprice<20)"
+    Then I Set Master Rule "(p.saleprice<"20")"
     And click on button "Save Campaign"
     Then I Should See Campaign "E2EAutoCreate" on Overview Page
     And I activate Campaign "E2EAutoCreate"
     Then Campaign should be Activated
 
-  @E2E
+  @E2E1
   Scenario: Verify merch rule on client site
-    Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
+    Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/accessories/10364791.html"
     Then I should see "producthorizontal" in the debug
-    Then I should see Rule "(r.gender=\"male\")" in "5" Positions
+    Then I should see Rule "(r.pricerange="expensive")" in "5" Positions
     When I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10599547.html"
-    Then I should not see Rule "(r.gender=\"male\")" in "5" Positions
+    Then I should see Rule "(r.pricerange="expensive")" in "0" Positions
     
     
   @setup2
@@ -40,7 +41,7 @@ Feature: End to End Tests for Merchandising
       | RuleNumber | Rule             											   | Position |
       | 2          | (r.category="Electricals>Audio" and r.pricerange="expensive") | 2        |
       
-   @E2E
+   @E2E2
   Scenario: Verify merch rule on client site
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
     Then I should see "producthorizontal" in the debug

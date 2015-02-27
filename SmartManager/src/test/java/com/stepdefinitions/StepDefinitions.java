@@ -45,7 +45,7 @@ public class StepDefinitions extends SmartMerchandising {
 	public void I_Create_Simple_Campaign(String campaign) throws Throwable {
 
 		createCampaignSimple(campaign, "Product Page", "producthorizontal",
-				"(r.gender=\"male\")");
+				"(r.pricerange=\"expensive\")");
 
 	}
 	
