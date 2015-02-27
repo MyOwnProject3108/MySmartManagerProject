@@ -254,7 +254,7 @@ public class StepDefinitions extends SmartMerchandising {
 	@Then("^I Add New Rule \"(.*?)\" with Rule \"(.*?)\"$")
 	public void i_Add_New_Rule(String ruleNumber, String rule) throws Throwable {
 	   clickElement(By.xpath("//ul/li["+ruleNumber+"]//div[contains(@class,'actions')]/button[contains(.,'Edit Rule')]"));
-	   clickLink("Toggle Advanced");
+	   clickElement(By.xpath("//a[contains(text(),'Toggle')]"));
 	   setText(By.xpath("//div/textarea[contains(@id,'advanced_btn_rec_"+ruleNumber+"')]"), rule	);
 	   clickButton("Save Campaign");	
 	}
@@ -345,7 +345,7 @@ public class StepDefinitions extends SmartMerchandising {
 				clickButton("Save Campaign");
 		}
 		
-		@Then("^Should Verify Rule  \"(.*?)\" at \"(.*?)\"$")
+		@Then("^I Should Verify Rule  \"(.*?)\" at \"(.*?)\"$")
 		public void should_verify_Rule_at_position(String position, String ruleNumber){
 			
 			elementIsPresent(By.xpath("//ul[@class='rules-grid']/li["+position+"]//p[contains(.,'"+ruleNumber+"')]"));
