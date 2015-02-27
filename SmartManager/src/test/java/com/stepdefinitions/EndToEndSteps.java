@@ -3,12 +3,9 @@ package com.stepdefinitions;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
 
 import com.peerius.PeeriusDebugInfo;
 import com.peerius.SmartMerchandising;
-import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
 
 import cucumber.api.java.en.Given;
