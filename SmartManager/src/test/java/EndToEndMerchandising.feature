@@ -60,4 +60,11 @@ Feature: End to End Tests for Merchandising
     Then I should see "producthorizontal" in the debug
     Then I should see Rule "(r.saleprice<"10")" in "5" Positions
     
+    
+   @deactivateABgroup
+   Scenario: Deactivate AB Group
+    Given I goto URL "/shop-admin/abtesting/abtests.page"
+    And I deactivate AB group
+    Then AB Group should be Deactivated
+    
 

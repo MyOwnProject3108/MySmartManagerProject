@@ -2,8 +2,13 @@ package com.stepdefinitions;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
+
 import com.peerius.PeeriusDebugInfo;
 import com.peerius.SmartMerchandising;
+import com.peerius.utils.Navigation;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -45,6 +50,27 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 
 	    
 	}
+	
+	@Given("^I goto URL \"(.*?)\"$")
+	public void i_goto_URL(String url) throws Throwable {
+		Navigation.gotoURL(url);
+	}
+
+	@Given("^I deactivate AB group$")
+	public void i_deactivate_AB_group() throws Throwable {
+		clickElement(By.className("_deactivate"));
+		Actions abDelete = new Actions(driverInstance);
+		abDelete.sendKeys(Keys.ENTER).build().perform();
+		
+	}
+
+	@Then("^AB Group should be Deactivated$")
+	public void ab_Group_should_be_Deactivated() throws Throwable {
+		System.out.println("its deleted");
+	
+	}
+	
+	
 
 
 }
