@@ -34,7 +34,7 @@ public class Context extends COREManager {
 
 	public static void setText(By locator, String text) {
 
-		WebElement textBox = new WebDriverWait(driverInstance, elementWaitTime)
+		WebElement textBox = new WebDriverWait(driverInstance, elementWaitTime).pollingEvery(elementWaitTime, TimeUnit.SECONDS)
 				.until(ExpectedConditions.visibilityOfElementLocated(locator));
 		textBox.clear();
 		textBox.sendKeys(text);

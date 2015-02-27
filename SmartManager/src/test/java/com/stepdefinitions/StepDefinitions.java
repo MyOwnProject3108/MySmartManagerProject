@@ -188,7 +188,7 @@ public class StepDefinitions extends SmartMerchandising {
 	
 	@Given("^I Create Campaign \"(.*?)\" For \"(.*?)\"$")
 	public void i_Create_Campaign_For(String campaign, String position) throws Throwable {
-		createCampaign(campaign, position, "Product Page", "product", "(r.gender=\"male\")");
+		createCampaign(campaign, position, "Product Page", "producthorizontal", "(r.gender=\"male\")");
 
 	}
 	
@@ -254,7 +254,8 @@ public class StepDefinitions extends SmartMerchandising {
 	@Then("^I Add New Rule \"(.*?)\" with Rule \"(.*?)\"$")
 	public void i_Add_New_Rule(String ruleNumber, String rule) throws Throwable {
 	   clickElement(By.xpath("//ul/li["+ruleNumber+"]//div[contains(@class,'actions')]/button[contains(.,'Edit Rule')]"));
-	   clickElement(By.xpath("//a[contains(text(),'Toggle')]"));
+	   clickElement(By.partialLinkText("Toggle"));
+	   clickElement(By.partialLinkText("Toggle"));
 	   setText(By.xpath("//div/textarea[contains(@id,'advanced_btn_rec_"+ruleNumber+"')]"), rule	);
 	   clickButton("Save Campaign");	
 	}

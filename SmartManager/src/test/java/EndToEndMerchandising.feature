@@ -28,7 +28,6 @@ Feature: End to End Tests for Merchandising
   @setupComplex
   Scenario Outline: End to End Test Set-up for Simple Rule alongwith AND Rule
     Given I Create Simple Campaign with name "E2EAutoCreate"
-    And I click on link "3. Recommendation Rules"
     And I click on button "Add New Rule"
     Then I Add New Rule "<RuleNumber>" with Rule "<Rule>"
     And Apply Rule "<RuleNumber>" To Position "<Position>"
