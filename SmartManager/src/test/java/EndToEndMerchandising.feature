@@ -17,6 +17,37 @@ Feature: End to End Tests for Merchandising
     Then Campaign should be Activated
 
   @E2E
+  Scenario: Verify merch rule on client site
+    Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
+    Then I should see "producthorizontal" in the debug
+    Then I should see Rule "(r.saleprice<20)" in "5" Positions
+    When I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10599547.html"
+    Then I should not see Rule "(r.saleprice<20)" in "5" Positions
+    
+    
+  @setup2
+  Scenario: End to End Test With Simple Rule alongwith Master Rule
+    Given I Create Simple Campaign with name "E2EAutoCreate"
+    Then I click on link "3. Recommendation Rules"
+    And I click on button "Add New Rule"
+    Then I Add New Rule "<RuleNumber>" with Rule "<Rule>"
+    And Apply Rule "<RuleNumber>" To Position "<Position>"
+    And I click on button "Save Campaign"
+    Then I Should See Campaign "E2EAutoCreate" on Overview Page
+    And I activate Campaign "E2EAutoCreate"
+    Then Campaign should be Activated
+  
+  Examples: Rule Positions
+      | RuleNumber | Rule             | Position |
+      | 2          | (r.category="Electricals>Audio" and r.pricerange="expensive") | 2        |
+      
+   @E2E
+  Scenario: Verify merch rule on client site
+    Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
+    Then I should see "producthorizontal" in the debug
+    
+    
+  @setup
   Scenario: Verify rules on client's website
 
   @setupproductset
@@ -41,12 +72,12 @@ Feature: End to End Tests for Merchandising
     Then I should see Rule "(r.productset="TestSet")" in "2" Positions
 
   @setupABgroup
-  Scenario Outline: Activate AB group
+  Scenario: Activate AB group
     Given I Create AB Group with Details
       | Group | Page    | Widget            | Group A Percent | Group B Percent |
       | A     | Product | producthorizontal | 100             | 0               |
-    Given I Create Simple Campaign with name "E2EAutoCreate"
-      When I click on link "3. Recommendation Rules"
+    And I Create Simple Campaign with name "E2EAutoCreate"
+    When I click on link "3. Recommendation Rules"
     And I click on button "Edit Rule..."
     And I select option "Sale Price"
     And I select operator "less than"
@@ -59,6 +90,7 @@ Feature: End to End Tests for Merchandising
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/clothing/mens/tops/10457232.html"
     Then I should see "producthorizontal" in the debug
     Then I should see Rule "(r.saleprice<"10")" in "5" Positions
+<<<<<<< HEAD
     
     
    @deactivateABgroup
@@ -68,3 +100,5 @@ Feature: End to End Tests for Merchandising
     Then AB Group should be Deactivated
     
 
+=======
+>>>>>>> 3047fdc9b53f52ce3751cbc964ef03058a343676
