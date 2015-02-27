@@ -1,0 +1,6 @@
+#surefire_0
+#Sun Feb 22 14:09:53 GMT 2015
+user.dir=D\:\\Automation\\automation_qa\\SmartManager
+cucumber.options=-t @diffrules
+localRepository=C\:\\Users\\ajoshi\\.m2\\repository
+basedir=D\:\\Automation\\automation_qa\\SmartManager
