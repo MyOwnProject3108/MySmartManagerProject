@@ -14,8 +14,11 @@ import com.peerius.utils.Navigation;
 public class SmartMerchandising extends Context {
 	
 	
-	
+
+
 	public static void createCampaignSimple(String name, String location, String widget, String ruleExpression){
+		
+	
 		
 		Navigation.gotoURL("/smartmanager/merchandising/edit.page");
 		setText(By.id("name"), name);
@@ -27,7 +30,9 @@ public class SmartMerchandising extends Context {
 		setText(By.id("advanced_btn_rec_default"), ruleExpression);
 		clickLink("Apply to all");
 		clickElement(By.xpath("//button[contains(.,' Save Campaign')]"));
-		verifyErrorMessage(By.className("notifications"), "Successfully saved");
+		
+		elementIsPresent(By.id("ajax_progress_bar"));
+			
 		
 	}
 	
