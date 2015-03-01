@@ -7,6 +7,7 @@ import com.peerius.SmartMerchandising;
 import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
 
+import cucumber.api.Scenario;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -41,7 +42,7 @@ public class StepDefinitions extends SmartMerchandising {
 
 	}
 
-	@Then("^I Create Simple Campaign with name \"([^\"]*)\"$")
+	@Then("^I Create Simple Campaign with name \"(.*?)\"$")
 	public void I_Create_Simple_Campaign(String campaign) throws Throwable {
 
 		createCampaignSimple(campaign, "Product Page", "producthorizontal",
@@ -50,7 +51,7 @@ public class StepDefinitions extends SmartMerchandising {
 	}
 	
 	@Then("^I Create invalid Campaign with name \"(.*?)\"$")
-	public void i_Create_invalid_Campaign_with_name(String campaign) throws Throwable {
+	public void i_Create_invalid_Campaign_with_name(String campaign, Scenario scenario) throws Throwable {
 		createCampaignSimple(campaign, "Product Page", "product",
 				"(r.productset<>\"AJ10043\")");
 	    
