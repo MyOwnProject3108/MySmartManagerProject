@@ -380,7 +380,11 @@ public static void verifytextContent(By elementlocator, String text) {
 		
 		Actions dragAndDrop = new Actions(driverInstance);
 	
-		dragAndDrop.clickAndHold(source).moveToElement(target).release(target).build().perform();
+		dragAndDrop.clickAndHold(source).moveToElement(target).build().perform();
+
+		dragAndDrop.moveToElement(target, 142, 624).release(target).perform();
+		
+	
 	}
 	
 	public static void uploadFile(By by, String filePath){
