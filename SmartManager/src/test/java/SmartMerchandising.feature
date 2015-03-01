@@ -10,6 +10,7 @@ Feature: S-Merchandising
     When I click on "Create a New Campaign" option in "Merchandising"
     Then I should be on Merchandising "Create a New Campaign" page
     And I Create Simple Campaign with name "AutoCreate"
+    Then I should see Message "Successfully saved"
     Then I Should See Campaign "AutoCreate" on Overview Page
 
   @editcampaign
@@ -33,6 +34,7 @@ Feature: S-Merchandising
   @positions
   Scenario Outline: Apply Rule to Campaign Positions
     Given I Create Campaign "<Campaign>" For "<Position>"
+    Then I should see Message "Successfully saved"
     And Edit Campaign "<Campaign>"
     When I click on link "3. Recommendation Rules"
     Then I Should Verify "<Position>"
