@@ -25,7 +25,7 @@ public class TestHook {
 
 	
 	@After
-	public void tearDown(cucumber.api.Scenario scenario){
+	public void tearDown(Scenario scenario){
 		
 		COREManager.tearDownAndtakeErrorScreenshot(scenario);
 		Navigation.closeWindow();
