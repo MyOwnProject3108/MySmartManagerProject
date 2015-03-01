@@ -171,12 +171,24 @@ public static void createABgroup(String group, String page, String widget, Strin
 	
 	Navigation.gotoURL("/shop-admin/abtesting/abtests.page");
 	setText(By.id("group_a"), group_a_percent);
-	pressKey("Enter");
-	javaScriptExe("$(\"#group_b\").val("+group_b_percent+")");
+	clickElement(By.xpath("//input[@value='Create']"));
 	clickElement(By.xpath("//*[@class='box widgets_"+group+"']//em[.='"+page+"']/following::select[@name='self[PRODUCT-"+group+"-0]']/option[.='"+widget+"']"));
-	javaScriptExe("$(\"input[value='Create']\").click()");
+
+	javaScriptExe("$(\"#group_b\").val("+group_b_percent+")");
+	javaScriptExe("window.scrollBy(0,290);");
+	clickElement(By.xpath("//select[@name='self[PRODUCT-"+group+"-0]']/option[.='"+widget+"']"));
+	
+	
 	COREManager.threadSleep(2000);
-	elementNotPresent(By.xpath("//input[.='Create']"));
+	elementNotPresent(By.xpath("//input[@value='Create']"));
+	Navigation.refreshPage();
+	clickElement(By.xpath("//*[@class='box widgets_"+group+"']//em[.='"+page+"']/following::select[@name='self[PRODUCT-"+group+"-0]']/option[.='"+widget+"']"));
+	javaScriptExe("window.scrollBy(0,290);");
+	clickElement(By.xpath("//input[@value='Update']"));
+	
+	acceptAlert();
+	elementIsPresent(By.xpath("//em[contains(.,'A/B Test Updated')]"));
+	
 }
 
 }
