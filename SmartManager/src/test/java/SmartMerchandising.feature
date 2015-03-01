@@ -98,7 +98,7 @@ Feature: S-Merchandising
   Scenario: Delete Product Set with is used as a rule in merch campaign
     When I click on "Define Product Sets" option in "Merchandising"
     And I click Delete On Product Set "TestSet"
-    Then I should see Message "SKU set is in use and cannot be deleted"
+	    Then I should see Message "SKU set is in use and cannot be deleted"
 
   @activecamp
   Scenario: Activate Campaign
@@ -232,7 +232,7 @@ Feature: S-Merchandising
     Then I click on link "Clear All Tags"
     Then I should see Message "An SKU set must have at least one valid product"
 
-  @EditProductSet
+  @editProductSet
   Scenario: Edit productset
     Given I goto ProductSet "TestSet"
     And I click Edit On Product Set "TestSet"
@@ -240,7 +240,7 @@ Feature: S-Merchandising
     And I Add "1" Products with Suffix "dora"
     Then I should see "1" products in "TestSet"
 
-  @CopyEditProductSet
+  @copyEditProductSet
   Scenario: Duplicate and Edit productset
     Given I Duplicate ProductSet "TestSet"
     And I click Edit On Product Set "TestSet copy"
@@ -260,12 +260,15 @@ Feature: S-Merchandising
   Scenario: Success message validation for setup campaign
     When I click on "Create a New Campaign" option in "Merchandising"
     Then I should be on Merchandising "Create a New Campaign" page
-    And I Create Simple Campaign with name "AutoCreate"
+    And I Create Simple Campaign with name "AutoCreateSuccess"
     Then I should see Message "Successfully saved"
 
   @campaigndeletemsg
   Scenario: Success message validation for delete campaign
     When I click on "Create a New Campaign" option in "Merchandising"
-    And I Create Simple Campaign with name "AutoCreate"
-    Given I Delete Campaign "AutoCreate"
+    And I Create Simple Campaign with name "AutoCreateDelete"
+    Given I Delete Campaign "AutoCreateDelete"
     Then I should see Message "Successfully deleted"
+    Given I Delete Campaign "AutoCreateSuccess"
+ 
+
