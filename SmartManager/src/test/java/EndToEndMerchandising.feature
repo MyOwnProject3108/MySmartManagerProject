@@ -69,7 +69,7 @@ Feature: End to End Tests for Merchandising
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
     Then I should see "producthorizontal" in the debug
     Then I should see Rule "(r.productset="TestSetE2E")" in "2" Positions
-    Given I Delete Campaign "E2EComplex"
+    Given I Delete Campaign "E2EProductSet"
     Then I should see Message "Successfully deleted"
      Given I Delete Product Set "TestSetE2E"
 
