@@ -255,7 +255,6 @@ public class StepDefinitions extends SmartMerchandising {
 	public void i_Add_New_Rule(String ruleNumber, String rule) throws Throwable {
 	   clickElement(By.xpath("//ul/li["+ruleNumber+"]//div[contains(@class,'actions')]/button[contains(.,'Edit Rule')]"));
 	   clickElement(By.partialLinkText("Toggle"));
-	   clickElement(By.partialLinkText("Toggle"));
 	   setText(By.xpath("//div/textarea[contains(@id,'advanced_btn_rec_"+ruleNumber+"')]"), rule	);
 	   clickButton("Save Campaign");	
 	}
@@ -339,11 +338,16 @@ public class StepDefinitions extends SmartMerchandising {
 
 		@Then("^Apply Rule \"(.*?)\" To Position \"(.*?)\"$")
 		public void apply_To_Position(String ruleNumber, String position) throws Throwable {
-		
+			
+				Navigation.refreshPage();
+				clickLink("3. Recommendation Rules");
+				 clickElement(By.xpath("//ul/li["+ruleNumber+"]//div[contains(@class,'actions')]/button[contains(.,'Edit Rule')]"));
+
 				dragAndDrop(By.xpath("//div[contains(@data-original-title,'Drag')]/p[contains(.,'"+ruleNumber+"')]"), 
-						By.xpath("//ul[@class='rules-grid']/li["+position+"]"));
+						By.xpath("//ul[@class='rules-grid']/li["+position+"]/div[contains(@id,'rule-target')]"));
 				
 				clickButton("Save Campaign");
+				
 		}
 		
 		@Then("^I Should Verify Rule  \"(.*?)\" at \"(.*?)\"$")
