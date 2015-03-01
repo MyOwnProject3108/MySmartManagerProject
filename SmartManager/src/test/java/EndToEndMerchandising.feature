@@ -47,7 +47,7 @@ Feature: End to End Tests for Merchandising
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
     Then I should see "producthorizontal" in the debug
     Then I should see Rule "(r.pricerange="expensive")" in "1" Positions
-    And I should see Rule "(r.category="Electricals>Audio" and r.pricerange="expensive")" in "1" Positions
+    And I should see Rule "(r.category="Electricals>Audio" and r.pricerange="expensive")" in "2" Positions
      Given I Delete Campaign "E2EComplex"
     Then I should see Message "Successfully deleted"
 
