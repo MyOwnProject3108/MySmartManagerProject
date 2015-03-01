@@ -19,7 +19,8 @@ public class PeeriusDebugInfo extends Context {
 		
 		
 		try{
-		List<WebElement> rulePositions =driverInstance.findElements(By.xpath("//tr[contains(.,'Rules')]//td[contains(.,'Product matched')]"));
+		List<WebElement> rulePositions =driverInstance.findElements(By.xpath("//tr[contains(.,'Rules')]//td[contains(text(),'"+rule+"')]"));
+		//tr[contains(.,'Rules')]//td[contains(.,'Product matched')]
 
 		int size = rulePositions.size();
 		
@@ -44,6 +45,7 @@ public class PeeriusDebugInfo extends Context {
 	}
 		
 	}
+	
 	
 
 	public static void verifyWidgetName(String widget){
