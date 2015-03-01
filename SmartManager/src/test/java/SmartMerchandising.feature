@@ -74,6 +74,7 @@ Feature: S-Merchandising
     Then I should see Message "Successfully saved"
     When I goto Campaign "AutoCreate"
     When I click on link "3. Recommendation Rules"
+    And I click on button "Edit Rule..."
     Then I should see Rule "(r.colour="black")" on Position "1"
 
   @productsetrule
@@ -223,7 +224,7 @@ Feature: S-Merchandising
     Given I Delete Product Set "TestSet"
     Then Product Set "TestSet" Should be Deleted
 
-  @ClearAllTags
+  @clearAllTags
   Scenario: Save productset by clearing products from ProductSet
     When I click on "Define Product Sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
