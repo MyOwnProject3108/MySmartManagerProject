@@ -42,7 +42,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
-			<scope>test</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
@@ -74,7 +74,7 @@
         <version>3.2</version>
         <configuration>
           <verbose>true</verbose>
-          <fork>true</fork>
+          <fork>false</fork>
           <executable> ${java.home}/bin/javac</executable>
           <compilerVersion>${default.java.version}</compilerVersion>
          <source>${default.java.version}</source>
