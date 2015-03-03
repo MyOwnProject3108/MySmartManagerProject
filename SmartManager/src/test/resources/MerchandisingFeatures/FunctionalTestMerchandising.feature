@@ -246,7 +246,7 @@ Feature: S-Merchandising
     And I click Edit On Product Set "TestSet copy"
     Then I click on link "Clear All Tags"
     And I Add "1" Products with Suffix "dora"
-    Then I should see "1" products in "TestSet"
+    Then I should see "1" products in "TestSet copy"
 
   @skuduplicate
   Scenario: Error message validation for duplicate sku

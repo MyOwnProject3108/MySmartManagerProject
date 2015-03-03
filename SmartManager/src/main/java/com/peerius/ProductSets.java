@@ -82,9 +82,9 @@ public class ProductSets extends Context {
 		Navigation
 				.gotoURL("/smartmanager/sku/selectedproductsets/list.page?smartproduct=merchandising");
 		elementIsPresent(By.linkText(name));
-		clickLink(name);
 		clickElement(By.xpath("//td/a[text()='" + name+ "']//following::td[1]//div/a[contains(@class,'duplicate')]"));
 		Navigation.refreshPage();
+		threadSleep(1000);
 		elementIsPresent(By.linkText(name+" copy"));
 
 	}
