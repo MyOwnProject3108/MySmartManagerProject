@@ -255,6 +255,10 @@ Feature: S-Merchandising
     Then I Should verify Product Sets "TestSet"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
     Then I should see Message "The name you have chosen is already in use"
+    Given I Delete Product Set "TestSet"
+    And I Delete Product Set "TestSet copy"
+    Then Product Set "TestSet" Should be Deleted
+    Then Product Set "TestSet" Should be Deleted
 
   @campaignsuccessmsg
   Scenario: Success message validation for setup campaign
@@ -270,5 +274,7 @@ Feature: S-Merchandising
     Given I Delete Campaign "AutoCreateDelete"
     Then I should see Message "Successfully deleted"
     Given I Delete Campaign "AutoCreateSuccess"
+    And I Delete Campaign "AutoCreate"
+     Then I should see Message "Successfully deleted"
  
 
