@@ -50,11 +50,11 @@ public class PeeriusDebugInfo extends Context {
 
 	public static void verifyWidgetName(String widget){
 		
+			addCookie("'peerius_pass_peeriusdebug", "1");
+			Navigation.refreshPage();
 			elementIsPresent(By.xpath("//h2[contains(.,'"+widget+"')]"));
-			
-			
 	}
-		
+
 	
 	public static void navigateToURl(String url){
 		

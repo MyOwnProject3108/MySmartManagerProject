@@ -4,6 +4,7 @@ package stepsdefinitions;
 import java.net.MalformedURLException;
 
 import com.peerius.COREManager;
+import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
 
 import cucumber.api.Scenario;
@@ -19,6 +20,11 @@ public class TestHook {
 		System.out.println("Starting --- Scenario --- " + scenario.getName());
 		COREManager.openBrowser();
 		COREManager.deleteCookie();
+		Navigation.gotoLoginPage();
+		COREManager.addCookie("'peerius_pass_peeriusdebug", "1");
+		Context.javaScriptExe("document.cookie='peerius_pass_peeriusdebug=1; expires=Sat, 1 Jan 2050 12:00:00 UTC'; path=/';");
+		Navigation.refreshPage();
+		
 		COREManager.maximize();
 
 	}
