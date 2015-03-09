@@ -387,6 +387,39 @@ public class StepDefinitions extends SmartMerchandising {
 		    
 			SmartMail.editMailCampaign(campaign);
 		}
+		
+		@Given("^I goto Mail Campaign \"(.*?)\"$")
+		public void i_goto_Mail_Campaign(String campaign) throws Throwable {
+		    
+			SmartMail.goToMailCampaign(campaign);
+		}
+
+		@Given("^I Duplicate Mail Campaign \"(.*?)\"$")
+		public void i_Duplicate_Mail_Campaign(String campaign) throws Throwable {
+		    
+			SmartMail.duplicateMailCampaign(campaign);
+		}
+
+		@Given("^I Pause Mail campaign \"(.*?)\"$")
+		public void i_pause_Mail_campaign(String campaign) throws Throwable {
+		    
+			SmartMail.pauseMailCampaign(campaign);
+		}
+		
+		@Then("^Mail Campaign Should be Paused$")
+		public void mail_Campaign_Should_be_Paused() throws Throwable {
+		    
+			elementIsPresent(By.xpath("//td//a[@data-original-title='Activate it']"));
+		}
+
+		@Given("^I Delete Mail Campaign \"(.*?)\"$")
+		public void i_Delete_Mail_Campaign(String name) throws Throwable {
+		    
+			SmartMail.deleteMailCampaign(name);
+		}
+
+
+
 
 		
 

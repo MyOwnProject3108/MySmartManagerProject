@@ -6,7 +6,7 @@ Feature: S-Mail
     And I search for site "leekes"
 
   @CreateMailCampaign
-  Scenario: Create a simple email campaign
+  Scenario: Create a simple Mail Campaign
     Given I click on "Create a New Campaign" option in "Mail"
     Then I should be on Mail "Create a New Campaign" page
     And I Create Simple Mail Campaign with name "AutoCreate"
@@ -14,17 +14,42 @@ Feature: S-Mail
     Then I Should See Mail Campaign "AutoCreate" on Mail Overview Page
 
   @EditMailCmpaign
-  Scenario: Editing An Email Campaign
-    Given I goto Campaign "AutoCreate"
+  Scenario: Editing An Mail Campaign
+    Given I goto Mail Campaign "AutoCreate"
     And I Edit Mail campaign "AutoCreate"
     Then I should be on "edit" Page
-    
+
   @CopyMailCampaign
-  Scenario: Duplicating Email Campaign
-  	Given I goto Campaign "AutoCreate"
-  	And I Duplicate Mail Campaign "AutoCreate"
+  Scenario: Duplicating Mail Campaign
+    Given I goto Mail Campaign "AutoCreate"
+    And I Duplicate Mail Campaign "AutoCreate"
+    Then I Should See Mail Campaign "AutoCreate copy" on Mail Overview Page
+
+  @PauseMailCampaign
+  Scenario: De-activate Mail Campaign
+    Given I goto Mail Campaign "AutoCreate"
+    And I Pause Mail campaign "AutoCreate"
+    Then Mail Campaign Should be Paused
+
+  @TextStyle
+  Scenario Outline: Styling changes should reflect on product title and price display
+    Given I goto Mail Campaign "AutoCreate"
+    And I Set style with "<value>" in "<Attribute>"
+    And I Set alignment for Title and Price for Email Rec
+    Then I should see the style applied in Preview pane 
     
-  
+   Examples: Style changes
+   |Attribute |Value   |
+   |Width     |300	   |
+   |Height    |200     |
+   
+  @DeleteMailCampaign
+  Scenario: Deleting Mail Campaign
+    Given I Delete Mail Campaign "AutoCreate copy"
+    Given I Delete Mail Campaign "AutoCreate"
+    Then I should not see "AutoCreate"
+    Then I should not see "AutoCreate copy" 
+   
 
   #Error validation scenarios start here
   @createMailvalidation
