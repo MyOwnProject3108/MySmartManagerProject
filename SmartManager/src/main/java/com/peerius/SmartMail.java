@@ -81,7 +81,7 @@ public class SmartMail extends Context {
 		
 	}
 	
-	public void goToMailCampaign(String campaign) {
+	public static void goToMailCampaign(String campaign) {
 		
 		Navigation.gotoURL("/smartmanager/mail/list.page");
 		elementIsPresent(By.linkText(campaign));
@@ -89,7 +89,7 @@ public class SmartMail extends Context {
 		
 	}
 	
-	public void verifyMailCampaign(String campaign) {
+	public static void verifyMailCampaign(String campaign) {
 		
 		Navigation.gotoURL("/smartmanager/mail/list.page");
 		elementIsPresent(By.linkText(campaign));

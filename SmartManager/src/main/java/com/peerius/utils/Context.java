@@ -164,6 +164,39 @@ public class Context extends COREManager {
 		}
 
 	}
+	
+	public static void verifyMailPage(String page) {
+
+		if (page.equalsIgnoreCase("Overview")) {
+
+			driverInstance.manage().timeouts()
+					.implicitlyWait(implicitWait, TimeUnit.SECONDS);
+			Assert.assertTrue(driverInstance.getCurrentUrl().contains("list"));
+
+		}
+
+		if (page.equalsIgnoreCase("Create a New Campaign")) {
+
+			Assert.assertTrue(driverInstance.getCurrentUrl().contains("edit"));
+		}
+		
+		else if (page.equalsIgnoreCase("Triggers")) {
+			
+			Assert.assertTrue(driverInstance.getCurrentUrl().contains(
+					"triggers"));
+		}
+
+		else if (page.equalsIgnoreCase("Define Product Sets")) {
+			Assert.assertTrue(driverInstance.getCurrentUrl().contains(
+					"selectedproductsets"));
+		}
+		
+		else if (page.equalsIgnoreCase("Customise Email Attributes")) {
+			
+			Assert.assertTrue(driverInstance.getCurrentUrl().contains(
+					"customattributes"));
+		}
+	}
 
 
 	public static void verifyErrorMessage(By by, String errorMesage) {

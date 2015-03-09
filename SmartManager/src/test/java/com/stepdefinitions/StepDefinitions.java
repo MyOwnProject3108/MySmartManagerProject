@@ -3,6 +3,7 @@ package com.stepdefinitions;
 import org.openqa.selenium.By;
 
 import com.peerius.ProductSets;
+import com.peerius.SmartMail;
 import com.peerius.SmartMerchandising;
 import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
@@ -356,6 +357,39 @@ public class StepDefinitions extends SmartMerchandising {
 			elementIsPresent(By.xpath("//ul[@class='rules-grid']/li["+position+"]//p[contains(.,'"+ruleNumber+"')]"));
 			
 		}
+		
+		@Then("^I should be on Mail \"(.*?)\" page$")
+		public void i_should_be_on_Mail_page(String page) throws Throwable {
+		    
+			Context.verifyMailPage(page);
+		}
+
+		@When("^I Set Name as \"(.*?)\"$")
+		public void i_Set_Name_as(String arg1) throws Throwable {
+		    
+			setText(By.id("the_email_campaign_name"), arg1);
+		}
+
+		@Given("^I Create Simple Mail Campaign with name \"(.*?)\"$")
+		public void i_Create_Simple_Mail_Campaign_with_name(String arg1) throws Throwable {
+		   
+			SmartMail.createSimpleMailCampaign(arg1, "Best Sellers by Conversion (last 90 days)");
+		}
+		
+		@Then("^I Should See Mail Campaign \"(.*?)\" on Mail Overview Page$")
+		public void i_Should_See_Mail_Campaign_on_Mail_Overview_Page(String arg1) throws Throwable {
+		
+			SmartMail.verifyMailCampaign(arg1);
+		}
+		
+		@Given("^I Edit Mail campaign \"(.*?)\"$")
+		public void i_Edit_Mail_campaign(String campaign) throws Throwable {
+		    
+			SmartMail.editMailCampaign(campaign);
+		}
+
+		
+
 
 }
 
