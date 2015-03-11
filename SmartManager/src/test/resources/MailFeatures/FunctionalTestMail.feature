@@ -3,7 +3,7 @@ Feature: S-Mail
   Background: Pre-requisite
     Given I login as "zach"
     Then I should be on "Peerius Smart Manager" page
-    And I search for site "leekes"
+    And I search for site "demostoredev"
 
   @CreateMailCampaign
   Scenario: Create a simple Mail Campaign
@@ -35,10 +35,10 @@ Feature: S-Mail
   Scenario Outline: Styling changes should reflect on product title and price display
     Given I goto Mail Campaign "AutoCreate"
     When I Set style with "<value>"
-    Then I should see the style applied with "<value>" in "<Attribute>" in Widget Content Preview  
+    Then I should see the style applied with "<value>" in "<Attribute>" in Widget Content Preview
     And click on button "Save Campaign"
     When I goto Mail Campaign "AutoCreate"
-    Then I should see the style applied with "<value>" in "<Attribute>" in Widget Content Preview  
+    Then I should see the style applied with "<value>" in "<Attribute>" in Widget Content Preview
 
     Examples: Style changes
       | Attribute    | Value |
@@ -53,19 +53,17 @@ Feature: S-Mail
     And The Link "Hide Advanced Settings" should be visible
 
   @SetNumOfProducts
-  Scenario: Changing Number Of Products Should Add/Remove Email Rec Slots
+  Scenario Outline: Changing Number Of Products Should Add/Remove Email Rec Slots
     Given I goto Mail Campaign "AutoCreate"
     And I click on link "2. Configuration"
     When I Set the Number of Products as "3"
-    Then I Should see that many "<products>"
-    
+    Then I Should "<Products>" Product Positions
+
     Examples: Number of products
-    |Products|
-    |1		 |
-    |2       |
-    |3       |
-    
-    
+      | Products |
+      | 1        |
+      | 2        |
+      | 3        |
 
   #End of functional scenarios
   @DeleteMailCampaign
