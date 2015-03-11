@@ -437,9 +437,8 @@ public class StepDefinitions extends SmartMerchandising {
 		}
 
 		@Then("^The Link \"(.*?)\" should be visible$")
-		public void the_Link_should_be_visible(String text) throws Throwable {
-		    //Link
-			Context.verifyInnerHTML(By.id("//a[@class='btn btn-link mail_config_show_advanced']"), text);
+		public void the_Link_should_be_visible(String link) throws Throwable {
+		   elementIsPresent(By.linkText(link));
 		}
 		
 		@When("^I Set the Number of Products as \"(.*?)\"$")
