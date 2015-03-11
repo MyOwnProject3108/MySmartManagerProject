@@ -1,6 +1,10 @@
 package com.peerius;
 
+
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
 
@@ -77,6 +81,21 @@ public class SmartMail extends Context {
 		Navigation.gotoURL("/smartmanager/mail/list.page");
 		elementIsPresent(By.linkText(campaign));
 		
+	}
+	
+	public static void setStyle(String value) {
+		
+		setText(By.id("productInfoWidth"), value);
+		setText(By.id("productInfoHeight"), value);
+		
+	}
+	
+	public static void verifyStyleAttribute(String attribute, String value) {
+		
+		WebElement style = driverInstance.findElement(By.id("productInfoPreview"));
+		Boolean visible =style.getAttribute(attribute).equals(value);
+		
+		Assert.assertTrue(visible);
 	}
 	
 	}

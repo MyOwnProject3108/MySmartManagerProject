@@ -417,12 +417,37 @@ public class StepDefinitions extends SmartMerchandising {
 		    
 			SmartMail.deleteMailCampaign(name);
 		}
+		
+		@When("^I Set style with \"(.*?)\"$")
+		public void i_Set_style_with(String value) throws Throwable {
+		    
+			SmartMail.setStyle(value);
+		}
 
+		@Then("^I should see the style applied with \"(.*?)\" in \"(.*?)\" in Widget Content Preview$")
+		public void i_should_see_the_style_applied_with_in_in_Widget_Content_Preview(String attribute, String value) throws Throwable {
+		    
+			SmartMail.verifyStyleAttribute(attribute, value);
+		}
 
+		@Then("^I should see the HTML code for Email Recs$")
+		public void i_should_see_the_HTML_code_for_Email_Recs() throws Throwable {
+		    
+			elementIsPresent(By.xpath("//textarea[@id='htmlCode']"));
+		}
 
+		@Then("^The Link \"(.*?)\" should be visible$")
+		public void the_Link_should_be_visible(String text) throws Throwable {
+		    Context.verifyInnerHTML(By.id("//a[@class='btn btn-link mail_config_show_advanced']"), text);
+		}
+		
+		@When("^I set the Number of Products as \"(.*?)\"$")
+		public void i_Set_the_Number_of_Products_as(String arg1) throws Throwable {
+		    
+			setText(By.id("howMany"), arg1);
+		}
 
 		
-
 
 }
 

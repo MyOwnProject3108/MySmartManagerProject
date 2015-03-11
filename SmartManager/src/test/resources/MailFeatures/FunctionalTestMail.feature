@@ -34,22 +34,46 @@ Feature: S-Mail
   @TextStyle
   Scenario Outline: Styling changes should reflect on product title and price display
     Given I goto Mail Campaign "AutoCreate"
-    And I Set style with "<value>" in "<Attribute>"
-    And I Set alignment for Title and Price for Email Rec
-    Then I should see the style applied in Preview pane 
+    When I Set style with "<value>"
+    Then I should see the style applied with "<value>" in "<Attribute>" in Widget Content Preview  
+    And click on button "Save Campaign"
+    When I goto Mail Campaign "AutoCreate"
+    Then I should see the style applied with "<value>" in "<Attribute>" in Widget Content Preview  
+
+    Examples: Style changes
+      | Attribute    | Value |
+      | clientHeight | 200   |
+      | clientWidth  | 300   |
+
+  @AdvancedLink
+  Scenario: Verify If Show Advanced Settings Link Works
+    Given I goto Mail Campaign "AutoCreate"
+    And I click on link "Show Advanced Settings"
+    Then I should see the HTML code for Email Recs
+    And The Link "Hide Advanced Settings" should be visible
+
+  @SetNumOfProducts
+  Scenario: Changing Number Of Products Should Add/Remove Email Rec Slots
+    Given I goto Mail Campaign "AutoCreate"
+    And I click on link "2. Configuration"
+    When I Set the Number of Products as "3"
+    Then I Should see that many "<products>"
     
-   Examples: Style changes
-   |Attribute |Value   |
-   |Width     |300	   |
-   |Height    |200     |
-   
+    Examples: Number of products
+    |Products|
+    |1		 |
+    |2       |
+    |3       |
+    
+    
+
+  #End of functional scenarios
   @DeleteMailCampaign
   Scenario: Deleting Mail Campaign
     Given I Delete Mail Campaign "AutoCreate copy"
     Given I Delete Mail Campaign "AutoCreate"
     Then I should not see "AutoCreate"
-    Then I should not see "AutoCreate copy" 
-   
+    Then I should not see "AutoCreate copy"
 
   #Error validation scenarios start here
   @createMailvalidation
