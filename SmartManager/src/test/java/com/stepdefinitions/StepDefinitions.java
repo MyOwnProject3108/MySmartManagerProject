@@ -441,13 +441,24 @@ public class StepDefinitions extends SmartMerchandising {
 		    Context.verifyInnerHTML(By.id("//a[@class='btn btn-link mail_config_show_advanced']"), text);
 		}
 		
-		@When("^I set the Number of Products as \"(.*?)\"$")
-		public void i_Set_the_Number_of_Products_as(String arg1) throws Throwable {
-		    
-			setText(By.id("howMany"), arg1);
+		@When("^I Set the Number of Products as \"(.*?)\"$")
+		public void i_Set_the_Number_of_Products_as(String num) throws Throwable {
+
+			setText(By.id("howMany"), num);
+			pressKey("Enter");
+		}
+		
+		@Then("^I Should see \"(.*?)\" products$")
+		public void i_Should_see_products(String num) throws Throwable {
+		   
+			int number= Integer.parseInt(num);
+			for (int i=1; i<=number; i++) 
+			{
+		        elementIsPresent(By.id("mail-item"+i));
+				
+		    }
 		}
 
-		
 
 }
 

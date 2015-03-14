@@ -57,16 +57,8 @@ Feature: S-Mail
     Given I goto Mail Campaign "AutoCreate"
     And I click on link "2. Configuration"
     When I Set the Number of Products as "3"
-    Then I Should see that many "<products>"
+    Then I Should see "3" products
     
-    Examples: Number of products
-    |Products|
-    |1		 |
-    |2       |
-    |3       |
-    
-    
-
   #End of functional scenarios
   @DeleteMailCampaign
   Scenario: Deleting Mail Campaign
