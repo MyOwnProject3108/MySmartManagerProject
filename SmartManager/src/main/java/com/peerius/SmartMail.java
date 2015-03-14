@@ -98,6 +98,7 @@ public class SmartMail extends Context {
 		Assert.assertTrue(visible);
 	}
 	
+	
 	}
 	
 
