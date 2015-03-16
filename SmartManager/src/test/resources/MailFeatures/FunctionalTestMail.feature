@@ -58,48 +58,52 @@ Feature: S-Mail
     And I click on link "2. Configuration"
     When I Set the Number of Products as "3"
     Then I Should see "3" Product Positions
-          
+
   @UserTopUpsDisabled
-  Scenario: Verify That If Top-Ups Is Disabled, Empty Email Rec should be returned 
-  	Given I goto Mail Campaign "AutoCreate"
-  	And I click on link "2. Configuration"
-  	When I Set the Number of Products as "3"
-  	And I Set "Product Catalog" at position "1"
-  	And I Set "Cross-sell, previous purchases and views" at position "2"
-  	And I Set "Product Catalog" at position "3"
-  	And I Uncheck the checkbox for User-Top ups
-  	And click on button "Next"
-  	And I Specify Email address for Preview as "test@peerius.com"
-  	And click on button " Preview Email"
-  	Then Preview should Show Second Position Blank with No Email Rec 
-  	And I click on link "2. Configuration"
-  	When I Set the Number of Products as "1"
-  	Then I Should see "1" Product Positions
-  	And click on button "Save Campaign"
-  	
+  Scenario: Verify That If Top-Ups Is Disabled, Empty Email Rec should be returned
+    Given I goto Mail Campaign "AutoCreate"
+    And I click on link "2. Configuration"
+    When I Set the Number of Products as "3"
+    And I Set "Product Catalog" at position "1"
+    And I Set "Cross-sell, previous purchases and views" at position "2"
+    And I Set "Product Catalog" at position "3"
+    And I Uncheck the checkbox for User-Top ups
+    And click on button "Next"
+    And I Specify Email address for Preview as "test@peerius.com"
+    And click on button " Preview Email"
+    Then Preview should Show Second Position Blank with No Email Rec
+    And I click on link "2. Configuration"
+    When I Set the Number of Products as "1"
+    Then I Should see "1" Product Positions
+    And click on button "Save Campaign"
+
   @UserTopUpsEnabled
   Scenario: Verify That If Top-Ups Is Enabled, Empty Email Rec Is Topped Up By Default Email Recs
-  	Given I goto Mail Campaign "AutoCreate"
-  	And I click on link "2. Configuration"
-  	When I Set the Number of Products as "3"
-  	And I Set "Product Catalog" at position "1"
-  	And I Set "Cross-sell, previous purchases and views" at position "2"
-  	And I Set "Product Catalog" at position "3"
-  	And I Enable User-Top ups
-  	And click on button "Next"
-  	And I Specify Email address for Preview as "test@peerius.com"
-  	And click on button " Preview Email"
-  	Then Preview should Show Second Position Topped up with Default Email Rec
-  	And I click on link "2. Configuration"
-  	When I Set the Number of Products as "1"
-  	Then I Should see "1" Product Positions
-  	And click on button "Save Campaign"
-  	
+    Given I goto Mail Campaign "AutoCreate"
+    And I click on link "2. Configuration"
+    When I Set the Number of Products as "3"
+    And I Set "Product Catalog" at position "1"
+    And I Set "Cross-sell, previous purchases and views" at position "2"
+    And I Set "Product Catalog" at position "3"
+    And I Enable User-Top ups
+    And click on button "Next"
+    And I Specify Email address for Preview as "test@peerius.com"
+    And click on button " Preview Email"
+    Then Preview should Show Second Position Topped up with Default Email Rec
+    And I click on link "2. Configuration"
+    When I Set the Number of Products as "1"
+    Then I Should see "1" Product Positions
+    And click on button "Save Campaign"
+
   @duplicatePositions
   Scenario: Each Click on Duplicate button Should copy that position to new position
-  
-   
-  	
+    Given I goto Mail Campaign "AutoCreate"
+    And I click on link "2. Configuration"
+    And I Set Expression
+    And I set Hint
+    And click on button " Duplicate"
+    Then I Should See a "2" Positions With Same Strategy, Expression and Hint.
+
   #End of functional scenarios
   @DeleteMailCampaign
   Scenario: Deleting Mail Campaign

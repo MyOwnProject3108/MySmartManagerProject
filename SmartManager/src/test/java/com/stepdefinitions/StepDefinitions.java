@@ -490,8 +490,26 @@ public class StepDefinitions extends SmartMerchandising {
 		public void preview_should_Show_Second_Position_Topped_up_with_Default_Email_Rec() throws Throwable {
 		    
 			driverInstance.findElement(By.xpath("//td[2]/a/img[@title='Just for you']"));
-			Context.elementIsPresent(By.tagName("IMG"));
+			elementIsPresent(By.tagName("IMG"));
 		}
 		
+		@Given("^I Set Expression$")
+		public void i_Set_Expression() throws Throwable {
+		    
+			SmartMail.setExpression();
+		}
+		
+		@Given("^I set Hint$")
+		public void i_set_Hint() throws Throwable {
+		    
+			SmartMail.setHint();
+		}
+		
+		@Then("^I Should See a \"(.*?)\" Positions With Same Strategy, Expression and Hint\\.$")
+		public void i_Should_See_a_Positions_With_Same_Strategy_Expression_and_Hint(String position) throws Throwable {
+		   
+			SmartMail.verifyDuplicatePosition(position);
+		}
+
 }
 

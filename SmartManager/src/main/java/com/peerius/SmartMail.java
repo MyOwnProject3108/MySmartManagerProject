@@ -131,8 +131,19 @@ public class SmartMail extends Context {
 			driverInstance.findElement(By.id("useTopups")).click();
 		}
 		
+	}
+	
+	public static void setExpression() {
 		
-			
+	}
+	
+	public static void setHint() {
+		
+	}
+	
+	public static void verifyDuplicatePosition(String position) {
+		
+		
 	}
 		}
 	
