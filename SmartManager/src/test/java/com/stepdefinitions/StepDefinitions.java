@@ -1,7 +1,6 @@
 package com.stepdefinitions;
 
 import org.openqa.selenium.By;
-
 import com.peerius.ProductSets;
 import com.peerius.SmartMail;
 import com.peerius.SmartMerchandising;
@@ -449,15 +448,38 @@ public class StepDefinitions extends SmartMerchandising {
 			pressKey("Enter");
 		}
 		
-		
-		@Then("^I Should \"(.*?)\" Product Positions$")
-		public void i_Should_Product_Positions(String position) throws Throwable {
-			
-			SmartMail.verifyProductPosition(position);
+		@Then("^I Should see \"(.*?)\" Product Positions$")
+		public void i_Should_see_Product_Positions(String position) throws Throwable {
 		    
+			SmartMail.verifyProductPosition(position);
+		}
+
+				
+		@When("^I Set \"(.*?)\" at position \"(.*?)\"$")
+		public void i_Set_at_position(String strategy, String position) throws Throwable {
+		    
+			SmartMail.setStrategyPerPosition(position, strategy);
 		}
 
 
-
+		@When("^I Uncheck the checkbox for User-Top ups$")
+		public void i_Uncheck_the_checkbox_for_User_Top_ups() throws Throwable {
+		    Context.clickElement(By.id("useTopups"));
+		}
+		
+		@When("^I Specify Email address for Preview as \"(.*?)\"$")
+		public void i_Specify_Email_address_for_Preview_as(String emailId) throws Throwable {
+		    
+			setText(By.xpath("//input[@type='email']"), emailId);
+		}
+		
+		@Then("^Preview should Show Second Position Blank with No Email Rec$")
+		public void preview_should_Show_Second_Position_Blank_with_No_Email_Rec() throws Throwable {
+		    
+			driverInstance.findElement(By.xpath("//td[2]/a/img[@title='Just for you']"));
+			elementNotPresent(By.tagName("IMG"));
+		}
+		
+		
 }
 

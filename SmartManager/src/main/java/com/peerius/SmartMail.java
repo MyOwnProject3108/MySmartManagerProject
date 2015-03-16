@@ -105,11 +105,33 @@ public class SmartMail extends Context {
 				
 		for(int i=0;i<=number;++i){
 			
-			elementIsPresent(By.id("item"+i+""));
+			elementIsPresent(By.id("mail-item"+i+""));
 			
 		}
+	}
+	
+	public static void setStrategyPerPosition(String position, String strategy) {
 		
 		
+			elementIsPresent(By.id("mail-item"+position+""));
+			
+			clickElement(By.xpath("(//input[@class='visual-input'])["+position+"]"));
+			setText(By.xpath("(//input[@class='visual-input'])["+position+"]"), strategy);
+			pressKey("Enter");
+			
+		
+		
+	}
+	
+	public static void userTopUp(){
+		
+			WebElement checkbox = COREManager.driverInstance.findElement(By.id("useTopups"));
+			checkbox.getAttribute("checked");
+			
+			
+				
+			
+			
 	}
 		}
 	

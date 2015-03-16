@@ -3,7 +3,7 @@ Feature: S-Mail
   Background: Pre-requisite
     Given I login as "zach"
     Then I should be on "Peerius Smart Manager" page
-    And I search for site "demostoredev"
+    And I search for site "leekes"
 
   @CreateMailCampaign
   Scenario: Create a simple Mail Campaign
@@ -53,19 +53,40 @@ Feature: S-Mail
     And The Link "Hide Advanced Settings" should be visible
 
   @SetNumOfProducts
-  Scenario Outline: Changing Number Of Products Should Add/Remove Email Rec Slots
+  Scenario: Changing Number Of Products Should Add/Remove Email Rec Slots
     Given I goto Mail Campaign "AutoCreate"
     And I click on link "2. Configuration"
     When I Set the Number of Products as "3"
-    Then I Should "<Products>" Product Positions
-
-    Examples: Number of products
-      | Products |
-      | 1        |
-      | 2        |
-      | 3        |
-
-
+    Then I Should see "3" Product Positions
+          
+  @UserTopUpsDisabled
+  Scenario: Verify That If Top-Ups Is Disabled, Empty Email Rec should be returned 
+  	Given I goto Mail Campaign "AutoCreate"
+  	And I click on link "2. Configuration"
+  	When I Set the Number of Products as "3"
+  	And I Set "Product Catalog" at position "1"
+  	And I Set "Cross-sell, previous purchases and views" at position "2"
+  	And I Set "Product Catalog" at position "3"
+  	And I Uncheck the checkbox for User-Top ups
+  	And click on button "Next"
+  	And I Specify Email address for Preview as "test@peerius.com"
+  	And click on button " Preview Email"
+  	Then Preview should Show Second Position Blank with No Email Rec 
+  	
+  @UserTopUpsEnabled
+  Scenario: Verify That If Top-Ups Is Enabled, Empty Email Rec Is Topped Up By Default Email Recs
+  	Given I goto Mail Campaign "AutoCreate"
+  	And I click on link "2. Configuration"
+  	When I Set the Number of Products as "3"
+  	And I Set "Product Catalog" at position "1"
+  	And I Set "Cross-sell, previous purchases and views" at position "2"
+  	And I Set "Product Catalog" at position "3"
+  	And I check the checkbox for User-Top ups
+  	And click on button "Next"
+  	And I Specify Email address for Preview as "test@peerius.com"
+  	And click on button " Preview Email"
+  	Then Preview should Show Second Position Topped up with Default Email Rec
+  
   #End of functional scenarios
   @DeleteMailCampaign
   Scenario: Deleting Mail Campaign
