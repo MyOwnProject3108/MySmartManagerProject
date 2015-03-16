@@ -72,6 +72,10 @@ Feature: S-Mail
   	And I Specify Email address for Preview as "test@peerius.com"
   	And click on button " Preview Email"
   	Then Preview should Show Second Position Blank with No Email Rec 
+  	And I click on link "2. Configuration"
+  	When I Set the Number of Products as "1"
+  	Then I Should see "1" Product Positions
+  	And click on button "Save Campaign"
   	
   @UserTopUpsEnabled
   Scenario: Verify That If Top-Ups Is Enabled, Empty Email Rec Is Topped Up By Default Email Recs
@@ -81,12 +85,21 @@ Feature: S-Mail
   	And I Set "Product Catalog" at position "1"
   	And I Set "Cross-sell, previous purchases and views" at position "2"
   	And I Set "Product Catalog" at position "3"
-  	And I check the checkbox for User-Top ups
+  	And I Enable User-Top ups
   	And click on button "Next"
   	And I Specify Email address for Preview as "test@peerius.com"
   	And click on button " Preview Email"
   	Then Preview should Show Second Position Topped up with Default Email Rec
+  	And I click on link "2. Configuration"
+  	When I Set the Number of Products as "1"
+  	Then I Should see "1" Product Positions
+  	And click on button "Save Campaign"
+  	
+  @duplicatePositions
+  Scenario: Each Click on Duplicate button Should copy that position to new position
   
+   
+  	
   #End of functional scenarios
   @DeleteMailCampaign
   Scenario: Deleting Mail Campaign

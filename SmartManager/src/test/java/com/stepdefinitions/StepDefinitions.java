@@ -480,6 +480,18 @@ public class StepDefinitions extends SmartMerchandising {
 			elementNotPresent(By.tagName("IMG"));
 		}
 		
+		@When("^I Enable User-Top ups$")
+		public void i_Enable_User_Top_ups() throws Throwable {
+		    
+			SmartMail.enableUserTopUps();
+		}
+		
+		@Then("^Preview should Show Second Position Topped up with Default Email Rec$")
+		public void preview_should_Show_Second_Position_Topped_up_with_Default_Email_Rec() throws Throwable {
+		    
+			driverInstance.findElement(By.xpath("//td[2]/a/img[@title='Just for you']"));
+			Context.elementIsPresent(By.tagName("IMG"));
+		}
 		
 }
 

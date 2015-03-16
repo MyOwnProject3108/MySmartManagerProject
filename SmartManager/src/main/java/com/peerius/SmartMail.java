@@ -123,14 +123,15 @@ public class SmartMail extends Context {
 		
 	}
 	
-	public static void userTopUp(){
+	public static void enableUserTopUps() {
 		
-			WebElement checkbox = COREManager.driverInstance.findElement(By.id("useTopups"));
-			checkbox.getAttribute("checked");
+		WebElement checkbox = driverInstance.findElement(By.id("useTopups"));
+		if (checkbox.getAttribute("checked").equals(false)) {
 			
-			
-				
-			
+			driverInstance.findElement(By.id("useTopups")).click();
+		}
+		
+		
 			
 	}
 		}
