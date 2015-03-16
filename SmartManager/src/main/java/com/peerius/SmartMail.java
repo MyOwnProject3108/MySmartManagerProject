@@ -98,8 +98,20 @@ public class SmartMail extends Context {
 		Assert.assertTrue(visible);
 	}
 	
-	
+	public static void verifyProductPosition(String position){
+		
+		
+		int number = Integer.parseInt(position);
+				
+		for(int i=0;i<=number;++i){
+			
+			elementIsPresent(By.id("item"+i+""));
+			
+		}
+		
+		
 	}
+		}
 	
 
 

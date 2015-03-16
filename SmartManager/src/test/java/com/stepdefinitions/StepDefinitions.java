@@ -30,8 +30,8 @@ public class StepDefinitions extends SmartMerchandising {
 	}
 
 	@When("^I click on \"([^\"]*)\" option in \"([^\"]*)\"$")
-	public void I_click_on_option_in(String arg1, String arg2) throws Throwable {
-		selectMenuOption(arg2, arg1);
+	public void I_click_on_option_in(String parent, String child) throws Throwable {
+		selectMenuOption(child, parent);
 
 	}
 
@@ -365,21 +365,21 @@ public class StepDefinitions extends SmartMerchandising {
 		}
 
 		@When("^I Set Name as \"(.*?)\"$")
-		public void i_Set_Name_as(String arg1) throws Throwable {
+		public void i_Set_Name_as(String name) throws Throwable {
 		    
-			setText(By.id("the_email_campaign_name"), arg1);
+			setText(By.id("the_email_campaign_name"), name);
 		}
 
 		@Given("^I Create Simple Mail Campaign with name \"(.*?)\"$")
-		public void i_Create_Simple_Mail_Campaign_with_name(String arg1) throws Throwable {
+		public void i_Create_Simple_Mail_Campaign_with_name(String name) throws Throwable {
 		   
-			SmartMail.createSimpleMailCampaign(arg1, "Best Sellers by Conversion (last 90 days)");
+			SmartMail.createSimpleMailCampaign(name, "Best Sellers by Conversion (last 90 days)");
 		}
 		
 		@Then("^I Should See Mail Campaign \"(.*?)\" on Mail Overview Page$")
-		public void i_Should_See_Mail_Campaign_on_Mail_Overview_Page(String arg1) throws Throwable {
+		public void i_Should_See_Mail_Campaign_on_Mail_Overview_Page(String campaign) throws Throwable {
 		
-			SmartMail.verifyMailCampaign(arg1);
+			SmartMail.verifyMailCampaign(campaign);
 		}
 		
 		@Given("^I Edit Mail campaign \"(.*?)\"$")
@@ -437,27 +437,26 @@ public class StepDefinitions extends SmartMerchandising {
 		}
 
 		@Then("^The Link \"(.*?)\" should be visible$")
-		public void the_Link_should_be_visible(String text) throws Throwable {
-		    Context.verifyInnerHTML(By.id("//a[@class='btn btn-link mail_config_show_advanced']"), text);
+		public void the_Link_should_be_visible(String link) throws Throwable {
+		   elementIsPresent(By.linkText(link));
 		}
 		
 		@When("^I Set the Number of Products as \"(.*?)\"$")
+
 		public void i_Set_the_Number_of_Products_as(String num) throws Throwable {
 
 			setText(By.id("howMany"), num);
 			pressKey("Enter");
 		}
 		
-		@Then("^I Should see \"(.*?)\" products$")
-		public void i_Should_see_products(String num) throws Throwable {
-		   
-			int number= Integer.parseInt(num);
-			for (int i=1; i<=number; i++) 
-			{
-		        elementIsPresent(By.id("mail-item"+i));
-				
-		    }
+		
+		@Then("^I Should \"(.*?)\" Product Positions$")
+		public void i_Should_Product_Positions(String position) throws Throwable {
+			
+			SmartMail.verifyProductPosition(position);
+		    
 		}
+
 
 
 }
