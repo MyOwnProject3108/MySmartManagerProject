@@ -493,22 +493,23 @@ public class StepDefinitions extends SmartMerchandising {
 			elementIsPresent(By.tagName("IMG"));
 		}
 		
-		@Given("^I Set Expression$")
-		public void i_Set_Expression() throws Throwable {
+		@When("^I select operator as \"(.*?)\"$")
+		public void i_select_operator_as(String operator) throws Throwable {
 		    
-			SmartMail.setExpression();
+			clickElement(By.xpath("//option[.='"+operator+"']"));
 		}
 		
-		@Given("^I set Hint$")
-		public void i_set_Hint() throws Throwable {
+		@When("^I Enter rule Text as \"(.*?)\"$")
+		public void i_Enter_rule_Text_as(String ruleText) throws Throwable {
 		    
-			SmartMail.setHint();
+			setText(By.xpath("//input[contains(@class, 'autosearch')]"), ruleText);
 		}
+
 		
 		@Then("^I Should See a \"(.*?)\" Positions With Same Strategy, Expression and Hint\\.$")
 		public void i_Should_See_a_Positions_With_Same_Strategy_Expression_and_Hint(String position) throws Throwable {
-		   
-			SmartMail.verifyDuplicatePosition(position);
+		    
+			SmartMail.verifyDuplicatePosition(position, "Product Catalog", "20", "Sale Price", "sale-product", "less than");
 		}
 
 }

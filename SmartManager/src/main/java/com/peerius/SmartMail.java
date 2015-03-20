@@ -1,6 +1,8 @@
 package com.peerius;
 
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -103,7 +105,7 @@ public class SmartMail extends Context {
 		
 		int number = Integer.parseInt(position);
 				
-		for(int i=0;i<=number;++i){
+		for(int i=1;i<=number;++i){
 			
 			elementIsPresent(By.id("mail-item"+i+""));
 			
@@ -115,12 +117,21 @@ public class SmartMail extends Context {
 		
 			elementIsPresent(By.id("mail-item"+position+""));
 			
-			clickElement(By.xpath("(//input[@class='visual-input'])["+position+"]"));
+			List<WebElement> elements= driverInstance.findElements(By.xpath("//div[@class='visual-tag']"));
+			
+			for (WebElement element:elements){
+				
+				if (element.isDisplayed()){
+					
+					clickElement(By.xpath("//i[@class='visual-tags-close close sm-icon-cancel']"));
+				}
+				
+			}
+			
+			clickElement(By.xpath("(//div[@class='visual'])["+position+"]"));	
 			setText(By.xpath("(//input[@class='visual-input'])["+position+"]"), strategy);
 			pressKey("Enter");
-			
-		
-		
+				
 	}
 	
 	public static void enableUserTopUps() {
@@ -133,16 +144,31 @@ public class SmartMail extends Context {
 		
 	}
 	
-	public static void setExpression() {
+	public static void verifyDuplicatePosition(String position, String strategry, String ruleValue, String ruleText, String hintOption, String operator ) {
 		
-	}
-	
-	public static void setHint() {
+		int number = Integer.parseInt(position);
 		
-	}
-	
-	public static void verifyDuplicatePosition(String position) {
+		for(int i=1;i<=number;++i){
+			
+			elementIsPresent(By.id("mail-item"+i+""));
+			
+			clickElement(By.xpath("//a[@href='#item"+i+"-rec']"));	
+			
+			elementIsPresent(By.xpath("(//div[@class='visual-tags-value'])["+i+"][.='"+strategry+"']"));
+			
+			clickElement(By.xpath("//a[@href='#item"+i+"-exp']"));
+			
+			verifySelectOption(ruleText, By.xpath("//select[@class='exp_left_hand']["+i+"]"));
 		
+			verifySelectOption(operator, By.xpath("//select[@class='exp_op operatoroptions']["+i+"]"));
+		
+			verifytextContent(By.xpath("//input[contains(@class, 'autosearch')]["+i+"]"), ruleValue);
+		
+			clickElement(By.xpath("//a[@href='#item"+i+"-hints']"));
+		
+			verifySelectOption(hintOption, By.xpath("(//select[@class='mail_hint_select'])["+i+"]"));
+		
+		}
 		
 	}
 		}

@@ -1,5 +1,6 @@
 package com.peerius.utils;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
@@ -302,8 +303,20 @@ public static void verifytextContent(By elementlocator, String text) {
 
 	}
 
-	public static void verifySelectOption() {
-
+	public static void verifySelectOption(String option, By by) {
+		
+		Select optionText = new  Select(driverInstance.findElement(by));
+		
+		List<WebElement> selectedOptions =optionText.getAllSelectedOptions();
+		
+		for (WebElement singleOption: selectedOptions){
+				
+			singleOption.getText().contains(option);
+			
+			
+		}
+		
+				
 	}
 
 	public static void isChecked(By locatorType, String locator) {
