@@ -158,9 +158,9 @@ public class SmartMail extends Context {
 			
 			clickElement(By.xpath("//a[@href='#item"+i+"-exp']"));
 			
-			verifySelectOption(ruleText, By.xpath("//select[@class='exp_left_hand']["+i+"]"));
+			verifySelectOption(ruleText, By.xpath("(//select[@class='exp_left_hand'])["+i+"]"));
 		
-			verifySelectOption(operator, By.xpath("//select[@class='exp_op operatoroptions']["+i+"]"));
+			verifySelectOption(operator, By.xpath("(//select[@class='exp_op operatoroptions'])["+i+"]"));
 		
 			//verifytextContent(By.xpath("(//input[contains(@class, 'autosearch')])["+i+"]"), ruleValue);
 			Assert.assertTrue(driverInstance.findElement(By.xpath("(//input[contains(@class, 'autosearch')])["+i+"]")).getAttribute("value").contains(ruleValue));
