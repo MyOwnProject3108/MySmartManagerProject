@@ -144,7 +144,7 @@ public class SmartMail extends Context {
 		
 	}
 	
-	public static void verifyDuplicatePosition(String position, String strategry, String ruleValue, String ruleText, String hintOption, String operator ) {
+	public static void verifyDuplicatePosition(String position, String strategy, String ruleValue, String ruleText, String hintOption, String operator ) {
 		
 		int number = Integer.parseInt(position);
 		
@@ -154,7 +154,7 @@ public class SmartMail extends Context {
 			
 			clickElement(By.xpath("//a[@href='#item"+i+"-rec']"));	
 			
-			elementIsPresent(By.xpath("(//div[@class='visual-tags-value'])["+i+"][.='"+strategry+"']"));
+			verifyInnerHTML(By.xpath("(//div[@class='visual-tags-value'])["+i+"]"), strategy);
 			
 			clickElement(By.xpath("//a[@href='#item"+i+"-exp']"));
 			
@@ -162,7 +162,8 @@ public class SmartMail extends Context {
 		
 			verifySelectOption(operator, By.xpath("//select[@class='exp_op operatoroptions']["+i+"]"));
 		
-			verifytextContent(By.xpath("//input[contains(@class, 'autosearch')]["+i+"]"), ruleValue);
+			//verifytextContent(By.xpath("(//input[contains(@class, 'autosearch')])["+i+"]"), ruleValue);
+			Assert.assertTrue(driverInstance.findElement(By.xpath("(//input[contains(@class, 'autosearch')])["+i+"]")).getAttribute("value").contains(ruleValue));
 		
 			clickElement(By.xpath("//a[@href='#item"+i+"-hints']"));
 		
