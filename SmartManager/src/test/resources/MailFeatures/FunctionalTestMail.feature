@@ -49,7 +49,7 @@ Feature: S-Mail
   Scenario: Verify If Show Advanced Settings Link Works
     Given I goto Mail Campaign "AutoCreate"
     And I click on link "Show Advanced Settings"
-    Then I should see the HTML code for Email Recs
+    Then I should see the HTML code for Styling
     And The Link "Hide Advanced Settings" should be visible
 
   @SetNumOfProducts
@@ -72,7 +72,7 @@ Feature: S-Mail
     And I Specify Email address for Preview as "test@peerius.com"
     And click on button " Preview Email"
     Then Preview should Show Second Position Blank with No Email Rec
-  
+
   @UserTopUpsEnabled
   Scenario: Verify That If Top-Ups Is Enabled, Empty Email Rec Is Topped Up By Default Email Recs
     Given I goto Mail Campaign "AutoCreate"
@@ -86,7 +86,7 @@ Feature: S-Mail
     And I Specify Email address for Preview as "test@peerius.com"
     And click on button " Preview Email"
     Then Preview should Show Second Position Topped up with Default Email Rec
- 
+
   @duplicatePositions
   Scenario: Each Click on Duplicate button Should copy that position to new position
     Given I goto Mail Campaign "AutoCreate"
@@ -101,6 +101,32 @@ Feature: S-Mail
     And I select option "sale-product"
     And click on button " Duplicate"
     Then I Should See a "2" Positions With Same Strategy, Expression and Hint.
+
+  #E2E to check if tracking code gets added to the email rec URL
+  @TrackingCode
+  Scenario: To check if Tracking Code gets added in the Product URL For Email Rec
+    Given I goto Mail Campaign "AutoCreate"
+    And I click on link "2. Configuration"
+    When I Set Tracking Code as "?test123"
+    And click on button "Next"
+    And I Specify Email address for Preview as "test@peerius.com"
+    And click on button " Preview Email"
+    And I click on Email Rec "1"
+    Then I Should See Tracking Code Added In The Product URL  #not implemented yet
+
+  @GenerateCode
+  Scenario: Test Generate Code button functionality for single and multiple positions
+    Given I goto Mail Campaign "AutoCreate"
+    And I click on link "2. Configuration"
+    And click on button "Next"
+    And click on button " Generate Code"
+    Then I should see the HTML code for Email Recs
+    And I click on link "2. Configuration"
+    When I Set the Number of Products as "3"
+    Then I Should see "3" Product Positions
+    And click on button "Next"
+    And click on button " Generate Code"
+    Then I should see the HTML code for Email Recs
 
   #End of functional scenarios
   @DeleteMailCampaign

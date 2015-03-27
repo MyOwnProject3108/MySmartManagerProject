@@ -429,8 +429,8 @@ public class StepDefinitions extends SmartMerchandising {
 			SmartMail.verifyStyleAttribute(attribute, value);
 		}
 
-		@Then("^I should see the HTML code for Email Recs$")
-		public void i_should_see_the_HTML_code_for_Email_Recs() throws Throwable {
+		@Then("^I should see the HTML code for Styling$")
+		public void i_should_see_the_HTML_code_for_Styling() throws Throwable {
 		    
 			elementIsPresent(By.xpath("//textarea[@id='htmlCode']"));
 		}
@@ -511,6 +511,23 @@ public class StepDefinitions extends SmartMerchandising {
 		    
 			SmartMail.verifyDuplicatePosition(position, "Product Catalog", "20", "Sale Price", "sale-product", "less than");
 		}
+		
+		@When("^I click on Email Rec \"(.*?)\"$")
+		public void i_click_on_Email_Rec(String trackingCode) throws Throwable {
+		    
+			setText(By.id("trackingCode"), trackingCode);
+		}
 
+//		@Then("^I Should See Tracking Code Added In The Product URL$")
+//		public void i_Should_See_Tracking_Code_Added_In_The_Product_URL() throws Throwable {
+		    
+			
+//		}
+		
+		@Then("^I should see the HTML code for Email Recs$")
+		public void i_should_see_the_HTML_code_for_Email_Recs() throws Throwable {
+			
+			elementIsPresent(By.xpath("//div[@class='clear clearfix']/div[@class='CodeMirror CodeMirror-wrap']"));
+		}
 }
 
