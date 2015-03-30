@@ -506,8 +506,8 @@ public class StepDefinitions extends SmartMerchandising {
 		}
 
 		
-		@Then("^I Should See a \"(.*?)\" Positions With Same Strategy, Expression and Hint\\.$")
-		public void i_Should_See_a_Positions_With_Same_Strategy_Expression_and_Hint(String position) throws Throwable {
+		@Then("^I Should See \"(.*?)\" Positions With Same Strategy, Expression and Hint$")
+		public void i_Should_See_Positions_With_Same_Strategy_Expression_and_Hint(String position) throws Throwable {
 		    
 			SmartMail.verifyDuplicatePosition(position, "Product Catalog", "20", "Sale Price", "sale-product", "less than");
 		}

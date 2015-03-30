@@ -100,7 +100,7 @@ Feature: S-Mail
     And I click on link "Hints"
     And I select option "sale-product"
     And click on button " Duplicate"
-    Then I Should See a "2" Positions With Same Strategy, Expression and Hint.
+    Then I Should See "2" Positions With Same Strategy, Expression and Hint
 
   #E2E to check if tracking code gets added to the email rec URL
   @TrackingCode
