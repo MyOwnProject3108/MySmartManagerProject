@@ -107,12 +107,13 @@ Feature: S-Mail
   Scenario: To check if Tracking Code gets added in the Product URL For Email Rec
     Given I goto Mail Campaign "AutoCreate"
     And I click on link "2. Configuration"
-    When I Set Tracking Code as "?test123"
+    When I Set Tracking Code as "&test123"
     And click on button "Next"
     And I Specify Email address for Preview as "test@peerius.com"
     And click on button " Preview Email"
     And I click on Email Rec "1"
-    Then I Should See Tracking Code Added In The Product URL  #not implemented yet
+ #   Then I Should See Tracking Code Added In The Product url
+ Then I Should see Tracking Code "&test123" Added In The Product url 
 
   @GenerateCode
   Scenario: Test Generate Code button functionality for single and multiple positions
@@ -127,8 +128,7 @@ Feature: S-Mail
     And click on button "Next"
     And click on button " Generate Code"
     Then I should see the HTML code for Email Recs
-    
-  
+
   #End of functional scenarios
   @DeleteMailCampaign
   Scenario: Deleting Mail Campaign
@@ -153,22 +153,31 @@ Feature: S-Mail
 
   @emptyEmailPreview
   Scenario: Validate Empty Email For Preview
-    Given I click on "Create a New Campaign" option in "Mail"
-    Then I should be on Mail "Create a New Campaign" page
-    When I click on link "3.Preview"
+    Given I goto Mail Campaign "AutoCreate"
+    And I click on link "2. Configuration"
+    And click on button "Next"
     And click on button " Preview Email"
-    Then I should see Message "Cannot generate preview Email address required"
+    Then I should see Message "Email address required"
 
   @sendEmailErrorValidation
   Scenario: Validate Empty Email For Send Email
-    Given I click on "Create a New Campaign" option in "Mail"
-    Then I should be on Mail "Create a New Campaign" page
-    When I click on link "3.Preview"
+    Given I goto Mail Campaign "AutoCreate"
+    And I click on link "2. Configuration"
+    And click on button "Next"
     And click on button "Send Test Email"
-    Then I should see Message "Cannot generate preview Email address required"
+    Then I should see Message "Email address required"
 
   @duplicateNameMailCampaign
   Scenario: Error Validate Duplicate Campaign Name
     Given I Create Simple Mail Campaign with name "AutoCreate"
     And I Create Simple Mail Campaign with name "AutoCreate"
     Then I should see Message "The name you have chosen is already in use"
+
+  @EmptyEmailPlaceholder
+  Scenario: Validate Empty Email Placeholder
+    Given I goto Mail Campaign "AutoCreate"
+    And I click on link "2. Configuration"
+    And click on button "Next"
+    And I Enter Text "" in Email Placeholder
+    And click on button " Generate Code"
+    Then I should see Message "Email placeholder is mandatory"

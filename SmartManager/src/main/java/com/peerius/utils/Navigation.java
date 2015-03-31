@@ -1,5 +1,7 @@
 package com.peerius.utils;
 
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
@@ -7,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchFrameException;
+import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -133,4 +136,40 @@ public class Navigation extends COREManager {
 		driverInstance.close();
 	}
 	
+	public static void selectWindowPopup() {
+		 
+        String currentWindow =driverInstance.getWindowHandle();
+        Set<?> allWindows = driverInstance.getWindowHandles();
+        Iterator<?> Iwindow = allWindows.iterator();
+ 
+        while( Iwindow.hasNext() ) {
+            String popup = Iwindow.next().toString();
+            try {
+                if( !popup.contains( currentWindow ) ) {
+                    driverInstance.switchTo().window( popup );
+                    driverInstance.switchTo().defaultContent();
+             
+                } else {
+                   driverInstance.switchTo().defaultContent();
+                }
+ 
+            } catch( NoSuchWindowException e ) {
+                driverInstance.switchTo().defaultContent();
+            
+            }
+        }
+	}
+ 
+ public void selectWindowName( String windowName ) {
+        try {
+        
+            driverInstance.switchTo().window( windowName );
+            driverInstance.switchTo().activeElement();
+ 
+        } catch( NoSuchWindowException e ) {
+
+            driverInstance.switchTo().defaultContent();
+	
 }
+ }
+ }

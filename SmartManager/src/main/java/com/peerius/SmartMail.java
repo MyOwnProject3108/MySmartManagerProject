@@ -172,6 +172,15 @@ public class SmartMail extends Context {
 		}
 		
 	}
+
+
+	public static void verifyTrackingCode(String trackingcodeUrl) {
+		
+		Navigation.selectWindowPopup();
+		String currentUrl=driverInstance.getCurrentUrl();
+		Assert.assertTrue(currentUrl.contains(trackingcodeUrl));
+		
+	}
 		}
 	
 
