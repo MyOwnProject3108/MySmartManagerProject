@@ -542,7 +542,7 @@ public class StepDefinitions extends SmartMerchandising {
 		
 		@When("^I Set Tracking Code as \"(.*?)\"$")
 		public void i_Set_Tracking_Code_as(String trackingcode) throws Throwable {
-			setText(By.xpath("//input[contains(@id,'trackingCode')]"), trackingcode);
+			setText(By.id("trackingCode"), trackingcode);
 		    
 		}
 		
