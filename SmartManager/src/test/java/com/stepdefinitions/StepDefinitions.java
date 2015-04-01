@@ -512,19 +512,6 @@ public class StepDefinitions extends SmartMerchandising {
 			SmartMail.verifyDuplicatePosition(position, "Product Catalog", "20", "Sale Price", "sale-product", "less than");
 		}
 		
-	/*Added by Ana and Commented by me,uncomment/remove later below step definition	
-		
-		@When("^I click on Email Rec \"(.*?)\"$")
-		public void i_click_on_Email_Rec(String trackingCode) throws Throwable {
-		setText(By.id("trackingCode"), trackingCode);
-			
-		} */
-
-//		@Then("^I Should See Tracking Code Added In The Product URL$")
-//		public void i_Should_See_Tracking_Code_Added_In_The_Product_URL() throws Throwable {
-		    
-			
-//		}
 		
 		@Then("^I should see the HTML code for Email Recs$")
 		public void i_should_see_the_HTML_code_for_Email_Recs() throws Throwable {
@@ -537,9 +524,7 @@ public class StepDefinitions extends SmartMerchandising {
 		   setText(By.xpath("//input[contains(@id,'emailplaceholder')]"), placeholder);
 		}
 		
-		
-		//Added by Faiyyaz
-		
+				
 		@When("^I Set Tracking Code as \"(.*?)\"$")
 		public void i_Set_Tracking_Code_as(String trackingcode) throws Throwable {
 			setText(By.id("trackingCode"), trackingcode);

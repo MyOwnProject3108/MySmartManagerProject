@@ -112,8 +112,7 @@ Feature: S-Mail
     And I Specify Email address for Preview as "test@peerius.com"
     And click on button " Preview Email"
     And I click on Email Rec "1"
- #   Then I Should See Tracking Code Added In The Product url
- Then I Should see Tracking Code "&test123" Added In The Product url 
+    Then I Should see Tracking Code "&test123" Added In The Product url
 
   @GenerateCode
   Scenario: Test Generate Code button functionality for single and multiple positions
