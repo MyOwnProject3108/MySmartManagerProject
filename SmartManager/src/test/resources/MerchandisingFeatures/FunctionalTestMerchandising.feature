@@ -98,7 +98,7 @@ Feature: S-Merchandising
   Scenario: Delete Product Set with is used as a rule in merch campaign
     When I click on "Define Product Sets" option in "Merchandising"
     And I click Delete On Product Set "TestSet"
-	    Then I should see Message "SKU set is in use and cannot be deleted"
+    Then I should see Message "SKU set is in use and cannot be deleted"
 
   @activecamp
   Scenario: Activate Campaign
@@ -117,6 +117,14 @@ Feature: S-Merchandising
     And I Duplicate Campaign "AutoCreate"
     Then I Should See Campaign "AutoCreate copy" on Overview Page
 
+  @createCampaignWithNoRule
+  Scenario: Create a simple campaign without adding any rule
+    When I click on "Create a New Campaign" option in "Merchandising"
+    Then I should be on Merchandising "Create a New Campaign" page
+    When I create simple camapign "AutoCreateNoRule" with no rule
+    Then I should see Message "Successfully saved"
+    Then I Should See Campaign "AutoCreateNoRule" on Overview Page
+
   @deletecamp
   Scenario: Delete Campaign
     Given I Delete Campaign "AutoCreate copy"
@@ -124,12 +132,15 @@ Feature: S-Merchandising
     Given I Delete Campaign "AutoCreatePosition1"
     Given I Delete Campaign "AutoCreatePosition2"
     Given I Delete Campaign "AutoCreatePosition3"
+    Given I Delete Campaign "AutoCreateNoRule"
     Then I should not see "AutoCreate copy"
     Then I should not see "AutoCreate"
     Then I should not see "AutoCreatePosition1"
     Then I should not see "AutoCreatePosition2"
     Then I should not see "AutoCreatePosition3"
+    Then I should not see "AutoCreateNoRule"
 
+  #Error validation starts here
   @createcapvalidation
   Scenario Outline: Message Validation
     Given I Create Campaign with "<Name>"
@@ -275,6 +286,4 @@ Feature: S-Merchandising
     Then I should see Message "Successfully deleted"
     Given I Delete Campaign "AutoCreateSuccess"
     And I Delete Campaign "AutoCreate"
-     Then I should see Message "Successfully deleted"
- 
-
+    Then I should see Message "Successfully deleted"

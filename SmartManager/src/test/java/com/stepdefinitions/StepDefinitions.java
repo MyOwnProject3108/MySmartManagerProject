@@ -49,6 +49,12 @@ public class StepDefinitions extends SmartMerchandising {
 
 	}
 	
+	@When("^I create simple camapign \"(.*?)\" with no rule$")
+	public void i_create_simple_camapign_with_no_rule(String name) throws Throwable {
+	    
+		SmartMerchandising.createCampaignSimpleNoRule(name, "Product Page", "producthorizontal");
+	}
+	
 	@Then("^I Create invalid Campaign with name \"(.*?)\"$")
 	public void i_Create_invalid_Campaign_with_name(String campaign) throws Throwable {
 		createCampaignSimple(campaign, "Product Page", "producthorizontal",
@@ -56,8 +62,6 @@ public class StepDefinitions extends SmartMerchandising {
 	    
 	}
 	
-	
-
 	@Then("^I Should See Campaign \"([^\"]*)\" on Overview Page$")
 	public void I_Should_See_Campaign_on_Overview_Page(String campaign)
 			throws Throwable {

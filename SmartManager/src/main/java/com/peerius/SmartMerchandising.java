@@ -36,7 +36,21 @@ public class SmartMerchandising extends Context {
 		
 	}
 	
-public static void createCampaign(String name, String position, String location, String widget, String ruleExpression){
+	public static void createCampaignSimpleNoRule(String name, String location, String widget){
+		
+		Navigation.gotoURL("/smartmanager/merchandising/edit.page");
+		setText(By.id("name"), name);
+		selectDropList(By.id("location"), location);
+		selectDropList(By.id("widget"), widget);
+		clickElement(By.xpath("//button[contains(.,' Save Campaign')]"));
+		
+		elementIsPresent(By.id("ajax_progress_bar"));
+		
+	}
+	
+	
+	
+    public static void createCampaign(String name, String position, String location, String widget, String ruleExpression){
 		
 		Navigation.gotoURL("/smartmanager/merchandising/edit.page");
 		setText(By.id("name"), name);
