@@ -1,6 +1,7 @@
 package com.peerius;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -42,9 +43,9 @@ public class SmartMerchandising extends Context {
 		setText(By.id("name"), name);
 		selectDropList(By.id("location"), location);
 		selectDropList(By.id("widget"), widget);
-		clickElement(By.xpath("//button[contains(.,' Save Campaign')]"));
+	//	clickElement(By.xpath("//button[contains(.,' Save Campaign')]"));
 		
-		elementIsPresent(By.id("ajax_progress_bar"));
+	//	elementIsPresent(By.id("ajax_progress_bar"));
 		
 	}
 	
@@ -202,6 +203,27 @@ public static void createABgroup(String group, String page, String widget, Strin
 	
 	acceptAlert();
 	elementIsPresent(By.xpath("//em[contains(.,'A/B Test Updated')]"));
+	
+}
+
+public static void createExclusions(String refcode) {
+	
+	 driverInstance.findElement(By.xpath("//*[@id='manual']/div/div[2]/div/textarea[2]"));
+	clickElement(By.xpath("//*[@id='manual']/div/div[2]/div/textarea[2]"));
+	setText(By.xpath("//*[@id='manual']/div/div[2]/div/textarea[2]"), refcode);
+	driverInstance.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
+	List<WebElement> elements= driverInstance.findElements(By.className("tags-list"));
+	
+	for (WebElement element:elements){
+		
+		if (element.isDisplayed()){
+			
+			//pressKey("Enter");
+			clickElement(By.className("tags-list"));
+		}
+		
+	}
+	
 	
 }
 

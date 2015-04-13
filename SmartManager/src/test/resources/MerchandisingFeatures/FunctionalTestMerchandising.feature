@@ -122,6 +122,9 @@ Feature: S-Merchandising
     When I click on "Create a New Campaign" option in "Merchandising"
     Then I should be on Merchandising "Create a New Campaign" page
     When I create simple camapign "AutoCreateNoRule" with no rule
+    When I click on link "4. Exclusions"
+    And I add "10649631" for exclusion
+    And click on button "Save Campaign"
     Then I should see Message "Successfully saved"
     Then I Should See Campaign "AutoCreateNoRule" on Overview Page
 

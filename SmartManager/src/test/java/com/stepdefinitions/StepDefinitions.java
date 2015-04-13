@@ -55,6 +55,13 @@ public class StepDefinitions extends SmartMerchandising {
 		SmartMerchandising.createCampaignSimpleNoRule(name, "Product Page", "producthorizontal");
 	}
 	
+	@When("^I add \"(.*?)\" for exclusion$")
+	public void i_add_for_exclusion(String refcode) throws Throwable {
+		SmartMerchandising.createExclusions(refcode);
+		
+		
+	}
+	
 	@Then("^I Create invalid Campaign with name \"(.*?)\"$")
 	public void i_Create_invalid_Campaign_with_name(String campaign) throws Throwable {
 		createCampaignSimple(campaign, "Product Page", "producthorizontal",
@@ -217,13 +224,13 @@ public class StepDefinitions extends SmartMerchandising {
 	@When("^I Set Master Rule \"(.*?)\"$")
 	public void i_Set_Master_Rule(String rule) throws Throwable {
 	 setText(By.id("master_advanced"), rule);
+		
 	}
 
 	
 	@When("^I Create Product Set \"(.*?)\" and products number \"(.*?)\" with Suffix \"(.*?)\"$")
 	public void i_Create_Product_Set_and_products_number_with_Suffix(String name, String productNumber, String productSuffix) throws Throwable {
-		
-		ProductSets.createProductSet(name, productSuffix,productNumber);
+				ProductSets.createProductSet(name, productSuffix,productNumber);
 	
 	}
 
