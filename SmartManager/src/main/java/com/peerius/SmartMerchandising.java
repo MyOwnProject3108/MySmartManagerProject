@@ -207,21 +207,16 @@ public static void createABgroup(String group, String page, String widget, Strin
 }
 
 public static void createExclusions(String refcode) {
-	
-	 driverInstance.findElement(By.xpath("//*[@id='manual']/div/div[2]/div/textarea[2]"));
-	clickElement(By.xpath("//*[@id='manual']/div/div[2]/div/textarea[2]"));
-	setText(By.xpath("//*[@id='manual']/div/div[2]/div/textarea[2]"), refcode);
-	elementIsPresent(By.xpath("//*[@id='manual']/div/div[2]/div/ul"));
-	List<WebElement> elements = driverInstance.findElements(By.xpath("//*[@id='manual']/div/div[2]/div/ul"));
-
+	 driverInstance.findElement(By.xpath("//*[@id='manual']//textarea[2]"));
+	clickElement(By.xpath("//*[@id='manual']//textarea[2]"));
+	setText(By.xpath("//*[@id='manual']//textarea[2]"), refcode);
+	elementIsPresent(By.xpath("//*[@id='manual']//ul"));
+	List<WebElement> elements = driverInstance.findElements(By.xpath("//*[@id='manual']//ul"));
 		for (WebElement element:elements){
-		
-			if (element.isDisplayed()){
 			Actions doubleClick = new Actions(driverInstance);
-
 			doubleClick.moveToElement(element).doubleClick().sendKeys(Keys.ENTER).build().perform();
-		}
-	}
+			}
+		clickLink("Finished");
 	
 	}
 
