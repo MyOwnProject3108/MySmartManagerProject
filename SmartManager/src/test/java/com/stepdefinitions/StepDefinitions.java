@@ -59,8 +59,8 @@ public class StepDefinitions extends SmartMerchandising {
 	public void i_add_for_exclusion(String refcode) throws Throwable {
 		SmartMerchandising.createExclusions(refcode);
 		
-		
 	}
+	
 	
 	@Then("^I Create invalid Campaign with name \"(.*?)\"$")
 	public void i_Create_invalid_Campaign_with_name(String campaign) throws Throwable {

@@ -211,20 +211,20 @@ public static void createExclusions(String refcode) {
 	 driverInstance.findElement(By.xpath("//*[@id='manual']/div/div[2]/div/textarea[2]"));
 	clickElement(By.xpath("//*[@id='manual']/div/div[2]/div/textarea[2]"));
 	setText(By.xpath("//*[@id='manual']/div/div[2]/div/textarea[2]"), refcode);
-	driverInstance.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
-	List<WebElement> elements= driverInstance.findElements(By.className("tags-list"));
-	
-	for (WebElement element:elements){
+	elementIsPresent(By.xpath("//*[@id='manual']/div/div[2]/div/ul"));
+	List<WebElement> elements = driverInstance.findElements(By.xpath("//*[@id='manual']/div/div[2]/div/ul"));
+
+		for (WebElement element:elements){
 		
-		if (element.isDisplayed()){
-			
-			//pressKey("Enter");
-			clickElement(By.className("tags-list"));
+			if (element.isDisplayed()){
+			Actions doubleClick = new Actions(driverInstance);
+
+			doubleClick.moveToElement(element).doubleClick().sendKeys(Keys.ENTER).build().perform();
 		}
-		
 	}
 	
+	}
+
 	
 }
 
-}
