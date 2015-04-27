@@ -88,7 +88,7 @@ Feature: End to End Tests for Merchandising
   Scenario: Verify merch rule on client site
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/10035099.html"
     Then I should see "producthorizontal" in the debug
-    Then I should see Rule "(r.saleprice<"10")" in "5" Positions
+    Then I should see Rule "(r.saleprice<"10")" in "3" Positions
     Given I Delete Campaign "E2EAutoABCreate"
 
   @deactivateABgroup
