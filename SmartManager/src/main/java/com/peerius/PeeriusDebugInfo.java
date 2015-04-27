@@ -19,10 +19,12 @@ public class PeeriusDebugInfo extends Context {
 		
 		
 		try{
-		List<WebElement> rulePositions =driverInstance.findElements(By.xpath("//tr[contains(.,'Rules')]//td[contains(text(),'"+rule+"')]"));
-		//tr[contains(.,'Rules')]//td[contains(.,'Product matched')]
+			
+			List<WebElement> rulePositions =driverInstance.findElements(By.xpath("//tr[contains(.,'Rules')]//td[contains(text(),'Product matched rule \""+rule+"')]"));
+		
 
 		int size = rulePositions.size();
+			
 		
 		if(number==size){
 			
@@ -38,13 +40,38 @@ public class PeeriusDebugInfo extends Context {
 			}		
 		}
 
-	catch(NoSuchElementException e){
+			catch(NoSuchElementException e){
 		
 		Navigation.refreshPage();
 		
 	}
 		
 	}
+	
+	public static void verifyComplexRule(String rule, String positions){
+		
+	List<WebElement> rulePositions =driverInstance.findElements(By.xpath(" //tr[contains(.,'Rules')]//td"));
+	//tr[contains(.,'Rules')]//td/text()[2][contains(.,'Product matched rule \""+rule+"')]
+		
+		int number = Integer.parseInt(positions);
+		int size = rulePositions.size();
+			
+		if(number==size |number!=size){
+			
+			for(WebElement singleElement: rulePositions){
+			
+				Assert.assertTrue(singleElement.getAttribute("textContent").contains(rule));
+			}
+		}
+			else{
+				
+				Assert.fail("Expected "+number+" But Rule "+size+" Was Found");
+				
+			}		
+
+	}
+		
+
 	
 	
 

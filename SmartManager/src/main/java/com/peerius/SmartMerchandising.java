@@ -1,7 +1,6 @@
 package com.peerius;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -207,7 +206,7 @@ public static void createABgroup(String group, String page, String widget, Strin
 }
 
 public static void createExclusions(String refcode) {
-	 driverInstance.findElement(By.xpath("//*[@id='manual']//textarea[2]"));
+	elementIsPresent(By.xpath("//*[@id='manual']//textarea[2]"));
 	clickElement(By.xpath("//*[@id='manual']//textarea[2]"));
 	setText(By.xpath("//*[@id='manual']//textarea[2]"), refcode);
 	elementIsPresent(By.xpath("//*[@id='manual']//ul"));
