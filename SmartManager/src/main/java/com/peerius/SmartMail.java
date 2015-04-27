@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
@@ -46,7 +48,7 @@ public class SmartMail extends Context {
 		elementIsPresent(By.linkText(campaign));
 		clickElement(By.xpath("//td/a[text()='"+campaign+"']//following::td//a[@data-original-title='Duplicate mail campaign']"));
 		threadSleep(2000);
-		elementIsPresent(By.linkText(campaign+"copy"));
+		elementIsPresent(By.linkText(campaign+" copy"));
 		
 	}
 	
@@ -57,7 +59,7 @@ public class SmartMail extends Context {
 		clickElement(By.xpath("//td/a[text()='"+campaign+"']//following::td//a[@data-original-title=' Pause it ']"));
 		threadSleep(2000);
 		Navigation.refreshPage();
-		elementIsPresent(By.xpath("//td//a[@data-original-title='Activate it']"));
+		elementIsPresent(By.xpath("//td//a[@data-original-title=' Activate it ']"));
 				
 	}
 	
@@ -117,7 +119,7 @@ public class SmartMail extends Context {
 		
 			elementIsPresent(By.id("mail-item"+position+""));
 			
-			List<WebElement> elements= driverInstance.findElements(By.xpath("//div[@class='visual-tag']"));
+			List<WebElement> elements= driverInstance.findElements(By.xpath("(//div[@class='visual-tag'])["+position+"]"));
 			
 			for (WebElement element:elements){
 				
@@ -131,7 +133,7 @@ public class SmartMail extends Context {
 			clickElement(By.xpath("(//div[@class='visual'])["+position+"]"));	
 			setText(By.xpath("(//input[@class='visual-input'])["+position+"]"), strategy);
 			pressKey("Enter");
-				
+						
 	}
 	
 	public static void enableUserTopUps() {

@@ -419,7 +419,7 @@ public class StepDefinitions extends SmartMerchandising {
 		@Then("^Mail Campaign Should be Paused$")
 		public void mail_Campaign_Should_be_Paused() throws Throwable {
 		    
-			elementIsPresent(By.xpath("//td//a[@data-original-title='Activate it']"));
+			elementIsPresent(By.xpath("//td//a[@data-original-title=' Activate it']"));
 		}
 
 		@Given("^I Delete Mail Campaign \"(.*?)\"$")
@@ -443,7 +443,8 @@ public class StepDefinitions extends SmartMerchandising {
 		@Then("^I should see the HTML code for Styling$")
 		public void i_should_see_the_HTML_code_for_Styling() throws Throwable {
 		    
-			elementIsPresent(By.xpath("//textarea[@id='htmlCode']"));
+			//elementIsPresent(By.xpath("//textarea[@id='htmlCode']"));
+			elementIsPresent(By.id("mail_config_advanced"));
 		}
 
 		@Then("^The Link \"(.*?)\" should be visible$")
@@ -494,7 +495,8 @@ public class StepDefinitions extends SmartMerchandising {
 		@When("^I Enable User-Top ups$")
 		public void i_Enable_User_Top_ups() throws Throwable {
 		    
-			SmartMail.enableUserTopUps();
+			Context.clickElement(By.id("useTopups"));
+			//SmartMail.enableUserTopUps();
 		}
 		
 		@Then("^Preview should Show Second Position Topped up with Default Email Rec$")
