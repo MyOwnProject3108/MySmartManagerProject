@@ -3,7 +3,7 @@ Feature: S-Mail
   Background: Pre-requisite
     Given I login as "zach"
     Then I should be on "Peerius Smart Manager" page
-    And I search for site "leekes"
+    And I search for site "demostoredev"
 
   @CreateMailCampaign
   Scenario: Create a simple Mail Campaign

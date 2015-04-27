@@ -27,6 +27,12 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 		verifyRule(rule, positions);
 
 	}
+	
+	@Then("^I should see Complex Rule \"(.*?)\" in \"(.*?)\" Positions$")
+	public void i_should_see_Complex_Rule_in_Positions(String rule, String positions) throws Throwable {
+		verifyComplexRule(rule,positions);
+	}
+
 
 	@Given("^I navigate to URL \"(.*?)\"$")
 	public void i_navigate_to_URL(String url) throws Throwable {
