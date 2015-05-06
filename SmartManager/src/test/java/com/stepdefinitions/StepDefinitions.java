@@ -481,8 +481,8 @@ public class StepDefinitions extends SmartMerchandising {
 		    Context.clickElement(By.id("useTopups"));
 		}
 		
-		@When("^I Specify Email address for Preview as \"(.*?)\"$")
-		public void i_Specify_Email_address_for_Preview_as(String emailId) throws Throwable {
+		@When("^I Specify Email address as \"(.*?)\"$")
+		public void i_Specify_Email_address_as(String emailId) throws Throwable {
 		    
 			setText(By.xpath("//input[@type='email']"), emailId);
 		}

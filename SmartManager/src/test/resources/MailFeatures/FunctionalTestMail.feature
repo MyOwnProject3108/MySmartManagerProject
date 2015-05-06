@@ -69,7 +69,7 @@ Feature: S-Mail
     And I Set "Product Catalog" at position "3"
     And I Enable User-Top ups
     And click on button "Next"
-    And I Specify Email address for Preview as "test@peerius.com"
+    And I Specify Email address as "test@peerius.com"
     And click on button " Preview Email"
     Then Preview should Show Second Position Topped up with Default Email Rec
   
@@ -83,7 +83,7 @@ Feature: S-Mail
     And I Set "Product Catalog" at position "3"
     And I Uncheck the checkbox for User-Top ups
     And click on button "Next"
-    And I Specify Email address for Preview as "test@peerius.com"
+   And I Specify Email address as "test@peerius.com"
     And click on button " Preview Email"
     Then Preview should Show Second Position Blank with No Email Rec
 
@@ -109,7 +109,7 @@ Feature: S-Mail
     And I click on link "2. Configuration"
     When I Set Tracking Code as "&test123"
     And click on button "Next"
-    And I Specify Email address for Preview as "test@peerius.com"
+    And I Specify Email address as "test@peerius.com"
     And click on button " Preview Email"
     And I click on Email Rec "1"
     Then I Should see Tracking Code "&test123" Added In The Product url
