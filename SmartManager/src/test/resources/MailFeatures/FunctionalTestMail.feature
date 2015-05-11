@@ -104,7 +104,7 @@ Feature: S-Mail
     And click on button " Duplicate"
     Then I Should See "2" Positions With Same Strategy, Expression and Hint
 
-  #E2E to check if tracking code gets added to the email rec URL
+  #E2E to check if tracking code gets added to the email rec url
   @TrackingCode
   Scenario: To check if Tracking Code gets added in the Product URL For Email Rec
     Given I goto Mail Campaign "AutoCreate"
