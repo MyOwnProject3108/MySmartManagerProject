@@ -2,6 +2,7 @@ package com.peerius;
 
 
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -14,6 +15,9 @@ import com.peerius.utils.Navigation;
 
 
 public class SmartMail extends Context {
+	
+	public static Random random = new Random();
+	public static String emailgenerated;
 	
 	public static void createSimpleMailCampaign(String name, String strategy)
 	{
@@ -170,8 +174,7 @@ public class SmartMail extends Context {
 			clickElement(By.xpath("//a[@href='#item"+i+"-hints']"));
 		
 			verifySelectOption(hintOption, By.xpath("(//select[@class='mail_hint_select'])["+i+"]"));
-		
-		}
+				}
 		
 	}
 
@@ -183,7 +186,54 @@ public class SmartMail extends Context {
 		Assert.assertTrue(currentUrl.contains(trackingcodeUrl));
 		
 	}
-		}
+
+	public static void generateRandomEmail(String randomEmail) {
+		int randomInt = random.nextInt(100000);
+		emailgenerated = randomEmail + randomInt;
+		setText(By.xpath("//input[@type='email']"),emailgenerated +"@mailinator.com");
+			
+	}
+
+
+	public static void searchRandomEmail() {
+		setText(By.id("inboxfield"), emailgenerated);
+		
+	}
+
+
+	public static void openEmail(String emailName) {
 	
+		elementIsPresent(By.id("InboxCtrl"));
+		clickElement(By.partialLinkText(emailName));
+		
+		
+		}
+
+
+	public static void searchFallBackSKU(String fallbackset) {
+		elementIsPresent(By.className("sku_set_searcher"));
+		clickElement(By.className("sku_set_searcher"));
+		setText(By.className("sku_set_searcher"), fallbackset);
+		
+		List<WebElement> productsets=driverInstance.findElements(By.cssSelector(".sku_set_context.context-menu"));
+		
+		for (WebElement productset : productsets) {
+
+			Actions selectFallback = new Actions(driverInstance);
+			selectFallback.moveToElement(productset).click().build().perform();
+			
+		}
+	}
+
+
+	public static void setExpression(String rule, String position) {
+		   clickElement(By.partialLinkText("Toggle"));
+		   setText(By.xpath("//*[@id='item"+position+"-exp']/textarea"),rule);
+	//	   clickButton("Save Campaign");
+		
+	}
+		
+	}
+
 
 

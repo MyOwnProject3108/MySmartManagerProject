@@ -29,8 +29,15 @@ public class Navigation extends COREManager {
 	
 	public static void gotoURL(String url){
 		
-		driverInstance.get(siteUrl+"/"+url+"");
+		if(url.contains("http") |url.contains("www")){
+			
+			driverInstance.navigate().to(url);
+		}
 		
+		else{
+		
+		driverInstance.get(siteUrl+"/"+url+"");
+		}
 		
 	}
 

@@ -1,15 +1,19 @@
 package com.stepdefinitions;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 
 import com.peerius.PeeriusDebugInfo;
+import com.peerius.SmartMail;
 import com.peerius.SmartMerchandising;
+import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 public class EndToEndSteps extends PeeriusDebugInfo {
 
@@ -74,10 +78,52 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 		elementNotPresent(By.className("box widgets_A"));
 		
 	}
+	
+	@Then("^I Specify random Email address as \"(.*?)\"$")
+	public void i_Specify_random_Email_address_as(String randomEmail) throws Throwable {
+		
+		SmartMail.generateRandomEmail(randomEmail);
+	} 
+	
+	@Given("^I Goto Random Inbox$")
+	public void i_Goto_Random_Inbox() throws Throwable {
+	 Navigation.gotoURL("http://mailinator.com/inbox.jsp?to="+SmartMail.emailgenerated);
+	}
 
 	
+	@Then("^I should be on mailinator \"(.*?)\" page$")
+	public void i_should_be_on_mailinator_page(String page) throws Throwable {
+		Context.verifyPageTitle(page);
+	}
 	
+	@Then("^I click on the Email \"(.*?)\"$")
+	public void i_click_on_the_Email(String emailName) throws Throwable {
+	   SmartMail.openEmail(emailName);
+	}
+
+	
+	@Then("^Switch Frame \"(.*?)\"$")
+	public void switch_Frame(String name) throws Throwable {
+	   Navigation.switchToFrame(name);
+	}
+	
+	@Then("^I should see GeneratioStrategy \"(.*?)\" in \"(.*?)\" Positions$")
+	public void i_should_see_GeneratioStrategy_in_Positions(String strategy, String positions) throws Throwable {
+	    PeeriusDebugInfo.verifyStrategy(strategy, positions);
+	}
 	
 
+	@Given("^I search for \"(.*?)\" Fallback ProductSet$")
+	public void i_search_for_Fallback_ProductSet(String fallbackset) throws Throwable {
+		SmartMail.searchFallBackSKU(fallbackset);
+	}
+	
+	
+	@Given("^I Enter Hint Parameter Text as \"(.*?)\" in \"(.*?)\" Positions$")
+	public void i_Enter_Hint_Parameter_Text_as_in_Positions(String hintParam, String position) throws Throwable {
+		 setText(By.xpath("//*[@id='item"+position+"-hints']/div/input"),hintParam);
+	   
+	}
+	
 
 }

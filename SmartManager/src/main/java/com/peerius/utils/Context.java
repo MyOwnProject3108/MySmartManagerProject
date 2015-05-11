@@ -43,16 +43,24 @@ public class Context extends COREManager {
 	}
 
 	public static void clickLink(String link) {
+		
+		WebElement wait;
+					
+		try{
 
-		WebElement linkElement = COREManager.driverInstance.findElement(By
-				.linkText(link));
-
-		linkElement = new WebDriverWait(COREManager.driverInstance,
+		wait = (WebElement) new WebDriverWait(COREManager.driverInstance,
 				COREManager.elementWaitTime).until(ExpectedConditions
-				.visibilityOf(linkElement));
-
+				.visibilityOfElementLocated(By.linkText(link)));
+		}
+		
+		catch(Exception e){
+			wait =  (WebElement) new WebDriverWait(COREManager.driverInstance,
+					COREManager.elementWaitTime).until(ExpectedConditions
+							.visibilityOfElementLocated(By.partialLinkText(link)));
+		}
+							
 		Actions scrollToView = new Actions(driverInstance);
-		scrollToView.moveToElement(linkElement).click().build().perform();
+		scrollToView.moveToElement( wait).click().build().perform();
 	}
 
 	public static void selectDropList(By locator, String option) {
