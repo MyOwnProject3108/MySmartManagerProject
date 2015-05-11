@@ -98,12 +98,11 @@ public class SmartMail extends Context {
 		
 	}
 	
-	public static void verifyStyleAttribute(String attribute, String value) {
+	public static void verifyStyleAttribute(String value, String attribute) {
 		
 		WebElement style = driverInstance.findElement(By.id("productInfoPreview"));
-		Boolean visible =style.getAttribute(attribute).equals(value);
 		
-		Assert.assertTrue(visible);
+		Assert.assertEquals(value, style.getAttribute(attribute));
 	}
 	
 	public static void verifyProductPosition(String position){
@@ -136,6 +135,17 @@ public class SmartMail extends Context {
 			
 			clickElement(By.xpath("(//div[@class='visual'])["+position+"]"));	
 			setText(By.xpath("(//input[@class='visual-input'])["+position+"]"), strategy);
+			//COREManager.threadSleep(2000);
+		    //elementIsPresent(By.xpath("//ul[@class='visual-list context-menu hide']"));
+			
+			//List<WebElement> we1 = driverInstance.findElements(By.xpath("//ul[@class='visual-list context-menu hide']"));
+			
+				//for (WebElement e:we1){
+				//Actions action = new Actions(driverInstance);
+				//action.moveToElement(e).click().build().perform();
+			//}
+			//driverInstance.findElement(By.xpath("//li[contains(@class, 'visual-item')]")).click();
+			//Context.clickElement(By.xpath("//ul[@class='visual-list context-menu hide']/li"));
 			pressKey("Enter");
 						
 	}

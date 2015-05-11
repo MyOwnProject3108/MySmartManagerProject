@@ -31,19 +31,16 @@ Feature: S-Mail
     And I Pause Mail campaign "AutoCreate"
     Then Mail Campaign Should be Paused
 
-  @TextStyle 
-  Scenario Outline: Styling changes should reflect on product title and price display
+  @TextStyle
+  Scenario: Styling changes should reflect on product title and price display
     Given I goto Mail Campaign "AutoCreate"
-    When I Set style with "<value>"
-    Then I should see the style applied with "<value>" in "<Attribute>" in Widget Content Preview
+    When I Set style with value "200" for clientHeight and ClientWidth
+    Then I should see the style applied with value "200" in "clientHeight" in Widget Content Preview
+    Then I should see the style applied with value "200" in "clientWidth" in Widget Content Preview
     And click on button "Save Campaign"
     When I goto Mail Campaign "AutoCreate"
-    Then I should see the style applied with "<value>" in "<Attribute>" in Widget Content Preview
-
-    Examples: Style changes
-      | Attribute    | Value |
-      | clientHeight | 200   |
-      | clientWidth  | 300   |
+    Then I should see the style applied with value "200" in "clientHeight" in Widget Content Preview
+    Then I should see the style applied with value "200" in "clientWidth" in Widget Content Preview
 
   @AdvancedLink
   Scenario: Verify If Show Advanced Settings Link Works
@@ -58,7 +55,7 @@ Feature: S-Mail
     And I click on link "2. Configuration"
     When I Set the Number of Products as "3"
     Then I Should see "3" Product Positions
-  
+
   @UserTopUpsEnabled
   Scenario: Verify That If Top-Ups Is Enabled, Empty Email Rec Is Topped Up By Default Email Recs
     Given I goto Mail Campaign "AutoCreate"
@@ -72,7 +69,9 @@ Feature: S-Mail
     And I Specify Email address as "test@peerius.com"
     And click on button " Preview Email"
     Then Preview should Show Second Position Topped up with Default Email Rec
-  
+    When I Set the Number of Products as "1"
+    Then I Should see "1" Product Positions
+
   @UserTopUpsDisabled
   Scenario: Verify That If Top-Ups Is Disabled, Empty Email Rec should be returned
     Given I goto Mail Campaign "AutoCreate"
@@ -83,9 +82,12 @@ Feature: S-Mail
     And I Set "Product Catalog" at position "3"
     And I Uncheck the checkbox for User-Top ups
     And click on button "Next"
-   And I Specify Email address as "test@peerius.com"
+    And I Specify Email address as "test@peerius.com"
     And click on button " Preview Email"
     Then Preview should Show Second Position Blank with No Email Rec
+    When I Set the Number of Products as "1"
+    Then I Should see "1" Product Positions
+    
 
   @duplicatePositions
   Scenario: Each Click on Duplicate button Should copy that position to new position
@@ -102,7 +104,7 @@ Feature: S-Mail
     And click on button " Duplicate"
     Then I Should See "2" Positions With Same Strategy, Expression and Hint
 
-  #E2E to check if tracking code gets added to the email rec URL
+  #E2E to check if tracking code gets added to the email rec url
   @TrackingCode
   Scenario: To check if Tracking Code gets added in the Product URL For Email Rec
     Given I goto Mail Campaign "AutoCreate"
