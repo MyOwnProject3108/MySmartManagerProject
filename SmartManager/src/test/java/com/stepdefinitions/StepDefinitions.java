@@ -329,6 +329,7 @@ public class StepDefinitions extends SmartMerchandising {
 			ProductSets.gotoProductSet(productset);
 		
 		}
+			
 
 		@Given("^I Add \"(.*?)\" Products with Suffix \"(.*?)\"$")
 		public void i_Add_Products_with_Suffix(String productnumber, String productSuffix) throws Throwable {
