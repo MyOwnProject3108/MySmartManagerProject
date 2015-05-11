@@ -441,7 +441,18 @@ public class StepDefinitions extends SmartMerchandising {
 		    
 			SmartMail.verifyStyleAttribute(attribute, value);
 		}
+		
+		@When("^I Set style with value \"(.*?)\" for clientHeight and ClientWidth$")
+		public void i_Set_style_with_value_for_clientHeight_and_ClientWidth(String value) throws Throwable {
+			SmartMail.setStyle(value);
+		}
 
+		@Then("^I should see the style applied with value \"(.*?)\" in \"(.*?)\" in Widget Content Preview$")
+		public void i_should_see_the_style_applied_with_value_in_in_Widget_Content_Preview(String value, String attribute) throws Throwable {
+		    
+			SmartMail.verifyStyleAttribute(value, attribute);
+		}
+		
 		@Then("^I should see the HTML code for Styling$")
 		public void i_should_see_the_HTML_code_for_Styling() throws Throwable {
 		    
