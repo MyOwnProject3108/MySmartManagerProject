@@ -25,8 +25,7 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 	}
 
 	@Then("^I should see Rule \"(.*?)\" in \"(.*?)\" Positions$")
-	public void i_should_see_Rule_in_Positions(String rule, String positions)
-			throws Throwable {
+	public void i_should_see_Rule_in_Positions(String rule, String positions) {
 
 		verifyRule(rule, positions);
 
@@ -34,6 +33,7 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 	
 	@Then("^I should see Complex Rule \"(.*?)\" in \"(.*?)\" Positions$")
 	public void i_should_see_Complex_Rule_in_Positions(String rule, String positions) throws Throwable {
+		
 		verifyComplexRule(rule,positions);
 	}
 

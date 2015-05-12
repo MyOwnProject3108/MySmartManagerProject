@@ -20,7 +20,7 @@ Feature: End to End Tests for Merchandising
   Scenario: Verify master rule alongwith simple rule on client site
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/accessories/10364791.html"
     Then I should see "producthorizontal" in the debug
-    Then I should see Rule "(r.pricerange="expensive")" in "3" Positions
+    Then I should see Rule "(r.pricerange="expensive")" in "5" Positions
     When I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10599547.html"
     Then I should see Rule "(r.pricerange="expensive")" in "0" Positions
     Given I Delete Campaign "E2EMasterRule"
@@ -45,8 +45,8 @@ Feature: End to End Tests for Merchandising
   Scenario: Verify Simple Rule alongwith AND Rule on client site
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
     Then I should see "producthorizontal" in the debug
-    Then I should see Rule "(r.pricerange="expensive")" in "2" Positions
-    And I should see Complex Rule "(r.category="DVD" and r.saleprice<"6")" in "1" Positions
+    Then I should see Rule "(r.pricerange="expensive")" in "3" Positions
+    And I should see Rule "(r.category="DVD" and r.saleprice<"6")" in "1" Positions
     Given I Delete Campaign "E2EComplex"
     Then I should see Message "Successfully deleted"
 
@@ -88,7 +88,7 @@ Feature: End to End Tests for Merchandising
   Scenario: Verify merch rule on client site
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/10035099.html"
     Then I should see "producthorizontal" in the debug
-    Then I should see Rule "(r.saleprice<"10")" in "3" Positions
+    Then I should see Rule "(r.saleprice<"10")" in "5" Positions
     Given I Delete Campaign "E2EAutoABCreate"
 
   @deactivateABgroup
