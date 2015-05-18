@@ -69,6 +69,7 @@ Feature: S-Mail
     And I Specify Email address as "test@peerius.com"
     And click on button " Preview Email"
     Then Preview should Show Second Position Topped up with Default Email Rec
+    And I click on link "2. Configuration"
     When I Set the Number of Products as "1"
     Then I Should see "1" Product Positions
 
@@ -85,6 +86,7 @@ Feature: S-Mail
     And I Specify Email address as "test@peerius.com"
     And click on button " Preview Email"
     Then Preview should Show Second Position Blank with No Email Rec
+    And I click on link "2. Configuration"
     When I Set the Number of Products as "1"
     Then I Should see "1" Product Positions
     

@@ -501,10 +501,10 @@ public class StepDefinitions extends SmartMerchandising {
 		
 		@Then("^Preview should Show Second Position Blank with No Email Rec$")
 		public void preview_should_Show_Second_Position_Blank_with_No_Email_Rec() throws Throwable {
-		    
-			driverInstance.findElement(By.xpath("//td[2]/a/img[@title='Just for you']"));
-			elementNotPresent(By.tagName("IMG"));
-		}
+			
+			SmartMail.verifyTopUpsDisabled();
+		}    
+			
 		
 		@When("^I Enable User-Top ups$")
 		public void i_Enable_User_Top_ups() throws Throwable {
@@ -516,8 +516,7 @@ public class StepDefinitions extends SmartMerchandising {
 		@Then("^Preview should Show Second Position Topped up with Default Email Rec$")
 		public void preview_should_Show_Second_Position_Topped_up_with_Default_Email_Rec() throws Throwable {
 		    
-			driverInstance.findElement(By.xpath("//td[2]/a/img[@title='Just for you']"));
-			elementIsPresent(By.tagName("IMG"));
+			SmartMail.verifyTopUpsEnabled();
 		}
 		
 		@When("^I select operator as \"(.*?)\"$")
