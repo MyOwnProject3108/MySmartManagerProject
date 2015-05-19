@@ -52,10 +52,25 @@ public class PeeriusDebugInfo extends Context {
 			
 		}
 	
+	
+	public static void verifyDebugHint(String hint) {
+			
+		try{
+			WebElement singleElement =driverInstance.findElement(By.xpath("//*[@class='peeriusSkipped']//td[text()]"));
+							
+					Assert.assertTrue(singleElement.getText().trim().contains(hint));
+		
+		}catch(NoSuchElementException e){
+		
+		}
+		
+	}
+	
+	
+	
 	public static void verifyComplexRule(String rule, String positions){
 		
 	List<WebElement> rulePositions =driverInstance.findElements(By.xpath(" //tr[contains(.,'Rules')]//td"));
-	//tr[contains(.,'Rules')]//td/text()[2][contains(.,'Product matched rule \""+rule+"')]
 		
 		int number = Integer.parseInt(positions);
 		int size = rulePositions.size();
@@ -92,6 +107,9 @@ public class PeeriusDebugInfo extends Context {
 		driverInstance.get(url);
 		
 	}
+
+
+	
 		
 		
 	}

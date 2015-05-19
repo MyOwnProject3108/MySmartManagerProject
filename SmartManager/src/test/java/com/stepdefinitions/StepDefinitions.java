@@ -1,7 +1,6 @@
 package com.stepdefinitions;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import com.peerius.ProductSets;
 import com.peerius.SmartMail;
