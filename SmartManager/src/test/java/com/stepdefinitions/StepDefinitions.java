@@ -577,5 +577,13 @@ public class StepDefinitions extends SmartMerchandising {
 		    
 			elementIsPresent(By.xpath("//button[@value='genre']/i[@class='sm-icon-check-checked']"));
 		}
+		
+		@When("^I Create Connection \"(.*?)\" for ESP \"(.*?)\"$")
+		public void i_Create_Connection_for_ESP(String connectionName, String esp) throws Throwable {
+		
+			SmartMail.createESPConnection(esp, connectionName);
+		
+		}
+
 }
 

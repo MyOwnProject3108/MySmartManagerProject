@@ -70,9 +70,9 @@ public class Context extends COREManager {
 				.until(ExpectedConditions.visibilityOfElementLocated(locator));
 
 		Select droplistOptions = new Select(selectElement);
-
-		droplistOptions.selectByVisibleText(option);
 		
+			droplistOptions.selectByVisibleText(option);
+				
 	}
 	
 	public static void selectMenuOption(String mainMenuLabel, String subMenu) {

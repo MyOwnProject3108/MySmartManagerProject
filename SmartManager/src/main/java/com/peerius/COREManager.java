@@ -52,6 +52,7 @@ public class COREManager {
 	public static String siteUrl;
 	private static BrowserName defaultBrowserName;
 	public static ImmutableMap<String, Credential> userProfiles;
+	public static ImmutableMap<String, Credential> espProfiles;
 	public static Properties prop;
 	public String browserName;
 	public static String remoteDriverUrl;
@@ -130,6 +131,16 @@ public class COREManager {
 				builder.put(profile, new Credential(username, password));
 			}
 			userProfiles = builder.build();
+			
+			//ESP Credentials Profiles
+				for (String espprofile : prop.getProperty("espProfile", "")
+								.split(",")) {
+					String username = prop.getProperty(espprofile + ".username");
+					String password = prop.getProperty(espprofile + ".password");
+					builder.put(espprofile, new Credential(username, password));
+						}
+						espProfiles = builder.build();
+
 
 			// Defaults Driver to Firefox
 			defaultBrowserName = BrowserName.findByName(
@@ -415,6 +426,17 @@ public class COREManager {
 				Assert.assertTrue("Page Title Exist", pageTitle);
 
 			}
+		}
+		
+		public static void espUserLogin(String espProfile){
+			
+		Credential espCredentials = espProfiles.get(espProfile);
+		
+		driverInstance.findElement(By.id("username")).sendKeys(
+				espCredentials.username);
+		driverInstance.findElement(By.id("password")).sendKeys(
+				espCredentials.password);
+	
 		}
 
 		public static void logOutUser() {

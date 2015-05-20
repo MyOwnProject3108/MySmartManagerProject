@@ -134,17 +134,6 @@ public class SmartMail extends Context {
 			
 			clickElement(By.xpath("(//div[@class='visual'])["+position+"]"));	
 			setText(By.xpath("(//input[@class='visual-input'])["+position+"]"), strategy);
-			//COREManager.threadSleep(2000);
-		    //elementIsPresent(By.xpath("//ul[@class='visual-list context-menu hide']"));
-			
-			//List<WebElement> we1 = driverInstance.findElements(By.xpath("//ul[@class='visual-list context-menu hide']"));
-			
-				//for (WebElement e:we1){
-				//Actions action = new Actions(driverInstance);
-				//action.moveToElement(e).click().build().perform();
-			//}
-			//driverInstance.findElement(By.xpath("//li[contains(@class, 'visual-item')]")).click();
-			//Context.clickElement(By.xpath("//ul[@class='visual-list context-menu hide']/li"));
 			pressKey("Enter");
 						
 	}
@@ -192,8 +181,7 @@ public class SmartMail extends Context {
 			verifySelectOption(ruleText, By.xpath("(//select[@class='exp_left_hand'])["+i+"]"));
 		
 			verifySelectOption(operator, By.xpath("(//select[@class='exp_op operatoroptions'])["+i+"]"));
-		
-			//verifytextContent(By.xpath("(//input[contains(@class, 'autosearch')])["+i+"]"), ruleValue);
+
 			Assert.assertTrue(driverInstance.findElement(By.xpath("(//input[contains(@class, 'autosearch')])["+i+"]")).getAttribute("value").contains(ruleValue));
 		
 			clickElement(By.xpath("//a[@href='#item"+i+"-hints']"));
@@ -254,9 +242,45 @@ public class SmartMail extends Context {
 	public static void setExpression(String rule, String position) {
 		   clickElement(By.partialLinkText("Toggle"));
 		   setText(By.xpath("//*[@id='item"+position+"-exp']/textarea"),rule);
-	//	   clickButton("Save Campaign");
+	}
+	
+	public static void createESPConnection(String ESPname, String connectionName ){
+		
+	setText(By.id("name"), connectionName);
+		
+		if(ESPname.equalsIgnoreCase("SilverPop"))
+		
+			Credential.espUserLogin("silverpop");
+			selectDropList(By.name("esp"), "Silverpop");
+			setText(By.id("realm"), "http://api2.silverpop.com/SoapApi");
+		
+		if(ESPname.equalsIgnoreCase("Ecircle")){
+		
+			Credential.espUserLogin("ecircle");
+			selectDropList(By.id("esp"), "Teradata (ECircle)");
+			setText(By.id("realm"), "http://peerius.cust-mta.com");
+			
 		
 	}
+		if(ESPname.equalsIgnoreCase("SmartCast")){
+			
+			Credential.espUserLogin("smartcast");
+			selectDropList(By.id("esp"), "SmartCast");
+			setText(By.id("realm"), "http://uk56.em.sdlproducts.com");
+		}
+			
+		clickButton("Test ESP Connection");
+	
+		verifyErrorMessage(By.className("notifications"), "Test passed successfully!");
+		clickButton("Save ESP Connection");
+
+		verifyErrorMessage(By.className("notifications"), "Successfully saved.");
+		
+
+		
+	}
+
+				
 
 
 		
