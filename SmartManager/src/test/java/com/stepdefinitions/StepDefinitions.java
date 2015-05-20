@@ -564,6 +564,18 @@ public class StepDefinitions extends SmartMerchandising {
 		@When("^I click on Email Rec \"(.*?)\"$")
 		public void i_click_on_Email_Rec(String arg1) throws Throwable {
 		   driverInstance.findElement(By.xpath("//td[1]/a[1]/img")).click();
-		  	}
+		}
+		
+		@When("^I set Custom Email Attribute \"(.*?)\"$")
+		public void i_set_Custom_Email_Attribute(String attribute){
+		    
+			driverInstance.findElement(By.xpath("//button[@value='" + attribute +"']")).click();
+		}
+				
+		@Then("^I should see the saved Custom Email Attribute setting$")
+		public void i_should_see_the_saved_Custom_Email_Attribute_setting(){
+		    
+			elementIsPresent(By.xpath("//button[@value='genre']/i[@class='sm-icon-check-checked']"));
+		}
 }
 

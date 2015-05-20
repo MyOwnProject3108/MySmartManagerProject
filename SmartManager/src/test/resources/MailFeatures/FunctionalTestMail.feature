@@ -131,6 +131,18 @@ Feature: S-Mail
     And click on button "Next"
     And click on button " Generate Code"
     Then I should see the HTML code for Email Recs
+    
+   @CustomEmailAttributes
+  Scenario: Test if Custom Email Attributes settings are saved in UI
+    Given I click on "Customise Email Attributes" option in "Mail"
+    When I set Custom Email Attribute "genre"
+    And click on button "Save Custom attributes"
+    Then I should see Message "Successfully saved"
+    And I click on link "Define Product Sets"
+    And I click on link "Custom Email Attributes"
+    Then I should see the saved Custom Email Attribute setting
+    And click on button "genre"
+    And click on button "Save Custom attributes" 
 
   #End of functional scenarios
   @DeleteMailCampaign
