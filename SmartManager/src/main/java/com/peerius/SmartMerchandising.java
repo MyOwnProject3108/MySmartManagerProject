@@ -139,84 +139,101 @@ public class SmartMerchandising extends Context {
 		
 		
 	}
-public static void gotoCreateCampaign(){
+	public static void gotoCreateCampaign(){
 	
-	Navigation.gotoURL("/smartmanager/merchandising/edit.page");
+		Navigation.gotoURL("/smartmanager/merchandising/edit.page");
 	
 }
 
-public static void selectPreviewProductList(String productPrefix, String number){
+	public static void selectPreviewProductList(String productPrefix, String number){
 	
-	int numberOfProduct = Integer.parseInt(number);
+		int numberOfProduct = Integer.parseInt(number);
 
-	setText(By.className("visual-input"), productPrefix);
-	pressKey("Enter");
-	elementIsPresent(By.xpath("//ul[contains(@class,'tags')]"));
-	List<WebElement> products = driverInstance.findElements(By.xpath("//textarea[@id='previewProducts']/following::ul[1]"));
+		setText(By.className("visual-input"), productPrefix);
+		pressKey("Enter");
+		elementIsPresent(By.xpath("//ul[contains(@class,'tags')]"));
+		List<WebElement> products = driverInstance.findElements(By.xpath("//textarea[@id='previewProducts']/following::ul[1]"));
 
-	for (int i = 0; i < numberOfProduct; i++) {
+		for (int i = 0; i < numberOfProduct; i++) {
 
-		for (WebElement product : products) {
+			for (WebElement product : products) {
 
-			Actions doubleClick = new Actions(driverInstance);
+				Actions doubleClick = new Actions(driverInstance);
 
-			doubleClick.moveToElement(product).click().sendKeys(Keys.ENTER).build().perform();
+				doubleClick.moveToElement(product).click().sendKeys(Keys.ENTER).build().perform();
 		}
 	}
-	clickLink("Finished");
+		clickLink("Finished");
 }
 
-public static void selectPreviewCategory(String category){
+	public static void selectPreviewCategory(String category){
 	
-	setText(By.id("previewCategory"), category);
+		setText(By.id("previewCategory"), category);
 	
-	elementIsPresent(By.xpath("//input[@id='previewCategory']/following::ul[1]"));
+		elementIsPresent(By.xpath("//input[@id='previewCategory']/following::ul[1]"));
 		
-	List<WebElement> categories = driverInstance.findElements(By.xpath("//input[@id='previewCategory']/following::ul[1]"));
+		List<WebElement> categories = driverInstance.findElements(By.xpath("//input[@id='previewCategory']/following::ul[1]"));
 	
-	for (WebElement cat : categories) {
+		for (WebElement cat : categories) {
 
-		Actions doubleClick = new Actions(driverInstance);
-		doubleClick.moveToElement(cat).doubleClick(cat).click(cat).build().perform();
+			Actions doubleClick = new Actions(driverInstance);
+			doubleClick.moveToElement(cat).doubleClick(cat).click(cat).build().perform();
+		}
 	}
-}
 
-public static void createABgroup(String group, String page, String widget, String group_a_percent, String group_b_percent){
+	public static void createABgroup(String group, String page, String widget, String group_a_percent, String group_b_percent){
 	
-	Navigation.gotoURL("/shop-admin/abtesting/abtests.page");
-	setText(By.id("group_a"), group_a_percent);
-	clickElement(By.xpath("//input[@value='Create']"));
-	clickElement(By.xpath("//*[@class='box widgets_"+group+"']//em[.='"+page+"']/following::select[@name='self[PRODUCT-"+group+"-0]']/option[.='"+widget+"']"));
+		Navigation.gotoURL("/shop-admin/abtesting/abtests.page");
+		setText(By.id("group_a"), group_a_percent);
+		clickElement(By.xpath("//input[@value='Create']"));
+		clickElement(By.xpath("//*[@class='box widgets_"+group+"']//em[.='"+page+"']/following::select[@name='self[PRODUCT-"+group+"-0]']/option[.='"+widget+"']"));
 
-	javaScriptExe("$(\"#group_b\").val("+group_b_percent+")");
-	javaScriptExe("window.scrollBy(0,290);");
-	clickElement(By.xpath("//select[@name='self[PRODUCT-"+group+"-0]']/option[.='"+widget+"']"));
+		javaScriptExe("$(\"#group_b\").val("+group_b_percent+")");
+		javaScriptExe("window.scrollBy(0,290);");
+		clickElement(By.xpath("//select[@name='self[PRODUCT-"+group+"-0]']/option[.='"+widget+"']"));
 	
 	
-	COREManager.threadSleep(2000);
-	elementNotPresent(By.xpath("//input[@value='Create']"));
-	Navigation.refreshPage();
-	clickElement(By.xpath("//*[@class='box widgets_"+group+"']//em[.='"+page+"']/following::select[@name='self[PRODUCT-"+group+"-0]']/option[.='"+widget+"']"));
-	javaScriptExe("window.scrollBy(0,290);");
-	clickElement(By.xpath("//input[@value='Update']"));
+		COREManager.threadSleep(2000);
+		elementNotPresent(By.xpath("//input[@value='Create']"));
+		Navigation.refreshPage();
+		clickElement(By.xpath("//*[@class='box widgets_"+group+"']//em[.='"+page+"']/following::select[@name='self[PRODUCT-"+group+"-0]']/option[.='"+widget+"']"));
+		javaScriptExe("window.scrollBy(0,290);");
+		clickElement(By.xpath("//input[@value='Update']"));
 	
-	acceptAlert();
-	elementIsPresent(By.xpath("//em[contains(.,'A/B Test Updated')]"));
+		acceptAlert();
+		elementIsPresent(By.xpath("//em[contains(.,'A/B Test Updated')]"));
 	
-}
+	}
 
-public static void createExclusions(String refcode) {
-	elementIsPresent(By.xpath("//*[@id='manual']//textarea[2]"));
-	clickElement(By.xpath("//*[@id='manual']//textarea[2]"));
-	setText(By.xpath("//*[@id='manual']//textarea[2]"), refcode);
-	elementIsPresent(By.xpath("//*[@id='manual']//ul"));
-	List<WebElement> elements = driverInstance.findElements(By.xpath("//*[@id='manual']//ul"));
+	public static void createExclusions(String refcode) {
+		elementIsPresent(By.xpath("//*[@id='manual']//textarea[2]"));
+		clickElement(By.xpath("//*[@id='manual']//textarea[2]"));
+		setText(By.xpath("//*[@id='manual']//textarea[2]"), refcode);
+		elementIsPresent(By.xpath("//*[@id='manual']//ul"));
+		List<WebElement> elements = driverInstance.findElements(By.xpath("//*[@id='manual']//ul"));
 		for (WebElement element:elements){
 			Actions doubleClick = new Actions(driverInstance);
 			doubleClick.moveToElement(element).doubleClick().sendKeys(Keys.ENTER).build().perform();
 			}
 		clickLink("Finished");
 	
+	}
+
+public static void createCampaignDuplicate(String name, String location, String widget, String ruleExpression){
+	
+	
+	
+	Navigation.gotoURL("/smartmanager/merchandising/edit.page");
+	setText(By.id("name"), name);
+	selectDropList(By.id("location"), location);
+	selectDropList(By.id("widget"), widget);
+	clickButton("Next");
+	clickButton("Next");
+	clickElement(By.xpath("//button[contains(@class,'edit-rule')]"));
+	setText(By.id("advanced_btn_rec_default"), ruleExpression);
+	clickLink("Apply to all");
+	clickElement(By.xpath("//button[contains(.,' Save Campaign')]"));
+		
 	}
 
 	

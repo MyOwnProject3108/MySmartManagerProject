@@ -25,12 +25,6 @@ Feature: S-Mail
     And I Duplicate Mail Campaign "AutoCreate"
     Then I Should See Mail Campaign "AutoCreate copy" on Mail Overview Page
 
-  @PauseMailCampaign
-  Scenario: De-activate Mail Campaign
-    Given I goto Mail Campaign "AutoCreate"
-    And I Pause Mail campaign "AutoCreate"
-    Then Mail Campaign Should be Paused
-
   @TextStyle
   Scenario: Styling changes should reflect on product title and price display
     Given I goto Mail Campaign "AutoCreate"
@@ -72,6 +66,7 @@ Feature: S-Mail
     And I click on link "2. Configuration"
     When I Set the Number of Products as "1"
     Then I Should see "1" Product Positions
+    And click on button "Save Campaign"
 
   @UserTopUpsDisabled
   Scenario: Verify That If Top-Ups Is Disabled, Empty Email Rec should be returned
@@ -89,7 +84,7 @@ Feature: S-Mail
     And I click on link "2. Configuration"
     When I Set the Number of Products as "1"
     Then I Should see "1" Product Positions
-    
+    And click on button "Save Campaign"
 
   @duplicatePositions
   Scenario: Each Click on Duplicate button Should copy that position to new position
@@ -125,14 +120,8 @@ Feature: S-Mail
     And click on button "Next"
     And click on button " Generate Code"
     Then I should see the HTML code for Email Recs
-    And I click on link "2. Configuration"
-    When I Set the Number of Products as "3"
-    Then I Should see "3" Product Positions
-    And click on button "Next"
-    And click on button " Generate Code"
-    Then I should see the HTML code for Email Recs
-    
-   @CustomEmailAttributes
+       
+  @CustomEmailAttributes
   Scenario: Test if Custom Email Attributes settings are saved in UI
     Given I click on "Customise Email Attributes" option in "Mail"
     When I set Custom Email Attribute "genre"
@@ -143,16 +132,21 @@ Feature: S-Mail
     Then I should see the saved Custom Email Attribute setting
     And click on button "genre"
     And click on button "Save Custom attributes" 
+    
+  @PauseMailCampaign
+  Scenario: De-activate Mail Campaign
+    Given I goto Mail Campaign "AutoCreate"
+    And I Pause Mail campaign "AutoCreate"
+    Then Mail Campaign Should be Paused
 
-  #End of functional scenarios
   @DeleteMailCampaign
   Scenario: Deleting Mail Campaign
     Given I Delete Mail Campaign "AutoCreate copy"
     Given I Delete Mail Campaign "AutoCreate"
     Then I should not see "AutoCreate"
     Then I should not see "AutoCreate copy"
-
-  #Error validation scenarios start here
+    
+   #Error validation scenarios start here
   @createMailvalidation
   Scenario Outline: Create Mail Message Validation
     Given I click on "Create a New Campaign" option in "Mail"
@@ -165,7 +159,13 @@ Feature: S-Mail
       | Name        | Message                                    |
       |             | Name must be provided                      |
       | Auto_Create | Recommendation Algorithms must be selected |
-
+      
+  @duplicateNameMailCampaign
+  Scenario: Error Validate Duplicate Campaign Name
+    Given I Create Simple Mail Campaign with name "AutoCreate"
+    And I Create Another Mail Campaign with name "AutoCreate"
+    Then I should see Message "The name you have chosen is already in use."
+  
   @emptyEmailPreview
   Scenario: Validate Empty Email For Preview
     Given I goto Mail Campaign "AutoCreate"
@@ -181,13 +181,7 @@ Feature: S-Mail
     And click on button "Next"
     And click on button "Send Test Email"
     Then I should see Message "Email address required"
-
-  @duplicateNameMailCampaign
-  Scenario: Error Validate Duplicate Campaign Name
-    Given I Create Simple Mail Campaign with name "AutoCreate"
-    #And I Create Simple Mail Campaign with name "AutoCreate"
-    Then I should see Message "The name you have chosen is already in use"
-
+  
   @EmptyEmailPlaceholder
   Scenario: Validate Empty Email Placeholder
     Given I goto Mail Campaign "AutoCreate"
@@ -196,3 +190,5 @@ Feature: S-Mail
     And I Enter Text "" in Email Placeholder
     And click on button " Generate Code"
     Then I should see Message "Email placeholder is mandatory"
+    
+  

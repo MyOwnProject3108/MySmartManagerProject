@@ -210,7 +210,7 @@ public class Context extends COREManager {
 
 	public static void verifyErrorMessage(By by, String errorMesage) {
 		Locator locator = Locator.by(by);
-		if (locator.hasClass("error")|locator.hasClass("notification")) {
+		if (locator.hasClass("error")|locator.hasClass("notification")|locator.hasClass("notification error")|locator.hasClass("notifications")){
 			
 		String exactText =locator.getElement().getAttribute("textContent");
 				

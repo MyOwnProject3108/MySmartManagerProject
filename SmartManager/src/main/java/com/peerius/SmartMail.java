@@ -3,6 +3,7 @@ package com.peerius;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -93,8 +94,9 @@ public class SmartMail extends Context {
 	public static void setStyle(String value) {
 		
 		setText(By.id("productInfoWidth"), value);
+		Context.pressKey("Enter");
 		setText(By.id("productInfoHeight"), value);
-		
+		Context.pressKey("Enter");
 	}
 	
 	public static void verifyStyleAttribute(String value, String attribute) {
@@ -163,7 +165,7 @@ public class SmartMail extends Context {
 		
 		WebElement imgHeight = driverInstance.findElement(By.xpath("//td[2]/a/img[@title='Just for you']"));
 		
-		Assert.assertEquals(1, imgHeight.getAttribute("height"));
+		Assert.assertEquals("1", imgHeight.getAttribute("height"));
 		
 	}
 	
@@ -171,8 +173,8 @@ public class SmartMail extends Context {
 		
 		WebElement imgHeight = driverInstance.findElement(By.xpath("//td[2]/a/img[@title='Just for you']"));
 		
-		Assert.assertNotEquals(1, imgHeight.getAttribute("height"));
-		
+		Assert.assertNotEquals("1", imgHeight.getAttribute("height"));
+		//Assert.assertTrue(imgHeight.getAttribute("height")!="1");
 	}
 	
 	public static void verifyDuplicatePosition(String position, String strategy, String ruleValue, String ruleText, String hintOption, String operator ) {
@@ -258,6 +260,17 @@ public class SmartMail extends Context {
 		
 	}
 
+	public static void createDuplicateMailCampaign(String name, String strategy)
+	{
+		Navigation.gotoURL("/smartmanager/mail/edit.page");
+		setText(By.id("the_email_campaign_name"), name);
+		clickButton("Next");
+		clickElement(By.xpath("//input[@class='visual-input']"));
+		setText(By.xpath("//input[@class='visual-input']"), strategy);
+		pressKey("Enter");
+		clickElement(By.id("mail_submit_btn"));
+			
+	}
 
 		
 	}

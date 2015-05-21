@@ -157,7 +157,7 @@ Feature: S-Merchandising
   @duplicatenamecamp
   Scenario: Error validation for Duplicate Merchandising Campaign name
     Given I Create Simple Campaign with name "AutoCreate"
-    And I Create Simple Campaign with name "AutoCreate"
+    And I Create Another Campaign with name "AutoCreate"
     Then I should see Message "The name you have chosen is already in use"
 
   @invalidexp
