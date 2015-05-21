@@ -577,7 +577,26 @@ public class StepDefinitions extends SmartMerchandising {
 		    
 			elementIsPresent(By.xpath("//button[@value='genre']/i[@class='sm-icon-check-checked']"));
 		}
-
+		@Given("^I Create Another Mail Campaign with name \"(.*?)\"$")
+		public void i_Create_Another_Mail_Campaign_with_name(String name) {
+			
+			SmartMail.createDuplicateMailCampaign(name, "Best Sellers by Conversion (last 90 days)");
+		    
+		}
 		
+		@Given("^I Create Another Campaign with name \"(.*?)\"$")
+		public void i_Create_Another_Campaign_with_name(String name) {
+		
+			SmartMerchandising.createCampaignDuplicate(name, "Product Page", "producthorizontal",
+					"(r.pricerange=\"expensive\")");
+		}
+		
+		@When("^I Create Connection \"(.*?)\" for ESP \"(.*?)\"$")
+		public void i_Create_Connection_for_ESP(String connectionName, String esp) throws Throwable {
+		
+			SmartMail.createESPConnection(esp, connectionName);
+		
+		}
+
 }
 
