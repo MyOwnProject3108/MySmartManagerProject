@@ -13,6 +13,7 @@ import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
 
 
+
 public class SmartMail extends Context {
 	
 	public static Random random = new Random();
@@ -245,30 +246,33 @@ public class SmartMail extends Context {
 	}
 	
 	
-	public static void createESPConnection(String ESPname, String connectionName ){
-		
+	public static void createESPConnection(String ESPname, String connectionName  ){
+	
 	setText(By.id("name"), connectionName);
-		
-		if(ESPname.equalsIgnoreCase("SilverPop"))
+	
+	
+	if(ESPname.equalsIgnoreCase("SilverPop")){
 		
 			Credential.espUserLogin("silverpop");
-			selectDropList(By.name("esp"), "SilverPop");
+			selectDropList(By.name("esp"), "Silverpop");
 			setText(By.id("realm"), "http://api2.silverpop.com/SoapApi");
-		
-		if(ESPname.equalsIgnoreCase("Ecircle")){
+	}
+	
+	if(ESPname.equalsIgnoreCase("Ecircle")){
 		
 			Credential.espUserLogin("ecircle");
 			selectDropList(By.id("esp"), "Teradata (ECircle)");
 			setText(By.id("realm"), "http://peerius.cust-mta.com");
-			
-		
+				
 	}
 		if(ESPname.equalsIgnoreCase("SmartCast")){
 			
 			Credential.espUserLogin("smartcast");
 			selectDropList(By.id("esp"), "SmartCast");
 			setText(By.id("realm"), "http://uk56.em.sdlproducts.com");
+			
 		}
+		
 			
 		clickButton("Test ESP Connection");
 	
@@ -278,14 +282,12 @@ public class SmartMail extends Context {
 		verifyErrorMessage(By.className("notifications"), "Successfully saved.");
 		
 
-		
-	}
 	
 					
 
-
+}
 		
 	}
 
-
+	
 

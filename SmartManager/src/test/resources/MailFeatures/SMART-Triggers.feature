@@ -14,7 +14,7 @@ Feature: SMART-Triggers Test
     And I Create Connection "<Name>" for ESP "<ESP>"
 
     Examples: Connections
-      | Name      | ESP       |
-      | SilverPop | Silverpop |
-      | ECircle   | ECircle   |
-      | SmartCast | SmartCast |
+      | Name                | ESP       |
+      | SilverPop           | Silverpop |
+      | ECircle             | ECircle   |
+      | SmartCastConnection | SmartCast |
