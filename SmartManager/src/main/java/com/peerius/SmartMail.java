@@ -3,7 +3,6 @@ package com.peerius;
 
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -94,9 +93,8 @@ public class SmartMail extends Context {
 	public static void setStyle(String value) {
 		
 		setText(By.id("productInfoWidth"), value);
-		Context.pressKey("Enter");
 		setText(By.id("productInfoHeight"), value);
-		Context.pressKey("Enter");
+		
 	}
 	
 	public static void verifyStyleAttribute(String value, String attribute) {
@@ -136,17 +134,6 @@ public class SmartMail extends Context {
 			
 			clickElement(By.xpath("(//div[@class='visual'])["+position+"]"));	
 			setText(By.xpath("(//input[@class='visual-input'])["+position+"]"), strategy);
-			//COREManager.threadSleep(2000);
-		    //elementIsPresent(By.xpath("//ul[@class='visual-list context-menu hide']"));
-			
-			//List<WebElement> we1 = driverInstance.findElements(By.xpath("//ul[@class='visual-list context-menu hide']"));
-			
-				//for (WebElement e:we1){
-				//Actions action = new Actions(driverInstance);
-				//action.moveToElement(e).click().build().perform();
-			//}
-			//driverInstance.findElement(By.xpath("//li[contains(@class, 'visual-item')]")).click();
-			//Context.clickElement(By.xpath("//ul[@class='visual-list context-menu hide']/li"));
 			pressKey("Enter");
 						
 	}
@@ -165,7 +152,7 @@ public class SmartMail extends Context {
 		
 		WebElement imgHeight = driverInstance.findElement(By.xpath("//td[2]/a/img[@title='Just for you']"));
 		
-		Assert.assertEquals("1", imgHeight.getAttribute("height"));
+		Assert.assertEquals(1, imgHeight.getAttribute("height"));
 		
 	}
 	
@@ -173,8 +160,8 @@ public class SmartMail extends Context {
 		
 		WebElement imgHeight = driverInstance.findElement(By.xpath("//td[2]/a/img[@title='Just for you']"));
 		
-		Assert.assertNotEquals("1", imgHeight.getAttribute("height"));
-		//Assert.assertTrue(imgHeight.getAttribute("height")!="1");
+		Assert.assertNotEquals(1, imgHeight.getAttribute("height"));
+		
 	}
 	
 	public static void verifyDuplicatePosition(String position, String strategy, String ruleValue, String ruleText, String hintOption, String operator ) {
@@ -194,8 +181,7 @@ public class SmartMail extends Context {
 			verifySelectOption(ruleText, By.xpath("(//select[@class='exp_left_hand'])["+i+"]"));
 		
 			verifySelectOption(operator, By.xpath("(//select[@class='exp_op operatoroptions'])["+i+"]"));
-		
-			//verifytextContent(By.xpath("(//input[contains(@class, 'autosearch')])["+i+"]"), ruleValue);
+
 			Assert.assertTrue(driverInstance.findElement(By.xpath("(//input[contains(@class, 'autosearch')])["+i+"]")).getAttribute("value").contains(ruleValue));
 		
 			clickElement(By.xpath("//a[@href='#item"+i+"-hints']"));
@@ -256,21 +242,46 @@ public class SmartMail extends Context {
 	public static void setExpression(String rule, String position) {
 		   clickElement(By.partialLinkText("Toggle"));
 		   setText(By.xpath("//*[@id='item"+position+"-exp']/textarea"),rule);
-	//	   clickButton("Save Campaign");
+	}
+	
+	public static void createESPConnection(String ESPname, String connectionName ){
+		
+	setText(By.id("name"), connectionName);
+		
+		if(ESPname.equalsIgnoreCase("SilverPop"))
+		
+			Credential.espUserLogin("silverpop");
+			selectDropList(By.name("esp"), "SilverPop");
+			setText(By.id("realm"), "http://api2.silverpop.com/SoapApi");
+		
+		if(ESPname.equalsIgnoreCase("Ecircle")){
+		
+			Credential.espUserLogin("ecircle");
+			selectDropList(By.id("esp"), "Teradata (ECircle)");
+			setText(By.id("realm"), "http://peerius.cust-mta.com");
+			
+		
+	}
+		if(ESPname.equalsIgnoreCase("SmartCast")){
+			
+			Credential.espUserLogin("smartcast");
+			selectDropList(By.id("esp"), "SmartCast");
+			setText(By.id("realm"), "http://uk56.em.sdlproducts.com");
+		}
+			
+		clickButton("Test ESP Connection");
+	
+		verifyErrorMessage(By.className("notifications"), "Test passed successfully!");
+		clickButton("Save ESP Connection");
+
+		verifyErrorMessage(By.className("notifications"), "Successfully saved.");
+		
+
 		
 	}
 
-	public static void createDuplicateMailCampaign(String name, String strategy)
-	{
-		Navigation.gotoURL("/smartmanager/mail/edit.page");
-		setText(By.id("the_email_campaign_name"), name);
-		clickButton("Next");
-		clickElement(By.xpath("//input[@class='visual-input']"));
-		setText(By.xpath("//input[@class='visual-input']"), strategy);
-		pressKey("Enter");
-		clickElement(By.id("mail_submit_btn"));
-			
-	}
+				
+
 
 		
 	}

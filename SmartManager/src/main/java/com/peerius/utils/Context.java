@@ -70,9 +70,9 @@ public class Context extends COREManager {
 				.until(ExpectedConditions.visibilityOfElementLocated(locator));
 
 		Select droplistOptions = new Select(selectElement);
-
-		droplistOptions.selectByVisibleText(option);
 		
+			droplistOptions.selectByVisibleText(option);
+				
 	}
 	
 	public static void selectMenuOption(String mainMenuLabel, String subMenu) {
@@ -210,7 +210,7 @@ public class Context extends COREManager {
 
 	public static void verifyErrorMessage(By by, String errorMesage) {
 		Locator locator = Locator.by(by);
-		if (locator.hasClass("error")|locator.hasClass("notification")|locator.hasClass("notification error")|locator.hasClass("notifications")){
+		if (locator.hasClass("error")|locator.hasClass("notification")) {
 			
 		String exactText =locator.getElement().getAttribute("textContent");
 				
