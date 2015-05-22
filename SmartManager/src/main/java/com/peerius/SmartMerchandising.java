@@ -30,9 +30,7 @@ public class SmartMerchandising extends Context {
 		setText(By.id("advanced_btn_rec_default"), ruleExpression);
 		clickLink("Apply to all");
 		clickElement(By.xpath("//button[contains(.,' Save Campaign')]"));
-		
-		elementIsPresent(By.id("ajax_progress_bar"));
-			
+				
 		
 	}
 	
@@ -42,9 +40,6 @@ public class SmartMerchandising extends Context {
 		setText(By.id("name"), name);
 		selectDropList(By.id("location"), location);
 		selectDropList(By.id("widget"), widget);
-	//	clickElement(By.xpath("//button[contains(.,' Save Campaign')]"));
-		
-	//	elementIsPresent(By.id("ajax_progress_bar"));
 		
 	}
 	
@@ -219,22 +214,6 @@ public class SmartMerchandising extends Context {
 	
 	}
 
-public static void createCampaignDuplicate(String name, String location, String widget, String ruleExpression){
-	
-	
-	
-	Navigation.gotoURL("/smartmanager/merchandising/edit.page");
-	setText(By.id("name"), name);
-	selectDropList(By.id("location"), location);
-	selectDropList(By.id("widget"), widget);
-	clickButton("Next");
-	clickButton("Next");
-	clickElement(By.xpath("//button[contains(@class,'edit-rule')]"));
-	setText(By.id("advanced_btn_rec_default"), ruleExpression);
-	clickLink("Apply to all");
-	clickElement(By.xpath("//button[contains(.,' Save Campaign')]"));
-		
-	}
 
 	
 }

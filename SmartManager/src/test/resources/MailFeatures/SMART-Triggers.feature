@@ -18,5 +18,3 @@ Feature: SMART-Triggers Test
       | SilverPop | Silverpop |
       | ECircle   | ECircle   |
       | SmartCast | SmartCast |
-      
-    

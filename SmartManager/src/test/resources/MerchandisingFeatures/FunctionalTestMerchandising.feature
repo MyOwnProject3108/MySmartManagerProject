@@ -106,12 +106,7 @@ Feature: S-Merchandising
     And I activate Campaign "AutoCreate"
     Then Campaign should be Activated
 
-  @pausecamp
-  Scenario: Pause Campaign
-    Given I Pause Campaign "AutoCreate"
-    Then Campaign Should be Paused
-
-  @dupliecamp
+  @duplicatecamp
   Scenario: Duplicate Campaign
     Given I goto Campaign "AutoCreate"
     And I Duplicate Campaign "AutoCreate"
@@ -127,6 +122,11 @@ Feature: S-Merchandising
     And click on button "Save Campaign"
     Then I should see Message "Successfully saved"
     Then I Should See Campaign "AutoCreateNoRule" on Overview Page
+
+  @pausecamp
+  Scenario: Pause Campaign
+    Given I Pause Campaign "AutoCreate"
+    Then Campaign Should be Paused
 
   @deletecamp
   Scenario: Delete Campaign
@@ -157,7 +157,7 @@ Feature: S-Merchandising
   @duplicatenamecamp
   Scenario: Error validation for Duplicate Merchandising Campaign name
     Given I Create Simple Campaign with name "AutoCreate"
-    And I Create Another Campaign with name "AutoCreate"
+    And I Create Simple Campaign with name "AutoCreate"
     Then I should see Message "The name you have chosen is already in use"
 
   @invalidexp

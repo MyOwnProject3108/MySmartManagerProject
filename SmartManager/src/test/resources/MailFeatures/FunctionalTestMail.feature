@@ -163,7 +163,7 @@ Feature: S-Mail
   @duplicateNameMailCampaign
   Scenario: Error Validate Duplicate Campaign Name
     Given I Create Simple Mail Campaign with name "AutoCreate"
-    And I Create Another Mail Campaign with name "AutoCreate"
+    And I Create Simple Mail Campaign with name "AutoCreate"
     Then I should see Message "The name you have chosen is already in use."
   
   @emptyEmailPreview

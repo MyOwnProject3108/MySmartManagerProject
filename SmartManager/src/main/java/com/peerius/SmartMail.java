@@ -28,8 +28,6 @@ public class SmartMail extends Context {
 		pressKey("Enter");
 		clickElement(By.id("mail_submit_btn"));
 		
-		elementIsPresent(By.id("ajax_progress_bar"));
-	
 	}
 		
 	
@@ -93,9 +91,11 @@ public class SmartMail extends Context {
 	public static void setStyle(String value) {
 		
 		setText(By.id("productInfoWidth"), value);
+		Context.pressKey("Enter");
 		setText(By.id("productInfoHeight"), value);
-		
+		Context.pressKey("Enter");
 	}
+	
 	
 	public static void verifyStyleAttribute(String value, String attribute) {
 		
@@ -152,7 +152,7 @@ public class SmartMail extends Context {
 		
 		WebElement imgHeight = driverInstance.findElement(By.xpath("//td[2]/a/img[@title='Just for you']"));
 		
-		Assert.assertEquals(1, imgHeight.getAttribute("height"));
+		Assert.assertNotEquals("1", imgHeight.getAttribute("height"));
 		
 	}
 	
@@ -160,7 +160,7 @@ public class SmartMail extends Context {
 		
 		WebElement imgHeight = driverInstance.findElement(By.xpath("//td[2]/a/img[@title='Just for you']"));
 		
-		Assert.assertNotEquals(1, imgHeight.getAttribute("height"));
+		Assert.assertNotEquals("1", imgHeight.getAttribute("height"));
 		
 	}
 	
@@ -244,6 +244,7 @@ public class SmartMail extends Context {
 		   setText(By.xpath("//*[@id='item"+position+"-exp']/textarea"),rule);
 	}
 	
+	
 	public static void createESPConnection(String ESPname, String connectionName ){
 		
 	setText(By.id("name"), connectionName);
@@ -279,8 +280,8 @@ public class SmartMail extends Context {
 
 		
 	}
-
-				
+	
+					
 
 
 		
