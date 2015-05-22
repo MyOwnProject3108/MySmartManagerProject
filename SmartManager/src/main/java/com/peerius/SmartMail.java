@@ -153,7 +153,7 @@ public class SmartMail extends Context {
 		
 		WebElement imgHeight = driverInstance.findElement(By.xpath("//td[2]/a/img[@title='Just for you']"));
 		
-		Assert.assertNotEquals("1", imgHeight.getAttribute("height"));
+		Assert.assertEquals("1", imgHeight.getAttribute("height"));
 		
 	}
 	
