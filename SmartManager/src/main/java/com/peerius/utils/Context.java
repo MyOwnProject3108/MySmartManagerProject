@@ -210,7 +210,8 @@ public class Context extends COREManager {
 
 	public static void verifyErrorMessage(By by, String errorMesage) {
 		Locator locator = Locator.by(by);
-		if (locator.hasClass("error")|locator.hasClass("notification")) {
+	
+		if (locator.isPresent()|locator.hasClass("error")|locator.hasClass("notification")) {
 			
 		String exactText =locator.getElement().getAttribute("textContent");
 				
@@ -474,6 +475,8 @@ static class Locator extends Context {
 	}
 
 	public boolean isPresent() {
+		webElement = new WebDriverWait(driverInstance, elementWaitTime).
+				until(ExpectedConditions.visibilityOf(webElement));
 		return webElement != null;
 	}
 

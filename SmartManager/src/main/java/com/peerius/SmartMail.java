@@ -269,23 +269,15 @@ public class SmartMail extends Context {
 			
 			Credential.espUserLogin("smartcast");
 			selectDropList(By.id("esp"), "SmartCast");
-			setText(By.id("realm"), "http://uk56.em.sdlproducts.com");
-			
+			setText(By.id("realm"), "http://uk56.em.sdlproducts.com");	
 		}
-		
-			
+
 		clickButton("Test ESP Connection");
-	
 		verifyErrorMessage(By.className("notifications"), "Test passed successfully!");
 		clickButton("Save ESP Connection");
-
 		verifyErrorMessage(By.className("notifications"), "Successfully saved.");
 		
-
-	
-					
-
-}
+		}
 		
 	}
 
