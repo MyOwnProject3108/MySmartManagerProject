@@ -57,8 +57,7 @@ public class SmartMerchandising extends Context {
 		setText(By.id("advanced_btn_rec_default"), ruleExpression);
 		dragAndDrop(By.xpath("//div[contains(@data-original-title,'Drag')]"), By.xpath("//ul[@class='rules-grid']/li["+position+"]"));
 		clickButton("Save Campaign");
-		threadSleep(5000);
-		Navigation.refreshPage();
+	
 	}
 
 	public static void deleteCampaign(String name){

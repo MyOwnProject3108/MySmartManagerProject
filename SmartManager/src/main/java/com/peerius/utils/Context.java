@@ -210,13 +210,14 @@ public class Context extends COREManager {
 
 	public static void verifyErrorMessage(By by, String errorMesage) {
 		Locator locator = Locator.by(by);
+		
 	
 		if (locator.isPresent()|locator.hasClass("error")|locator.hasClass("notification")) {
 			
 		String exactText =locator.getElement().getAttribute("textContent");
 				
 		Boolean messageValid =	exactText.contains(errorMesage);
-		System.out.println(locator.getElement().getAttribute("textContent"));
+		System.out.println(locator.getElement().getAttribute("textContent")+"\n");
 		Assert.assertTrue(messageValid);
 
 		} 
