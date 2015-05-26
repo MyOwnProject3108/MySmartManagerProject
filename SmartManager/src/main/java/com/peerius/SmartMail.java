@@ -38,7 +38,6 @@ public class SmartMail extends Context {
 		elementIsPresent(By.linkText(name));
 		clickElement(By.xpath("//td/a[text()='"+name+"']//following::td//a[@data-original-title='Delete mail campaign']"));
 		clickElement(By.xpath("//div[contains(@class,'yes')]"));
-		threadSleep(2000);
 		Navigation.refreshPage();
 		elementNotPresent(By.linkText(name));
 		
@@ -49,7 +48,7 @@ public class SmartMail extends Context {
 		Navigation.gotoURL("/smartmanager/mail/list.page");
 		elementIsPresent(By.linkText(campaign));
 		clickElement(By.xpath("//td/a[text()='"+campaign+"']//following::td//a[@data-original-title='Duplicate mail campaign']"));
-		threadSleep(2000);
+		Navigation.refreshPage();
 		elementIsPresent(By.linkText(campaign+" copy"));
 		
 	}
@@ -59,7 +58,6 @@ public class SmartMail extends Context {
 		Navigation.gotoURL("/smartmanager/mail/list.page");
 		elementIsPresent(By.linkText(campaign));
 		clickElement(By.xpath("//td/a[text()='"+campaign+"']//following::td//a[@data-original-title=' Pause it ']"));
-		threadSleep(2000);
 		Navigation.refreshPage();
 		elementIsPresent(By.xpath("//td//a[@data-original-title=' Activate it ']"));
 				

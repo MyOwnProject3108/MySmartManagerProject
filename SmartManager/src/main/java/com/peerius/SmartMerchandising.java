@@ -67,7 +67,6 @@ public class SmartMerchandising extends Context {
 		elementIsPresent(By.linkText(name));
 		clickElement(By.xpath("//td/a//small[text()='"+name+"']//following::td//a[@data-original-title='Delete']"));
 		clickElement(By.xpath("//div[contains(@class,'yes')]"));
-		threadSleep(2000);
 		Navigation.refreshPage();
 		elementNotPresent(By.linkText(name));
 	}
@@ -77,6 +76,7 @@ public class SmartMerchandising extends Context {
 		Navigation.gotoURL("/smartmanager/merchandising/list.page");
 		elementIsPresent(By.linkText(campaign));
 		clickElement(By.xpath("//td/a//small[text()='"+campaign+"']//following::td//a[@data-original-title='Duplicate']"));
+		Navigation.refreshPage();
 		elementIsPresent(By.linkText(campaign+" copy"));
 
 	}
@@ -86,7 +86,6 @@ public class SmartMerchandising extends Context {
 		Navigation.gotoURL("/smartmanager/merchandising/list.page");
 		elementIsPresent(By.linkText(campaign));
 		clickElement(By.xpath("//td/a//small[text()='"+campaign+"']//following::td//a[@data-original-title=' Activate it ']"));
-		threadSleep(2000);
 		Navigation.refreshPage();
 		elementIsPresent(By.xpath("//td//a[@data-original-title=' Pause it ']"));
 		
@@ -97,9 +96,8 @@ public class SmartMerchandising extends Context {
 		Navigation.gotoURL("/smartmanager/merchandising/list.page");
 		elementIsPresent(By.linkText(campaign));
 		clickElement(By.xpath("//td/a//small[text()='"+campaign+"']//following::td//a[@data-original-title=' Pause it ']"));
-		threadSleep(2000);
 		Navigation.refreshPage();
-		elementIsPresent(By.xpath("//td//a[@data-original-title=' Activate it ']"));
+		elementIsPresent(By.xpath("//*[@class='relative']/a[@data-original-title=' Activate it ']"));
 		
 	}
 	

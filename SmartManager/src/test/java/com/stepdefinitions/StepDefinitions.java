@@ -420,8 +420,8 @@ public class StepDefinitions extends SmartMerchandising {
 		
 		@Then("^Mail Campaign Should be Paused$")
 		public void mail_Campaign_Should_be_Paused() throws Throwable {
-		    
-			elementIsPresent(By.xpath("//td//a[@data-original-title=' Activate it']"));
+			
+			elementIsPresent(By.xpath("//*[@class='relative']/a[@data-original-title=' Activate it ']"));
 		}
 
 		@Given("^I Delete Mail Campaign \"(.*?)\"$")
