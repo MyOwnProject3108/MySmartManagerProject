@@ -100,7 +100,7 @@ public class SmartMail extends Context {
 		
 		WebElement style = driverInstance.findElement(By.id("productInfoPreview"));
 		
-		Assert.assertEquals(value, style.getAttribute(attribute));
+		Assert.assertEquals(value, style.getAttribute(attribute).toString());
 	}
 	
 	public static void verifyProductPosition(String position){

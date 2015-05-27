@@ -120,7 +120,7 @@ Feature: S-Mail
     And click on button "Next"
     And click on button " Generate Code"
     Then I should see the HTML code for Email Recs
-       
+
   @CustomEmailAttributes
   Scenario: Test if Custom Email Attributes settings are saved in UI
     Given I click on "Customise Email Attributes" option in "Mail"
@@ -131,8 +131,8 @@ Feature: S-Mail
     And I click on link "Custom Email Attributes"
     Then I should see the saved Custom Email Attribute setting
     And click on button "genre"
-    And click on button "Save Custom attributes" 
-    
+    And click on button "Save Custom attributes"
+
   @PauseMailCampaign
   Scenario: De-activate Mail Campaign
     Given I goto Mail Campaign "AutoCreate"
@@ -142,11 +142,11 @@ Feature: S-Mail
   @DeleteMailCampaign
   Scenario: Deleting Mail Campaign
     Given I Delete Mail Campaign "AutoCreate copy"
+    Then I should not see "AutoCreate copy"
     Given I Delete Mail Campaign "AutoCreate"
     Then I should not see "AutoCreate"
-    Then I should not see "AutoCreate copy"
-    
-   #Error validation scenarios start here
+
+  #Error validation scenarios start here
   @createMailvalidation
   Scenario Outline: Create Mail Message Validation
     Given I click on "Create a New Campaign" option in "Mail"
@@ -159,13 +159,13 @@ Feature: S-Mail
       | Name        | Message                                    |
       |             | Name must be provided                      |
       | Auto_Create | Recommendation Algorithms must be selected |
-      
+
   @duplicateNameMailCampaign
   Scenario: Error Validate Duplicate Campaign Name
     Given I Create Simple Mail Campaign with name "AutoCreate"
     And I Create Simple Mail Campaign with name "AutoCreate"
     Then I should see Message "The name you have chosen is already in use."
-  
+
   @emptyEmailPreview
   Scenario: Validate Empty Email For Preview
     Given I goto Mail Campaign "AutoCreate"
@@ -181,7 +181,7 @@ Feature: S-Mail
     And click on button "Next"
     And click on button "Send Test Email"
     Then I should see Message "Email address required"
-  
+
   @EmptyEmailPlaceholder
   Scenario: Validate Empty Email Placeholder
     Given I goto Mail Campaign "AutoCreate"
@@ -190,12 +190,9 @@ Feature: S-Mail
     And I Enter Text "" in Email Placeholder
     And click on button " Generate Code"
     Then I should see Message "Email placeholder is mandatory"
-    
+
   @DeleteMailCampaign
   Scenario: Deleting Mail Campaign
     #Given I Delete Mail Campaign "AutoCreate copy"
     Given I Delete Mail Campaign "AutoCreate"
     Then I should not see "AutoCreate"
-    #Then I should not see "AutoCreate copy"
-    
-  
