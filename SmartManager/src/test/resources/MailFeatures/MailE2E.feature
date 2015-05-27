@@ -157,6 +157,9 @@ Feature: End to End Tests for Mail
     And Switch Frame "rendermail"
     And I click on link "Click here for debug information"
     Then I should see GeneratioStrategy "Product Set" in "1" Positions
+
+  @E2EDelete
+  Scenario: E2E mail campaign and ProductSet deletion
     Given I Delete Mail Campaign "E2EAutoCreate"
     Then I should not see "E2EAutoCreate"
     Given I Delete Product Set "TestproductSetE2E"
