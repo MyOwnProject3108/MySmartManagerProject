@@ -48,7 +48,7 @@ Feature: End to End Tests for Mail
     Given I goto Mail Campaign "E2EAutoCreate"
     And I click on link "2. Configuration"
     When I Set the Number of Products as "1"
-    And I Set "Product Catalog" at position "1"
+    And I Set "New Products(last 30 days)" at position "1"
     And I click on link "Hints"
     And I select option "new-product"
     And I Enter Hint Parameter Text as "30" in "1" Positions
