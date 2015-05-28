@@ -191,8 +191,7 @@ Feature: S-Mail
     And click on button " Generate Code"
     Then I should see Message "Email placeholder is mandatory"
 
-  @DeleteMailCampaign
+  @DeleteLastCampaign
   Scenario: Deleting Mail Campaign
-    #Given I Delete Mail Campaign "AutoCreate copy"
     Given I Delete Mail Campaign "AutoCreate"
     Then I should not see "AutoCreate"

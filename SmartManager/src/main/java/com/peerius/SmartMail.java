@@ -38,7 +38,7 @@ public class SmartMail extends Context {
 		elementIsPresent(By.linkText(name));
 		clickElement(By.xpath("//td/a[text()='"+name+"']//following::td//a[@data-original-title='Delete mail campaign']"));
 		clickElement(By.xpath("//div[contains(@class,'yes')]"));
-		Navigation.refreshPage();
+		verifyErrorMessage(By.className("notification"), "Successfully deleted");
 		elementNotPresent(By.linkText(name));
 		
 	}

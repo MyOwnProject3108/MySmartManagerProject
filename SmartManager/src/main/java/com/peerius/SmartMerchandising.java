@@ -66,7 +66,7 @@ public class SmartMerchandising extends Context {
 		elementIsPresent(By.linkText(name));
 		clickElement(By.xpath("//td/a//small[text()='"+name+"']//following::td//a[@data-original-title='Delete']"));
 		clickElement(By.xpath("//div[contains(@class,'yes')]"));
-		Navigation.refreshPage();
+		verifyErrorMessage(By.className("notification"), "Successfully deleted");
 		elementNotPresent(By.linkText(name));
 	}
 	
