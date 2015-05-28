@@ -98,10 +98,10 @@ public class SmartMail extends Context {
 	public static void verifyStyleAttribute(String value, String attribute) {
 		
 		WebElement style = driverInstance.findElement(By.id("productInfoPreview"));
+		String actual = style.getAttribute(attribute).trim().toString();
 		
-		boolean attributeContent = style.getAttribute(attribute).toString().contains(value);
-		
-		Assert.assertTrue(attributeContent);
+	
+		Assert.assertEquals(value, actual);
 	}
 	
 	public static void verifyProductPosition(String position){
