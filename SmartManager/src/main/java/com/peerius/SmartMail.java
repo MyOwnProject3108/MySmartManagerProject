@@ -48,7 +48,6 @@ public class SmartMail extends Context {
 		Navigation.gotoURL("/smartmanager/mail/list.page");
 		elementIsPresent(By.linkText(campaign));
 		clickElement(By.xpath("//td/a[text()='"+campaign+"']//following::td//a[@data-original-title='Duplicate mail campaign']"));
-		Navigation.refreshPage();
 		elementIsPresent(By.linkText(campaign+" copy"));
 		
 	}
