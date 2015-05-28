@@ -194,7 +194,7 @@ public class StepDefinitions extends SmartMerchandising {
 	@Then("^I Should Verify \"(.*?)\"$")
 	public void i_Should_Verify(String position) throws Throwable {
 		
-		elementIsPresent(By.xpath("//li["+position+"]//div[contains(@class,'selected')]"));
+		elementIsPresent(By.xpath("//li["+position+"]//div[contains(@class,'rule')]/p"));
 
 	}
 	

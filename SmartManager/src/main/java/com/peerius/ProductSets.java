@@ -72,7 +72,6 @@ public class ProductSets extends Context {
 		Navigation
 				.gotoURL("/smartmanager/sku/selectedproductsets/list.page?smartproduct=merchandising");
 		elementIsPresent(By.linkText(name));
-		clickLink(name);
 		clickElement(By.xpath("//td/a[text()='" + name
 				+ "']//following::td[1]//div/a[contains(@class,'edit')]"));
 
@@ -84,8 +83,6 @@ public class ProductSets extends Context {
 				.gotoURL("/smartmanager/sku/selectedproductsets/list.page?smartproduct=merchandising");
 		elementIsPresent(By.linkText(name));
 		clickElement(By.xpath("//td/a[text()='" + name+ "']//following::td[1]//div/a[contains(@class,'duplicate')]"));
-		Navigation.refreshPage();
-		threadSleep(1000);
 		elementIsPresent(By.linkText(name+" copy"));
 
 	}
@@ -100,8 +97,7 @@ public class ProductSets extends Context {
 		clickElement(By.xpath("//td/a[text()='" + productSet
 				+ "']//following::td[1]//div/a[contains(@class,'delete')]"));
 		clickElement(By.xpath("//div[contains(@class,'yes')]"));
-		threadSleep(2000);
-		Navigation.refreshPage();
+		verifyErrorMessage(By.className("notification"), "Successfully deleted");
 		elementNotPresent(By.linkText(productSet));
 
 	}
