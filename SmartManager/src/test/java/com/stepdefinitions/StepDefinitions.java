@@ -456,7 +456,6 @@ public class StepDefinitions extends SmartMerchandising {
 		@Then("^I should see the HTML code for Styling$")
 		public void i_should_see_the_HTML_code_for_Styling() throws Throwable {
 		    
-			//elementIsPresent(By.xpath("//textarea[@id='htmlCode']"));
 			elementIsPresent(By.id("mail_config_advanced"));
 		}
 
