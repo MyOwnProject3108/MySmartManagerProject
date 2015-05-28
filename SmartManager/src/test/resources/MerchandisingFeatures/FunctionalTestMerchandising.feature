@@ -43,7 +43,7 @@ Feature: S-Merchandising
       | Campaign            | Position |
       | AutoCreatePosition1 | 1        |
       | AutoCreatePosition2 | 2        |
-      | AutoCreatePosition3 | 3        |
+
 
   @diffrules
   Scenario Outline: Different Rules At Different Positions
