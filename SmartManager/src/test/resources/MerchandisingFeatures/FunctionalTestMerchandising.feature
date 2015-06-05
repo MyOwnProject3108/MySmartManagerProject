@@ -134,13 +134,11 @@ Feature: S-Merchandising
     Given I Delete Campaign "AutoCreate"
     Given I Delete Campaign "AutoCreatePosition1"
     Given I Delete Campaign "AutoCreatePosition2"
-    Given I Delete Campaign "AutoCreatePosition3"
     Given I Delete Campaign "AutoCreateNoRule"
     Then I should not see "AutoCreate copy"
     Then I should not see "AutoCreate"
     Then I should not see "AutoCreatePosition1"
     Then I should not see "AutoCreatePosition2"
-    Then I should not see "AutoCreatePosition3"
     Then I should not see "AutoCreateNoRule"
 
   #Error validation starts here
