@@ -273,7 +273,9 @@ public class Context extends COREManager {
 	
 	public static void verifyInnerHTML(By elementlocator, String text) {
 		
-		WebElement innerHTML = driverInstance.findElement(elementlocator);
+
+    	WebElement innerHTML = new WebDriverWait(driverInstance, elementWaitTime)
+    .until(ExpectedConditions.visibilityOfElementLocated(elementlocator));
 		
 		boolean innerText =	innerHTML.getAttribute("innerHTML").contains(text);
 			
