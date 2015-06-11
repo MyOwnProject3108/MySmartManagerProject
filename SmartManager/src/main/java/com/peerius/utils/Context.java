@@ -217,10 +217,7 @@ public class Context extends COREManager {
        if (locator.isPresent()|locator.hasClass("error")|locator.hasClass("notification")|locator.hasClass("success")) {
               
               allText.add(locator.getElement().getAttribute("textContent"));    
-       
-              System.out.println(locator.getElement().getAttribute("textContent")+"\n"); 
-              
-              String exactText =allText.get(0).toString();
+              String exactText =allText.get(0).toString();            
               Assert.assertTrue(exactText.contains(errorMesage));
               
        }
