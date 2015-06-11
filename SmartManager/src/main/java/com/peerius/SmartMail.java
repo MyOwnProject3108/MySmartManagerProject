@@ -245,12 +245,14 @@ public class SmartMail extends Context {
 	}
 	
 	
+	
+	
 	public static void createESPConnection(String ESPname, String connectionName  ){
 	
 	setText(By.id("name"), connectionName);
 	
 	
-	if(ESPname.equalsIgnoreCase("SilverPop")){
+	if(ESPname.equalsIgnoreCase("Silverpop")){
 		
 			Credential.espUserLogin("silverpop");
 			selectDropList(By.name("esp"), "Silverpop");
@@ -278,8 +280,139 @@ public class SmartMail extends Context {
 		verifyErrorMessage(By.className("notifications"), "Successfully saved.");
 		elementIsPresent(By.xpath("//button[contains(@class,'btn-success disabled')]"));
 		}
+	
+	
+	
+	
+	public static void createESPAction(String actionName, String espConnection) {
+		setText(By.id("action-name"),actionName);
+		
+		if(espConnection.equalsIgnoreCase("ECircle")){
+			selectDropList(By.id("connection-name"), "ECircle");
+			clickButton("SEND_MESSAGE_TO_USER");
+			setText(By.name("Message ID"), "1800403818");
+		}
+		
+		if(espConnection.equalsIgnoreCase("SmartCast")){
+			selectDropList(By.id("connection-name"), "SmartCast");
+			clickButton("SEND_MESSAGE_TO_USER");
+			setText(By.name("Creative Name"), "74535_Abandon_201410v01");
+			setText(By.name("Template ID"), "116");
+			setText(By.name("List Category"), "74535 - Abandon Basket");
+		}
+		
+		if(espConnection.equalsIgnoreCase("Silverpop")){
+			selectDropList(By.id("connection-name"), "Silverpop");
+			clickButton("SEND_MESSAGE_TO_USER");
+			setText(By.name("listID"), "4066625");
+			setText(By.name("Message ID"), "4079469");
+				
+		}		
+		
+		setText(By.name("email_address"), "webtest@mailinator.com");
+		clickButton("Test ESP Action");
+		verifyErrorMessage(By.className("notification"), "Test passed successfully!");
+		elementIsPresent(By.xpath("//button[contains(@class,'btn-success')]"));
+		clickButton("Save ESP Action");
+		verifyErrorMessage(By.className("notification"), "Successfully saved");
+		elementIsPresent(By.xpath("//button[contains(@class,'btn-success disabled')]"));
 		
 	}
+	
+
+
+	public static void createESPTrigger(String triggername, String espActionName) {
+		setText(By.id("triggers_name"), triggername);
+		setText(By.className("input-small"), "5");
+		WebElement element =driverInstance.findElement(By.id("trigger_action_id"));
+		List<WebElement> options= element.findElements(By.tagName("option"));
+		for(WebElement option : options){
+			if(option.getText().equals(espActionName)){
+				option.click();
+			}
+			
+		}
+		dragAndDrop(By.id("available"), By.id("in-use"));
+		clickButton("Save ESP Action");
+		verifyPageText(By.className("triggers-target"), triggername);
+				
+	}
+
+
+	public static void verifyESPAction(String actionName) {
+		elementIsPresent(By.linkText(actionName));
+		
+		
+	}
+
+
+	public static void verifyESPConnection(String connectionName) {
+		elementIsPresent(By.linkText(connectionName));
+		
+	}
+
+
+	public static void createTestOnlyESPConnection(String connectionName,String ESPname) {
+		setText(By.id("name"), connectionName);
+		Credential.espUserLogin("ecircle");
+		selectDropList(By.id("esp"), "Teradata (ECircle)");
+		setText(By.id("realm"), "http://peerius.cust-mta.com");
+		clickButton("Test ESP Connection");
+		verifyErrorMessage(By.className("notifications"), "Test passed successfully!");
+		elementIsPresent(By.xpath("//button[contains(@class,'btn-success')]"));
+		
+	}
+
+
+	public static void gotoESPConnection(String connectionName) {
+		Navigation.gotoURL("smartmanager/mail/triggers.page");
+		clickButton("ESP Connections");
+		elementIsPresent(By.linkText(connectionName));
+		clickLink(connectionName);
+		
+	}
+
+
+	public static void editESPConnection(String connectionName) {
+		
+		Navigation.gotoURL("smartmanager/mail/triggers.page");
+		clickButton("ESP Connections");
+		elementIsPresent(By.linkText(connectionName));
+		clickElement(By.xpath("//ul/li[.='"+connectionName+"']/following-sibling::li/i[@data-original-title='Edit this item.']"));
+		elementIsPresent(By.xpath("//button[contains(@class,'btn btn-primary disabled')]"));
+		setText(By.id("name"), "AutoECircle");
+		clickButton("Test ESP Connection");
+		verifyErrorMessage(By.className("notifications"), "Test passed successfully!");
+		elementIsPresent(By.xpath("//button[contains(@class,'btn-success')]"));
+		clickButton("Save ESP Connection");
+		verifyErrorMessage(By.className("notifications"), "Successfully saved.");
+		elementIsPresent(By.xpath("//button[contains(@class,'btn-success disabled')]"));
+
+		
+	}
+
+
+	public static void deleteESPConnection(String connectionName) {
+		Navigation.gotoURL("smartmanager/mail/triggers.page");
+		clickButton("ESP Connections");
+		elementIsPresent(By.linkText(connectionName));
+		clickElement(By.xpath("//ul/li[.='"+connectionName+"']/following-sibling::li/i[@data-original-title='Delete this item.']"));
+		clickElement(By.xpath("//div[contains(@class, 'yes')]"));
+		verifyErrorMessage(By.className("notification"), "Successfully deleted");
+		elementNotPresent(By.linkText(connectionName));
+		
+		
+		
+	}
+	
+	
+		
+	}
+
+	
+
+		
+	
 
 	
 

@@ -1,5 +1,6 @@
 package com.peerius.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -208,20 +209,22 @@ public class Context extends COREManager {
 	}
 
 
-	public static void verifyErrorMessage(By by, String errorMesage) {
-		Locator locator = Locator.by(by);
-		
-	
-		if (locator.isPresent()|locator.hasClass("error")|locator.hasClass("notification")) {
-			
-		String exactText =locator.getElement().getAttribute("textContent");
-				
-		Boolean messageValid =	exactText.contains(errorMesage);
-		System.out.println(locator.getElement().getAttribute("textContent")+"\n");
-		Assert.assertTrue(messageValid);
-
-		} 
-	}
+    public static void verifyErrorMessage(By by, String errorMesage) {
+        Locator locator = Locator.by(by);
+            
+       ArrayList<String>  allText = new ArrayList<String>();
+                     
+       if (locator.isPresent()|locator.hasClass("error")|locator.hasClass("notification")|locator.hasClass("success")) {
+              
+              allText.add(locator.getElement().getAttribute("textContent"));    
+       
+              System.out.println(locator.getElement().getAttribute("textContent")+"\n"); 
+              
+              String exactText =allText.get(0).toString();
+              Assert.assertTrue(exactText.contains(errorMesage));
+              
+       }
+    }
 
 	public static void verifyPageText(By locator, String text) {
 		

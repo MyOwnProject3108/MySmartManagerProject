@@ -583,5 +583,54 @@ public class StepDefinitions extends SmartMerchandising {
 			SmartMail.createESPConnection(esp, connectionName);
 		
 		}
+		
+		@When("^I Create Action \"(.*?)\" for ESP \"(.*?)\"$")
+		public void i_Create_Action_for_ESP(String actionName, String connection) throws Throwable {
+		    SmartMail.createESPAction(actionName,connection);
+		}
+		
+			
+		@When("^I Create Trigger with name \"(.*?)\" for \"(.*?)\"$")
+		public void i_Create_Trigger_with_name_for(String triggername, String espActionName) throws Throwable {
+		   SmartMail.createESPTrigger(triggername,espActionName);
+		}
+		
+		@Then("^I Should See ESP Connection \"(.*?)\" on Mail Triggers Page$")
+		public void i_Should_See_ESP_Connection_on_Mail_Triggers_Page(String connectionName) throws Throwable {
+		    SmartMail.verifyESPConnection(connectionName);
+		}
+
+		
+		@Then("^I Should See ESP Action \"(.*?)\" on Mail Triggers Page$")
+		public void i_Should_See_ESP_Action_on_Mail_Triggers_Page(String actionName) throws Throwable {
+		    SmartMail.verifyESPAction(actionName);
+		}
+		
+		@When("^I Create Test Connection \"(.*?)\" for ESP \"(.*?)\"$")
+		public void i_Create_Test_Connection_for_ESP(String esp, String connectionName) throws Throwable {
+		  SmartMail.createTestOnlyESPConnection(esp,connectionName);
+		}
+
+		@Then("^I Should not See ESP Connection \"(.*?)\" on Mail Triggers Page$")
+		public void i_Should_not_See_ESP_Connection_on_Mail_Triggers_Page(String connectionName) throws Throwable {
+			elementNotPresent(By.linkText(connectionName));
+		}
+		
+		@Given("^I goto ESP Connection \"(.*?)\"$")
+		public void i_goto_ESP_Connection(String connectionName) throws Throwable {
+		    SmartMail.gotoESPConnection(connectionName);
+		}
+		
+		@Given("^I Edit ESP Connection \"(.*?)\"$")
+		public void i_Edit_ESP_Connection(String connectionName) throws Throwable {
+		    SmartMail.editESPConnection(connectionName);
+		}
+		
+		@Given("^I Delete ESP Connection \"(.*?)\"$")
+		public void i_Delete_ESP_Connection(String connectionName) throws Throwable {
+		    SmartMail.deleteESPConnection(connectionName);
+		}
+		
+
 
 }
