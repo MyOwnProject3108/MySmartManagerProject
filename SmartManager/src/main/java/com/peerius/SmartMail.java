@@ -314,7 +314,7 @@ public class SmartMail extends Context {
 		verifyErrorMessage(By.className("notification"), "Test passed successfully!");
 		elementIsPresent(By.xpath("//button[contains(@class,'btn-success')]"));
 		clickButton("Save ESP Action");
-		verifyErrorMessage(By.className("notification"), "Successfully saved");
+		verifyInnerHTML(By.tagName("div"), "Successfully saved.");
 		elementIsPresent(By.xpath("//button[contains(@class,'btn-success disabled')]"));
 		
 	}
