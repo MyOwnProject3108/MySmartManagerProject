@@ -434,6 +434,41 @@ public class SmartMail extends Context {
 	}
 
 
+	public static void oneESPConnection(String connectionName, String esp) {
+		setText(By.id("name"), connectionName);
+		Credential.espUserLogin("ecircle");
+		selectDropList(By.id("esp"), "Teradata (ECircle)");
+		setText(By.id("realm"), "http://peerius.cust-mta.com");
+		clickButton("Test ESP Connection");
+		verifyErrorMessage(By.className("notifications"), "Test passed successfully!");
+		elementIsPresent(By.xpath("//button[contains(@class,'btn-success')]"));
+		clickButton("Save ESP Connection");
+		verifyErrorMessage(By.className("notifications"), "Successfully saved.");
+		elementIsPresent(By.xpath("//button[contains(@class,'btn-success disabled')]"));
+				
+	}
+
+
+	public static void createTestOnlyESPAction(String actionName,String connection) {
+		setText(By.id("action-name"),actionName);
+		selectDropList(By.id("connection-name"), "ECircle");
+		clickButton("SEND_MESSAGE_TO_USER");
+		setText(By.name("Message ID"), "1800403818");
+		setText(By.name("email_address"), "webtest@mailinator.com");
+		clickButton("Test ESP Action");
+		verifyErrorMessage(By.className("notification"), "Test passed successfully!");
+		elementIsPresent(By.xpath("//button[contains(@class,'btn-success')]"));
+		
+		
+	}
+
+
+	public static void editESPAction(String actionName) {
+		
+		
+	}
+
+
 	
 	
 	

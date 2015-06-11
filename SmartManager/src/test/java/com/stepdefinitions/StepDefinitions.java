@@ -664,8 +664,27 @@ public class StepDefinitions extends SmartMerchandising {
 		public void i_Should_See_disabled_delete_button_for_ESP_Connection(String esp) throws Throwable {
 		   elementIsPresent(By.xpath("//ul/li[.='"+esp+"']/following-sibling::li//i[contains(@class,'disabled')]"));
 		}
+		
+		@When("^I Create New Connection \"(.*?)\" for ESP \"(.*?)\"$")
+		public void i_Create_New_Connection_for_ESP(String name, String esp) throws Throwable {
+		    SmartMail.oneESPConnection(name,esp);
+		}
 
+		@When("^I Create Test Action \"(.*?)\" for ESP \"(.*?)\"$")
+		public void i_Create_Test_Action_for_ESP(String actionName, String connection) throws Throwable {
+			SmartMail.createTestOnlyESPAction(actionName,connection);
+		}
 
+		@Then("^I Should not See ESP Action \"(.*?)\" on Mail Triggers Page$")
+		public void i_Should_not_See_ESP_Action_on_Mail_Triggers_Page(String ActionName) throws Throwable {
+			elementNotPresent(By.partialLinkText(ActionName));
+		}
+		
+		@Given("^I Edit ESP Action \"(.*?)\"$")
+		public void i_Edit_ESP_Action(String actionName) throws Throwable {
+		    SmartMail.editESPAction(actionName);
+		}
+		
 		
 		
 	/*	@Given("^I Do not Delete ESP Connection \"(.*?)\"$")
