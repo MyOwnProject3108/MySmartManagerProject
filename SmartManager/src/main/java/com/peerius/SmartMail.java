@@ -341,9 +341,7 @@ public class SmartMail extends Context {
 
 	public static void verifyESPAction(String actionName) {
 		elementIsPresent(By.linkText(actionName));
-		
-		
-	}
+		}
 
 
 	public static void verifyESPConnection(String connectionName) {
@@ -398,12 +396,45 @@ public class SmartMail extends Context {
 		elementIsPresent(By.linkText(connectionName));
 		clickElement(By.xpath("//ul/li[.='"+connectionName+"']/following-sibling::li/i[@data-original-title='Delete this item.']"));
 		clickElement(By.xpath("//div[contains(@class, 'yes')]"));
-		verifyErrorMessage(By.className("notification"), "Successfully deleted");
-		elementNotPresent(By.linkText(connectionName));
+		verifyErrorMessage(By.className("notification"), "Successfully deleted this item");
+	//	elementNotPresent(By.linkText(connectionName));
 		
 		
 		
 	}
+
+
+	public static void noDeleteESPConnection(String connectionName) {
+		elementIsPresent(By.linkText(connectionName));
+		clickElement(By.xpath("//ul/li[.='"+connectionName+"']/following-sibling::li/i[@data-original-title='Delete this item.']"));
+		clickElement(By.xpath("//div[contains(@class, 'no btn btn-secondary')]"));
+		elementIsPresent(By.linkText(connectionName));
+		
+	}
+
+
+	public static void deactiveESPConnection(String connectionName) {
+	 elementIsPresent(By.linkText(connectionName));
+	 clickElement(By.xpath("//ul/li[.='"+connectionName+"']/following-sibling::li//div[contains(@class, 'ibw btn-switcher on ui-switcher')]"));
+		
+	}
+
+
+	public static void activateESPConnection(String connectionName) {
+		elementIsPresent(By.linkText(connectionName));
+		clickElement(By.xpath("//ul/li[.='"+connectionName+"']/following-sibling::li//div[contains(@class, 'ibw btn-switcher off ui-switcher')]"));
+		
+	}
+
+
+	public static void clickEditConnection(String connectionName) {
+		elementIsPresent(By.linkText(connectionName));
+		clickElement(By.xpath("//ul/li[.='"+connectionName+"']/following-sibling::li/i[@data-original-title='Edit this item.']"));
+		
+	}
+
+
+	
 	
 	
 		

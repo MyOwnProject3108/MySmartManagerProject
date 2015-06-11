@@ -613,7 +613,10 @@ public class StepDefinitions extends SmartMerchandising {
 
 		@Then("^I Should not See ESP Connection \"(.*?)\" on Mail Triggers Page$")
 		public void i_Should_not_See_ESP_Connection_on_Mail_Triggers_Page(String connectionName) throws Throwable {
-			elementNotPresent(By.linkText(connectionName));
+		/*	Navigation.gotoURL("smartmanager/mail/triggers.page");
+			clickButton("ESP Connections");*/
+			//elementNotPresent(By.linkText(connectionName));
+			elementNotPresent(By.partialLinkText(connectionName));
 		}
 		
 		@Given("^I goto ESP Connection \"(.*?)\"$")
@@ -630,6 +633,45 @@ public class StepDefinitions extends SmartMerchandising {
 		public void i_Delete_ESP_Connection(String connectionName) throws Throwable {
 		    SmartMail.deleteESPConnection(connectionName);
 		}
+		
+		@When("^I click No for Delete ESP Connection \"(.*?)\"$")
+		public void i_click_No_for_Delete_ESP_Connection(String connectionName) throws Throwable {
+			SmartMail.noDeleteESPConnection(connectionName);
+		}
+		
+		@When("^I deactivate \"(.*?)\" ESP Connection$")
+		public void i_deactivate_ESP_Connection(String connectionName) throws Throwable {
+		   SmartMail.deactiveESPConnection(connectionName);
+		}
+
+	/*	@Then("^ESP Connection should be deactivated$")
+		public void esp_Connection_should_be_deactivated() throws Throwable {
+		   elementNotPresent(By.xpath("//ul/li[.='ECircle']/following-sibling::li//div[contains(@class, 'ibw btn-switcher off ui-switcher')]"));
+		}*/
+		
+		@When("^I activate \"(.*?)\" ESP Connection$")
+		public void i_activate_ESP_Connection(String connectionName) throws Throwable {
+		    SmartMail.activateESPConnection(connectionName);
+		}
+		
+		@When("^I click Edit button for \"(.*?)\" ESP Connection$")
+		public void i_click_Edit_button_for_ESP_Connection(String connectionName) throws Throwable {
+		 SmartMail.clickEditConnection(connectionName);
+		}
+		
+		
+		@Then("^I Should See disabled delete button for \"(.*?)\" ESP Connection$")
+		public void i_Should_See_disabled_delete_button_for_ESP_Connection(String esp) throws Throwable {
+		   elementIsPresent(By.xpath("//ul/li[.='"+esp+"']/following-sibling::li//i[contains(@class,'disabled')]"));
+		}
+
+
+		
+		
+	/*	@Given("^I Do not Delete ESP Connection \"(.*?)\"$")
+		public void i_Do_not_Delete_ESP_Connection(String connectionName) throws Throwable {
+		    SmartMail.noDeleteESPConnection(connectionName);
+		}*/
 		
 
 

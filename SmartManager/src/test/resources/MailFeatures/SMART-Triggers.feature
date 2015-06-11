@@ -51,8 +51,56 @@ Feature: SMART-Triggers Test
 	 Then I Should See ESP Connection "AutoECircle" on Mail Triggers Page
 	 
 	 @DeleteESPConnection
-	 Scenario: Edit ESP Connection
+	 Scenario: Delete ESP Connection
 	 Given I Delete ESP Connection "ECircle"
 	 Then I Should not See ESP Connection "ECircle" on Mail Triggers Page
+	 
+	 @NoDeleteESPConnection
+	 Scenario: Click No to Delete ESP Connection
+ 	 Given I click on "Triggers" option in "Mail"
+     Then I should be on Mail "Triggers" page
+     When click on button "ESP Connections"
+	 And I click No for Delete ESP Connection "ECircle"
+	 Then I Should See ESP Connection "ECircle" on Mail Triggers Page
+	 
+	 @DeactiveESPConnection
+	 Scenario: Deactive ESP Connection
+	 Given I click on "Triggers" option in "Mail"
+	 When click on button "ESP Connections"
+	 And I deactivate "ECircle" ESP Connection
+     Then I should see Message "Switched off"
+     
+     @ActivatedeactivatedESPConnection
+     Scenario: Activate a deactivated ESP Connection
+     Given I click on "Triggers" option in "Mail"
+	 When click on button "ESP Connections"
+	 And I activate "ECircle" ESP Connection
+     Then I should see Message "Switched on"
+     
+     @EditDeleteButtonConnection
+     Scenario: Verify delete button is disabled on Edit
+     Given I click on "Triggers" option in "Mail"
+	 When click on button "ESP Connections"
+	 And I click Edit button for "ECircle" ESP Connection 
+     Then I Should See disabled delete button for "ECircle" ESP Connection
+     
+     @NewDeleteButtonConnection
+     Scenario Outline: Verify delete button is disabled for new Connection
+       Given I click on "Triggers" option in "Mail"
+       When click on button "ESP Connections"
+       And click on button "Add an ESP connection"
+       And I Create Connection "<Name>" for ESP "<ESP>"
+       Then I Should See disabled delete button for "ECircle" ESP Connection
+       
+       Examples: Actions
+      | Name      | ESP       |
+      | ECircle   | ECircle   |
+       
+     
+     
+     
+	 
+	 
+     
 	 
 
