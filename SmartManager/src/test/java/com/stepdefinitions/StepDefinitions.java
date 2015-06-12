@@ -590,9 +590,12 @@ public class StepDefinitions extends SmartMerchandising {
 		}
 		
 			
-		@When("^I Create Trigger with name \"(.*?)\" for \"(.*?)\"$")
-		public void i_Create_Trigger_with_name_for(String triggername, String espActionName) throws Throwable {
-		   SmartMail.createESPTrigger(triggername,espActionName);
+/*		@When("^I Create Trigger with name \"(.*?)\" for \"(.*?)\"$")
+		public void i_Create_Trigger_with_name_for(String triggername, String espActionName) throws Throwable {*/
+		
+		@When("^I Create Trigger with name \"(.*?)\" for \"(.*?)\" from \"(.*?)\"$")
+		public void i_Create_Trigger_with_name_for_from(String triggername, String espActionName, String position) throws Throwable {
+		   SmartMail.createESPTrigger(triggername,espActionName,position);
 		}
 		
 		@Then("^I Should See ESP Connection \"(.*?)\" on Mail Triggers Page$")
@@ -665,10 +668,7 @@ public class StepDefinitions extends SmartMerchandising {
 		   elementIsPresent(By.xpath("//ul/li[.='"+esp+"']/following-sibling::li//i[contains(@class,'disabled')]"));
 		}
 		
-		@When("^I Create New Connection \"(.*?)\" for ESP \"(.*?)\"$")
-		public void i_Create_New_Connection_for_ESP(String name, String esp) throws Throwable {
-		    SmartMail.oneESPConnection(name,esp);
-		}
+
 
 		@When("^I Create Test Action \"(.*?)\" for ESP \"(.*?)\"$")
 		public void i_Create_Test_Action_for_ESP(String actionName, String connection) throws Throwable {
@@ -684,6 +684,38 @@ public class StepDefinitions extends SmartMerchandising {
 		public void i_Edit_ESP_Action(String actionName) throws Throwable {
 		    SmartMail.editESPAction(actionName);
 		}
+		
+		@Given("^I Delete ESP Action \"(.*?)\"$")
+		public void i_Delete_ESP_Action(String actionName) throws Throwable {
+		  SmartMail.deleteESPAction(actionName);
+		}
+		
+		@When("^I click No for Delete ESP Action \"(.*?)\"$")
+		public void i_click_No_for_Delete_ESP_Action(String actionName) throws Throwable {
+		    SmartMail.noDeleteESPAction(actionName);
+		}
+		
+		
+		@Given("^I goto ESP Actions on Mail Triggers Page$")
+		public void i_goto_ESP_Actions_on_Mail_Triggers_Page() throws Throwable {
+		    SmartMail.espActions();
+		}
+		
+		@Given("^I goto ESP Connections on Mail Triggers Page$")
+		public void i_goto_ESP_Connections_on_Mail_Triggers_Page() throws Throwable {
+		    SmartMail.espConnections();
+		}
+		
+		@Given("^I click Edit button for \"(.*?)\" ESP Action$")
+		public void i_click_Edit_button_for_ESP_Action(String actionName) throws Throwable {
+			SmartMail.clickEditAction(actionName);
+		}
+
+		@Then("^I Should See disabled delete button for \"(.*?)\" ESP Action$")
+		public void i_Should_See_disabled_delete_button_for_ESP_Action(String esp) throws Throwable {
+			  elementIsPresent(By.xpath("//ul/li[.='"+esp+"']/following-sibling::li//i[contains(@class,'disabled')]"));
+		}
+		
 		
 		
 		
