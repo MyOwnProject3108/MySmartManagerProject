@@ -3,15 +3,18 @@ package com.peerius;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
-import com.thoughtworks.selenium.webdriven.commands.ClickAt;
+
 
 
 
@@ -326,8 +329,8 @@ public class SmartMail extends Context {
 	
 
 
-	public static void createESPTrigger(String triggername, String espActionName, String position) {
-		setText(By.id("triggers_name"), triggername);
+	public static void createESPTrigger(String triggerName, String espActionName, String position) {
+		setText(By.id("triggers_name"), triggerName);
 		setText(By.xpath("//div[contains(@class, 'triggers_after_field')]/input"), "5");
 		
 		WebElement element =driverInstance.findElement(By.id("trigger_action_id"));
@@ -343,9 +346,10 @@ public class SmartMail extends Context {
 		threadSleep(2000);
 		elementIsPresent(By.xpath("//div[contains(@class, 'row cf')]/div/button[@data-original-title='Save this trigger campaign.']"));
 		clickButton("Save Trigger");
+//		threadSleep(2000);
 		elementIsPresent(By.className("notification"));
 		verifyInnerHTML(By.xpath("//div[@class='notifications']"), "Successfully saved.");
-		elementIsPresent(By.xpath("//div[contains(@class, 'triggers-target')]//li[contains(@class, 'item name')]/a[contains(text(), '"+triggername+"')]"));
+		elementIsPresent(By.xpath("//div[contains(@class, 'triggers-target')]//li[contains(@class, 'item name')]/a[contains(text(), '"+triggerName+"')]"));
 			
 	}
 	
@@ -403,7 +407,7 @@ public class SmartMail extends Context {
 		elementIsPresent(By.linkText(connectionName));
 		clickElement(By.xpath("//ul/li[.='"+connectionName+"']/following-sibling::li/i[@data-original-title='Edit this item.']"));
 		elementIsPresent(By.xpath("//button[contains(@class,'btn btn-primary disabled')]"));
-		setText(By.id("name"), "AutoECircle");
+		setText(By.id("name"), "AutoECircleConnection");
 		clickButton("Test ESP Connection");
 		verifyErrorMessage(By.className("notifications"), "Test passed successfully!");
 		elementIsPresent(By.xpath("//button[contains(@class,'btn-success')]"));
@@ -482,7 +486,7 @@ public class SmartMail extends Context {
 	//	clickElement(By.xpath("//ul/li[.='"+actionName+"']/following-sibling::li/i[@data-original-title='Edit this item.']"));
 		clickElement(By.xpath("//ul/li[.='"+actionName+"']/preceding::li[1]/i[@data-original-title='Edit this item.']"));
 		
-		setText(By.id("action-name"), "AutoTestAction");
+		setText(By.id("action-name"), "AutoECircleConnection");
 	   setText(By.name("email_address"), "webtest@mailinator.com");
 	   clickButton("Test ESP Action");
 	   verifyErrorMessage(By.className("notification"), "Test passed successfully!");
@@ -522,6 +526,56 @@ public class SmartMail extends Context {
 		elementIsPresent(By.linkText(actionName));
 		clickElement(By.xpath("//ul/li[.='"+actionName+"']/preceding::li[1]/i[@data-original-title='Edit this item.'])"));
 		
+	}
+
+
+	public static void editESPTrigger(String triggerName) {
+		Navigation.gotoURL("smartmanager/mail/triggers.page");
+		clickButton("ESP Triggers");
+		elementIsPresent(By.linkText(triggerName));
+		clickElement(By.xpath("//li[contains(@class, 'item name')]/a[contains(text(), '"+triggerName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-edit')]"));
+		setText(By.id("triggers_name"), "Edit Abandoned Browse");
+		elementIsPresent(By.xpath("//div[contains(@class, 'row cf')]/div/button[@data-original-title= 'Save this trigger campaign.']"));
+		clickButton("Save Trigger");
+		threadSleep(2000);
+		elementIsPresent(By.className("notification"));
+		verifyInnerHTML(By.xpath("//div[@class='notifications']"), "Successfully saved.");
+		
+	}
+
+
+	public static void verifyESPTrigger(String triggerName) {
+		elementIsPresent(By.xpath("//div[contains(@class, 'triggers-target')]//li[contains(@class, 'item name')]/a[contains(text(), '"+triggerName+"')]"));
+		
+	}
+
+
+	public static void deleteESPTrigger(String triggerName) {
+		Navigation.gotoURL("smartmanager/mail/triggers.page");
+		clickButton("ESP Triggers");
+		elementIsPresent(By.linkText(triggerName));
+		clickElement(By.xpath("//li[contains(@class,'item name')]/a[contains(text(),'"+triggerName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-delete')]"));
+		clickElement(By.xpath("//div[contains(@class, 'yes')]"));
+		threadSleep(2000);
+		verifyErrorMessage(By.className("modal-body"), "Successfully deleted this item.");
+	
+		
+	}
+
+
+	public static void espTriggers() {
+		Navigation.gotoURL("smartmanager/mail/triggers.page");
+		clickButton("ESP Triggers");
+		
+	}
+
+
+	public static void noDeleteESPTrigger(String triggerName) {
+		elementIsPresent(By.linkText(triggerName));
+		clickElement(By.xpath("//li[contains(@class,'item name')]/a[contains(text(),'"+triggerName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-delete')]"));
+		clickElement(By.xpath("//div[contains(@class, 'no btn btn-secondary')]"));
+		elementIsPresent(By.linkText(triggerName));
+				
 	}
 
 	

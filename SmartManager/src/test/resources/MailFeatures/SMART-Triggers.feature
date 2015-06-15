@@ -30,7 +30,7 @@ Feature: SMART-Triggers Test
   @EditESPConnection
   Scenario: Edit ESP Connection
     Given I Edit ESP Connection "ECircle"
-    Then I Should See ESP Connection "AutoECircle" on Mail Triggers Page
+    Then I Should See ESP Connection "AutoECircleConnection" on Mail Triggers Page
 
   @DeleteESPConnection
   Scenario: Delete ESP Connection
@@ -91,8 +91,8 @@ Feature: SMART-Triggers Test
 
   @EditESPAction
   Scenario: Edit ESP Action
-    Given I Edit ESP Action "SmartCast"
-    Then I Should See ESP Action "AutoECircle" on Mail Triggers Page
+    Given I Edit ESP Action "ECircle"
+    Then I Should See ESP Action "AutoECircleAction" on Mail Triggers Page
     
    @DeleteESPAction
    Scenario: Delete ESP Action
@@ -129,5 +129,20 @@ Feature: SMART-Triggers Test
       | TriggerName      | ESPAction | Position|
       | Abandoned Browse | ECircle   | 2       |
       | Abandoned Basket | SmartCast | 1       |
-    
+            
+   @EditESPTrigger
+   Scenario:  Edit ESP Trigger
+   Given I Edit ESP Trigger "Abandoned Browse"  
+   Then I Should See ESP Trigger "Edit Abandoned Browse" on Mail Triggers Page
+   
+   @DeleteESPTrigger
+   Scenario: Delete ESP Trigger
+   Given I Delete ESP Trigger "Abandoned Browse"
+   Then I Should not See ESP Trigger "Abandoned Browse" on Mail Triggers Page
+   
+  @NoDeleteESPTrigger
+  Scenario: Click No to Delete ESP Trigger
+	Given I goto ESP Triggers on Mail Triggers Page
+    And I click No for Delete ESP Trigger "Abandoned Browse"
+    Then I Should See ESP Trigger "Abandoned Browse" on Mail Triggers Page
     
