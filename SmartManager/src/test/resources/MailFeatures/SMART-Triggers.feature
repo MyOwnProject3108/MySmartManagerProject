@@ -23,7 +23,7 @@ Feature: SMART-Triggers Test
   @TestOnlyESPConnection
   Scenario: Create Test only ESP Connection
     Given I goto ESP Connections on Mail Triggers Page
-    And click on button "Add an ESP connection"
+   And click on button "Add an ESP connection"
     And I Create Test Connection "ECircleTest" for ESP "ECircle"
     Then I Should not See ESP Connection "ECircleTest" on Mail Triggers Page
 
@@ -34,8 +34,8 @@ Feature: SMART-Triggers Test
 
   @DeleteESPConnection
   Scenario: Delete ESP Connection
-    Given I Delete ESP Connection "ECircle"
-    Then I Should not See ESP Connection "ECircle" on Mail Triggers Page
+    Given I Delete ESP Connection "Silverpop"
+    Then I Should not See ESP Connection "Silverpop" on Mail Triggers Page
 
   @NoDeleteESPConnection
   Scenario: Click No to Delete ESP Connection
@@ -64,7 +64,7 @@ Feature: SMART-Triggers Test
   @NewDeleteButtonConnection
   Scenario: Verify delete button is disabled for new ESP Connection
     Given I goto ESP Connections on Mail Triggers Page
-    And click on button "Add an ESP connection"
+   And click on button "Add an ESP connection"
     And I Create Connection "ECircle" for ESP "ECircle"
     Then I Should See disabled delete button for "ECircle" ESP Connection
 
@@ -75,6 +75,7 @@ Feature: SMART-Triggers Test
     When click on button "ESP Actions"
     And click on button "Add an ESP Action"
     And I Create Action "<Name>" for ESP "<Connection>"
+    Then I Should See ESP Action "<Verification>" on Mail Triggers Page
 
     Examples: Actions
       | Name      | Connection | Verification|
@@ -114,7 +115,7 @@ Feature: SMART-Triggers Test
   @NewDeleteButtonAction
   Scenario: Verify delete button is disabled for new ESP Action
     Given I goto ESP Actions on Mail Triggers Page
-    And click on button "Add an ESP Action"
+   And click on button "Add an ESP Action"
 	And I Create Action "ECircle" for ESP "ECircle"
     Then I Should See disabled delete button for "ECircle" ESP Action
     
@@ -145,4 +146,30 @@ Feature: SMART-Triggers Test
 	Given I goto ESP Triggers on Mail Triggers Page
     And I click No for Delete ESP Trigger "Abandoned Browse"
     Then I Should See ESP Trigger "Abandoned Browse" on Mail Triggers Page
+    
+    
+  @ActivateESPTrigger
+  Scenario: Activate a deactivated ESP Trigger
+    Given I goto ESP Triggers on Mail Triggers Page
+    And I activate "Abandoned Basket" ESP Trigger
+    Then I should see Message "Switched on"
+    
+  @DeActivateESPTrigger
+  Scenario: Deactivate ESP Trigger
+    Given I goto ESP Triggers on Mail Triggers Page
+    And I deactivate "Abandoned Basket" ESP Trigger
+    Then I should see Message "Switched off"
+    
+  @EditDeleteButtonTrigger
+  Scenario: Verify delete button is disabled for Edit ESP Trigger
+	Given I goto ESP Triggers on Mail Triggers Page
+    And I click Edit button for "Abandoned Browse" ESP Trigger
+    Then I Should See disabled delete button for "Abandoned Browse" ESP Trigger
+    
+   @NewDeleteButtonTrigger
+  Scenario: Verify delete button is disabled for new ESP Trigger
+   Given I goto ESP Triggers on Mail Triggers Page
+   And click on button "Add a Trigger"
+   And I Create Trigger with name "AutoTrigger" for "ECircle" from "2"
+   Then I Should See disabled delete button for "AutoTrigger" ESP Trigger
     

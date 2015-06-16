@@ -589,10 +589,6 @@ public class StepDefinitions extends SmartMerchandising {
 		    SmartMail.createESPAction(actionName,connection);
 		}
 		
-			
-/*		@When("^I Create Trigger with name \"(.*?)\" for \"(.*?)\"$")
-		public void i_Create_Trigger_with_name_for(String triggername, String espActionName) throws Throwable {*/
-		
 		@When("^I Create Trigger with name \"(.*?)\" for \"(.*?)\" from \"(.*?)\"$")
 		public void i_Create_Trigger_with_name_for_from(String triggerName, String espActionName, String position) throws Throwable {
 		   SmartMail.createESPTrigger(triggerName,espActionName,position);
@@ -616,10 +612,8 @@ public class StepDefinitions extends SmartMerchandising {
 
 		@Then("^I Should not See ESP Connection \"(.*?)\" on Mail Triggers Page$")
 		public void i_Should_not_See_ESP_Connection_on_Mail_Triggers_Page(String connectionName) throws Throwable {
-		/*	Navigation.gotoURL("smartmanager/mail/triggers.page");
-			clickButton("ESP Connections");*/
-			//elementNotPresent(By.linkText(connectionName));
-			elementNotPresent(By.partialLinkText(connectionName));
+			elementNotPresent(By.xpath("//div[contains(@class, 'connections-target')]/ul/li[contains(@class, 'item name')]/a[contains(text(), '"+connectionName+"')]"));
+			
 		}
 		
 		@Given("^I goto ESP Connection \"(.*?)\"$")
@@ -646,11 +640,6 @@ public class StepDefinitions extends SmartMerchandising {
 		public void i_deactivate_ESP_Connection(String connectionName) throws Throwable {
 		   SmartMail.deactiveESPConnection(connectionName);
 		}
-
-	/*	@Then("^ESP Connection should be deactivated$")
-		public void esp_Connection_should_be_deactivated() throws Throwable {
-		   elementNotPresent(By.xpath("//ul/li[.='ECircle']/following-sibling::li//div[contains(@class, 'ibw btn-switcher off ui-switcher')]"));
-		}*/
 		
 		@When("^I activate \"(.*?)\" ESP Connection$")
 		public void i_activate_ESP_Connection(String connectionName) throws Throwable {
@@ -745,16 +734,27 @@ public class StepDefinitions extends SmartMerchandising {
 		public void i_click_No_for_Delete_ESP_Trigger(String triggerName) throws Throwable {
 		    SmartMail.noDeleteESPTrigger(triggerName);
 		}
+		
+		@Given("^I activate \"(.*?)\" ESP Trigger$")
+		public void i_activate_ESP_Trigger(String triggerName) throws Throwable {
+		    SmartMail.activateESPTrigger(triggerName);
+		}
+		
+		@Given("^I deactivate \"(.*?)\" ESP Trigger$")
+		public void i_deactivate_ESP_Trigger(String triggerName) throws Throwable {
+		   SmartMail.deactivateESPTrigger(triggerName);
+		}
+		
+		@Given("^I click Edit button for \"(.*?)\" ESP Trigger$")
+		public void i_click_Edit_button_for_ESP_Trigger(String triggerName) throws Throwable {
+		    SmartMail.clickEditTrigger(triggerName);
+		}
 
-		
-		
-		
-		
-	/*	@Given("^I Do not Delete ESP Connection \"(.*?)\"$")
-		public void i_Do_not_Delete_ESP_Connection(String connectionName) throws Throwable {
-		    SmartMail.noDeleteESPConnection(connectionName);
-		}*/
-		
+		@Then("^I Should See disabled delete button for \"(.*?)\" ESP Trigger$")
+		public void i_Should_See_disabled_delete_button_for_ESP_Trigger(String triggerName) throws Throwable {
+		  elementIsPresent(By.xpath("//div[contains(@class, 'triggers-target')]//ul/li/a[contains(text(), '"+triggerName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'disabled')]"));
+		  		    
+		}
 
 
 }

@@ -3,17 +3,15 @@ package com.peerius;
 
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
+
 
 
 
@@ -425,11 +423,9 @@ public class SmartMail extends Context {
 		elementIsPresent(By.linkText(connectionName));
 		clickElement(By.xpath("//ul/li[.='"+connectionName+"']/following-sibling::li/i[@data-original-title='Delete this item.']"));
 		clickElement(By.xpath("//div[contains(@class, 'yes')]"));
-		verifyErrorMessage(By.className("notification"), "Successfully deleted this item");
-	//	elementNotPresent(By.linkText(connectionName));
-		
-		
-		
+		threadSleep(2000);
+		verifyErrorMessage(By.className("modal-body"), "Successfully deleted this item.");
+			
 	}
 
 
@@ -576,6 +572,27 @@ public class SmartMail extends Context {
 		clickElement(By.xpath("//div[contains(@class, 'no btn btn-secondary')]"));
 		elementIsPresent(By.linkText(triggerName));
 				
+	}
+
+
+	public static void activateESPTrigger(String triggerName) {
+		elementIsPresent(By.linkText(triggerName));
+		clickElement(By.xpath("//div[contains(@class, 'triggers-target')]//ul/li[.='"+triggerName+"']/following-sibling::li//div[contains(@class, 'ibw btn-switcher off ui-switcher')]"));
+	
+	}
+
+
+	public static void deactivateESPTrigger(String triggerName) {
+		elementIsPresent(By.linkText(triggerName));
+		clickElement(By.xpath("//div[contains(@class, 'triggers-target')]//ul/li[.='"+triggerName+"']/following-sibling::li//div[contains(@class, 'ibw btn-switcher on ui-switcher')]"));
+		
+	}
+
+
+	public static void clickEditTrigger(String triggerName) {
+		elementIsPresent(By.linkText(triggerName));
+		clickElement(By.xpath("//li[contains(@class, 'item name')]/a[contains(text(), '"+triggerName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-edit')]"));
+		
 	}
 
 	
