@@ -61,6 +61,7 @@ public class SmartMerchandising extends Context {
 	}
 
 	public static void deleteCampaign(String name){
+		Navigation.gotoURL("/smartmanager/merchandising/list.page");
 		clickLink("Merchandising");
 		elementIsPresent(By.linkText(name));
 		clickElement(By.xpath("//td/a//small[text()='"+name+"']//following::td//a[@data-original-title='Delete']"));
@@ -84,8 +85,8 @@ public class SmartMerchandising extends Context {
 		Navigation.gotoURL("/smartmanager/merchandising/list.page");
 		elementIsPresent(By.linkText(campaign));
 		clickElement(By.xpath("//td/a//small[text()='"+campaign+"']//following::td//a[@data-original-title=' Activate it ']"));
-		Navigation.refreshPage();
-		elementIsPresent(By.xpath("//td//a[@data-original-title=' Pause it ']"));
+		verifyInnerHTML(By.tagName("div"), "Switched on");
+
 		
 	}
 	

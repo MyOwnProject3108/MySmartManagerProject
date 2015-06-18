@@ -23,8 +23,11 @@ Feature: End to End Tests for Merchandising
     Then I should see Rule "(r.pricerange="expensive")" in "5" Positions
     When I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10599547.html"
     Then I should see Rule "(r.pricerange="expensive")" in "0" Positions
+
+  @deleteE2EMaster
+  Scenario: Delete E2E Data
     Given I Delete Campaign "E2EMasterRule"
-    Then I should see Message "Successfully deleted"
+    Then I should not see "E2EMasterRule"
 
   @setupComplex
   Scenario Outline: End to End Test Set-up for Simple Rule alongwith AND Rule
@@ -47,8 +50,11 @@ Feature: End to End Tests for Merchandising
     Then I should see "producthorizontal" in the debug
     Then I should see Rule "(r.pricerange="expensive")" in "3" Positions
     And I should see Rule "(r.category="DVD" and r.saleprice<"6")" in "1" Positions
+
+  @deleteE2eComplex
+  Scenario: Delete E2E Data
     Given I Delete Campaign "E2EComplex"
-    Then I should see Message "Successfully deleted"
+    Then I should not see "E2EComplex"
 
   @setupproductset
   Scenario: Setup simple rule with productset for End-End scenario
@@ -68,9 +74,13 @@ Feature: End to End Tests for Merchandising
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641945.html"
     Then I should see "producthorizontal" in the debug
     Then I should see Rule "(r.productset="TestSetE2E")" in "2" Positions
+
+  @deleteProductSet
+  Scenario: Delete E2E Data
     Given I Delete Campaign "E2EProductSet"
-    Then I should see Message "Successfully deleted"
+    Then I should not see "E2EProductSet"
     Given I Delete Product Set "TestSetE2E"
+    Then I should not see "TestSetE2E"
 
   @setupABgroup
   Scenario: Activate AB group
@@ -89,6 +99,9 @@ Feature: End to End Tests for Merchandising
     Given I navigate to URL "http://showcase-dev.peerius.com/index.php/10035099.html"
     Then I should see "producthorizontal" in the debug
     Then I should see Rule "(r.saleprice<"10")" in "5" Positions
+
+  @deleteE2eABGroup
+  Scenario: Delete E2E Data
     Given I Delete Campaign "E2EAutoABCreate"
 
   @deactivateABgroup
@@ -101,4 +114,8 @@ Feature: End to End Tests for Merchandising
     Given I Create Simple Campaign with name "E2EAutoCreate1"
     And I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/accessories/10364791.html"
     Then I should see Rule "(r.pricerange="expensive")" in "0" Positions
+
+  @deleteInActiveCampaign
+  Scenario: Delete E2E Data
     Given I Delete Campaign "E2EAutoCreate1"
+    Then I should not see "E2EAutoCreate1"
