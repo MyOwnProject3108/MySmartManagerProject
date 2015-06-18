@@ -282,10 +282,12 @@ Feature: S-Merchandising
 
   @campaigndeletemsg
   Scenario: Success message validation for delete campaign
-    When I click on "Create a New Campaign" option in "Merchandising"
-    And I Create Simple Campaign with name "AutoCreateDelete"
-    Given I Delete Campaign "AutoCreateDelete"
-    Then I should see Message "Successfully deleted"
+   	Given I Create Simple Campaign with name "AutoCreateDelete"
+   	When I Delete Campaign "AutoCreateDelete"
+   	Then I should not see "AutoCreateDelete"
     Given I Delete Campaign "AutoCreateSuccess"
+    Then I should not see "AutoCreateSuccess"
     And I Delete Campaign "AutoCreate"
-    Then I should see Message "Successfully deleted"
+    Then I should not see "AutoCreate"
+    
+  

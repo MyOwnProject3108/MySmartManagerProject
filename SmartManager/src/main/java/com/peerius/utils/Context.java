@@ -306,8 +306,8 @@ public static void verifytextContent(By elementlocator, String text) {
 
 	public static void elementNotPresent(By locator) {
 	
-		boolean elementNotPresent = new WebDriverWait(driverInstance, 1)
-		.pollingEvery(2, TimeUnit.SECONDS)
+		boolean elementNotPresent = new WebDriverWait(driverInstance, 5)
+		.pollingEvery(1, TimeUnit.SECONDS)
 				.until(ExpectedConditions.invisibilityOfElementLocated(locator));
 				
 		Assert.assertTrue(elementNotPresent);

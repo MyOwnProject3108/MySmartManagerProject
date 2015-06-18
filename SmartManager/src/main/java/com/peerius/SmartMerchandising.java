@@ -61,8 +61,7 @@ public class SmartMerchandising extends Context {
 	}
 
 	public static void deleteCampaign(String name){
-		
-		Navigation.gotoURL("/smartmanager/merchandising/list.page");
+		clickLink("Merchandising");
 		elementIsPresent(By.linkText(name));
 		clickElement(By.xpath("//td/a//small[text()='"+name+"']//following::td//a[@data-original-title='Delete']"));
 		clickElement(By.xpath("//div[contains(@class,'yes')]"));
