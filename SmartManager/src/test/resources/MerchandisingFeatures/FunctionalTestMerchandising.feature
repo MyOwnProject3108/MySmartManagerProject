@@ -242,6 +242,7 @@ Feature: S-Merchandising
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
     And I click Edit On Product Set "TestSet"
     Then I click on link "Clear All Tags"
+    And click on button "Save Product set"
     Then I should see Message "An SKU set must have at least one valid product"
 
   @editProductSet
