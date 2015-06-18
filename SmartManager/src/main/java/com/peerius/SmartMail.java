@@ -154,6 +154,9 @@ public class SmartMail extends Context {
 		
 		WebElement imgHeight = driverInstance.findElement(By.xpath("//td[2]/a/img[@title='Just for you']"));
 		
+		//TODO	This does not make much sense logic needs to be check
+		//Passes with this Assert.assertEquals("300", imgHeight.getAttribute("height"));
+		
 		Assert.assertEquals("1", imgHeight.getAttribute("height"));
 		
 	}
@@ -167,7 +170,7 @@ public class SmartMail extends Context {
 	}
 	
 	public static void verifyDuplicatePosition(String position, String strategy, String ruleValue, String ruleText, String hintOption, String operator ) {
-		
+		//TODO Xpaths needs to be check
 		int number = Integer.parseInt(position);
 		
 		for(int i=1;i<=number;++i){
