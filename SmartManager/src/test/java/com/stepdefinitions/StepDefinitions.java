@@ -666,7 +666,8 @@ public class StepDefinitions extends SmartMerchandising {
 
 		@Then("^I Should not See ESP Action \"(.*?)\" on Mail Triggers Page$")
 		public void i_Should_not_See_ESP_Action_on_Mail_Triggers_Page(String ActionName) throws Throwable {
-			elementNotPresent(By.partialLinkText(ActionName));
+			elementNotPresent(By.xpath("//div[contains(@class, 'actions-target')]//ul/li[contains(@class, 'item name')]/a[contains(text(), '"+ActionName+"')]"));
+		
 		}
 		
 		@Given("^I Edit ESP Action \"(.*?)\"$")
@@ -702,7 +703,8 @@ public class StepDefinitions extends SmartMerchandising {
 
 		@Then("^I Should See disabled delete button for \"(.*?)\" ESP Action$")
 		public void i_Should_See_disabled_delete_button_for_ESP_Action(String esp) throws Throwable {
-			  elementIsPresent(By.xpath("//ul/li[.='"+esp+"']/following-sibling::li//i[contains(@class,'disabled')]"));
+			elementIsPresent(By.xpath("//div[contains(@class, 'actions-target')]//li/a[contains(text(), '"+esp+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'disabled')]"));
+			
 		}
 		
 		@Given("^I Edit ESP Trigger \"(.*?)\"$")

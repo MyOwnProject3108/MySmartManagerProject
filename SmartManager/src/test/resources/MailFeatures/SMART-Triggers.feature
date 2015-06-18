@@ -24,7 +24,7 @@ Feature: SMART-Triggers Test
   Scenario: Create Test only ESP Connection
     Given I goto ESP Connections on Mail Triggers Page
    And click on button "Add an ESP connection"
-    And I Create Test Connection "ECircleTest" for ESP "ECircle"
+    And I Create Test Connection "ECircleTest" for ESP "Teradata (ECircle)"
     Then I Should not See ESP Connection "ECircleTest" on Mail Triggers Page
 
   @EditESPConnection
