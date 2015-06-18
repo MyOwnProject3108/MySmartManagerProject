@@ -758,5 +758,103 @@ public class StepDefinitions extends SmartMerchandising {
 		  		    
 		}
 
+//		Ana's steps for error validations
+		
+		@When("^I create and save ESP connection without specifying Name$")
+		public void i_create_and_save_ESP_connection_without_specifying_Name() throws Throwable {
+		    
+			SmartMail.addConnectionNoName();
+		}
+		
+		@When("^I create and test ESP connection without specifying UserName$")
+		public void i_create_and_test_ESP_connection_without_specifying_UserName() throws Throwable {
+		    
+			SmartMail.addConnectionNoUserName();
+		}
+		
+		@When("^I create and test ESP connection specifying invalid UserName$")
+		public void i_create_and_test_ESP_connection_specifying_invalid_UserName() throws Throwable {
+		    
+			SmartMail.addConnectionInvalidUserName();
+		}
+		
+		@When("^I create and test ESP connection without specifying Realm$")
+		public void i_create_and_test_ESP_connection_without_specifying_Realm() throws Throwable {
+		    
+			SmartMail.addConnectionNoRealm();
+		}
+
+		@When("^I create and test ESP connection specifying invalid Realm$")
+		public void i_create_and_test_ESP_connection_specifying_invalid_Realm() throws Throwable {
+		    
+			SmartMail.addConnectionInvalidRealm();
+		}
+		
+		@When("^I create and test ESP connection without specifying Password$")
+		public void i_create_and_test_ESP_connection_without_specifying_Password() throws Throwable {
+		    
+			SmartMail.addConnectionNoPassword();
+		}
+
+		@When("^I create and test ESP connection specifying invalid Password$")
+		public void i_create_and_test_ESP_connection_specifying_invalid_Password() throws Throwable {
+		    
+			SmartMail.addConnectionInvalidPassword();
+		}
+
+		@When("^I create Action without specifying Name$")
+		public void i_create_Action_without_specifying_Name() throws Throwable {
+		    
+			SmartMail.addActionNoName();
+		}
+		
+		@When("^I select Connection from the dropdown$")
+		public void i_select_Connection_from_the_dropdown() throws Throwable {
+		    
+			selectDropList(By.id("connection-name"), "ECircle");
+		}
+
+		@Then("^I should see Action Types Menu$")
+		public void i_should_see_Action_Types_Menu() throws Throwable {
+		    
+			elementIsPresent(By.xpath("//div[@class='cf control-action-type']"));
+		}
+
+		@Given("^I Create and test Action \"(.*?)\" for \"(.*?)\"$")
+		public void i_Create_and_test_Action_for(String actionName, String connectionName) throws Throwable {
+		    
+			SmartMail.addActionInactiveConnection(actionName, connectionName);
+		}
+		
+		@When("^I add Action \"(.*?)\" to add new user for ESP \"(.*?)\"$")
+		public void i_add_Action_to_add_new_user_for_ESP(String actionName, String connectionName) throws Throwable {
+		    
+			SmartMail.addUserInvalidGroupID(actionName, connectionName);
+		}
+		
+		@When("^I add Action \"(.*?)\" to remove user for ESP \"(.*?)\"$")
+		public void i_add_Action_to_remove_user_for_ESP(String actionName, String connectionName) throws Throwable {
+		    
+			SmartMail.removeUserInvalidGroupID(actionName, connectionName);
+		}
+		
+		@When("^I add Action \"(.*?)\" to send message to user for ESP \"(.*?)\"$")
+		public void i_add_Action_to_send_message_to_user_for_ESP(String actionName, String connectionName) throws Throwable {
+		    
+			SmartMail.addActionInvalidMessageID(actionName, connectionName);
+		}
+		
+		@When("^I add a trigger for Action \"(.*?)\" without specifying name and mins of inactivity$")
+		public void i_add_a_trigger_for_Action_without_specifying_name_and_mins_of_inactivity(String espActionName) throws Throwable {
+		    
+			SmartMail.addTriggerNoNameAndMinOfInactivity(espActionName);
+		}
+		
+		@When("^I add a trigger \"(.*?)\" for Action \"(.*?)\" without specifying Criteria$")
+		public void i_add_a_trigger_for_Action_without_specifying_Criteria(String triggerName, String espActionName) throws Throwable {
+		    
+			SmartMail.addTriggerNoCriteria(triggerName, espActionName);
+		}
+		
 
 }

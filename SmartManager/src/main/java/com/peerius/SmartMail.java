@@ -593,7 +593,179 @@ public class SmartMail extends Context {
 		
 	}
 
+	//Ana's methods for error validations
 	
+		public static void addConnectionNoName()
+		
+		{
+			Credential.espUserLogin("ecircle");
+			selectDropList(By.id("esp"), "Teradata (ECircle)");
+			setText(By.id("realm"), "http://peerius.cust-mta.com");
+			clickButton("Test ESP Connection");
+			verifyErrorMessage(By.className("notifications"), "Test passed successfully!");
+			elementIsPresent(By.xpath("//button[contains(@class,'btn-success')]"));
+			clickButton("Save ESP Connection");
+			
+		}
+
+		public static void addConnectionNoUserName()
+		
+		{	
+			Credential.espUserLogin("ecircle");
+			setText(By.id("name"), "Test");
+			setText(By.id("username"), "");
+			selectDropList(By.id("esp"), "Teradata (ECircle)");
+			setText(By.id("realm"), "http://peerius.cust-mta.com");
+			clickButton("Test ESP Connection");
+			
+		}
+		
+		public static void addConnectionInvalidUserName()
+		
+		{	
+			Credential.espUserLogin("ecircle");
+			setText(By.id("name"), "Test");
+			setText(By.id("username"), "test");
+			selectDropList(By.id("esp"), "Teradata (ECircle)");
+			setText(By.id("realm"), "http://peerius.cust-mta.com");
+			clickButton("Test ESP Connection");
+			
+		}
+		
+		public static void addConnectionNoRealm()
+		{
+			Credential.espUserLogin("ecircle");
+			setText(By.id("name"), "Test");
+			selectDropList(By.id("esp"), "Teradata (ECircle)");
+			setText(By.id("realm"), "test");
+			clickButton("Test ESP Connection");
+		}
+		
+		public static void addConnectionInvalidRealm()
+		{
+			Credential.espUserLogin("ecircle");
+			setText(By.id("name"), "Test");
+			selectDropList(By.id("esp"), "Teradata (ECircle)");
+			clickButton("Test ESP Connection");
+		}
+		
+		public static void addConnectionNoPassword()
+		{
+			Credential.espUserLogin("ecircle");
+			setText(By.id("name"), "Test");
+			setText(By.id("password"), "");
+			selectDropList(By.id("esp"), "Teradata (ECircle)");
+			setText(By.id("realm"), "http://peerius.cust-mta.com");
+			clickButton("Test ESP Connection");
+		}
+		
+		public static void addConnectionInvalidPassword()
+		{
+			Credential.espUserLogin("ecircle");
+			setText(By.id("name"), "Test");
+			setText(By.id("password"), "test");
+			selectDropList(By.id("esp"), "Teradata (ECircle)");
+			setText(By.id("realm"), "http://peerius.cust-mta.com");
+			clickButton("Test ESP Connection");
+		}
+		
+		public static void addActionNoName()
+		
+		{
+			selectDropList(By.id("connection-name"), "ECircle");
+			clickButton("SEND_MESSAGE_TO_USER");
+			setText(By.name("Message ID"), "1800403818");
+			setText(By.name("email_address"), "webtest@mailinator.com");
+			clickButton("Test ESP Action");
+			verifyErrorMessage(By.className("notification"), "Test passed successfully!");
+			elementIsPresent(By.xpath("//button[contains(@class,'btn-success')]"));
+			clickButton("Save ESP Action");
+			
+		}
+		
+		public static void addActionInactiveConnection(String actionName, String connectionName)
+		
+		{
+			setText(By.id("action-name"),actionName);
+			selectDropList(By.id("connection-name"), connectionName);
+			clickButton("SEND_MESSAGE_TO_USER");
+			setText(By.name("Message ID"), "1800403818");
+			setText(By.name("email_address"), "webtest@mailinator.com");
+			clickButton("Test ESP Action");
+		
+		}
+		
+		
+		public static void addUserInvalidGroupID(String actionName, String connectionName)
+		
+		{
+			setText(By.id("action-name"),actionName);
+			selectDropList(By.id("connection-name"), connectionName);
+			clickButton("ADD_USER_TO_GROUP");
+			setText(By.name("Group ID"), "1800403818");
+			setText(By.name("email_address"), "webtest@mailinator.com");
+			clickButton("Test ESP Action");
+		
+		}
+		
+		public static void removeUserInvalidGroupID(String actionName, String connectionName)
+		
+		{
+			setText(By.id("action-name"),actionName);
+			selectDropList(By.id("connection-name"), connectionName);
+			clickButton("REMOVE_USER_FROM_GROUP");
+			setText(By.name("Group ID"), "1800403818");
+			setText(By.name("email_address"), "webtest@mailinator.com");
+			clickButton("Test ESP Action");
+		
+		}
+		
+		public static void addActionInvalidMessageID(String actionName, String connectionName)
+		
+		{
+			setText(By.id("action-name"),actionName);
+			selectDropList(By.id("connection-name"), connectionName);
+			clickButton("SEND_MESSAGE_TO_USER");
+			setText(By.name("Message ID"), "123");
+			setText(By.name("email_address"), "webtest@mailinator.com");
+			clickButton("Test ESP Action");
+			
+		}
+		
+		public static void addTriggerNoNameAndMinOfInactivity(String espActionName)
+		
+		{
+			WebElement element =driverInstance.findElement(By.id("trigger_action_id"));
+			List<WebElement> options= element.findElements(By.tagName("option"));
+			for(WebElement option : options){
+				if(option.getText().equals(espActionName)){
+					option.click();
+				}
+				
+			}
+			dragAndDrop(By.id("available"), By.id("in-use"));
+			clickButton("Save Trigger");
+			
+		}
+		
+			public static void addTriggerNoCriteria(String triggerName,String espActionName)
+			{
+				setText(By.id("triggers_name"), triggerName);
+				setText(By.xpath("//div[contains(@class, 'triggers_after_field')]/input"), "5");
+				WebElement element =driverInstance.findElement(By.id("trigger_action_id"));
+				List<WebElement> options= element.findElements(By.tagName("option"));
+				for(WebElement option : options){
+					if(option.getText().equals(espActionName)){
+						option.click();
+					}
+					
+				}
+				
+				clickButton("Save Trigger");
+				
+			}
+		
+		
 		
 	}
 
