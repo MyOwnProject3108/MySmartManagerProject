@@ -22,11 +22,10 @@ Feature: SMART-Triggers Test
 
   @TestOnlyESPConnection
   Scenario: Create Test only ESP Connection
-    Given I goto ESP Connections on Mail Triggers Page
-	Given click on button "ESP Connections"
+   Given click on button "ESP Connections"
    And click on button "Add an ESP connection"
-    And I Create Test Connection "ECircleTest" for ESP "Teradata (ECircle)"
-    Then I Should not See ESP Connection "ECircleTest" on Mail Triggers Page
+   And I Create Test Connection "ECircleTest" for ESP "Teradata (ECircle)"
+   Then I Should not See ESP Connection "ECircleTest" on Mail Triggers Page
 
   @EditESPConnection
   Scenario: Edit ESP Connection
@@ -294,8 +293,8 @@ Feature: SMART-Triggers Test
     Then I should see Message "<Message>"
 
     Examples: Validation Messages
-      | Name    | Message                                                                                                                                                              |
-      |         | Please provide a name for your new Trigger.                                                                                                                          |
+      | Name    | Message                                         |                                                                                                                     |
+      |         | Please provide a name for your new Trigger.     |                                                                                                                     |
       | ECircle | Please provide the number of inactivity minutes.|
       
   @Triggers_criteriaMandatory

@@ -377,8 +377,6 @@ public class SmartMail extends Context {
 	
 
 	public static void gotoESPConnection(String connectionName) {
-		Navigation.gotoURL("smartmanager/mail/triggers.page");
-		clickButton("ESP Connections");
 		elementIsPresent(By.linkText(connectionName));
 		clickLink(connectionName);
 		
