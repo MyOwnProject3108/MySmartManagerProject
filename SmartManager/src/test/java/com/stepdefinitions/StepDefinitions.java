@@ -631,8 +631,8 @@ public class StepDefinitions extends SmartMerchandising {
 		    SmartMail.deleteESPConnection(connectionName);
 		}
 		
-		@When("^I click No for Delete ESP Connection \"(.*?)\"$")
-		public void i_click_No_for_Delete_ESP_Connection(String connectionName) throws Throwable {
+		@When("^I click No to Delete ESP Connection \"(.*?)\"$")
+		public void i_click_No_to_Delete_ESP_Connection(String connectionName) throws Throwable {
 			SmartMail.noDeleteESPConnection(connectionName);
 		}
 		
@@ -680,21 +680,11 @@ public class StepDefinitions extends SmartMerchandising {
 		  SmartMail.deleteESPAction(actionName);
 		}
 		
-		@When("^I click No for Delete ESP Action \"(.*?)\"$")
-		public void i_click_No_for_Delete_ESP_Action(String actionName) throws Throwable {
+		@When("^I click No to Delete ESP Action \"(.*?)\"$")
+		public void i_click_No_to_Delete_ESP_Action(String actionName) throws Throwable {
 		    SmartMail.noDeleteESPAction(actionName);
 		}
 		
-		
-		@Given("^I goto ESP Actions on Mail Triggers Page$")
-		public void i_goto_ESP_Actions_on_Mail_Triggers_Page() throws Throwable {
-		    SmartMail.espActions();
-		}
-		
-		@Given("^I goto ESP Connections on Mail Triggers Page$")
-		public void i_goto_ESP_Connections_on_Mail_Triggers_Page() throws Throwable {
-		    SmartMail.espConnections();
-		}
 		
 		@Given("^I click Edit button for \"(.*?)\" ESP Action$")
 		public void i_click_Edit_button_for_ESP_Action(String actionName) throws Throwable {
@@ -727,13 +717,9 @@ public class StepDefinitions extends SmartMerchandising {
 			elementNotPresent(By.xpath("//div[contains(@class, 'triggers-target')]//ul/li[contains(@class, 'item name')]/a[contains(text(), '"+triggerName+"')]"));
 		}
 		
-		@Given("^I goto ESP Triggers on Mail Triggers Page$")
-		public void i_goto_ESP_Triggers_on_Mail_Triggers_Page() throws Throwable {
-		   SmartMail.espTriggers();
-		}
-
-		@Given("^I click No for Delete ESP Trigger \"(.*?)\"$")
-		public void i_click_No_for_Delete_ESP_Trigger(String triggerName) throws Throwable {
+	
+		@Given("^I click No to Delete ESP Trigger \"(.*?)\"$")
+		public void i_click_No_to_Delete_ESP_Trigger(String triggerName) throws Throwable {
 		    SmartMail.noDeleteESPTrigger(triggerName);
 		}
 		

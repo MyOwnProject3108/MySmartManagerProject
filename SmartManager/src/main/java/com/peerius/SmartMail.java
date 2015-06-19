@@ -350,21 +350,6 @@ public class SmartMail extends Context {
 			
 	}
 	
-	
-	public static void espActions() {
-		Navigation.gotoURL("smartmanager/mail/triggers.page");
-		clickButton("ESP Actions");
-		
-	}
-
-
-	public static void espConnections() {
-		Navigation.gotoURL("smartmanager/mail/triggers.page");
-		clickButton("ESP Connections");
-		
-	}
-
-
 	public static void verifyESPAction(String actionName) {
 			elementIsPresent(By.linkText(actionName));
 		}
@@ -398,9 +383,6 @@ public class SmartMail extends Context {
 
 
 	public static void editESPConnection(String connectionName) {
-		
-		Navigation.gotoURL("smartmanager/mail/triggers.page");
-		clickButton("ESP Connections");
 		elementIsPresent(By.linkText(connectionName));
 		clickElement(By.xpath("//ul/li[.='"+connectionName+"']/following-sibling::li/i[@data-original-title='Edit this item.']"));
 		elementIsPresent(By.xpath("//button[contains(@class,'btn btn-primary disabled')]"));
@@ -417,8 +399,6 @@ public class SmartMail extends Context {
 
 
 	public static void deleteESPConnection(String connectionName) {
-		Navigation.gotoURL("smartmanager/mail/triggers.page");
-		clickButton("ESP Connections");
 		elementIsPresent(By.linkText(connectionName));
 		clickElement(By.xpath("//ul/li[.='"+connectionName+"']/following-sibling::li/i[@data-original-title='Delete this item.']"));
 		clickElement(By.xpath("//div[contains(@class, 'yes')]"));
@@ -474,11 +454,8 @@ public class SmartMail extends Context {
 
 
 	public static void editESPAction(String actionName) {
-		Navigation.gotoURL("smartmanager/mail/triggers.page");
-		clickButton("ESP Actions");
 		elementIsPresent(By.linkText(actionName));
 		clickElement(By.xpath("//div[contains(@class, 'actions-target')]//li[contains(@class, 'item name')]/a[contains(text(), '"+actionName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-edit')]"));
-			
 		setText(By.id("action-name"), "AutoECircleAction");
 	   setText(By.name("email_address"), "webtest@mailinator.com");
 	   clickButton("Test ESP Action");
@@ -495,8 +472,6 @@ public class SmartMail extends Context {
 
 
 	public static void deleteESPAction(String actionName) {
-		Navigation.gotoURL("smartmanager/mail/triggers.page");
-		clickButton("ESP Actions");
 		elementIsPresent(By.linkText(actionName));
 		clickElement(By.xpath("//div[contains(@class, 'actions-target')]//li[contains(@class, 'item name')]/a[contains(text(), '"+actionName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-delete')]"));
 		clickElement(By.xpath("//div[contains(@class, 'yes')]"));
@@ -524,8 +499,6 @@ public class SmartMail extends Context {
 
 
 	public static void editESPTrigger(String triggerName) {
-		Navigation.gotoURL("smartmanager/mail/triggers.page");
-		clickButton("ESP Triggers");
 		elementIsPresent(By.linkText(triggerName));
 		clickElement(By.xpath("//li[contains(@class, 'item name')]/a[contains(text(), '"+triggerName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-edit')]"));
 		setText(By.id("triggers_name"), "Edit Abandoned Browse");
@@ -545,21 +518,12 @@ public class SmartMail extends Context {
 
 
 	public static void deleteESPTrigger(String triggerName) {
-		Navigation.gotoURL("smartmanager/mail/triggers.page");
-		clickButton("ESP Triggers");
 		elementIsPresent(By.linkText(triggerName));
 		clickElement(By.xpath("//li[contains(@class,'item name')]/a[contains(text(),'"+triggerName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-delete')]"));
 		clickElement(By.xpath("//div[contains(@class, 'yes')]"));
 		threadSleep(2000);
 		verifyErrorMessage(By.className("modal-body"), "Successfully deleted this item.");
 	
-		
-	}
-
-
-	public static void espTriggers() {
-		Navigation.gotoURL("smartmanager/mail/triggers.page");
-		clickButton("ESP Triggers");
 		
 	}
 
