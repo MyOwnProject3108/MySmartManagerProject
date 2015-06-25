@@ -23,8 +23,6 @@ public class TestHook {
 		Navigation.gotoLoginPage();
 		COREManager.addCookie("'peerius_pass_peeriusdebug", "1");
 		Context.javaScriptExe("document.cookie='peerius_pass_peeriusdebug=1; expires=Sat, 1 Jan 2050 12:00:00 UTC'; path=/';");
-		Navigation.refreshPage();
-		
 		COREManager.maximize();
 
 	}

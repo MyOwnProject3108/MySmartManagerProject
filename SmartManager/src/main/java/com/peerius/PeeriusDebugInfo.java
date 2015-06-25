@@ -14,6 +14,8 @@ public class PeeriusDebugInfo extends Context {
 	
 	public static void verifyRule(String rule, String positions){
 	int number = Integer.parseInt(positions);
+	addCookie("'peerius_pass_peeriusdebug", "1");
+	Navigation.refreshPage();
 			try{
 				List<WebElement> rulePositions =driverInstance.findElements(By.xpath("//tr[contains(.,'Rules')]//td[contains(text(),'Product matched rule \""+rule+"')]"));
 			int size = rulePositions.size();
@@ -34,6 +36,10 @@ public class PeeriusDebugInfo extends Context {
 	
 	
 	public static void verifyStrategy(String strategy, String positions){
+		
+		addCookie("'peerius_pass_peeriusdebug", "1");
+		Navigation.refreshPage();
+		
 		int number = Integer.parseInt(positions);
 		try{
 			List<WebElement> strategyPositions =driverInstance.findElements(By.xpath(" //tr[contains(.,'GeneratioStrategy')]//td[contains(.,'"+strategy+"')]"));
@@ -54,6 +60,9 @@ public class PeeriusDebugInfo extends Context {
 	
 	
 	public static void verifyDebugHint(String hint) {
+		
+		addCookie("'peerius_pass_peeriusdebug", "1");
+		Navigation.refreshPage();
 			
 		try{
 			WebElement singleElement =driverInstance.findElement(By.xpath("//*[@class='peeriusSkipped']//td[text()]"));
@@ -69,6 +78,9 @@ public class PeeriusDebugInfo extends Context {
 	
 	
 	public static void verifyComplexRule(String rule, String positions){
+		
+		addCookie("'peerius_pass_peeriusdebug", "1");
+		Navigation.refreshPage();
 		
 	List<WebElement> rulePositions =driverInstance.findElements(By.xpath(" //tr[contains(.,'Rules')]//td"));
 		
