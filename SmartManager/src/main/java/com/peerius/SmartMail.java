@@ -353,10 +353,6 @@ public class SmartMail extends Context {
 			
 	}
 	
-	public static void verifyESPAction(String actionName) {
-			elementIsPresent(By.linkText(actionName));
-		}
-
 
 	public static void verifyESPConnection(String connectionName) {
 		elementIsPresent(By.linkText(connectionName));
@@ -456,7 +452,7 @@ public class SmartMail extends Context {
 
 	public static void editESPAction(String actionName) {
 		elementIsPresent(By.linkText(actionName));
-		clickElement(By.xpath("//div[contains(@class, 'actions-target')]//li[contains(@class, 'item name')]/a[contains(text(), '"+actionName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-edit')]"));
+		clickElement(By.xpath("//div[contains(@class, 'actions-target')]//li//a[contains(text(), '"+actionName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-edit')]"));
 		setText(By.id("action-name"), "AutoECircleAction");
 	   setText(By.name("email_address"), "webtest@mailinator.com");
 	   clickButton("Test ESP Action");
@@ -474,7 +470,7 @@ public class SmartMail extends Context {
 
 	public static void deleteESPAction(String actionName) {
 		elementIsPresent(By.linkText(actionName));
-		clickElement(By.xpath("//div[contains(@class, 'actions-target')]//li[contains(@class, 'item name')]/a[contains(text(), '"+actionName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-delete')]"));
+		clickElement(By.xpath("//div[contains(@class, 'actions-target')]//li//a[contains(text(), '"+actionName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-delete')]"));
 		clickElement(By.xpath("//div[contains(@class, 'yes')]"));
 		threadSleep(2000);
 		verifyErrorMessage(By.className("modal-body"), "Successfully deleted this item.");
@@ -485,7 +481,7 @@ public class SmartMail extends Context {
 
 	public static void noDeleteESPAction(String actionName) {
 		elementIsPresent(By.linkText(actionName));
-		clickElement(By.xpath("//div[contains(@class, 'actions-target')]//li[contains(@class, 'item name')]/a[contains(text(), '"+actionName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-delete')]"));
+		clickElement(By.xpath("//div[contains(@class, 'actions-target')]//li//a[contains(text(), '"+actionName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-delete')]"));
 		clickElement(By.xpath("//div[contains(@class, 'no btn btn-secondary')]"));
 		elementIsPresent(By.linkText(actionName));
 		
@@ -494,7 +490,7 @@ public class SmartMail extends Context {
 
 	public static void clickEditAction(String actionName) {
 		elementIsPresent(By.linkText(actionName));
-		clickElement(By.xpath("//div[contains(@class, 'actions-target')]//li[contains(@class, 'item name')]/a[contains(text(), '"+actionName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-edit')]"));
+		clickElement(By.xpath("//div[contains(@class, 'actions-target')]//li//a[contains(text(), '"+actionName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-edit')]"));
 				
 	}
 
@@ -513,7 +509,7 @@ public class SmartMail extends Context {
 
 
 	public static void verifyESPTrigger(String triggerName) {
-		elementIsPresent(By.xpath("//div[contains(@class, 'triggers-target')]//li[contains(@class, 'item name')]/a[contains(text(), '"+triggerName+"')]"));
+		elementIsPresent(By.xpath("//div[contains(@class, 'triggers-target')]//li//a[contains(text(), '"+triggerName+"')]"));
 		
 	}
 

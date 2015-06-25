@@ -594,13 +594,13 @@ public class StepDefinitions extends SmartMerchandising {
 		
 		@Then("^I Should See ESP Connection \"(.*?)\" on Mail Triggers Page$")
 		public void i_Should_See_ESP_Connection_on_Mail_Triggers_Page(String connectionName) throws Throwable {
-		    SmartMail.verifyESPConnection(connectionName);
+			elementIsPresent(By.linkText(connectionName));
 		}
 
 		
 		@Then("^I Should See ESP Action \"(.*?)\" on Mail Triggers Page$")
 		public void i_Should_See_ESP_Action_on_Mail_Triggers_Page(String actionName) throws Throwable {
-		    SmartMail.verifyESPAction(actionName);
+			elementIsPresent(By.linkText(actionName));
 		}
 		
 		@When("^I Create Test Connection \"(.*?)\" for ESP \"(.*?)\"$")
@@ -610,7 +610,7 @@ public class StepDefinitions extends SmartMerchandising {
 
 		@Then("^I Should not See ESP Connection \"(.*?)\" on Mail Triggers Page$")
 		public void i_Should_not_See_ESP_Connection_on_Mail_Triggers_Page(String connectionName) throws Throwable {
-			elementNotPresent(By.xpath("//div[contains(@class, 'connections-target')]/ul/li[contains(@class, 'item name')]/a[contains(text(), '"+connectionName+"')]"));
+			elementNotPresent(By.xpath("//ul/li//a[contains(text(), '"+connectionName+"')]"));
 			
 		}
 		
@@ -710,7 +710,7 @@ public class StepDefinitions extends SmartMerchandising {
 		
 		@Then("^I Should not See ESP Trigger \"(.*?)\" on Mail Triggers Page$")
 		public void i_Should_not_See_ESP_Trigger_on_Mail_Triggers_Page(String triggerName) throws Throwable {
-			elementNotPresent(By.xpath("//div[contains(@class, 'triggers-target')]//ul/li[contains(@class, 'item name')]/a[contains(text(), '"+triggerName+"')]"));
+			elementNotPresent(By.xpath("//ul/li//a[contains(text(), '"+triggerName+"')]"));
 		}
 		
 	
@@ -736,7 +736,7 @@ public class StepDefinitions extends SmartMerchandising {
 
 		@Then("^I Should See disabled delete button for \"(.*?)\" ESP Trigger$")
 		public void i_Should_See_disabled_delete_button_for_ESP_Trigger(String triggerName) throws Throwable {
-		  elementIsPresent(By.xpath("//div[contains(@class, 'triggers-target')]//ul/li/a[contains(text(), '"+triggerName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'disabled')]"));
+		  elementIsPresent(By.xpath("//ul/li/a[contains(text(), '"+triggerName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'disabled')]"));
 		  		    
 		}
 
