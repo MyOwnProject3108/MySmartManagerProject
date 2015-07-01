@@ -664,7 +664,7 @@ public class StepDefinitions extends SmartMerchandising {
 
 		@Then("^I Should not See ESP Action \"(.*?)\" on Mail Triggers Page$")
 		public void i_Should_not_See_ESP_Action_on_Mail_Triggers_Page(String ActionName) throws Throwable {
-			elementNotPresent(By.partialLinkText(ActionName));
+			elementNotPresent(By.xpath("//div[contains(@class, 'actions-target')]//li/a[contains(text(), '"+ActionName+"')]"));
 		}
 		
 		@Given("^I Edit ESP Action \"(.*?)\"$")

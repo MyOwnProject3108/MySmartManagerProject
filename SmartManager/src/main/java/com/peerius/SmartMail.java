@@ -296,13 +296,13 @@ public class SmartMail extends Context {
 		
 		if(espConnection.equalsIgnoreCase("ECircle")){
 			selectDropList(By.id("connection-name"), "ECircle");
-			clickButton("SEND_MESSAGE_TO_USER");
+			clickButton("Send message");
 			setText(By.name("Message ID"), "1800403818");
 		}
 		
 		if(espConnection.equalsIgnoreCase("SmartCast")){
 			selectDropList(By.id("connection-name"), "SmartCast");
-			clickButton("SEND_MESSAGE_TO_USER");
+			clickButton("Send message");
 			setText(By.name("Creative Name"), "74535_Abandon_201410v01");
 			setText(By.name("Template ID"), "116");
 			setText(By.name("List Category"), "74535 - Abandon Basket");
@@ -310,7 +310,7 @@ public class SmartMail extends Context {
 		
 		if(espConnection.equalsIgnoreCase("Silverpop")){
 			selectDropList(By.id("connection-name"), "Silverpop");
-			clickButton("SEND_MESSAGE_TO_USER");
+			clickButton("Send message");
 			setText(By.name("listID"), "4066625");
 			setText(By.name("Message ID"), "4079469");
 				
@@ -439,7 +439,7 @@ public class SmartMail extends Context {
 	public static void createTestOnlyESPAction(String actionName,String connection) {
 		setText(By.id("action-name"),actionName);
 		selectDropList(By.id("connection-name"), connection);
-		clickButton("SEND_MESSAGE_TO_USER");
+		clickButton("Send message");
 		setText(By.name("Message ID"), "1800403818");
 		setText(By.name("email_address"), "webtest@mailinator.com");
 		clickButton("Test ESP Action");
