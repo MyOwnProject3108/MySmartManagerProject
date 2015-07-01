@@ -314,7 +314,13 @@ public class SmartMail extends Context {
 			setText(By.name("listID"), "4066625");
 			setText(By.name("Message ID"), "4079469");
 				
-		}		
+		}
+		
+		if(espConnection.equalsIgnoreCase("E2EConnection")){
+			selectDropList(By.id("connection-name"), "E2EConnection");
+			clickButton("Send message");
+			setText(By.name("Message ID"), "1800403818");
+		}
 		
 		setText(By.name("email_address"), "webtest@mailinator.com");
 		clickButton("Test ESP Action");
