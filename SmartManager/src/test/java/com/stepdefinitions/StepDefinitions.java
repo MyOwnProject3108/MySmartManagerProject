@@ -740,5 +740,57 @@ public class StepDefinitions extends SmartMerchandising {
 		  		    
 		}
 
+		//Ana's new step definitions
+		
+		@Given("^I set data for new \"(.*?)\"$")
+		public void i_set_data_for_new(String element) throws Throwable {
+				    
+			SmartMail.setDataForValidations(element);
+		}
+
+		@Given("^I set \"(.*?)\" field as \"(.*?)\"$")
+		public void i_set_field_as(String field, String value) throws Throwable {
+		  
+			setText(By.id(field), value);
+		}
+
+		@When("^I Test and Save ESP Action$")
+		public void i_Test_and_Save_ESP_Action() throws Throwable {
+				    
+			clickButton("Test ESP Action");
+			elementIsPresent(By.xpath("//button[contains(@class,'btn-success')]"));
+			clickButton("Save ESP Action");
+		}
+				
+		@Then("^I should see Action Types Menu$")
+		public void i_should_see_Action_Types_Menu() throws Throwable {
+				    
+			elementIsPresent(By.xpath("//div[@class='cf control-action-type']"));
+		}
+				
+		@Given("^I select ESP connection as \"(.*?)\"$")
+		public void i_select_ESP_connection_as(String ConnectionName) throws Throwable {
+				    
+			selectDropList(By.id("connection-name"), ConnectionName);
+		}
+				
+		@When("^I enter \"(.*?)\" in field \"(.*?)\"$")
+		public void i_enter_in_field(String value, String field) throws Throwable {
+				    
+			setText(By.name(field), value);
+		}
+				
+		@When("^I set MinOfInactivity field as blank$")
+		public void i_set_MinOfInactivity_field_as_blank() throws Throwable {
+				    
+			setText(By.xpath("//div[contains(@class, 'triggers_after_field')]/input"), "5");
+		}
+				
+		@When("^I delete the Criteria$")
+		public void i_delete_the_Criteria() throws Throwable {
+				    
+			driverInstance.findElement(By.xpath("//div[@class='right']/i"));
+		}
+			
 
 }
