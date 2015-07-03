@@ -170,18 +170,10 @@ Feature: SMART-Triggers Test
     Then I Should See disabled delete button for "Abandoned Browse" ESP Trigger
    
  #Error validation scenarios start here
- 
-  Feature: SMART-Triggers Test
+  
 
-  Background: Pre-requisite
-    Given I login as "zach"
-    Then I should be on "Peerius Smart Manager" page
-    And I search for site "demostoredev"
-    Given I click on "Triggers" option in "Mail"
-    Then I should be on Mail "Triggers" page
-
-  @Connection_nameMandatory
-  Scenario: To verify that name is mandatory for Connections
+   @Connection_nameMandatory
+   Scenario: To verify that name is mandatory for Connections
     Given click on button "ESP Connections"
     And click on button "Add an ESP connection"
     And I set data for new "Connection"
@@ -189,8 +181,8 @@ Feature: SMART-Triggers Test
     When I click on button "Test ESP Connection"
     Then I should see Message "Name is required."
     
-  @Connection_noUserName
-  Scenario: To verify that UserName is mandatory for Connections
+   @Connection_noUserName
+   Scenario: To verify that UserName is mandatory for Connections
     Given click on button "ESP Connections"
     And click on button "Add an ESP connection"
     And I set data for new "Connection"
@@ -198,8 +190,8 @@ Feature: SMART-Triggers Test
     When I click on button "Test ESP Connection"
     Then I should see Message "Could not connect to ecircle using specified credentials"
     
-  @Connection_invalidUserName
-  Scenario: To verify that incorrect UserName is not accepted for Connections
+   @Connection_invalidUserName
+   Scenario: To verify that incorrect UserName is not accepted for Connections
     Given click on button "ESP Connections"
     And click on button "Add an ESP connection"
     And I set data for new "Connection"
@@ -207,8 +199,8 @@ Feature: SMART-Triggers Test
     When I click on button "Test ESP Connection"
     Then I should see Message "Could not connect to ecircle using specified credentials"
     
-  @Connection_noRealm
-  Scenario: To verify that Realm is mandatory for Connections
+   @Connection_noRealm
+   Scenario: To verify that Realm is mandatory for Connections
     Given click on button "ESP Connections"
     And click on button "Add an ESP connection"
     And I set data for new "Connection"
@@ -216,8 +208,8 @@ Feature: SMART-Triggers Test
     When I click on button "Test ESP Connection"
     Then I should see Message "Could not connect to ecircle using specified credentials"
     
-  @Connection_invalidRealm
-  Scenario: To verify that Realm is mandatory for Connections
+   @Connection_invalidRealm
+   Scenario: To verify that Realm is mandatory for Connections
     Given click on button "ESP Connections"
     And click on button "Add an ESP connection"
     And I set data for new "Connection"
@@ -225,8 +217,8 @@ Feature: SMART-Triggers Test
     When I click on button "Test ESP Connection"
     Then I should see Message "Could not connect to ecircle using specified credentials"
     
-  @Connection_noPassword
-  Scenario: To verify that Password is mandatory for Connections
+   @Connection_noPassword
+   Scenario: To verify that Password is mandatory for Connections
     Given click on button "ESP Connections"
     And click on button "Add an ESP connection"
     And I set data for new "Connection"
@@ -234,8 +226,8 @@ Feature: SMART-Triggers Test
     When I click on button "Test ESP Connection"
     Then I should see Message "Could not connect to ecircle using specified credentials"
     
-  @Connection_invalidPassword
-  Scenario: To verify that Password is mandatory for Connections
+   @Connection_invalidPassword
+   Scenario: To verify that Password is mandatory for Connections
     Given click on button "ESP Connections"
     And click on button "Add an ESP connection"
     And I set data for new "Connection"
@@ -243,8 +235,8 @@ Feature: SMART-Triggers Test
     When I click on button "Test ESP Connection"
     Then I should see Message "Could not connect to ecircle using specified credentials"
     
-  @Connection_duplicateName
-  Scenario: To verify that duplicate name for connection is not allowed
+   @Connection_duplicateName
+   Scenario: To verify that duplicate name for connection is not allowed
     Given click on button "ESP Connections"
     And click on button "Add an ESP connection"
     And I Create Test Connection "TestConnection" for ESP "Teradata (ECircle)"
@@ -253,9 +245,8 @@ Feature: SMART-Triggers Test
     When I click on button "Save ESP Connection"
     Then I should see Message "There is already a connection with name 'TestConnection'"
     
-  
-  @Actions_nameMandatory
-  Scenario: To verify that name is mandatory for Actions
+   @Actions_nameMandatory
+   Scenario: To verify that name is mandatory for Actions
     Given I click on button "ESP Actions"
     And I click on button "Add an ESP Action"
     And I set data for new "Action"
@@ -263,15 +254,15 @@ Feature: SMART-Triggers Test
     When I Test and Save ESP Action
     Then I should see Message "Name is required."
     
-  @Actions_verifyActionTypesDisplay
-  Scenario: To verify that for adding new action Action Types are displayed after selecting connection
+   @Actions_verifyActionTypesDisplay
+   Scenario: To verify that for adding new action Action Types are displayed after selecting connection
     Given I click on button "ESP Actions"
     And I click on button "Add an ESP Action"
     And I select ESP connection as "ECircle"
     Then I should see Action Types Menu
     
-  @Actions_inactiveConnection
-  Scenario: To verify that Action can not be tested if Connection selected is inactive
+   @Actions_inactiveConnection
+   Scenario: To verify that Action can not be tested if Connection selected is inactive
     Given click on button "ESP Connections"
     And I deactivate "TestConnection" ESP Connection
     Then I should see Message "Switched off"
@@ -284,8 +275,8 @@ Feature: SMART-Triggers Test
     And I activate "TestConnection" ESP Connection
     Then I should see Message "Switched on"
     
-  @Actions_AddUserInvalidGroupID
-  Scenario: To verify that Action to Add New User to Group fails for invalid Group ID
+   @Actions_AddUserInvalidGroupID
+   Scenario: To verify that Action to Add New User to Group fails for invalid Group ID
     Given I click on button "ESP Actions"
     And I click on button "Add an ESP Action"
     And I set data for new "Action"
@@ -294,8 +285,8 @@ Feature: SMART-Triggers Test
     When I Test and Save ESP Action
     Then I should see Message ""
   
-  @Actions_RemoveUserInvalidGroupID
-  Scenario: To verify that Action to Add New User to Group fails for invalid Group ID
+   @Actions_RemoveUserInvalidGroupID
+   Scenario: To verify that Action to Add New User to Group fails for invalid Group ID
     Given I click on button "ESP Actions"
     And I click on button "Add an ESP Action"
     And I set data for new "Action"
@@ -304,8 +295,8 @@ Feature: SMART-Triggers Test
     When I click on button "Test ESP Action"
     Then I should see Message "Test failed."
     
-  @Actions_InvalidmessageID
-  Scenario: To verify that Action to Send Message To User fails for invalid Message ID
+   @Actions_InvalidmessageID
+   Scenario: To verify that Action to Send Message To User fails for invalid Message ID
     Given I click on button "ESP Actions"
     And I click on button "Add an ESP Action"
     And I set data for new "Action"
@@ -313,8 +304,8 @@ Feature: SMART-Triggers Test
     When I click on button "Test ESP Action"
     Then I should see Message "Test failed."
     
-  @Actions_duplicateName
-  Scenario: To verify that duplicate name for Action is not allowed
+   @Actions_duplicateName
+   Scenario: To verify that duplicate name for Action is not allowed
     Given I click on button "ESP Actions"
     And I click on button "Add an ESP Action"
     And I Create Test Action "TestAction" for ESP "TestConnection"
@@ -324,8 +315,8 @@ Feature: SMART-Triggers Test
     When I click on button "Save ESP Action"
     Then I should see Message "There is already an action with name 'TestAction'"
     
-  @Triggers_nameMandatory
-  Scenario: To verify that name and Min of Inactivity are mandatory for Triggers
+   @Triggers_nameMandatory
+   Scenario: To verify that name and Min of Inactivity are mandatory for Triggers
     When I click on button " Add a Trigger"
     And I set data for new "Trigger"
     And I set "triggers_name" field as ""
@@ -333,24 +324,24 @@ Feature: SMART-Triggers Test
     When I click on button "Save Trigger"
     Then I should see Message "Please provide a name for your new Trigger."
 
-  @Triggers_MinOfInactivityMandatory
-  Scenario: To verify that name and Min of Inactivity are mandatory for Triggers
+   @Triggers_MinOfInactivityMandatory
+   Scenario: To verify that name and Min of Inactivity are mandatory for Triggers
     When I click on button " Add a Trigger"
     And I set data for new "Trigger"
     And I set MinOfInactivity field as blank
     When I click on button "Save Trigger"
     Then I should see Message "Please provide a name for your new Trigger."   
     
-  @Triggers_criteriaMandatory
-  Scenario: To verify that Criteria is mandatory for Triggers
+   @Triggers_criteriaMandatory
+   Scenario: To verify that Criteria is mandatory for Triggers
   	When I click on button " Add a Trigger"
     And I set data for new "Trigger"
     And I delete the Criteria
     When I click on button "Save Trigger"
     Then I should see Message "Invalid configuration : Triggers must have some trigger criteria" 
     
-  @Triggers_duplicateName
-  Scenario Outline: To verify that duplicate name for Triggers is not allowed
+   @Triggers_duplicateName
+   Scenario Outline: To verify that duplicate name for Triggers is not allowed
     When I click on button " Add a Trigger"
     And I set data for new "Trigger" 
     And I click on button "Save Trigger"
@@ -360,19 +351,19 @@ Feature: SMART-Triggers Test
     And I Create Trigger with name "TestTrigger" for "TestAction"
     Then I should see Message "Invalid configuration : A trigger called 'test' already exists"  
    
-  @DeleteValidationConnection
-  Scenario: Delete ESP Connection
+   @DeleteValidationConnection
+   Scenario: Delete ESP Connection
   	Given click on button "ESP Connections"
     Given I Delete ESP Connection "TestConnection"
     Then I Should not See ESP Connection "TestConnection" on Mail Triggers Page
     
-  @DeleteValidationAction
+   @DeleteValidationAction
    Scenario: Delete ESP Action
     Given I click on button "ESP Actions"
     Given I Delete ESP Action "TestAction"
     Then I Should not See ESP Action "ECircle" on Mail Triggers Page
     
-  @DeleteValidationTrigger
+   @DeleteValidationTrigger
    Scenario: Delete ESP Trigger
    Given I Delete ESP Trigger "Abandoned Browse"
    Then I Should not See ESP Trigger "TestTrigger" on Mail Triggers Page
