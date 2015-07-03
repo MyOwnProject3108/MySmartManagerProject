@@ -310,14 +310,4 @@ Feature: SMART-Triggers Test
     And I click on button " Add a Trigger"
     And I Create Trigger with name "TestTrigger" for "TestAction"
     Then I should see Message "Invalid configuration : A trigger called 'test' already exists"
-    
-      
-      
-      
-      
-      
-      
-      
-      
-   	
-    
+
