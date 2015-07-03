@@ -20,6 +20,7 @@ public class SmartMail extends Context {
 	
 	public static Random random = new Random();
 	public static String emailgenerated;
+	public static String registerRandomEmailGenerated;
 	
 	public static void createSimpleMailCampaign(String name, String strategy)
 	{
@@ -134,7 +135,12 @@ public class SmartMail extends Context {
 				
 			}
 			
-			clickElement(By.xpath("(//div[@class='visual'])["+position+"]"));	
+			clickElement(By.xpath("(//div[@class='visual'])["+position+"]"));
+			
+			//driverInstance.findElements(By.className("visual-list context-menu hide"));
+			
+			
+			
 			setText(By.xpath("(//input[@class='visual-input'])["+position+"]"), strategy);
 			pressKey("Enter");
 						
@@ -312,7 +318,8 @@ public class SmartMail extends Context {
 			selectDropList(By.id("connection-name"), "Silverpop");
 			clickButton("Send message");
 			setText(By.name("listID"), "4066625");
-			setText(By.name("Message ID"), "4079469");
+			//setText(By.name("Message ID"), "4079469");
+			setText(By.name("Message ID"), "7875507");
 				
 		}
 		
@@ -338,7 +345,7 @@ public class SmartMail extends Context {
 
 	public static void createESPTrigger(String triggerName, String espActionName, String position) {
 		setText(By.id("triggers_name"), triggerName);
-		setText(By.xpath("//div[contains(@class, 'triggers_after_field')]/input"), "5");
+		setText(By.xpath("//div[contains(@class, 'triggers_after_field')]/input"), "0");
 		
 		WebElement element =driverInstance.findElement(By.id("trigger_action_id"));
 		List<WebElement> options= element.findElements(By.tagName("option"));
@@ -731,6 +738,23 @@ public class SmartMail extends Context {
 				clickButton("Save Trigger");
 				
 			}
+
+
+			public static void registerRandomEmail(String registerRandomEmail) {
+				Navigation.gotoURL("http://showcase-dev.peerius.com/index.php/customer/account/create/");
+				   setText(By.id("firstname"), "Peerius");
+				   setText(By.id("lastname"), "Test");
+				   int randomInt=random.nextInt(100000);
+				   registerRandomEmailGenerated = registerRandomEmail+randomInt;
+				   setText(By.id("email_address"), registerRandomEmailGenerated+"@mailinator.com");
+				   setText(By.id("password"),"password");
+				   setText(By.id("confirmation"), "password");
+				   clickButton("Submit");
+				   			
+			}
+
+
+			
 		
 		
 		
