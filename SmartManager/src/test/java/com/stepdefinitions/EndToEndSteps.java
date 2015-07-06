@@ -1,7 +1,6 @@
 package com.stepdefinitions;
 
 import java.util.List;
-import java.util.Random;
 
 import org.openqa.selenium.By;
 
@@ -137,8 +136,8 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 	
 	@Given("^I Register with random Email address as \"(.*?)\"$")
 	public void i_Register_with_random_Email_address_as(String registerRandomEmail) throws Throwable {
-		SmartMail.registerRandomEmail(registerRandomEmail);
-	   		
+		//SmartMail.registerRandomEmailGenerated(registerRandomEmail);
+	
 	}
 	
 	@Given("^I Goto Registered Random Inbox$")
@@ -153,11 +152,10 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 	
 	}
 	
-	
+		
 
 
 	
 	
 	
-
 
