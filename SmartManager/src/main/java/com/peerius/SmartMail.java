@@ -435,6 +435,7 @@ public class SmartMail extends Context {
 
 
 	public static void activateESPConnection(String connectionName) {
+		clickButton("ESP Connections");
 		elementIsPresent(By.linkText(connectionName));
 		clickElement(By.xpath("//ul/li[.='"+connectionName+"']/following-sibling::li//div[contains(@class, 'ibw btn-switcher off ui-switcher')]"));
 		
@@ -592,7 +593,7 @@ public class SmartMail extends Context {
 		if(element.equalsIgnoreCase("Trigger"))
 		{	
 			setText(By.id("triggers_name"), "Test");
-			setText(By.xpath("//div[contains(@class, 'triggers_after_field')]/input"), "5");
+			setText(By.name("after"), "5");
 			WebElement element1 =driverInstance.findElement(By.id("trigger_action_id"));
 			List<WebElement> options= element1.findElements(By.tagName("option"));
 			for(WebElement option : options)
@@ -601,6 +602,12 @@ public class SmartMail extends Context {
 			        {
 						option.click();
 					}
+				if(option.getText().equalsIgnoreCase("TestAction"))
+		        {
+					option.click();
+				}
+				
+				
 			}
 			dragAndDrop(By.id("available"), By.id("in-use"));
 		}
