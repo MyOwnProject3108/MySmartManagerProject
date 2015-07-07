@@ -611,12 +611,7 @@ public class StepDefinitions extends SmartMerchandising {
 		public void i_goto_ESP_Connection(String connectionName) throws Throwable {
 		    SmartMail.gotoESPConnection(connectionName);
 		}
-		
-		@Given("^I Edit ESP Connection \"(.*?)\"$")
-		public void i_Edit_ESP_Connection(String connectionName) throws Throwable {
-		    SmartMail.editESPConnection(connectionName);
-		}
-		
+			
 		@Given("^I Delete ESP Connection \"(.*?)\"$")
 		public void i_Delete_ESP_Connection(String connectionName) throws Throwable {
 		    SmartMail.deleteESPConnection(connectionName);
@@ -660,11 +655,7 @@ public class StepDefinitions extends SmartMerchandising {
 			elementNotPresent(By.xpath("//div[contains(@class, 'actions-target')]//li/a[contains(text(), '"+ActionName+"')]"));
 		}
 		
-		@Given("^I Edit ESP Action \"(.*?)\"$")
-		public void i_Edit_ESP_Action(String actionName) throws Throwable {
-		    SmartMail.editESPAction(actionName);
-		}
-		
+			
 		@Given("^I Delete ESP Action \"(.*?)\"$")
 		public void i_Delete_ESP_Action(String actionName) throws Throwable {
 		  SmartMail.deleteESPAction(actionName);
@@ -686,11 +677,7 @@ public class StepDefinitions extends SmartMerchandising {
 			  elementIsPresent(By.xpath("//ul/li[.='"+esp+"']/following-sibling::li//i[contains(@class,'disabled')]"));
 		}
 		
-		@Given("^I Edit ESP Trigger \"(.*?)\"$")
-		public void i_Edit_ESP_Trigger(String triggerName) throws Throwable {
-		 SmartMail.editESPTrigger(triggerName);
-		}
-		
+			
 		@Then("^I Should See ESP Trigger \"(.*?)\" on Mail Triggers Page$")
 		public void i_Should_See_ESP_Trigger_on_Mail_Triggers_Page(String triggerName) throws Throwable {
 		   SmartMail.verifyESPTrigger(triggerName);
@@ -733,8 +720,6 @@ public class StepDefinitions extends SmartMerchandising {
 		  		    
 		}
 
-		//Ana's new step definitions
-		
 		@Given("^I set data for new \"(.*?)\"$")
 		public void i_set_data_for_new(String element) throws Throwable {
 				    
@@ -770,9 +755,16 @@ public class StepDefinitions extends SmartMerchandising {
 		@When("^I delete the Criteria$")
 		public void i_delete_the_Criteria() throws Throwable {
 			
-			clickElement(By.xpath("//div[@class='right']/i[contains(@class,'trash')]"));	    
-		
+			clickElement(By.xpath("//ul[@id='in-use']//i"));	
+			elementNotPresent(By.xpath("//ul[@id='in-use']//i"));
 
 }
+		//Use to Wait for Element with ClassName
+		@Then("^I Wait for Element \"(.*?)\"$")
+		public void i_Wait_for_Element(String className) throws Throwable {
+			elementIsPresent(By.xpath("//*[contains(@class,'"+className+"')]"));
+		  
+		}
+
 		
 }

@@ -120,8 +120,8 @@ public class Context extends COREManager {
 		button.click();
 
 	}
-
-	public static void clickElement(By locator) {
+	
+		public static void clickElement(By locator) {
 
 		WebElement click = new WebDriverWait(driverInstance, elementWaitTime)
 				.until(ExpectedConditions.visibilityOfElementLocated((locator)));
