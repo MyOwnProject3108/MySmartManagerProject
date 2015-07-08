@@ -56,6 +56,7 @@ Feature: SMART-Triggers Test
     And I click Edit button for "ECircle" ESP Connection
     And I set "name" field as "AutoECircleConnection"
     When I click on button "Test ESP Connection"
+    And I Wait for Element "notification"
     Then I should see Message "Test passed successfully"
     And I Wait for Element "btn btn-primary btn-success"
     When I click on button "Save ESP Connection"
@@ -265,8 +266,8 @@ Feature: SMART-Triggers Test
 
   @Connection_noPassword
   Scenario: To verify that Password is mandatory for Connections
-    Given click on button "ESP Connections"
-    And click on button "Add an ESP connection"
+    Given I click on button "ESP Connections"
+    And I click on button "Add an ESP connection"
     And I set data for new "Connection"
     And I set "password" field as ""
     When I click on button "Test ESP Connection"
@@ -274,8 +275,8 @@ Feature: SMART-Triggers Test
 
   @Connection_invalidPassword
   Scenario: To verify that Password is mandatory for Connections
-    Given click on button "ESP Connections"
-    And click on button "Add an ESP connection"
+    Given I click on button "ESP Connections"
+    And I click on button "Add an ESP connection"
     And I set data for new "Connection"
     And I set "password" field as "123"
     When I click on button "Test ESP Connection"

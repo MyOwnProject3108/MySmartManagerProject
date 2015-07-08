@@ -603,7 +603,9 @@ public class StepDefinitions extends SmartMerchandising {
 
 		@Then("^I Should not See ESP Connection \"(.*?)\" on Mail Triggers Page$")
 		public void i_Should_not_See_ESP_Connection_on_Mail_Triggers_Page(String connectionName) throws Throwable {
-			elementNotPresent(By.xpath("//ul/li//a[contains(text(), '"+connectionName+"')]"));
+			
+			//Need to modify xpath
+			elementNotPresent(By.xpath("//li[contains(@class,'item name')]/a[.='"+connectionName+"']"));
 			
 		}
 		

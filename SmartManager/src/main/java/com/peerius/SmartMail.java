@@ -398,6 +398,7 @@ public class SmartMail extends Context {
 		clickElement(By.xpath("//div[contains(@class, 'yes')]"));
 		threadSleep(2000);
 		verifyErrorMessage(By.className("modal-body"), "Successfully deleted this item.");
+		Navigation.refreshPage();
 			
 	}
 
@@ -454,6 +455,7 @@ public class SmartMail extends Context {
 		clickElement(By.xpath("//div[contains(@class, 'yes')]"));
 		threadSleep(2000);
 		verifyErrorMessage(By.className("modal-body"), "Successfully deleted this item.");
+		Navigation.refreshPage();
 			
 		
 	}
@@ -496,6 +498,7 @@ public class SmartMail extends Context {
 		elementIsPresent(By.linkText(triggerName));
 		clickElement(By.xpath("//li[contains(@class,'item name')]/a[contains(text(),'"+triggerName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-delete')]"));
 		clickElement(By.xpath("//div[contains(@class, 'no btn btn-secondary')]"));
+		Navigation.refreshPage();
 		elementIsPresent(By.linkText(triggerName));
 				
 	}
