@@ -312,6 +312,7 @@ public class SmartMail extends Context {
 			setText(By.name("Creative Name"), "74535_Abandon_201410v01");
 			setText(By.name("Template ID"), "116");
 			setText(By.name("List Category"), "74535 - Abandon Basket");
+			setText(By.name("Sender Email"), "test@peerius.com");
 		}
 		
 		if(espConnection.equalsIgnoreCase("Silverpop")){
