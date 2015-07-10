@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -119,32 +120,40 @@ public class SmartMail extends Context {
 		}
 	}
 	
+
+	
 	public static void setStrategyPerPosition(String position, String strategy) {
 		
+		elementIsPresent(By.id("mail-item"+position+""));
 		
-			elementIsPresent(By.id("mail-item"+position+""));
+		List<WebElement> elements= driverInstance.findElements(By.xpath("(//div[@class='visual-tag'])["+position+"]"));
+		
+		for (WebElement element:elements){
 			
-			List<WebElement> elements= driverInstance.findElements(By.xpath("(//div[@class='visual-tag'])["+position+"]"));
-			
-			for (WebElement element:elements){
+			if (element.isDisplayed()){
 				
-				if (element.isDisplayed()){
-					
-					clickElement(By.xpath("//i[@class='visual-tags-close close sm-icon-cancel']"));
-				}
-				
+				clickElement(By.xpath("//i[contains(@class,'visual-tags-close')]"));
+				clickElement(By.xpath("(//div[@class='visual'])["+position+"]"));
 			}
 			
-			clickElement(By.xpath("(//div[@class='visual'])["+position+"]"));
+		}
+		
+		
+		List<WebElement> droplist = driverInstance.findElements(By.xpath("//ul[@class='visual-list context-menu hide']/li"));
+		
+		for(WebElement option: droplist){
 			
-			//driverInstance.findElements(By.className("visual-list context-menu hide"));
+			if(option.getText().equalsIgnoreCase(strategy)){
+				
+				Actions selectOption = new Actions(driverInstance);
+				selectOption.doubleClick(option).sendKeys(Keys.ENTER).build().perform();
+			//moveToElement(option)
+			}
+			
+		}
 			
 			
-			
-			setText(By.xpath("(//input[@class='visual-input'])["+position+"]"), strategy);
-			pressKey("Enter");
-						
-	}
+}
 	
 	public static void enableUserTopUps() {
 		
@@ -326,7 +335,7 @@ public class SmartMail extends Context {
 		if(espConnection.equalsIgnoreCase("E2EConnection")){
 			selectDropList(By.id("connection-name"), "E2EConnection");
 			clickButton("Send message");
-			setText(By.name("Message ID"), "1800403818");
+			setText(By.name("Message ID"), "1800605946");
 		}
 		
 		setText(By.name("email_address"), "webtest@mailinator.com");
@@ -606,7 +615,20 @@ public class SmartMail extends Context {
 		}
 			
 	}
-			
+	
+	
+	public static void registerRandomEmail(String registerRandomEmail) {
+		Navigation.gotoURL("http://showcase-dev.peerius.com/index.php/customer/account/create/");
+		   setText(By.id("firstname"), "Peerius");
+		   setText(By.id("lastname"), "Test");
+		   int randomInt=random.nextInt(100000);
+		   registerRandomEmailGenerated = registerRandomEmail+randomInt;
+		   setText(By.id("email_address"), registerRandomEmailGenerated+"@mailinator.com");
+		   setText(By.id("password"),"password");
+		   setText(By.id("confirmation"), "password");
+		   clickButton("Submit");
+		   			
+	}	
 	
 }
 

@@ -36,11 +36,11 @@ Feature: E2E Test for Triggers
     Scenario: Create TriggerEmail Campaign
     Given I click on "Create a New Campaign" option in "Mail"
     Then I should be on Mail "Create a New Campaign" page
-    Given I Create Simple Mail Campaign with name "TriggerEmailTest"
-    Given I goto Mail Campaign "TriggerEmailTest"
+    Given I Create Simple Mail Campaign with name "E2ETriggerEmail"
+    Given I goto Mail Campaign "E2ETriggerEmail"
     And I click on link "2. Configuration"
     And I Set "Triggered Email" at position "1"
-    And click on button " Send Test Email"
+    And click on button "Save Campaign"
     Then I should see Message "Successfully saved."
     
     
@@ -49,7 +49,7 @@ Feature: E2E Test for Triggers
     Given I Register with random Email address as "Peeriustest"
     And I navigate to URL "http://showcase-dev.peerius.com/index.php/electricals/cameras/10641946.html"
     Given I Goto Registered Random Inbox
-    And I click on the Email "Lander Test"
+    And I click on the Email "LanderTest"
     And Switch Frame "rendermail"
     
      

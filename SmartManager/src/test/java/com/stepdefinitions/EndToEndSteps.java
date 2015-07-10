@@ -136,7 +136,7 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 	
 	@Given("^I Register with random Email address as \"(.*?)\"$")
 	public void i_Register_with_random_Email_address_as(String registerRandomEmail) throws Throwable {
-		//SmartMail.registerRandomEmailGenerated(registerRandomEmail);
+		SmartMail.registerRandomEmail(registerRandomEmail);
 	
 	}
 	
