@@ -178,13 +178,6 @@ public class StepDefinitions extends SmartMerchandising {
 	}
 
 
-	
-	@When("^click on button \"(.*?)\"$")
-	public void click_on_button(String SaveCampaign) throws Throwable {
-	  clickButton(SaveCampaign);
-	
-	}
-	
 	@Given("^I Save the Campaign$")
 	public void i_Save_the_Campaign() throws Throwable {
 	    
@@ -610,7 +603,9 @@ public class StepDefinitions extends SmartMerchandising {
 
 		@Then("^I Should not See ESP Connection \"(.*?)\" on Mail Triggers Page$")
 		public void i_Should_not_See_ESP_Connection_on_Mail_Triggers_Page(String connectionName) throws Throwable {
-			elementNotPresent(By.xpath("//ul/li//a[contains(text(), '"+connectionName+"')]"));
+			
+			//Need to modify xpath
+			elementNotPresent(By.xpath("//li[contains(@class,'item name')]/a[.='"+connectionName+"']"));
 			
 		}
 		
@@ -618,12 +613,7 @@ public class StepDefinitions extends SmartMerchandising {
 		public void i_goto_ESP_Connection(String connectionName) throws Throwable {
 		    SmartMail.gotoESPConnection(connectionName);
 		}
-		
-		@Given("^I Edit ESP Connection \"(.*?)\"$")
-		public void i_Edit_ESP_Connection(String connectionName) throws Throwable {
-		    SmartMail.editESPConnection(connectionName);
-		}
-		
+			
 		@Given("^I Delete ESP Connection \"(.*?)\"$")
 		public void i_Delete_ESP_Connection(String connectionName) throws Throwable {
 		    SmartMail.deleteESPConnection(connectionName);
@@ -667,11 +657,7 @@ public class StepDefinitions extends SmartMerchandising {
 			elementNotPresent(By.xpath("//div[contains(@class, 'actions-target')]//li/a[contains(text(), '"+ActionName+"')]"));
 		}
 		
-		@Given("^I Edit ESP Action \"(.*?)\"$")
-		public void i_Edit_ESP_Action(String actionName) throws Throwable {
-		    SmartMail.editESPAction(actionName);
-		}
-		
+			
 		@Given("^I Delete ESP Action \"(.*?)\"$")
 		public void i_Delete_ESP_Action(String actionName) throws Throwable {
 		  SmartMail.deleteESPAction(actionName);
@@ -693,11 +679,7 @@ public class StepDefinitions extends SmartMerchandising {
 			  elementIsPresent(By.xpath("//ul/li[.='"+esp+"']/following-sibling::li//i[contains(@class,'disabled')]"));
 		}
 		
-		@Given("^I Edit ESP Trigger \"(.*?)\"$")
-		public void i_Edit_ESP_Trigger(String triggerName) throws Throwable {
-		 SmartMail.editESPTrigger(triggerName);
-		}
-		
+			
 		@Then("^I Should See ESP Trigger \"(.*?)\" on Mail Triggers Page$")
 		public void i_Should_See_ESP_Trigger_on_Mail_Triggers_Page(String triggerName) throws Throwable {
 		   SmartMail.verifyESPTrigger(triggerName);
@@ -740,8 +722,6 @@ public class StepDefinitions extends SmartMerchandising {
 		  		    
 		}
 
-		//Ana's new step definitions
-		
 		@Given("^I set data for new \"(.*?)\"$")
 		public void i_set_data_for_new(String element) throws Throwable {
 				    
@@ -749,19 +729,12 @@ public class StepDefinitions extends SmartMerchandising {
 		}
 
 		@Given("^I set \"(.*?)\" field as \"(.*?)\"$")
-		public void i_set_field_as(String field, String value) throws Throwable {
+		public void i_set_field_with_id_as(String field, String value) throws Throwable {
 		  
 			setText(By.id(field), value);
 		}
 
-		@When("^I Test and Save ESP Action$")
-		public void i_Test_and_Save_ESP_Action() throws Throwable {
-				    
-			clickButton("Test ESP Action");
-			elementIsPresent(By.xpath("//button[contains(@class,'btn-success')]"));
-			clickButton("Save ESP Action");
-		}
-				
+	
 		@Then("^I should see Action Types Menu$")
 		public void i_should_see_Action_Types_Menu() throws Throwable {
 				    
@@ -775,22 +748,25 @@ public class StepDefinitions extends SmartMerchandising {
 		}
 				
 		@When("^I enter \"(.*?)\" in field \"(.*?)\"$")
-		public void i_enter_in_field(String value, String field) throws Throwable {
+		public void i_enter_in_field_name(String value, String field) throws Throwable {
 				    
 			setText(By.name(field), value);
 		}
 				
-		@When("^I set MinOfInactivity field as blank$")
-		public void i_set_MinOfInactivity_field_as_blank() throws Throwable {
-				    
-			setText(By.xpath("//div[contains(@class, 'triggers_after_field')]/input"), "5");
-		}
-				
+		
 		@When("^I delete the Criteria$")
 		public void i_delete_the_Criteria() throws Throwable {
-				    
-			driverInstance.findElement(By.xpath("//div[@class='right']/i"));
-		}
 			
+			clickElement(By.xpath("//ul[@id='in-use']//i"));	
+			elementNotPresent(By.xpath("//ul[@id='in-use']//i"));
 
+}
+		//Use to Wait for Element with ClassName
+		@Then("^I Wait for Element \"(.*?)\"$")
+		public void i_Wait_for_Element(String className) throws Throwable {
+			elementIsPresent(By.xpath("//*[contains(@class,'"+className+"')]"));
+		  
+		}
+
+		
 }
