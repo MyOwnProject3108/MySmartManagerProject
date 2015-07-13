@@ -147,7 +147,7 @@ public class SmartMail extends Context {
 				
 				Actions selectOption = new Actions(driverInstance);
 				selectOption.doubleClick(option).sendKeys(Keys.ENTER).build().perform();
-			//moveToElement(option)
+		
 			}
 			
 		}
@@ -328,7 +328,6 @@ public class SmartMail extends Context {
 			selectDropList(By.id("connection-name"), "Silverpop");
 			clickButton("Send message");
 			setText(By.name("listID"), "4066625");
-			//setText(By.name("Message ID"), "4079469");
 			setText(By.name("Message ID"), "7875507");
 				
 		}
@@ -461,7 +460,7 @@ public class SmartMail extends Context {
 
 	public static void deleteESPAction(String actionName) {
 		elementIsPresent(By.linkText(actionName));
-		clickElement(By.xpath("//li[contains(@class,'item name')]/a[.='"+actionName+"']/following::i[2]"));
+		clickElement(By.xpath("//li[contains(@class,'item name')]/a[.='"+actionName+"']/preceding::i[1]"));
 		clickElement(By.xpath("//div[contains(@class, 'yes')]"));
 		verifyErrorMessage(By.className("modal-body"), "Successfully deleted this item.");
 		

@@ -85,9 +85,9 @@ Feature: SMART-Triggers Test
     Then I Should See ESP Action "<Verification>" on Mail Triggers Page
 
     Examples: Actions
-      | Name      | Connection | Verification |
-      | ECircle   | ECircle    | ECircle      |
-      | Silverpop | Silverpop  | Silverpop    |
+      | Name            | Connection | Verification |
+      | ECircleAction   | ECircle    | ECircle      |
+      | SilverpopAction | Silverpop  | Silverpop    |
 
   #| SmartCast     | SmartCast  | SmartCast    |
   @TestOnlyESPAction
@@ -133,8 +133,8 @@ Feature: SMART-Triggers Test
   Scenario: Verify delete button is disabled for new ESP Action
     Given I click on button "ESP Actions"
     And I click on button "Add an ESP Action"
-    And I Create Action "ECircle" for ESP "ECircle"
-    Then I Should See disabled delete button for "ECircle" ESP Action
+    And I Create Action "ECircleAction" for ESP "ECircle"
+    Then I Should See disabled delete button for "ECircleAction" ESP Action
 
   @CreateESPTrigger
   Scenario Outline: Create an ESP Trigger
@@ -142,9 +142,9 @@ Feature: SMART-Triggers Test
     And I Create Trigger with name "<TriggerName>" for "<ESPAction>" from "<Position>"
 
     Examples: Triggers
-      | TriggerName      | ESPAction | Position |
-      | Abandoned Browse | ECircle   | 2        |
-      | Abandoned Basket | Silverpop | 1        |
+      | TriggerName      | ESPAction       | Position |
+      | Abandoned Browse | ECircleAction   | 2        |
+      | Abandoned Basket | SilverpopAction | 1        |
 
   @NoDeleteESPTrigger
   Scenario: Click No to Delete ESP Trigger
@@ -205,8 +205,8 @@ Feature: SMART-Triggers Test
       | Action    |
       | Silverpop |
       | ECircle   |
-      | SmartCast |
 
+  # | SmartCast |
   @DeleteConnectionAfterTest
   Scenario Outline: Delete ESP Connections After Test
     Given I click on button "ESP Connections"
@@ -218,5 +218,3 @@ Feature: SMART-Triggers Test
       | ECircle    |
       | SmartCast  |
       | Silverpop  |
-
-  

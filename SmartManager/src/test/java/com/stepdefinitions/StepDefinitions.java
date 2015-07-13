@@ -605,6 +605,7 @@ public class StepDefinitions extends SmartMerchandising {
 		public void i_Should_not_See_ESP_Connection_on_Mail_Triggers_Page(String connectionName) throws Throwable {
 			
 			//Need to modify xpath
+			clickButton("ESP Connections");
 			elementNotPresent(By.xpath("//li[contains(@class,'item name')]/a[.='"+connectionName+"']"));
 			
 		}

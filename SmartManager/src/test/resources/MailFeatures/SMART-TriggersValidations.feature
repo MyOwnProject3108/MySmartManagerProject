@@ -27,7 +27,7 @@ Feature: SMART-Triggers Error Validations
 
   @Connection_invalidUserName
   Scenario: To verify that incorrect UserName is not accepted for Connections
-    Given I click on button "ESP Connections"
+    Given I click on button "ESP Connections" 
     And I click on button "Add an ESP connection"
     And I set data for new "Connection"
     And I set "username" field as "user"
