@@ -175,6 +175,16 @@ public class Context extends COREManager {
 
 	}
 	
+	public static void verifyTriggersPage(String page){
+		
+				
+			Assert.assertTrue(driverInstance.getCurrentUrl().contains(
+					"triggers"));
+	
+		
+		
+	}
+	
 	public static void verifyMailPage(String page) {
 
 		if (page.equalsIgnoreCase("Overview")) {
@@ -190,13 +200,7 @@ public class Context extends COREManager {
 			Assert.assertTrue(driverInstance.getCurrentUrl().contains("edit"));
 		}
 		
-		else if (page.equalsIgnoreCase("Triggers")) {
-			
-			Assert.assertTrue(driverInstance.getCurrentUrl().contains(
-					"triggers"));
-		}
-
-		else if (page.equalsIgnoreCase("Define Product Sets")) {
+			else if (page.equalsIgnoreCase("Define Product Sets")) {
 			Assert.assertTrue(driverInstance.getCurrentUrl().contains(
 					"selectedproductsets"));
 		}

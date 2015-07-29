@@ -4,14 +4,14 @@ Feature: SMART-Triggers Test
     Given I login as "zach"
     Then I should be on "Peerius Smart Manager" page
     And I search for site "demostoredev"
-    Given I click on "Triggers" option in "Mail"
-    Then I should be on Mail "Triggers" page
+    Given I click on "Triggers" option in "Triggers"
+    Then I should be on Triggers "Triggers" page
 
   @CreateESPConnection
   Scenario Outline: Create an ESP Connection
-    When I click on button "ESP Connections"
+    Given I click on button "ESP Connections"
     And I click on button "Add an ESP connection"
-    And I Create Connection "<Name>" for ESP "<ESP>"
+    When I Create Connection "<Name>" for ESP "<ESP>"
     Then I Should See ESP Connection "<Verification>" on Mail Triggers Page
 
     Examples: Connections

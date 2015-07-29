@@ -7,7 +7,7 @@ Feature: S-Mail
 
   @CreateMailCampaign
   Scenario: Create a simple Mail Campaign
-    Given I click on "Create a New Campaign" option in "Mail"
+    Given I click on "Create a new campaign" option in "Mail"
     Then I should be on Mail "Create a New Campaign" page
     And I Create Simple Mail Campaign with name "AutoCreate"
     Then I should see Message "Successfully saved"
@@ -31,7 +31,7 @@ Feature: S-Mail
     When I Set style with value "200" for clientHeight and ClientWidth
     Then I should see the style applied with value "200" in "clientHeight" in Widget Content Preview
     Then I should see the style applied with value "200" in "clientWidth" in Widget Content Preview
-    And click on button "Save Campaign"
+    And I click on "Save Campaign"
     When I goto Mail Campaign "AutoCreate"
     Then I should see the style applied with value "200" in "clientHeight" in Widget Content Preview
     Then I should see the style applied with value "200" in "clientWidth" in Widget Content Preview
@@ -59,14 +59,14 @@ Feature: S-Mail
     And I Set "Cross-sell, previous purchases and views" at position "2"
     And I Set "Product Catalog" at position "3"
     And I Enable User-Top ups
-    And click on button "Next"
+    And I click on button "Next"
     And I Specify Email address as "test@peerius.com"
-    And click on button " Preview Email"
+    And I click on " Preview Email"
     Then Preview should Show Second Position Topped up with Default Email Rec
     And I click on link "2. Configuration"
     When I Set the Number of Products as "1"
     Then I Should see "1" Product Positions
-    And click on button "Save Campaign"
+    And I click on button "Save Campaign"
 
   @UserTopUpsDisabled
   Scenario: Verify That If Top-Ups Is Disabled, Empty Email Rec should be returned
@@ -79,12 +79,12 @@ Feature: S-Mail
     And I Uncheck the checkbox for User-Top ups
     And click on button "Next"
     And I Specify Email address as "test@peerius.com"
-    And click on button " Preview Email"
+    And I click on button " Preview Email"
     Then Preview should Show Second Position Blank with No Email Rec
     And I click on link "2. Configuration"
     When I Set the Number of Products as "1"
     Then I Should see "1" Product Positions
-    And click on button "Save Campaign"
+    And I click on button "Save Campaign"
 
   @duplicatePositions
   Scenario: Each Click on Duplicate button Should copy that position to new position
@@ -98,7 +98,7 @@ Feature: S-Mail
     And I Enter rule Text as "20"
     And I click on link "Hints"
     And I select option "sale-product"
-    And click on button " Duplicate"
+    And I click on button " Duplicate"
     Then I Should See "2" Positions With Same Strategy, Expression and Hint
 
   #E2E to check if tracking code gets added to the email rec url
@@ -107,9 +107,9 @@ Feature: S-Mail
     Given I goto Mail Campaign "AutoCreate"
     And I click on link "2. Configuration"
     When I Set Tracking Code as "&test123"
-    And click on button "Next"
+    And I click on button "Next"
     And I Specify Email address as "test@peerius.com"
-    And click on button " Preview Email"
+    And I click on button " Preview Email"
     And I click on Email Rec "1"
     Then I Should see Tracking Code "&test123" Added In The Product url
 
@@ -117,21 +117,21 @@ Feature: S-Mail
   Scenario: Test Generate Code button functionality for single and multiple positions
     Given I goto Mail Campaign "AutoCreate"
     And I click on link "2. Configuration"
-    And click on button "Next"
-    And click on button " Generate Code"
+    And I click on button "Next"
+    And I click on button " Generate Code"
     Then I should see the HTML code for Email Recs
 
   @CustomEmailAttributes
   Scenario: Test if Custom Email Attributes settings are saved in UI
-    Given I click on "Customise Email Attributes" option in "Mail"
+    Given I click on "Customise email attributes" option in "Mail"
     When I set Custom Email Attribute "genre"
-    And click on button "Save Custom attributes"
+    And I click on button "Save Custom attributes"
     Then I should see Message "Successfully saved"
-    And I click on link "Define Product Sets"
-    And I click on link "Custom Email Attributes"
+    And I click on link "Define product sets"
+    And I click on link "Custom email attributes"
     Then I should see the saved Custom Email Attribute setting
-    And click on button "genre"
-    And click on button "Save Custom attributes"
+    And I click on button "genre"
+    And I click on button "Save custom attributes"
 
   @PauseMailCampaign
   Scenario: De-activate Mail Campaign
@@ -149,10 +149,10 @@ Feature: S-Mail
   #Error validation scenarios start here
   @createMailvalidation
   Scenario Outline: Create Mail Message Validation
-    Given I click on "Create a New Campaign" option in "Mail"
+    Given I click on "Create a new campaign" option in "Mail"
     Then I should be on Mail "Create a New Campaign" page
     When I Set Name as "<Name>"
-    And click on button "Create mail campaign"
+    And I click on button "Save campaign"
     Then I should see Message "<Message>"
 
     Examples: Validation Messages
@@ -170,28 +170,28 @@ Feature: S-Mail
   Scenario: Validate Empty Email For Preview
     Given I goto Mail Campaign "AutoCreate"
     And I click on link "2. Configuration"
-    And click on button "Next"
-    And click on button " Preview Email"
+    And I click on button "Next"
+    And I click on button " Preview Email"
     Then I should see Message "Email address required"
 
   @sendEmailErrorValidation
   Scenario: Validate Empty Email For Send Email
     Given I goto Mail Campaign "AutoCreate"
     And I click on link "2. Configuration"
-    And click on button "Next"
-    And click on button "Send Test Email"
+    And I click on button "Next"
+    And I click on button "Send Test Email"
     Then I should see Message "Cannot generate preview Email address required "
 
   @EmptyEmailPlaceholder
   Scenario: Validate Empty Email Placeholder
     Given I goto Mail Campaign "AutoCreate"
     And I click on link "2. Configuration"
-    And click on button "Next"
+    And I click on button "Next"
     And I Enter Text "" in Email Placeholder
-    And click on button " Generate Code"
-    #This needs to be checked as i've check previous deployment and this field is not mandatory
-    #Then I should see Message "Email placeholder is mandatory"
+    And I click on button " Generate code"
 
+  #This needs to be checked as i've check previous deployment and this field is not mandatory
+  #Then I should see Message "Email placeholder is mandatory"
   @DeleteLastCampaign
   Scenario: Deleting Mail Campaign
     Given I Delete Mail Campaign "AutoCreate"

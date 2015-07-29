@@ -11,7 +11,7 @@ Feature: End to End Tests for Mail
     And I click on link "2. Configuration"
     And I click on button "Next"
     And I Specify random Email address as "Peeriustest"
-    And click on button " Send Test Email"
+    And I click on button " Send Test Email"
     Then I should see Message "Successfully saved."
 
   @E2ESimpleCampaign
@@ -31,7 +31,7 @@ Feature: End to End Tests for Mail
     And I Set "Best Seller By Revenue in Smart Category" at position "2"
     And I click on button "Next"
     And I Specify random Email address as "Peeriustest"
-    And click on button " Send Test Email"
+    And I click on button " Send Test Email"
     Then I should see Message "Successfully saved."
 
   @E2EMultipleStrategy
@@ -54,7 +54,7 @@ Feature: End to End Tests for Mail
     And I Enter Hint Parameter Text as "30" in "1" Positions
     And I click on button "Next"
     And I Specify random Email address as "Peeriustest"
-    And click on button " Send Test Email"
+    And I click on button " Send Test Email"
     Then I should see Message "Successfully saved."
 
   @E2ENewproductHint
@@ -74,7 +74,7 @@ Feature: End to End Tests for Mail
     And I select option "no-sale-product"
     And I click on button "Next"
     And I Specify random Email address as "Peeriustest"
-    And click on button " Send Test Email"
+    And I click on button " Send Test Email"
     Then I should see Message "Successfully saved."
 
   @E2ENoSaleProductHint
@@ -91,13 +91,13 @@ Feature: End to End Tests for Mail
     And I click on link "2. Configuration"
     And I Set "Product Catalog" at position "1"
     And I click on link "Expression"
-    And I click on link "Toggle Advanced"
+    And I click on link "Toggle advanced"
     Then I Set Rule for "<Expression>"
     And I click on link "Hints"
     And I select option "Please Select a Hint"
     And I click on button "Next"
     And I Specify random Email address as "Peeriustest"
-    And click on button " Send Test Email"
+    And I click on button " Send Test Email"
     Then I should see Message "Successfully saved."
 
     Examples: Expression
@@ -126,7 +126,7 @@ Feature: End to End Tests for Mail
     And I Enter Hint Parameter Text as "Clothing>Dresses>Dresses" in "1" Positions
     And I click on button "Next"
     And I Specify random Email address as "Peeriustest"
-    And click on button " Send Test Email"
+    And I click on button " Send Test Email"
     Then I should see Message "Successfully saved."
 
   @E2EManualSelect
@@ -139,7 +139,7 @@ Feature: End to End Tests for Mail
 
   @SetupE2EFallbackProductSet
   Scenario: Setup E2E S-Mail test for Fallback Productset
-    When I click on "Define Product Sets" option in "Mail"
+    When I click on "Define product sets" option in "Mail"
     And I Create Product Set "TestproductSetE2E" and products number "5" with Suffix "Dress"
     Given I goto Mail Campaign "E2EAutoCreate"
     And I click on link "2. Configuration"
@@ -147,8 +147,8 @@ Feature: End to End Tests for Mail
     And I search for "TestproductSetE2E" Fallback ProductSet
     And I click on button "Next"
     And I Specify random Email address as "Peeriustest"
-    And click on button " Send Test Email"
-    Then I should see Message "Successfully saved."
+    And I click on button " Send Test Email"
+	    Then I should see Message "Successfully saved."
 
   @E2EFallbackProductSet
   Scenario: E2E S-Mail test for Fallback Productset

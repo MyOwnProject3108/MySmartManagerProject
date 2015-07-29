@@ -16,6 +16,7 @@ public class PeeriusDebugInfo extends Context {
 	int number = Integer.parseInt(positions);
 	addCookie("'peerius_pass_peeriusdebug", "1");
 	Navigation.refreshPage();
+	addCookie("'peerius_pass_peeriusdebug", "1");
 			try{
 				List<WebElement> rulePositions =driverInstance.findElements(By.xpath("//tr[contains(.,'Rules')]//td[contains(text(),'Product matched rule \""+rule+"')]"));
 			int size = rulePositions.size();
@@ -39,6 +40,7 @@ public class PeeriusDebugInfo extends Context {
 		
 		addCookie("'peerius_pass_peeriusdebug", "1");
 		Navigation.refreshPage();
+		addCookie("'peerius_pass_peeriusdebug", "1");
 		
 		int number = Integer.parseInt(positions);
 		try{
@@ -63,7 +65,7 @@ public class PeeriusDebugInfo extends Context {
 		
 		addCookie("'peerius_pass_peeriusdebug", "1");
 		Navigation.refreshPage();
-			
+		addCookie("'peerius_pass_peeriusdebug", "1");
 		try{
 			WebElement singleElement =driverInstance.findElement(By.xpath("//*[@class='peeriusSkipped']//td[text()]"));
 							
@@ -81,6 +83,7 @@ public class PeeriusDebugInfo extends Context {
 		
 		addCookie("'peerius_pass_peeriusdebug", "1");
 		Navigation.refreshPage();
+		addCookie("'peerius_pass_peeriusdebug", "1");
 		
 	List<WebElement> rulePositions =driverInstance.findElements(By.xpath(" //tr[contains(.,'Rules')]//td"));
 		
@@ -110,6 +113,7 @@ public class PeeriusDebugInfo extends Context {
 		
 			addCookie("'peerius_pass_peeriusdebug", "1");
 			Navigation.refreshPage();
+			addCookie("'peerius_pass_peeriusdebug", "1");
 			elementIsPresent(By.xpath("//h2[contains(.,'"+widget+"')]"));
 	}
 

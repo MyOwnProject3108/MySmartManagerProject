@@ -4,8 +4,8 @@ Feature: SMART-Triggers Error Validations
     Given I login as "zach"
     Then I should be on "Peerius Smart Manager" page
     And I search for site "demostoredev"
-    Given I click on "Triggers" option in "Mail"
-    Then I should be on Mail "Triggers" page
+    Given I click on "Triggers" option in "Triggers"
+    Then I should be on Triggers "Triggers" page
 
   @Connection_nameMandatory
   Scenario: To verify that name is mandatory for Connections
@@ -27,7 +27,7 @@ Feature: SMART-Triggers Error Validations
 
   @Connection_invalidUserName
   Scenario: To verify that incorrect UserName is not accepted for Connections
-    Given I click on button "ESP Connections" 
+    Given I click on button "ESP Connections"
     And I click on button "Add an ESP connection"
     And I set data for new "Connection"
     And I set "username" field as "user"

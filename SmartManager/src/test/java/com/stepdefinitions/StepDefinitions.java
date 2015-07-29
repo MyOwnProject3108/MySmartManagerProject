@@ -385,6 +385,13 @@ public class StepDefinitions extends SmartMerchandising {
 			SmartMail.verifyMailCampaign(campaign);
 		}
 		
+		@Then("^I should be on Triggers \"(.*?)\" page$")
+		public void triggerPage(String page){
+			
+			SmartMail.verifyTriggersPage(page);
+			
+		}
+		
 		@Given("^I Edit Mail campaign \"(.*?)\"$")
 		public void i_Edit_Mail_campaign(String campaign) throws Throwable {
 		    
