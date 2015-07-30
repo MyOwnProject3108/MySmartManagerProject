@@ -39,8 +39,6 @@ public class PeeriusDebugInfo extends Context {
 	public static void verifyStrategy(String strategy, String positions){
 		
 		addCookie("'peerius_pass_peeriusdebug", "1");
-		Navigation.refreshPage();
-		addCookie("'peerius_pass_peeriusdebug", "1");
 		
 		int number = Integer.parseInt(positions);
 		try{
@@ -64,8 +62,6 @@ public class PeeriusDebugInfo extends Context {
 	public static void verifyDebugHint(String hint) {
 		
 		addCookie("'peerius_pass_peeriusdebug", "1");
-		Navigation.refreshPage();
-		addCookie("'peerius_pass_peeriusdebug", "1");
 		try{
 			WebElement singleElement =driverInstance.findElement(By.xpath("//*[@class='peeriusSkipped']//td[text()]"));
 							
@@ -83,7 +79,6 @@ public class PeeriusDebugInfo extends Context {
 		
 		addCookie("'peerius_pass_peeriusdebug", "1");
 		Navigation.refreshPage();
-		addCookie("'peerius_pass_peeriusdebug", "1");
 		
 	List<WebElement> rulePositions =driverInstance.findElements(By.xpath(" //tr[contains(.,'Rules')]//td"));
 		

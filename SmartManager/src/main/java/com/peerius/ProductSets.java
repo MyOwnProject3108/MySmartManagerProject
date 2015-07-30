@@ -14,8 +14,8 @@ public class ProductSets extends Context {
 
 	public static void createProductSet(String title, String productPrefix,	String number) {
 
-		clickButton("Add Product set");
-		verifyPageText(By.tagName("h4"), "Define Product set");
+		clickButton("Add product set");
+		verifyPageText(By.tagName("h4"), "Define product set");
 		setText(By.name("name"), title);
 
 		int numberOfProduct = Integer.parseInt(number);
@@ -36,7 +36,7 @@ public class ProductSets extends Context {
 		}
 		clickLink("Finished");
 
-		clickButton("Save Product set");
+		clickButton("Save product set");
 
 	}
 	

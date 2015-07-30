@@ -148,10 +148,10 @@ public class StepDefinitions extends SmartMerchandising {
 	}
 	
 	@Given("^I Create Campaign with \"(.*?)\"$")
-	public void i_Create_Campaign_with_Test_Selenium(String name) throws Throwable {
+	public void i_Create_Campaign(String name) throws Throwable {
 		SmartMerchandising.gotoCreateCampaign();
 		setText(By.id("name"), name);
-		clickButton("Save Campaign");
+		clickButton("Save campaign");
 		}
 	
 	@When("^I click on link \"(.*?)\"$")
@@ -230,7 +230,7 @@ public class StepDefinitions extends SmartMerchandising {
 	
 	@Then("^I Should verify Product Sets \"(.*?)\"$")
 	public void i_Should_verify_Product_Sets(String name) throws Throwable {
-		SmartMerchandising.selectMenuOption("Merchandising", "Define Product Sets");
+		SmartMerchandising.selectMenuOption("Merchandising", "Define product sets");
 		clickLink(name);
 		elementIsPresent(By.xpath("//div[@class='visual-tags']//descendant::div"));
 		
@@ -243,13 +243,13 @@ public class StepDefinitions extends SmartMerchandising {
 
 	@Then("^Product Set \"(.*?)\" Should be Deleted$")
 	public void product_Set_Should_be_Deleted(String productSet) throws Throwable {
-	 SmartMerchandising.selectMenuOption("Merchandising", "Define Product Sets");
+	 SmartMerchandising.selectMenuOption("Merchandising", "Define product sets");
 	 elementNotPresent(By.linkText(productSet));
 	}
 	
 	@Then("^Product Set \"(.*?)\" is not Deleted$")
 	public void product_Set_is_not_Deleted(String productset) throws Throwable {
-		SmartMerchandising.selectMenuOption("Merchandising", "Define Product Sets");
+		SmartMerchandising.selectMenuOption("Merchandising", "Define product sets");
 		elementIsPresent(By.linkText(productset));
 	}
 
@@ -344,13 +344,13 @@ public class StepDefinitions extends SmartMerchandising {
 		@Then("^Apply Rule \"(.*?)\" To Position \"(.*?)\"$")
 		public void apply_To_Position(String ruleNumber, String position) throws Throwable {
 			
-				clickLink("3. Recommendation Rules");
+				clickLink("3. Recommendation rules");
 				 clickElement(By.xpath("//ul/li["+ruleNumber+"]//div[contains(@class,'actions')]/button[contains(.,'Edit Rule')]"));
 
 				dragAndDrop(By.xpath("//div[contains(@data-original-title,'Drag')]/p[contains(.,'"+ruleNumber+"')]"), 
 						By.xpath("//ul[@class='rules-grid']/li["+position+"]/div[contains(@id,'rule-target')]"));
 				
-				clickButton("Save Campaign");
+				clickButton("Save campaign");
 				
 		}
 		

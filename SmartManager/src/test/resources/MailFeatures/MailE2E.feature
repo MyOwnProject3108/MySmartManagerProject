@@ -94,7 +94,7 @@ Feature: End to End Tests for Mail
     And I click on link "Toggle advanced"
     Then I Set Rule for "<Expression>"
     And I click on link "Hints"
-    And I select option "Please Select a Hint"
+    And I select option "Please select a hint"
     And I click on button "Next"
     And I Specify random Email address as "Peeriustest"
     And I click on button " Send Test Email"
@@ -140,7 +140,7 @@ Feature: End to End Tests for Mail
   @SetupE2EFallbackProductSet
   Scenario: Setup E2E S-Mail test for Fallback Productset
     When I click on "Define product sets" option in "Mail"
-    And I Create Product Set "TestproductSetE2E" and products number "5" with Suffix "Dress"
+    And I Create Product Set "TestproductSetE2E" and products number "2" with Suffix "WL155733121, WL257143001"
     Given I goto Mail Campaign "E2EAutoCreate"
     And I click on link "2. Configuration"
     And I Set "Cross-sell, previous purchases and views" at position "1"

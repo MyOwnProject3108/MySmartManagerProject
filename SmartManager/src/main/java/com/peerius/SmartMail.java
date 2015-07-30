@@ -6,7 +6,6 @@ import java.util.Random;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -138,20 +137,20 @@ public class SmartMail extends Context {
 			
 		}
 		
+		clickElement(By.xpath("(//div[@class='visual'])["+position+"]"));
+		setText(By.xpath("(//input[@class='visual-input'])["+position+"]"), strategy);
+		List<WebElement> strategies = driverInstance.findElements(By.xpath("//ul[@class='visual-list context-menu hide']/li[contains(@style,'list-item')]"));
 		
-		List<WebElement> droplist = driverInstance.findElements(By.xpath("//ul[@class='visual-list context-menu hide']/li"));
-		
-		for(WebElement option: droplist){
+		for(WebElement option: strategies){
 			
 			if(option.getText().equalsIgnoreCase(strategy)){
 				
 				Actions selectOption = new Actions(driverInstance);
-				selectOption.doubleClick(option).sendKeys(Keys.ENTER).build().perform();
+				selectOption.doubleClick(option).build().perform();
 		
 			}
 			
 		}
-			
 			
 }
 	

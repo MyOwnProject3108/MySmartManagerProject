@@ -31,7 +31,7 @@ Feature: S-Mail
     When I Set style with value "200" for clientHeight and ClientWidth
     Then I should see the style applied with value "200" in "clientHeight" in Widget Content Preview
     Then I should see the style applied with value "200" in "clientWidth" in Widget Content Preview
-    And I click on "Save Campaign"
+    And I click on button "Save campaign"
     When I goto Mail Campaign "AutoCreate"
     Then I should see the style applied with value "200" in "clientHeight" in Widget Content Preview
     Then I should see the style applied with value "200" in "clientWidth" in Widget Content Preview
@@ -61,12 +61,12 @@ Feature: S-Mail
     And I Enable User-Top ups
     And I click on button "Next"
     And I Specify Email address as "test@peerius.com"
-    And I click on " Preview Email"
+    And I click on button " Preview Email"
     Then Preview should Show Second Position Topped up with Default Email Rec
     And I click on link "2. Configuration"
     When I Set the Number of Products as "1"
     Then I Should see "1" Product Positions
-    And I click on button "Save Campaign"
+    And I click on button "Save campaign"
 
   @UserTopUpsDisabled
   Scenario: Verify That If Top-Ups Is Disabled, Empty Email Rec should be returned
@@ -77,14 +77,14 @@ Feature: S-Mail
     And I Set "Cross-sell, previous purchases and views" at position "2"
     And I Set "Product Catalog" at position "3"
     And I Uncheck the checkbox for User-Top ups
-    And click on button "Next"
+    And I click on button "Next"
     And I Specify Email address as "test@peerius.com"
     And I click on button " Preview Email"
     Then Preview should Show Second Position Blank with No Email Rec
     And I click on link "2. Configuration"
     When I Set the Number of Products as "1"
     Then I Should see "1" Product Positions
-    And I click on button "Save Campaign"
+    And I click on button "Save campaign"
 
   @duplicatePositions
   Scenario: Each Click on Duplicate button Should copy that position to new position
@@ -98,7 +98,7 @@ Feature: S-Mail
     And I Enter rule Text as "20"
     And I click on link "Hints"
     And I select option "sale-product"
-    And I click on button " Duplicate"
+    And I click on button "Duplicate"
     Then I Should See "2" Positions With Same Strategy, Expression and Hint
 
   #E2E to check if tracking code gets added to the email rec url
@@ -109,7 +109,7 @@ Feature: S-Mail
     When I Set Tracking Code as "&test123"
     And I click on button "Next"
     And I Specify Email address as "test@peerius.com"
-    And I click on button " Preview Email"
+    And I click on button "Preview Email"
     And I click on Email Rec "1"
     Then I Should see Tracking Code "&test123" Added In The Product url
 
@@ -118,14 +118,14 @@ Feature: S-Mail
     Given I goto Mail Campaign "AutoCreate"
     And I click on link "2. Configuration"
     And I click on button "Next"
-    And I click on button " Generate Code"
+    And I click on button " Generate code"
     Then I should see the HTML code for Email Recs
 
   @CustomEmailAttributes
   Scenario: Test if Custom Email Attributes settings are saved in UI
     Given I click on "Customise email attributes" option in "Mail"
     When I set Custom Email Attribute "genre"
-    And I click on button "Save Custom attributes"
+    And I click on button "Save custom attributes"
     Then I should see Message "Successfully saved"
     And I click on link "Define product sets"
     And I click on link "Custom email attributes"

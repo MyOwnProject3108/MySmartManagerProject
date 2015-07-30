@@ -29,7 +29,7 @@ public class SmartMerchandising extends Context {
 		clickElement(By.xpath("//button[contains(@class,'edit-rule')]"));
 		setText(By.id("advanced_btn_rec_default"), ruleExpression);
 		clickLink("Apply to all");
-		clickElement(By.xpath("//button[contains(.,' Save Campaign')]"));
+		clickElement(By.xpath("//button[contains(.,' Save campaign')]"));
 				
 		
 	}
@@ -56,7 +56,7 @@ public class SmartMerchandising extends Context {
 		clickElement(By.xpath("//button[contains(@class,'edit-rule')]"));
 		setText(By.id("advanced_btn_rec_default"), ruleExpression);
 		dragAndDrop(By.xpath("//div[contains(@data-original-title,'Drag')]"), By.xpath("//ul[@class='rules-grid']/li["+position+"]"));
-		clickButton("Save Campaign");
+		clickButton("Save campaign");
 	
 	}
 

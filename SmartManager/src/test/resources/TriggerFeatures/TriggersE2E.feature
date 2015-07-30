@@ -9,8 +9,8 @@ Feature: E2E Test for Triggers
   Scenario: Create an E2E ESP Connection
     Given I click on "Triggers" option in "Mail"
     Then I should be on Mail "Triggers" page
-    Given click on button "ESP Connections"
-    And click on button "Add an ESP connection"
+    Given I click on button "ESP Connections"
+    And I click on button "Add an ESP connection"
     And I Create Connection "E2EConnection" for ESP "ECircle"
     Then I Should See ESP Connection "E2EConnection" on Mail Triggers Page
 
@@ -19,8 +19,8 @@ Feature: E2E Test for Triggers
     Given I click on "Triggers" option in "Mail"
     Then I should be on Triggers "Triggers" page
     Then I should be on Mail "Triggers" page
-    When click on button "ESP Actions"
-    And click on button "Add an ESP Action"
+    When I click on button "ESP Actions"
+    And I click on button "Add an ESP Action"
     And I Create Action "E2EAction" for ESP "E2EConnection"
     Then I Should See ESP Action "E2EAction" on Mail Triggers Page
 
@@ -28,20 +28,20 @@ Feature: E2E Test for Triggers
   Scenario: Create an E2E ESP Trigger
     Given I click on "Triggers" option in "Mail"
     Then I should be on Triggers "Triggers" page
-    When click on button " Add a Trigger"
+    When I click on button " Add a Trigger"
     And I Create Trigger with name "E2ETrigger" for "E2EAction" from "2"
     Then I Should See ESP Trigger "E2ETrigger" on Mail Triggers Page
     Given I activate "E2ETrigger" ESP Trigger
 
   @TriggerEmailCampaignSetup
   Scenario: Create TriggerEmail Campaign
-    Given I click on "Create a New Campaign" option in "Mail"
+    Given I click on "Create a new campaign" option in "Mail"
     Then I should be on Mail "Create a New Campaign" page
     Given I Create Simple Mail Campaign with name "E2ETriggerEmail"
     Given I goto Mail Campaign "E2ETriggerEmail"
     And I click on link "2. Configuration"
     And I Set "Triggered Email" at position "1"
-    And click on button "Save Campaign"
+    And I click on button "Save campaign"
     Then I should see Message "Successfully saved."
 
   @E2EAbandonedBrowseTest

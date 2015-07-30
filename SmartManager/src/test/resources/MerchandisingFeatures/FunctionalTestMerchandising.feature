@@ -7,7 +7,7 @@ Feature: S-Merchandising
 
   @createsimple
   Scenario: Create Simple Merchandising Campaign
-    When I click on "Create a New Campaign" option in "Merchandising"
+    When I click on "Create a new campaign" option in "Merchandising"
     Then I should be on Merchandising "Create a New Campaign" page
     And I Create Simple Campaign with name "AutoCreate"
     Then I should see Message "Successfully saved"
@@ -22,13 +22,13 @@ Feature: S-Merchandising
   @masterrule
   Scenario: Add Master rule
     Given I goto Campaign "AutoCreate"
-    Then I click on link "2. Master Rules"
-    And I click on link "Toggle Advanced"
+    Then I click on link "2. Master rules"
+    And I click on link "Toggle advanced"
     Then I Set Master Rule "(r.saleprice<20)"
-    And click on button "Save Campaign"
+    And click on button "Save campaign"
     Then I should see Message "Successfully saved"
     When I goto Campaign "AutoCreate"
-    And I click on link "2. Master Rules"
+    And I click on link "2. Master rules"
     Then I should see Master Rule "(r.saleprice<20)"
 
   @positions
@@ -36,7 +36,7 @@ Feature: S-Merchandising
     Given I Create Campaign "<Campaign>" For "<Position>"
     Then I should see Message "Successfully saved"
     And Edit Campaign "<Campaign>"
-    When I click on link "3. Recommendation Rules"
+    When I click on link "3. Recommendation rules"
     Then I Should Verify "<Position>"
 
     Examples: Rule Positions
@@ -48,12 +48,12 @@ Feature: S-Merchandising
   @diffrules
   Scenario Outline: Different Rules At Different Positions
     Given I goto Campaign "AutoCreate"
-    And I click on link "3. Recommendation Rules"
-    And I click on button "Add New Rule"
+    And I click on link "3. Recommendation rules"
+    And I click on button "Add new rule"
     Then I Add New Rule "<RuleNumber>" with Rule "<Rule>"
     And Apply Rule "<RuleNumber>" To Position "<Position>"
     Given I goto Campaign "AutoCreate"
-    And I click on link "3. Recommendation Rules"
+    And I click on link "3. Recommendation rules"
     Then I Should Verify Rule  "<RuleNumber>" at "<Position>"
 
     Examples: Rule Positions
@@ -65,38 +65,38 @@ Feature: S-Merchandising
   Scenario: Create Simple Merchandising Campaign using select list for the rules
     Given I goto Campaign "AutoCreate"
     And Edit Campaign "AutoCreate"
-    When I click on link "3. Recommendation Rules"
+    When I click on link "3. Recommendation rules"
     And I click on button "Edit Rule..."
     And I select option "r.colour"
     And I select operator "equals to"
     And I Enter rule Text "black"
-    And click on button "Save Campaign"
+    And click on button "Save campaign"
     Then I should see Message "Successfully saved"
     When I goto Campaign "AutoCreate"
-    When I click on link "3. Recommendation Rules"
+    When I click on link "3. Recommendation rules"
     And I click on button "Edit Rule..."
     Then I should see Rule "(r.colour="black")" on Position "1"
 
   @productsetrule
   Scenario: Create Simple Merchandising Campaign using productset as a rule
-    When I click on "Define Product Sets" option in "Merchandising"
+    When I click on "Define product sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
     Given I goto Campaign "AutoCreate"
     And Edit Campaign "AutoCreate"
-    When I click on link "3. Recommendation Rules"
+    When I click on link "3. Recommendation rules"
     And I click on button "Edit Rule..."
     And I select option "r.productset"
     And I select operator "equals to"
     And I Enter rule Text "TestSet"
-    And click on button "Save Campaign"
+    And click on button "Save campaign"
     Then I should see Message "Successfully saved"
     When I goto Campaign "AutoCreate"
-    When I click on link "3. Recommendation Rules"
+    When I click on link "3. Recommendation rules"
     Then I should see Rule "(r.productset="TestSet")" on Position "1"
 
   @deleteproductsetusedinrule
   Scenario: Delete Product Set with is used as a rule in merch campaign
-    When I click on "Define Product Sets" option in "Merchandising"
+    When I click on "Define product dets" option in "Merchandising"
     And I click Delete On Product Set "TestSet"
     Then I should see Message "SKU set is in use and cannot be deleted"
 
@@ -114,12 +114,12 @@ Feature: S-Merchandising
 
   @createCampaignWithNoRule
   Scenario: Create a simple campaign without adding any rule
-    When I click on "Create a New Campaign" option in "Merchandising"
+    When I click on "Create a new campaign" option in "Merchandising"
     Then I should be on Merchandising "Create a New Campaign" page
     When I create simple camapign "AutoCreateNoRule" with no rule
     When I click on link "4. Exclusions"
     And I add "10649631" for exclusion
-    And click on button "Save Campaign"
+    And click on button "Save campaign"
     Then I should see Message "Successfully saved"
     Then I Should See Campaign "AutoCreateNoRule" on Overview Page
 
@@ -167,20 +167,20 @@ Feature: S-Merchandising
   Scenario: Error validation for Empty Expression on Edit
     Given I Create Simple Campaign with name "AutoCreate"
     And Edit Campaign "AutoCreate"
-    When I click on link "3. Recommendation Rules"
+    When I click on link "3. Recommendation rules"
     And I click on button "Edit Rule..."
     And I Enter Text ""
-    And click on button "Save Campaign"
+    And click on button "Save campaign"
     Then I should see Message "no expression was specified"
 
   @invalidmasterrule
   Scenario: Error message validation for invalid Master rule
     Given I Create Simple Campaign with name "AutoCreate"
     And Edit Campaign "AutoCreate"
-    Then I click on link "2. Master Rules"
-    And I click on link "Toggle Advanced"
+    Then I click on link "2. Master rules"
+    And I click on link "Toggle advanced"
     Then I Set Master Rule "(p.fit)"
-    And click on button "Save Campaign"
+    And click on button "Save campaign"
     Then I should see Message "a valid expression should be provided"
 
   @emptyrefpreview
@@ -200,34 +200,34 @@ Feature: S-Merchandising
     And Select Preview Category "Tops"
     When I click on link "Preview"
     Then I Should See Preview with "2" Products
-    And click on button "Save Campaign"
+    And click on button "Save campaign"
 
   @emptyskuname
   Scenario: Error validation for empty productset name
-    When I click on "Define Product Sets" option in "Merchandising"
-    And I click on button "Add Product set"
-    And click on button "Save Product set"
+    When I click on "Define product sets" option in "Merchandising"
+    And I click on button "Add product set"
+    And click on button "Save product set"
     Then I should see Message "Name is required"
 
   @emptysku
   Scenario: Error validation for empty productset
-    When I click on "Define Product Sets" option in "Merchandising"
-    And I click on button "Add Product set"
+    When I click on "Define product sets" option in "Merchandising"
+    And I click on button "Add product set"
     And I enter title "AutoproductSet"
-    And click on button "Save Product set"
+    And click on button "Save product set"
     Then I should see Message "An SKU set must have at least one valid product"
 
   @productsetvalidation
   Scenario: Error validation for invalid productset name
-    When I click on "Define Product Sets" option in "Merchandising"
-    And I click on button "Add Product set"
+    When I click on "Define product sets" option in "Merchandising"
+    And I click on button "Add product set"
     And I enter title "AutoproductSet@123"
-    And click on button "Save Product set"
+    And I click on button "Save product set"
     Then I should see Message "Name accepts alphanumeric and spaces only"
 
   @productset
   Scenario: Add Product Set
-    When I click on "Define Product Sets" option in "Merchandising"
+    When I click on "Define product sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
     Then I Should verify Product Sets "TestSet"
 
@@ -238,11 +238,11 @@ Feature: S-Merchandising
 
   @clearAllTags
   Scenario: Save productset by clearing products from ProductSet
-    When I click on "Define Product Sets" option in "Merchandising"
+    When I click on "Define product sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
     And I click Edit On Product Set "TestSet"
     Then I click on link "Clear All Tags"
-    And click on button "Save Product set"
+    And click on button "Save product set"
     Then I should see Message "An SKU set must have at least one valid product"
 
   @editProductSet
@@ -263,7 +263,7 @@ Feature: S-Merchandising
 
   @skuduplicate
   Scenario: Error message validation for duplicate sku
-    When I click on "Define Product Sets" option in "Merchandising"
+    When I click on "Define product sets" option in "Merchandising"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
     Then I Should verify Product Sets "TestSet"
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
@@ -275,7 +275,7 @@ Feature: S-Merchandising
 
   @campaignsuccessmsg
   Scenario: Success message validation for setup campaign
-    When I click on "Create a New Campaign" option in "Merchandising"
+    When I click on "Create a new campaign" option in "Merchandising"
     Then I should be on Merchandising "Create a New Campaign" page
     And I Create Simple Campaign with name "AutoCreateSuccess"
     Then I should see Message "Successfully saved"
