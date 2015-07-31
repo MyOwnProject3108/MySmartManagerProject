@@ -344,7 +344,7 @@ public class SmartMail extends Context {
 		clickButton("Save ESP Action");
 		threadSleep(2000);
 		elementIsPresent(By.className("notification"));
-		verifyInnerHTML(By.xpath("//div[@class='notifications']"), "Successfully saved.");
+		verifyErrorMessage(By.className("notifications"), "Successfully saved.");
 		elementIsPresent(By.xpath("//button[contains(@class,'btn-success disabled')]"));
 		
 	}
@@ -369,7 +369,7 @@ public class SmartMail extends Context {
 		elementIsPresent(By.xpath("//div[contains(@class, 'row cf')]/div/button[@data-original-title='Save this trigger campaign.']"));
 		clickButton("Save Trigger");
 		elementIsPresent(By.className("notification"));
-		verifyInnerHTML(By.xpath("//div[@class='notifications']"), "Successfully saved.");
+		verifyErrorMessage(By.className("notifications"), "Successfully saved");
 		elementIsPresent(By.xpath("//div[contains(@class, 'triggers-target')]//li[contains(@class, 'item name')]/a[contains(text(), '"+triggerName+"')]"));
 			
 	}
@@ -493,7 +493,7 @@ public class SmartMail extends Context {
 		elementIsPresent(By.linkText(triggerName));
 		clickElement(By.xpath("//li[contains(@class,'item name')]/a[.='"+triggerName+"']/following::i[2]"));
 		clickElement(By.xpath("//div[contains(@class, 'yes')]"));
-		verifyErrorMessage(By.className("modal-body"), "Successfully deleted this item.");
+		
 	
 		
 	}
