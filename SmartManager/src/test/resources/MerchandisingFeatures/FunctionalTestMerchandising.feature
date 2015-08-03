@@ -250,7 +250,7 @@ Feature: S-Merchandising
     Given I goto ProductSet "TestSet"
     And I click Edit On Product Set "TestSet"
     Then I click on link "Clear All Tags"
-    And I Add "1" Products with Suffix "dora"
+    And I Add "1" Products with Suffix "A"
     Then I should see "1" products in "TestSet"
 
   @copyEditProductSet
