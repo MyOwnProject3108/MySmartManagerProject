@@ -9,9 +9,9 @@ Feature: End to End Tests for Merchandising
   Scenario: End to End Test Set-up for Simple Rule alongwith Master Rule
     Given I Create Simple Campaign with name "E2EMasterRule"
     Then I click on link "2. Master rules"
-    And I click on link "Toggle Advanced"
+    And I click on link "Toggle advanced"
     Then I Set Master Rule "(p.saleprice<"20")"
-    And click on button "Save Campaign"
+    And I click on button "Save campaign"
     Then I Should See Campaign "E2EMasterRule" on Overview Page
     And I activate Campaign "E2EMasterRule"
     Then Campaign should be Activated
@@ -32,10 +32,10 @@ Feature: End to End Tests for Merchandising
   @setupComplex
   Scenario Outline: End to End Test Set-up for Simple Rule alongwith AND Rule
     Given I Create Simple Campaign with name "E2EComplex"
-    And I click on button "Add New Rule"
+    And I click on button "Add new rule"
     Then I Add New Rule "<RuleNumber>" with Rule "<Rule>"
     And Apply Rule "<RuleNumber>" To Position "<Position>"
-    And I click on button "Save Campaign"
+    And I click on button "Save campaign"
     Then I Should See Campaign "E2EComplex" on Overview Page
     And I activate Campaign "E2EComplex"
     Then Campaign should be Activated
@@ -58,14 +58,14 @@ Feature: End to End Tests for Merchandising
 
   @setupproductset
   Scenario: Setup simple rule with productset for End-End scenario
-    When I click on "Define Product Sets" option in "Merchandising"
+    When I click on "Define product sets" option in "Merchandising"
     And I Create Product Set "TestSetE2E" and products number "2" with Suffix "D"
     And I Create Simple Campaign with name "E2EProductSet"
     And I select option "Handpick"
     And I select option "r.productset"
     And I select operator "equals to"
     And I Enter rule Text "TestSetE2E"
-    And click on button "Save Campaign"
+    And I click on button "Save campaign"
     Then I should see Message "Successfully saved"
     And I activate Campaign "E2EProductSet"
 
@@ -91,7 +91,7 @@ Feature: End to End Tests for Merchandising
     And I select option "Sale Price"
     And I select operator "less than"
     And I Enter rule Text "10"
-    And click on button "Save Campaign"
+    And I click on button "Save campaign"
     And I activate Campaign "E2EAutoABCreate"
 
   @end2endABGroup
