@@ -161,7 +161,7 @@ public class ProductSets extends Context {
 			}
 		}
 		clickLink("Finished");
-		clickButton("Save Product set");
+		clickButton("Save product set");
 		
 	}
 

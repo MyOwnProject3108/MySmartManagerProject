@@ -25,7 +25,7 @@ Feature: S-Merchandising
     Then I click on link "2. Master rules"
     And I click on link "Toggle advanced"
     Then I Set Master Rule "(r.saleprice<20)"
-    And click on button "Save campaign"
+    And I click on button "Save campaign"
     Then I should see Message "Successfully saved"
     When I goto Campaign "AutoCreate"
     And I click on link "2. Master rules"
@@ -70,7 +70,7 @@ Feature: S-Merchandising
     And I select option "r.colour"
     And I select operator "equals to"
     And I Enter rule Text "black"
-    And click on button "Save campaign"
+    And I click on button "Save campaign"
     Then I should see Message "Successfully saved"
     When I goto Campaign "AutoCreate"
     When I click on link "3. Recommendation rules"
@@ -88,7 +88,7 @@ Feature: S-Merchandising
     And I select option "r.productset"
     And I select operator "equals to"
     And I Enter rule Text "TestSet"
-    And click on button "Save campaign"
+    And I click on button "Save campaign"
     Then I should see Message "Successfully saved"
     When I goto Campaign "AutoCreate"
     When I click on link "3. Recommendation rules"
@@ -119,7 +119,7 @@ Feature: S-Merchandising
     When I create simple camapign "AutoCreateNoRule" with no rule
     When I click on link "4. Exclusions"
     And I add "10649631" for exclusion
-    And click on button "Save campaign"
+    And I click on button "Save campaign"
     Then I should see Message "Successfully saved"
     Then I Should See Campaign "AutoCreateNoRule" on Overview Page
 
@@ -170,7 +170,7 @@ Feature: S-Merchandising
     When I click on link "3. Recommendation rules"
     And I click on button "Edit rule..."
     And I Enter Text ""
-    And click on button "Save campaign"
+    And I click on button "Save campaign"
     Then I should see Message "no expression was specified"
 
   @invalidmasterrule
@@ -180,7 +180,7 @@ Feature: S-Merchandising
     Then I click on link "2. Master rules"
     And I click on link "Toggle advanced"
     Then I Set Master Rule "(p.fit)"
-    And click on button "Save campaign"
+    And I click on button "Save campaign"
     Then I should see Message "a valid expression should be provided"
 
   @emptyrefpreview
@@ -200,13 +200,13 @@ Feature: S-Merchandising
     And Select Preview Category "Tops"
     When I click on link "Preview"
     Then I Should See Preview with "2" Products
-    And click on button "Save campaign"
+    And I click on button "Save campaign"
 
   @emptyskuname
   Scenario: Error validation for empty productset name
     When I click on "Define product sets" option in "Merchandising"
     And I click on button "Add product set"
-    And click on button "Save product set"
+    And I click on button "Save product set"
     Then I should see Message "Name is required"
 
   @emptysku
@@ -214,7 +214,7 @@ Feature: S-Merchandising
     When I click on "Define product sets" option in "Merchandising"
     And I click on button "Add product set"
     And I enter title "AutoproductSet"
-    And click on button "Save product set"
+    And I click on button "Save product set"
     Then I should see Message "An SKU set must have at least one valid product"
 
   @productsetvalidation
@@ -242,7 +242,7 @@ Feature: S-Merchandising
     And I Create Product Set "TestSet" and products number "2" with Suffix "D"
     And I click Edit On Product Set "TestSet"
     Then I click on link "Clear All Tags"
-    And click on button "Save product set"
+    And I click on button "Save product set"
     Then I should see Message "An SKU set must have at least one valid product"
 
   @editProductSet
