@@ -66,7 +66,7 @@ Feature: S-Merchandising
     Given I goto Campaign "AutoCreate"
     And Edit Campaign "AutoCreate"
     When I click on link "3. Recommendation rules"
-    And I click on button "Edit Rule..."
+    And I click on button "Edit rule..."
     And I select option "r.colour"
     And I select operator "equals to"
     And I Enter rule Text "black"
@@ -74,7 +74,7 @@ Feature: S-Merchandising
     Then I should see Message "Successfully saved"
     When I goto Campaign "AutoCreate"
     When I click on link "3. Recommendation rules"
-    And I click on button "Edit Rule..."
+    And I click on button "Edit rule..."
     Then I should see Rule "(r.colour="black")" on Position "1"
 
   @productsetrule
@@ -84,7 +84,7 @@ Feature: S-Merchandising
     Given I goto Campaign "AutoCreate"
     And Edit Campaign "AutoCreate"
     When I click on link "3. Recommendation rules"
-    And I click on button "Edit Rule..."
+    And I click on button "Edit rule..."
     And I select option "r.productset"
     And I select operator "equals to"
     And I Enter rule Text "TestSet"
@@ -96,7 +96,7 @@ Feature: S-Merchandising
 
   @deleteproductsetusedinrule
   Scenario: Delete Product Set with is used as a rule in merch campaign
-    When I click on "Define product dets" option in "Merchandising"
+    When I click on "Define product sets" option in "Merchandising"
     And I click Delete On Product Set "TestSet"
     Then I should see Message "SKU set is in use and cannot be deleted"
 
@@ -168,7 +168,7 @@ Feature: S-Merchandising
     Given I Create Simple Campaign with name "AutoCreate"
     And Edit Campaign "AutoCreate"
     When I click on link "3. Recommendation rules"
-    And I click on button "Edit Rule..."
+    And I click on button "Edit rule..."
     And I Enter Text ""
     And click on button "Save campaign"
     Then I should see Message "no expression was specified"

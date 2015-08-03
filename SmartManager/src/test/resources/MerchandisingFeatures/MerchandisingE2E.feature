@@ -8,7 +8,7 @@ Feature: End to End Tests for Merchandising
   @setupMaster
   Scenario: End to End Test Set-up for Simple Rule alongwith Master Rule
     Given I Create Simple Campaign with name "E2EMasterRule"
-    Then I click on link "2. Master Rules"
+    Then I click on link "2. Master rules"
     And I click on link "Toggle Advanced"
     Then I Set Master Rule "(p.saleprice<"20")"
     And click on button "Save Campaign"

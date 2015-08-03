@@ -257,10 +257,10 @@ public class StepDefinitions extends SmartMerchandising {
 	
 	@Then("^I Add New Rule \"(.*?)\" with Rule \"(.*?)\"$")
 	public void i_Add_New_Rule(String ruleNumber, String rule) throws Throwable {
-	   clickElement(By.xpath("//ul/li["+ruleNumber+"]//div[contains(@class,'actions')]/button[contains(.,'Edit Rule')]"));
+	   clickElement(By.xpath("//ul/li["+ruleNumber+"]//div[contains(@class,'actions')]/button[contains(.,'Edit rule')]"));
 	   clickElement(By.partialLinkText("Toggle"));
 	   setText(By.xpath("//div/textarea[contains(@id,'advanced_btn_rec_"+ruleNumber+"')]"), rule	);
-	   clickButton("Save Campaign");	
+	   clickButton("Save campaign");	
 	}
 
 
@@ -345,7 +345,7 @@ public class StepDefinitions extends SmartMerchandising {
 		public void apply_To_Position(String ruleNumber, String position) throws Throwable {
 			
 				clickLink("3. Recommendation rules");
-				 clickElement(By.xpath("//ul/li["+ruleNumber+"]//div[contains(@class,'actions')]/button[contains(.,'Edit Rule')]"));
+				 clickElement(By.xpath("//ul/li["+ruleNumber+"]//div[contains(@class,'actions')]/button[contains(.,'Edit rule')]"));
 
 				dragAndDrop(By.xpath("//div[contains(@data-original-title,'Drag')]/p[contains(.,'"+ruleNumber+"')]"), 
 						By.xpath("//ul[@class='rules-grid']/li["+position+"]/div[contains(@id,'rule-target')]"));

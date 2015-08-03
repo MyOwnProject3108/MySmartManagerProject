@@ -61,7 +61,7 @@ public class ProductSets extends Context {
 
 	public static void gotoProductSet(String name) {
 
-		SmartMerchandising.selectMenuOption("Merchandising", "Define Product Sets");
+		SmartMerchandising.selectMenuOption("Merchandising", "Define product sets");
 		elementIsPresent(By.linkText(name));
 		clickLink(name);
 
