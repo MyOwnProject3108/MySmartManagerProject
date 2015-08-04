@@ -1,4 +1,4 @@
-Feature: S-Merchandising
+Feature: S-Merchandising Functional Tests
 
   Background: Pre-requisite
     Given I login as "zach"

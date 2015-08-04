@@ -1,4 +1,4 @@
-Feature: S-Mail
+Feature: S-Mail Functional Tests
 
   Background: Pre-requisite
     Given I login as "zach"
