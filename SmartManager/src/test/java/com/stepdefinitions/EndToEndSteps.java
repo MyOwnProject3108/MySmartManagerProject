@@ -142,8 +142,9 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 	
 	@Given("^I Goto Registered Random Inbox$")
 	public void i_Goto_Registered_Random_Inbox() throws Throwable {
+		   threadSleep(180000);
 		   Navigation.gotoURL("http://mailinator.com/inbox.jsp?to="+SmartMail.registerRandomEmailGenerated);
-		//   threadSleep(3000);
+		
 	}
 
 	   
