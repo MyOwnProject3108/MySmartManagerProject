@@ -29,7 +29,7 @@ Feature: E2E Test for Triggers
     Given I click on "Triggers" option in "Mail"
     Then I should be on Triggers "Triggers" page
     When I click on button " Add a Trigger"
-    And I Create Trigger with name "E2ETrigger" for "E2EAction" from "2"
+   	And  I Create Trigger "Abandoned Browse" with name "E2ETrigger" for "E2EAction" and "0" period
     Then I Should See ESP Trigger "E2ETrigger" on Mail Triggers Page
     Given I activate "E2ETrigger" ESP Trigger
 

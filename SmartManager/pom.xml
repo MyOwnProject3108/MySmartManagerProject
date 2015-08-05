@@ -98,7 +98,7 @@
 			</build>
 		</profile>
 		<profile>
-			<id>Trigger-Tests</id>
+			<id>Triggers-Tests</id>
 			<build>
 				<plugins>
 					<plugin>

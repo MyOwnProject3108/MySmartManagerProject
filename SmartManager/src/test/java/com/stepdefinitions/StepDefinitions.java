@@ -587,9 +587,9 @@ public class StepDefinitions extends SmartMerchandising {
 		    SmartMail.createESPAction(actionName,connection);
 		}
 		
-		@When("^I Create Trigger with name \"(.*?)\" for \"(.*?)\" from \"(.*?)\"$")
-		public void i_Create_Trigger_with_name_for_from(String triggerName, String espActionName, String position) throws Throwable {
-		   SmartMail.createESPTrigger(triggerName,espActionName,position);
+		@When("^I Create Trigger \"(.*?)\" with name \"(.*?)\" for \"(.*?)\" and \"(.*?)\" period$")
+		public void i_Create_Trigger_with_name_for(String triggerType, String triggerName, String espActionName, String inactivityPeriod) throws Throwable {
+		   SmartMail.createESPTrigger(triggerName,espActionName,triggerType,inactivityPeriod);
 		}
 		
 		@Then("^I Should See ESP Connection \"(.*?)\" on Mail Triggers Page$")

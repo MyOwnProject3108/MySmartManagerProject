@@ -136,13 +136,13 @@ Feature: SMART-Triggers Test
 
   @CreateESPTrigger
   Scenario Outline: Create an ESP Trigger
-    When I click on button " Add a Trigger"
-    And I Create Trigger with name "<TriggerName>" for "<ESPAction>" from "<Position>"
+    When I click on button "Add a Trigger"
+    And I Create Trigger "<TriggerType>" with name "<TriggerName>" for "<ESPAction>" and "<InactivityPeriod>" period
 
     Examples: Triggers
-      | TriggerName      | ESPAction       | Position |
-      | Abandoned Browse | ECircleAction   | 2        |
-      | Abandoned Basket | SilverpopAction | 1        |
+      | TriggerName      | ESPAction       | TriggerType      | InactivityPeriod |
+      | Abandoned Browse | ECircleAction   | Abandoned Browse | 0                |
+      | Abandoned Basket | SilverpopAction | Abandoned Basket | 2                |
 
   @NoDeleteESPTrigger
   Scenario: Click No to Delete ESP Trigger
@@ -152,12 +152,12 @@ Feature: SMART-Triggers Test
   @ActivateESPTrigger
   Scenario: Activate a deactivated ESP Trigger
     Given I activate "Abandoned Basket" ESP Trigger
-    Then I should see Message "Switched on"
+    Then I should see Message "Switched On"
 
   @DeActivateESPTrigger
   Scenario: Deactivate ESP Trigger
     Given I deactivate "Abandoned Basket" ESP Trigger
-    Then I should see Message "Switched off"
+    Then I should see Message "Switched Off"
 
   @EditDeleteButtonTrigger
   Scenario: Verify delete button is disabled for Edit ESP Trigger
@@ -180,7 +180,7 @@ Feature: SMART-Triggers Test
   @NewDeleteButtonTrigger
   Scenario: Verify delete button is disabled for new ESP Trigger
     Given I click on button "Add a Trigger"
-    And I Create Trigger with name "Abandoned Browse" for "ECircleAction" from "2"
+   	And  I Create Trigger "Abandoned Browse" with name "Abandoned Browse" for "<ECircleAction>" and "0" period
     Then I Should See disabled delete button for "Abandoned Browse" ESP Trigger
 
   @DeleteTestTriggers
