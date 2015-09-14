@@ -180,7 +180,7 @@ Feature: S-Mail Functional Tests
     And I click on link "2. Configuration"
     And I click on button "Next"
     And I click on button "Send Test Email"
-    Then I should see Message "Cannot generate preview Email address required "
+    Then I should see Message "Email address required "
 
   @EmptyEmailPlaceholder
   Scenario: Validate Empty Email Placeholder

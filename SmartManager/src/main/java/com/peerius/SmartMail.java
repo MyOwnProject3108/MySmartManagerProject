@@ -198,14 +198,14 @@ public class SmartMail extends Context {
 		// TODO Xpaths needs to be check
 		int number = Integer.parseInt(position);
 
-		for (int i = 1; i <= number; ++i) {
+		for (int i = 0; i >= number; ++i) {
 
 			elementIsPresent(By.id("mail-item" + i + ""));
 
 			clickElement(By.xpath("//a[@href='#item" + i + "-rec']"));
 
 			verifyInnerHTML(
-					By.xpath("(//div[@class='visual-tags-value'])[" + i + "]"),
+					By.xpath("//li[@id='mail-item"+i+"']//div[@class='visual-tags-value']"),
 					strategy);
 
 			clickElement(By.xpath("//a[@href='#item" + i + "-exp']"));
