@@ -140,7 +140,7 @@ Feature: End to End Tests for Mail
   @SetupE2EFallbackProductSet
   Scenario: Setup E2E S-Mail test for Fallback Productset
     When I click on "Define product sets" option in "Mail"
-    And I Create Product Set "TestproductSetE2E" and products number "2" with Suffix "Jacket"
+    And I Create Product Set "TestproductSetE2E" and products number "2" with Suffix "Suede"
     Given I goto Mail Campaign "E2EAutoCreate"
     And I click on link "2. Configuration"
     And I Set "Cross-sell, previous purchases and views" at position "1"
