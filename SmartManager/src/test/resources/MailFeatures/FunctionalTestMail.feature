@@ -93,7 +93,7 @@ Feature: S-Mail Functional Tests
     When I Set the Number of Products as "1"
     And I Set "Product Catalog" at position "1"
     And I click on link "Expression"
-    And I select option "Sale Price"
+    And I select option "Sale price"
     And I select operator as "less than"
     And I Enter rule Text as "20"
     And I click on link "Hints"
