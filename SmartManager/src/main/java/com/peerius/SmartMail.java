@@ -565,8 +565,8 @@ public class SmartMail extends Context {
 	public static void clickEditTrigger(String triggerName) {
 		elementIsPresent(By.linkText(triggerName));
 		clickElement(By
-				.xpath("//ul//a[.= 'AbandonedBasket']/following::li[contains(@class, 'actions')][1]//i[contains(@class,'edit')]"));
-		// clickElement(By.xpath("//li[contains(@class, 'item name')]/a[contains(text(), '"+triggerName+"')]/following::li[contains(@class, 'actions')]/i[contains(@class, 'btn-edit')]"));
+				.xpath("//ul//a[.= '"+triggerName+"']/ancestor::ul//i[contains(@class,'edit')]"));
+		
 
 	}
 

@@ -180,7 +180,7 @@ Feature: SMART-Triggers Test
   @NewDeleteButtonTrigger
   Scenario: Verify delete button is disabled for new ESP Trigger
     Given I click on button "Add a Trigger"
-   	And  I Create Trigger "Abandoned Browse" with name "Abandoned Browse" for "<ECircleAction>" and "0" period
+   	And  I Create Trigger "Abandoned Browse" with name "Abandoned Browse" for "ECircleAction" and "0" period
     Then I Should See disabled delete button for "Abandoned Browse" ESP Trigger
 
   @DeleteTestTriggers
