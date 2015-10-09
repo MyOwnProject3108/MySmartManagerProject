@@ -488,8 +488,7 @@ public class SmartMail extends Context {
 
 	public static void deleteESPAction(String actionName) {
 		elementIsPresent(By.linkText(actionName));
-		clickElement(By.xpath("//li[contains(@class,'item name')]/a[.='"
-				+ actionName + "']/preceding::i[1]"));
+		clickElement(By.xpath("//li[contains(@class,'item name')]/a[.='"+actionName+"']/ancestor::ul//i[2]"));
 		clickElement(By.xpath("//div[contains(@class, 'yes')]"));
 		verifyErrorMessage(By.className("modal-body"),
 				"Successfully deleted this item.");

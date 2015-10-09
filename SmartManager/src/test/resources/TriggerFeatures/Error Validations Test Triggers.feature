@@ -112,7 +112,7 @@ Feature: SMART-Triggers Error Validations
   Scenario: To verify that Action can not be tested if Connection selected is inactive
     Given I click on button "ESP Connections"
     And I deactivate "TestConnection" ESP Connection
-    Then I should see Message "Switched off"
+    Then I should see Message "Switched Off"
 
   @TestActionInactiveConnetion
   Scenario: Test Action with Inactive Connection
@@ -129,7 +129,7 @@ Feature: SMART-Triggers Error Validations
   @activateTestConnection
   Scenario: Activate a deactivated ESP Connection
     Given I activate "TestConnection" ESP Connection
-    Then I should see Message "Switched on"
+    Then I should see Message "Switched On"
 
   @Actions_AddUserInvalidGroupID
   Scenario: To verify that Action to Add New User to Group fails for invalid Group ID
