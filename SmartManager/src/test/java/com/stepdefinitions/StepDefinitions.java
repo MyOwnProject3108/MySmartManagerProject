@@ -765,7 +765,7 @@ public class StepDefinitions extends SmartMerchandising {
 		@When("^I delete the Criteria$")
 		public void i_delete_the_Criteria() throws Throwable {
 			
-			clickElement(By.xpath("//ul[@id='in-use']//i"));	
+			clickElement(By.xpath("//ul[@id='in-use']/li/div[.='Home']/following-sibling::div/i"));	
 			elementNotPresent(By.xpath("//ul[@id='in-use']//i"));
 
 }
