@@ -48,18 +48,18 @@ Feature: E2E Test for Triggers
     And Switch Frame "rendermail"
 
   @DeleteE2ETrigger
-  Scenario Outline: Delete AbandonedBasket Trigger After Tests
+  Scenario: Delete AbandonedBasket Trigger After Tests
     Given I Delete ESP Trigger "E2ETrigger"
     Then I Should not See ESP Trigger "E2ETrigger" on Mail Triggers Page
 
   @DeleteE2EAction
-  Scenario Outline: Delete ESP Action After Test
+  Scenario: Delete ESP Action After Test
     Given I click on button "ESP Actions"
     And I Delete ESP Action "E2EAction"
     Then I Should not See ESP Action "E2EAction" on Mail Triggers Page
 
   @DeleteConnectionE2E
-  Scenario Outline: Delete ESP Connections After Test
+  Scenario: Delete ESP Connections After Test
     Given I click on button "ESP Connections"
     And I Delete ESP Connection "E2EConnection"
     Then I Should not See ESP Connection "E2EConnection" on Mail Triggers Page
