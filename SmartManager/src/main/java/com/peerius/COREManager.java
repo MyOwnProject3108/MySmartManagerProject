@@ -25,6 +25,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -54,7 +55,7 @@ public class COREManager {
 	public static ImmutableMap<String, Credential> userProfiles;
 	public static ImmutableMap<String, Credential> espProfiles;
 	public static Properties prop;
-	public String browserName;
+	public static String browserName;
 	public static String remoteDriverUrl;
 	public static String remoteBrowserName;
 	public static String remoteBrowserVersion;
@@ -78,10 +79,13 @@ public class COREManager {
 		prop = new Properties();
 		ImmutableMap.Builder<String, Credential> builder = ImmutableMap
 				.builder();
-		try (InputStream input = new FileInputStream(currentDir
-				+ "/src/main/resources/config.properties")) {
+		
+		try (InputStream input = new FileInputStream(currentDir + "/src/main/resources/config.properties")) {
 			prop.load(input);
 
+			//BrowserName
+			browserName = prop.getProperty("browser").trim();
+			
 			// siteUrl
 			siteUrl = prop.getProperty("siteUrl", "").trim();
 			// Tracker Plugin Site
@@ -119,7 +123,7 @@ public class COREManager {
 			implicitWait = Integer.parseInt(prop.getProperty(
 					"browserImplicitWait", "").trim());
 
-			// load Plugin File
+			//load Plugin File
 			trackerPlugIn = new File(currentDir + "/drivers/PeeriusPlugIn.xpi");
 			System.out.print("TrackerPlugin Directory ---- " + trackerPlugIn);
 
@@ -271,6 +275,8 @@ public class COREManager {
 				phantom.setCapability("takesScreenshot", true);
 				phantom.setCapability("acceptSslCerts", false);
 				phantom.setCapability("handlesAlerts", true);
+				phantom.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] 
+						{"--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=tlsv1"});
 
 				if (System.getProperty("os.name").contains("Mac")) {
 					phantom.setCapability(
@@ -281,7 +287,7 @@ public class COREManager {
 				if (System.getProperty("os.name").contains("Windows")) {
 					phantom.setCapability(
 							PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-							currentDir + "\\phantomjs\\phantomjs.exe");
+							currentDir +"\\phantomjs\\phantomjs.exe");
 				}
 
 				else if (System.getProperty("os.name").contains("Linux")) {
@@ -322,6 +328,7 @@ public class COREManager {
 				remoteDriver.setVersion(remoteBrowserVersion);
 				driverInstance = new RemoteWebDriver(new URL(remoteDriverUrl),
 						remoteDriver);
+				
 				((RemoteWebDriver) driverInstance)
 						.setFileDetector(new LocalFileDetector());
 
@@ -343,6 +350,12 @@ public class COREManager {
 				browserStack.setCapability("browserstack.debug", true);
 				browserStack.setCapability("project", projectName);
 				browserStack.setCapability("build", "'" + buildVersion + "'");
+				browserStack.setCapability("acceptSslCerts", "true");
+				browserStack.setCapability("unexpectedAlertBehaviour", "true");
+				browserStack.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, true);
+				browserStack.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+				
+				
 				driverInstance = new RemoteWebDriver(new URL("http://"
 						+ browserStackuser + ":" + automationKey
 						+ "@hub.browserstack.com/wd/hub"), browserStack);
@@ -414,15 +427,19 @@ public class COREManager {
 			if (userCredentials != null) {
 
 				Navigation.gotoLoginPage();
-				driverInstance.findElement(By.id("emailaddress")).sendKeys(
-						userCredentials.username);
-				driverInstance.findElement(By.id("password")).sendKeys(
-						userCredentials.password);
-				driverInstance.findElement(By.tagName("button")).click();
-
-				Boolean pageTitle = new WebDriverWait(driverInstance, 15L)
-						.until(ExpectedConditions
-								.titleContains("Peerius Smart Manager"));
+				
+				WebDriverWait driverWait = new WebDriverWait(driverInstance, elementWaitTime);
+								
+				WebElement emailField = driverWait.until(ExpectedConditions.presenceOfElementLocated(By.id("emailaddress")));
+				emailField.sendKeys(userCredentials.username);
+								
+				WebElement passwordField = driverWait.until(ExpectedConditions.presenceOfElementLocated(By.id("password")));
+				passwordField.sendKeys(userCredentials.password);
+				
+				WebElement submitButton = driverWait.until(ExpectedConditions.presenceOfElementLocated(By.id("the_login_button")));
+				submitButton.click();
+			
+				boolean pageTitle = new WebDriverWait(driverInstance, 5L).until(ExpectedConditions.titleContains("Peerius Smart Manager"));
 				Assert.assertTrue("Page Title Exist", pageTitle);
 
 			}

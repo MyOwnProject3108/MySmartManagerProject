@@ -29,12 +29,10 @@ Feature: S-Mail Functional Tests
   Scenario: Styling changes should reflect on product title and price display
     Given I goto Mail Campaign "AutoCreate"
     When I Set style with value "200" for clientHeight and ClientWidth
-    Then I should see the style applied with value "200" in "clientHeight" in Widget Content Preview
-    Then I should see the style applied with value "200" in "clientWidth" in Widget Content Preview
     And I click on button "Save campaign"
     When I goto Mail Campaign "AutoCreate"
-    Then I should see the style applied with value "200" in "clientHeight" in Widget Content Preview
-    Then I should see the style applied with value "200" in "clientWidth" in Widget Content Preview
+    Then I should see the style applied with value "200" in "height" in Widget Content Preview
+    Then I should see the style applied with value "200" in "width" in Widget Content Preview
 
   @AdvancedLink
   Scenario: Verify If Show Advanced Settings Link Works
@@ -49,7 +47,7 @@ Feature: S-Mail Functional Tests
     And I click on link "2. Configuration"
     When I Set the Number of Products as "3"
     Then I Should see "3" Product Positions
-
+#Invalid Test should be more specific rather than doing multiple task 
   @UserTopUpsEnabled
   Scenario: Verify That If Top-Ups Is Enabled, Empty Email Rec Is Topped Up By Default Email Recs
     Given I goto Mail Campaign "AutoCreate"
@@ -180,7 +178,7 @@ Feature: S-Mail Functional Tests
     And I click on link "2. Configuration"
     And I click on button "Next"
     And I click on button "Send Test Email"
-    Then I should see Message "Cannot send test email Email address required"
+    Then I should see Message "Cannot send test email"
 
   @EmptyEmailPlaceholder
   Scenario: Validate Empty Email Placeholder

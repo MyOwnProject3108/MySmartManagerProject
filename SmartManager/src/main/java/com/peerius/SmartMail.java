@@ -96,18 +96,19 @@ public class SmartMail extends Context {
 	public static void setStyle(String value) {
 
 		setText(By.id("productInfoWidth"), value);
-		Context.pressKey("Enter");
+		clickElement(By.id("productInfoPreview"));
 		setText(By.id("productInfoHeight"), value);
-		Context.pressKey("Enter");
+		clickElement(By.id("productInfoPreview"));
 	}
 
 	public static void verifyStyleAttribute(String value, String attribute) {
 
-		WebElement style = driverInstance.findElement(By
-				.id("productInfoPreview"));
-		String actual = style.getAttribute(attribute).trim().toString();
-
-		Assert.assertEquals(value, actual);
+		clickElement(By.id("productInfoPreview"));
+		
+		WebElement style = driverInstance.findElement(By.id("productInfoPreview"));
+				
+		String actual = style.getAttribute(attribute);
+		Assert.assertTrue(actual.contentEquals(value));
 	}
 
 	public static void verifyProductPosition(String position) {

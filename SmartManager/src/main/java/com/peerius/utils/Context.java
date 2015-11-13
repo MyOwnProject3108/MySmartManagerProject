@@ -77,19 +77,34 @@ public class Context extends COREManager {
 	}
 	
 	public static void selectMenuOption(String mainMenuLabel, String subMenu) {
-
+		
 		mainMenuLabel = new String(mainMenuLabel).toLowerCase();
-		
-		
+				
 		Actions hover = new Actions(driverInstance);
 		String mainMenu = "//li[contains(@section,'" + mainMenuLabel + "')]";
+		
+		if(browserName.equalsIgnoreCase("chrome")){
+			
+					WebElement menu = new WebDriverWait(driverInstance, elementWaitTime).
+					until(ExpectedConditions.presenceOfElementLocated(By.xpath(mainMenu+"/a")));
+					menu.click();
+					clickLink("Create a new campaign");
+			
+		}
+		else{
 
-		WebElement menu = driverInstance.findElement(By.xpath(mainMenu));
+		
 
-		WebElement subMenuOptions = driverInstance.findElement(By
-				.xpath("//li[contains(@section,'" + mainMenuLabel + "')]"
-						+ "//parent::a[text()='" + subMenu + "']"));
+		WebElement menu = new WebDriverWait(driverInstance, elementWaitTime).
+				until(ExpectedConditions.presenceOfElementLocated(By.xpath(mainMenu)));
+		hover.moveToElement(menu).build().perform();	
 
+		WebElement subMenuOptions =  new WebDriverWait(driverInstance, elementWaitTime).
+				until(ExpectedConditions.visibilityOfElementLocated
+				(By.xpath("//li[contains(@section,'" + mainMenuLabel + "')]"
+						+ "//parent::a[text()='" + subMenu + "']")));
+
+	
 		hover.moveToElement(menu).build().perform();
 
 		WebElement waitForMainMenu = new WebDriverWait(driverInstance, 10)
@@ -105,7 +120,7 @@ public class Context extends COREManager {
 			Assert.fail("Failed Selecting Option" + mainMenuLabel + ">"
 					+ subMenu); 
 		}
-
+		}
 	}
 
 	public static void clickButton(String name) {
@@ -186,30 +201,39 @@ public class Context extends COREManager {
 	}
 	
 	public static void verifyMailPage(String page) {
+		
+		WebDriverWait currentPage = new WebDriverWait(driverInstance, pageLoadTime);
 
 		if (page.equalsIgnoreCase("Overview")) {
 
-			driverInstance.manage().timeouts()
-					.implicitlyWait(implicitWait, TimeUnit.SECONDS);
-			Assert.assertTrue(driverInstance.getCurrentUrl().contains("list"));
+			boolean overview =currentPage.until(ExpectedConditions.urlContains("list"));
+			
+			Assert.assertTrue(overview);
 
 		}
 
 		if (page.equalsIgnoreCase("Create a New Campaign")) {
 
-			Assert.assertTrue(driverInstance.getCurrentUrl().contains("edit"));
+			boolean newCampaign =currentPage.until(ExpectedConditions.urlContains("edit"));
+			
+			Assert.assertTrue(newCampaign);
+	
 		}
 		
 			else if (page.equalsIgnoreCase("Define Product Sets")) {
-			Assert.assertTrue(driverInstance.getCurrentUrl().contains(
-					"selectedproductsets"));
+								
+				boolean productSet =currentPage.until(ExpectedConditions.urlContains("selectedproductsets"));
+				
+				Assert.assertTrue(productSet);
+		
 		}
 		
 		else if (page.equalsIgnoreCase("Customise Email Attributes")) {
 			
-			Assert.assertTrue(driverInstance.getCurrentUrl().contains(
-					"customattributes"));
-		}
+			boolean emailAttributes =currentPage.until(ExpectedConditions.urlContains("customattributes"));
+			
+			Assert.assertTrue(emailAttributes);
+				}
 	}
 
 
@@ -221,7 +245,8 @@ public class Context extends COREManager {
        if (locator.isPresent()|locator.hasClass("error")|locator.hasClass("notification")|locator.hasClass("success")) {
               
               allText.add(locator.getElement().getAttribute("textContent"));    
-              String exactText =allText.get(0).toString();            
+              String exactText =allText.get(0).trim();        
+              System.out.println(exactText);
               Assert.assertTrue(exactText.contains(errorMesage));
               
        }

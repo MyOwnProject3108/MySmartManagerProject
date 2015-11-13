@@ -61,14 +61,20 @@ public class Navigation extends COREManager {
 		searchText.sendKeys(searchBox, sitename).sendKeys(Keys.ENTER).build().perform();
 		
 		driverInstance.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
-		Assert.assertTrue("Site Not Switched or Failed to Change",driverInstance.getCurrentUrl().contains(sitename));
+		
+		Boolean siteLoaded = new WebDriverWait(driverInstance, implicitWait).until(ExpectedConditions.urlContains(sitename));
+		
+		Assert.assertTrue("Site not switched or Failed to change",siteLoaded);
 
 	}
 
 	public static void gotoLoginPage() {
 
 		driverInstance.navigate().to(COREManager.siteUrl);
-		Assert.assertTrue(driverInstance.getPageSource().contains("Login"));
+		
+		Boolean pageTitle = new WebDriverWait(driverInstance, elementWaitTime).until(ExpectedConditions.urlContains("login.page"));
+	
+		Assert.assertTrue(pageTitle);
 	}
 
 	public void navigatePage(String direction) {

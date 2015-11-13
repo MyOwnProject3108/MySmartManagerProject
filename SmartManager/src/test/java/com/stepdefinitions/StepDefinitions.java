@@ -467,7 +467,7 @@ public class StepDefinitions extends SmartMerchandising {
 		public void i_Set_the_Number_of_Products_as(String num) throws Throwable {
 
 			setText(By.id("howMany"), num);
-			pressKey("Enter");
+			clickElement(By.id("trackingCode"));
 		}
 		
 		@Then("^I Should see \"(.*?)\" Product Positions$")
@@ -505,8 +505,8 @@ public class StepDefinitions extends SmartMerchandising {
 		@When("^I Enable User-Top ups$")
 		public void i_Enable_User_Top_ups() throws Throwable {
 		    
-			Context.clickElement(By.id("useTopups"));
-			//SmartMail.enableUserTopUps();
+			clickElement(By.id("useTopups"));
+			
 		}
 		
 		@Then("^Preview should Show Second Position Topped up with Default Email Rec$")
