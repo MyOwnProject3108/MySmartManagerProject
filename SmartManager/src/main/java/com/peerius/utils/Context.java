@@ -40,8 +40,8 @@ public class Context extends COREManager {
 				.until(ExpectedConditions.visibilityOfElementLocated(locator));
 		textBox.clear();
 		textBox.sendKeys(text);
-
-	}
+		
+		}
 
 	public static void clickLink(String link) {
 		
@@ -73,7 +73,20 @@ public class Context extends COREManager {
 		Select droplistOptions = new Select(selectElement);
 		
 			droplistOptions.selectByVisibleText(option);
+						
+			Assert.assertTrue(droplistOptions.getAllSelectedOptions().contains(option));
 				
+	}
+	
+	public static void select(String locator, String option){
+		
+		WebElement selectElement = new WebDriverWait(
+				COREManager.driverInstance, COREManager.elementWaitTime)
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//select[@name='"+locator+"']/option[.='"+option+"']")));		
+		
+		
+		selectElement.click();
+		
 	}
 	
 	public static void selectMenuOption(String mainMenuLabel, String subMenu) {
@@ -195,7 +208,30 @@ public class Context extends COREManager {
 				
 			Assert.assertTrue(driverInstance.getCurrentUrl().contains(
 					"triggers"));
+		
+		
+	}
 	
+	public static  void verifyContentPage(String page) {
+				
+		if(page.equalsIgnoreCase("Creatives overview")){
+			driverInstance.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
+			Assert.assertTrue(driverInstance.getCurrentUrl().contains("creative"));
+		}
+		
+		else if (page.equalsIgnoreCase("New creative")){
+			Assert.assertTrue(driverInstance.getCurrentUrl().contains("edit"));
+		}
+		else if(page.equalsIgnoreCase("Campaign")){
+			Assert.assertTrue(driverInstance.getCurrentUrl().contains("list"));
+						
+		}
+		else if(page.equalsIgnoreCase("Create a campaign")){
+			Assert.assertTrue(driverInstance.getCurrentUrl().contains("adaptivecontent"));
+		}
+		else if (page.equalsIgnoreCase("Define product sets")){
+			Assert.assertTrue(driverInstance.getCurrentUrl().contains("selectedproductsets"));
+		}
 		
 		
 	}
