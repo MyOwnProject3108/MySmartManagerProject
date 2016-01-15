@@ -923,9 +923,107 @@ public class StepDefinitions extends SmartMerchandising {
 		    selectDropList(By.xpath(option), value);
 		}
 		
-	
-			
+		//SmartContent steps: By Ana
+
+		@Then("^I should be on creative \"(.*?)\" page$")
+		public void i_should_be_on_Creative_page(String page) throws Throwable 
+		{
+		   	Context.verifyContentPage(page);
 		}
+		
+		@When("^I add a new creative with field values name \"(.*?)\" image url \"(.*?)\" link url \"(.*?)\" category \"(.*?)\" attribute \"(.*?)\" and tag \"(.*?)\"$")
+		public void i_add_a_new_creative_with_field_values_name_image_url_link_url_category_attribute_and_tag(String name, String imgUrl, String linkUrl, String relCat, String relAtt, String tag) throws Throwable
+		{
+		    SmartContent.addNewCreative(name, imgUrl, linkUrl, relCat, relAtt, tag);
+		}
+		
+		@Then("^I should see creative \"(.*?)\" on Configure Creatives Page$")
+		public void i_should_see_creative_on_Configure_Creatives_Page(String creative) throws Throwable 
+		{
+		   	SmartContent.verifyCreative(creative);
+		}
+
+		@Given("^I goto creative \"(.*?)\"$")
+		public void i_goto_creative(String creative) throws Throwable 
+		{
+		    SmartContent.goToCreative(creative);
+		}
+
+		@When("^I edit creative \"(.*?)\"$")
+		public void i_edit_creative(String creative) throws Throwable 
+		{
+		    SmartContent.editCreative(creative);
+		}
+		
+		@When("^I copy creative \"(.*?)\"$")
+		public void i_copy_creative(String creative) throws Throwable 
+		{
+		    SmartContent.duplicateCreative(creative);
+		}
+		
+		@When("^I delete creative \"(.*?)\"$")
+		public void i_delete_creative(String creative) throws Throwable 
+		{
+		    SmartContent.deleteCreative(creative);
+		}
+		
+		@When("^I select option \"(.*?)\" in confirmation dialog$")
+		public void i_select_option_in_confirmation_dialog(String option) throws Throwable 
+		{
+			clickElement(By.xpath("//div[contains(@class, '"+option+"')]"));
+		}
+
+		@Then("^I should not see creative \"(.*?)\" on Configure Creatives Page$")
+		public void i_should_not_see_creative_on_Configure_Creatives_Page(String creative) throws Throwable 
+		{
+			elementNotPresent(By.linkText(creative));
+		}
+		
+		@Given("^I enter name as \"(.*?)\"$")
+		public void i_enter_name_as(String name) throws Throwable 
+		{
+		    setText(By.id("name"), name);
+		}
+
+		@Given("^I enter image url as \"(.*?)\"$")
+		public void i_enter_image_url_as(String imgUrl) throws Throwable 
+		{
+			setText(By.id("image0"), imgUrl );
+		}
+
+		@Given("^I enter link url as \"(.*?)\"$")
+		public void i_enter_link_url_as(String linkUrl) throws Throwable 
+		{
+			setText(By.id("link0"), linkUrl);
+		}
+		
+		@Given("^I click in the in the img url field and then in link url field$")
+		public void i_click_in_the_in_the_img_url_field_and_then_in_link_url_field() throws Throwable 
+		{
+		    clickElement(By.id("image0"));
+		    clickElement(By.id("link0"));
+		}
+	
+		@Then("^creative preview should be visible$")
+		public void creative_preview_should_be_visible() throws Throwable 
+		{
+		   elementIsPresent(By.tagName("img"));
+		}
+		
+		@Then("^creative preview should not be visible$")
+		public void creative_preview_should_not_be_visible() throws Throwable 
+		{
+		    elementNotPresent(By.tagName("img")); 
+		    verifyInnerHTML(By.xpath("//button[contains(@class,'preview')]"), "Show Preview");		    
+		}
+				
+		@When("^I remove html from advanced html field$")
+		public void i_remove_html_from_advanced_html_field() throws Throwable 
+		{
+		    Context.setText(By.cssSelector(".htmlcode"), "");
+		}
+		
+}
 		
 
 		

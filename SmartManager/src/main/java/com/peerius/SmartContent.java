@@ -1,11 +1,18 @@
 package com.peerius;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
 
-public class SmartContent extends Context{
+public class SmartContent extends Context
+{
 	
 	public static void createSetupNoCondition(String name,String placement,String creative,String size,String criteria){
 		setText(By.id("name"),name);
@@ -106,13 +113,108 @@ public class SmartContent extends Context{
 		
 	}
 
-
-
-
-
+	public static void addNewCreative(String name, String imgUrl, String linkUrl, String relCat, String relAtt, String tag)
+	{
+		setText(By.id("name"), name);
+		
+		setText(By.id("image0"), imgUrl);
+		
+		setText(By.id("link0"), linkUrl);
+		
+		clickElement(By.xpath("(//input[@class='visual-input'])[1]"));
+		
+		List<WebElement> categories = new WebDriverWait(driverInstance,5L).until(ExpectedConditions.visibilityOfAllElementsLocatedBy
+				(By.xpath("//ul[@class='visual-list context-menu hide']/li")));
+				
+		for (WebElement category : categories)
+		{
+		if (category.getText().equalsIgnoreCase(relCat))
+			{
+				category.click();
+			}
+		}
+		
+		clickElement(By.id("name"));
+		
+		clickElement(By.xpath("(//input[@class='visual-input'])[2]"));
+		
+		List<WebElement> attributes = new WebDriverWait(driverInstance,10L)
+			.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".attr_list ul.visual-list li")));  //div[contains(@class,'attr_list')]//ul[@class='visual-list context-menu hide']/li
+		
+		for (WebElement attribute: attributes)
+		{
+			if(attribute.getText().equalsIgnoreCase(relAtt))
+			{
+				attribute.click();
+			}
+						
+		}
+		
+		clickElement(By.id("name"));
+		
+		clickElement(By.xpath("(//input[@class='visual-input'])[3]"));
+		
+		setText(By.xpath("(//input[@class='visual-input'])[3]"), tag);
+		
+		clickElement(By.id("name"));
+		
+		clickButton("Save creative");
 	
+	}
 	
+	public static void verifyCreative(String creative) 
+	{
+
+		Navigation.gotoURL("/smartmanager/creative/list.page");
+		
+		elementIsPresent(By.linkText(creative));
+
+	}
 	
+	public static void goToCreative(String creative) 
+	{
+
+		Navigation.gotoURL("/smartmanager/creative/list.page");
+		
+		elementIsPresent(By.linkText(creative));
+		
+		clickLink(creative);
+
+	}
 	
+	public static void editCreative(String creative)
+	{
+		Navigation.gotoURL("/smartmanager/creative/list.page");
+		
+		elementIsPresent(By.linkText(creative));
+		
+		clickElement(By.xpath("//td//a[contains(text(),'"+creative+"')]//following::td//a[@data-original-title='Edit creative']"));
+		
+		verifyURlText("edit.page");
+		
+	}
+	
+	public static void duplicateCreative(String creative)
+	{
+		Navigation.gotoURL("/smartmanager/creative/list.page");
+		
+		elementIsPresent(By.linkText(creative));
+		
+		clickElement(By.xpath("//td//a[contains(text(), '"+creative+"')]//following::td//a[@data-original-title='Duplicate creative']"));
+		
+		elementIsPresent(By.linkText(creative + " copy"));
+		
+	}
+	
+	public static void deleteCreative(String creative)
+	{
+		Navigation.gotoURL("/smartmanager/creative/list.page");
+		
+		elementIsPresent(By.linkText(creative));
+		
+		clickElement(By.xpath("//td//a[contains(text(), '"+creative+"')]//following::td//a[@data-original-title='Delete creative']"));
+		
+	}
+
 	
 }
