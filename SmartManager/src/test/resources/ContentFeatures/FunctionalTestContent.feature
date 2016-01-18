@@ -162,7 +162,7 @@ Feature: Smart Content Functional tests
     And I click on link "Advanced"
     When I remove html from advanced html field
     And I click on button "Save creative"
-    Then I should see Message "Please provide image/link details for the default creatives"
+    Then I should see Message "You must provide an Image URL for the content you wish to display."
 
   @deleteCreativeYes
   Scenario: Delete existing creative by selecting Yes
