@@ -81,8 +81,8 @@ Feature: Smart Content Functional tests
     When I click on "Create a campaign" option in "Content"
     Then I should be on Content "Create a campaign" page
     When I Create Simple Content Campaign "<Name>" with "<Placement>" for "<CreativeName>" of "<Size>" for "<Rule>" with "<Operator>" and "<Attribute>"
-    Then I Should See Content Campaign "AutoCampaignWithRule" on list Page
-
+    Then I should see Message "Successfully saved"
+   
     Examples: ContentSetup
       | Name                 | Placement   | CreativeName                      | Size    | Rule   | Operator  | Attribute |
       | AutoCampaignWithRule | homeRecs_ip | Desktop Walt Disney World Tickets | default | Gender | equals to | male      |
