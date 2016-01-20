@@ -36,11 +36,6 @@ Feature: Smart Content Functional tests
     When I click on button "Hide preview"
     Then creative preview should not be visible
 
-  @deleteCreativeNo
-  Scenario: Delete existing creative by selecting No
-    When I delete creative "AutoCreative"
-    And I select option "no" in confirmation dialog
-    Then I should see creative "AutoCreative" on Configure Creatives Page
 
   @CreateCampaignNoCondition
   Scenario Outline: Create Simple Content Campaign with No Condition
@@ -80,10 +75,6 @@ Feature: Smart Content Functional tests
     And I click on button "Save campaign"
     Then I should see Message "Successfully saved"
 
-  @DoNotDeleteContentCampaign
-  Scenario: 'No' to Delete Content Campaign
-    Given I say No to Delete Content Campaign "AutoContentCampaign"
-    Then Content Campaign "AutoContentCampaign" should not be deleted
 
   @CreateCampaignWithRule
   Scenario Outline: Create Simple Content Campaign with Condition
@@ -107,11 +98,6 @@ Feature: Smart Content Functional tests
     Then I should see Message "Successfully saved"
     Given I goto Content Campaign "AutoCampaignWithRule"
     Then I Should see "Desktop Orlando Tours Category" in "1" index
-
-  @DeleteDuplicateCampaign
-  Scenario: 'Yes' to Delete Duplicate Content Campaign
-    Given I Delete Content Campaign "AutoContentCampaign copy"
-    Then I should not see Content Campaign "AutoContentCampaign copy"
 
   #Error validations
   @creativeErrorValidation
@@ -146,18 +132,6 @@ Feature: Smart Content Functional tests
     And I click on button "Save creative"
     Then I should see Message "You must provide an Image URL for the content you wish to display."
 
-  @deleteCreativeYes
-  Scenario: Delete existing creative by selecting Yes
-    When I delete creative "AutoCreative"
-    And I select option "yes" in confirmation dialog
-    Then I should not see creative "AutoCreative" on Configure Creatives Page
-
-  @deleteduplicateCreative
-  Scenario: Delete copy of the creative
-    When I delete creative "AutoCreative copy"
-    And I select option "yes" in confirmation dialog
-    Then I should not see creative "AutoCreative copy" on Configure Creatives Page
-
   @Setuperrorvalidations
   Scenario Outline: Error validation for empty setup name
     When I click on "Create a campaign" option in "Content"
@@ -181,10 +155,39 @@ Feature: Smart Content Functional tests
     When I Set ip as "Test"
     And I click on button "Save campaign"
     Then I should see Message "The IP address Test was not valid"
+        
+  @DoNotDeleteContentCampaign
+  Scenario: 'No' to Delete Content Campaign
+    Given I say No to Delete Content Campaign "AutoContentCampaign"
+    Then Content Campaign "AutoContentCampaign" should not be deleted
+    
+    
+  @DeleteDuplicateCampaign
+  Scenario: 'Yes' to Delete Duplicate Content Campaign
+    Given I Delete Content Campaign "AutoContentCampaign copy"
+    Then I should not see Content Campaign "AutoContentCampaign copy"
 
   @DeleteContentCampaign
   Scenario: 'Yes' to Delete Content Campaign
     Given I Delete Content Campaign "AutoContentCampaign"
     Then I should not see Content Campaign "AutoContentCampaign"
     And I Delete Content Campaign "AutoCampaignWithRule"
-    Then I should not see Content Campaign "AutoCampaignWithRule"
+    Then I should not see Content Campaign "AutoCampaignWithRule"    
+    
+  @deleteCreativeNo
+  Scenario: Delete existing creative by selecting No
+    When I delete creative "AutoCreative"
+    And I select option "no" in confirmation dialog
+    Then I should see creative "AutoCreative" on Configure Creatives Page
+
+  @deleteCreativeYes
+  Scenario: Delete existing creative by selecting Yes
+    When I delete creative "AutoCreative"
+    And I select option "yes" in confirmation dialog
+    Then I should not see creative "AutoCreative" on Configure Creatives Page
+
+  @deleteduplicateCreative
+  Scenario: Delete copy of the creative
+    When I delete creative "AutoCreative copy"
+    And I select option "yes" in confirmation dialog
+    Then I should not see creative "AutoCreative copy" on Configure Creatives Page
