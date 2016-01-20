@@ -42,6 +42,17 @@ Feature: Smart Content Functional tests
     And I select option "no" in confirmation dialog
     Then I should see creative "AutoCreative" on Configure Creatives Page
 
+  @CreateCampaignNoCondition
+  Scenario Outline: Create Simple Content Campaign with No Condition
+    When I click on "Create a campaign" option in "Content"
+    Then I should be on Content "Create a campaign" page
+    When I Create Simple Content Campaign "<Name>" with "<Placement>" for "<CreativeName>" of "<Size>" and "<Rule>"
+    Then I should see Message "Successfully saved"
+
+    Examples: ContentSetup
+      | Name                | Placement   | CreativeName                      | Size    | Rule             |
+      | AutoContentCampaign | homeRecs_ip | Desktop Walt Disney World Tickets | default | Default creative |
+
   @ActivateContentCampaign
   Scenario: Activate Content Campaign
     Given I goto Content Campaign "AutoContentCampaign"
@@ -69,62 +80,33 @@ Feature: Smart Content Functional tests
     And I click on button "Save campaign"
     Then I should see Message "Successfully saved"
 
-  @VerifySelectCriteria
-  Scenario: Create Simple Content Campaign using select list for the rules
-    Given I goto Content Campaign "AutoContentCampaign"
-    And I Edit Content Campaign "AutoContentCampaign"
-    And I select creative option "Customer"
-    And I select conditional operator "equals to"
-    And I Enter Criteria rule Text "returning"
-    And I click on button "Save campaign"
-    Then I should see Message "Successfully saved"
-
   @DoNotDeleteContentCampaign
   Scenario: 'No' to Delete Content Campaign
     Given I say No to Delete Content Campaign "AutoContentCampaign"
     Then Content Campaign "AutoContentCampaign" should not be deleted
 
-  @DeleteContentCampaign
-  Scenario: 'Yes' to Delete Content Campaign
-    Given I Delete Content Campaign "AutoContentCampaign"
-    Then I should not see Content Campaign "AutoContentCampaign"
-
-  @CreateCampaignNoCondition
-  Scenario Outline: Create Simple Content Campaign with No Condition
-    When I click on "Create a campaign" option in "Content"
-    Then I should be on Content "Create a campaign" page
-    When I Create Simple Content Campaign "<Name>" with "<Placement>" for "<CreativeName>" of "<Size>" and "<Rule>"
-    Given I Delete Content Campaign "AutoContentCampaign"
-    Then I should not see Content Campaign "AutoContentCampaign"
-
-    Examples: ContentSetup
-      | Name                | Placement   | CreativeName                      | Size    | Rule             |
-      | AutoContentCampaign | homeRecs_ip | Desktop Walt Disney World Tickets | default | Default creative |
-
-  @CreateCampaignWithCondition
+  @CreateCampaignWithRule
   Scenario Outline: Create Simple Content Campaign with Condition
     When I click on "Create a campaign" option in "Content"
     Then I should be on Content "Create a campaign" page
     When I Create Simple Content Campaign "<Name>" with "<Placement>" for "<CreativeName>" of "<Size>" for "<Rule>" with "<Operator>" and "<Attribute>"
-    Then I Should See Content Campaign "AutoContentCampaign" on list Page
+    Then I Should See Content Campaign "AutoCampaignWithRule" on list Page
 
     Examples: ContentSetup
-      | Name                | Placement   | CreativeName                      | Size    | Rule   | Operator  | Attribute |
-      | AutoContentCampaign | homeRecs_ip | Desktop Walt Disney World Tickets | default | Gender | equals to | male      |
+      | Name                 | Placement   | CreativeName                      | Size    | Rule   | Operator  | Attribute |
+      | AutoCampaignWithRule | homeRecs_ip | Desktop Walt Disney World Tickets | default | Gender | equals to | male      |
 
   @MultipleRules
   Scenario: Create Content Campaign with Multiple Rules
-    Given I goto Content Campaign "AutoContentCampaign"
+    Given I goto Content Campaign "AutoCampaignWithRule"
     And I click on "Add a new row" for the Creative
     And I select Creative "Desktop Orlando Tours Category" in "1" index
     And I select Creative Size "default" in "1" index
     And I Select Creative Rule "Default creative" in "2" row
     And I click on button "Save campaign"
     Then I should see Message "Successfully saved"
-    Given I goto Content Campaign "AutoContentCampaign"
+    Given I goto Content Campaign "AutoCampaignWithRule"
     Then I Should see "Desktop Orlando Tours Category" in "1" index
-    Given I Delete Content Campaign "AutoContentCampaign"
-    Then I should not see Content Campaign "AutoContentCampaign"
 
   @DeleteDuplicateCampaign
   Scenario: 'Yes' to Delete Duplicate Content Campaign
@@ -194,15 +176,15 @@ Feature: Smart Content Functional tests
       | AutoCampaign | homeRecs_ip | Default creative | You must provide a value for 'creative size' |
 
   @IPErrorvalidation
-  Scenario Outline: Error validation for ip address
-    When I click on "Create a campaign" option in "Content"
-    Then I should be on Content "Create a campaign" page
-    When I Create Simple Content Campaign "<Name>" with "<Placement>" for "<CreativeName>" of "<Size>" and "<Rule>"
-    Given I goto Content Campaign "AutoContentCampaign"
+  Scenario: Error validation for ip address
+    Given I goto Content Campaign "AutoCampaignWithRule"
     When I Set ip as "Test"
     And I click on button "Save campaign"
     Then I should see Message "The IP address Test was not valid"
 
-    Examples: ContentSetup
-      | Name                | Placement   | CreativeName                      | Size    | Rule             |
-      | AutoContentCampaign | homeRecs_ip | Desktop Walt Disney World Tickets | default | Default creative |
+  @DeleteContentCampaign
+  Scenario: 'Yes' to Delete Content Campaign
+    Given I Delete Content Campaign "AutoContentCampaign"
+    Then I should not see Content Campaign "AutoContentCampaign"
+    And I Delete Content Campaign "AutoCampaignWithRule"
+    Then I should not see Content Campaign "AutoCampaignWithRule"
