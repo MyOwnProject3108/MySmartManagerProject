@@ -120,9 +120,17 @@ public class PeeriusDebugInfo extends Context {
 	}
 
 
-	
-		
-		
+	public static void verifyContent(String campaignName, String rule) {
+		addCookie("peerius_pass_peeriusdebug", "1");
+		Navigation.refreshPage();
+		elementIsPresent(By.xpath("//h2[contains(.,'"+ campaignName +"')]"));
+		WebElement element = driverInstance.findElement(By.xpath("//td[contains(.,'"+rule+"')]"));
+		Assert.assertTrue(element.getText().contains(rule));
+			
 	}
+	
+	
+	
+}
 
 

@@ -147,7 +147,11 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 		
 	}
 
-	   
+	@Then("^I should see campaign name \"(.*)\" and Rule \"(.*)\" in the debug$")
+	public void i_should_see_campaign_name_and_Rule_new_in_the_debug(String campaignName, String rule) throws Throwable {
+		PeeriusDebugInfo.verifyContent(campaignName,rule);
+	    
+	}
 	
 	
 	

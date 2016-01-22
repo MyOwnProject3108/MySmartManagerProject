@@ -890,8 +890,13 @@ public class StepDefinitions extends SmartMerchandising {
 		
 		@Given("^I Enter Criteria rule Text \"([^\"]*)\"$")
 		public void i_Enter_Criteria_rule_Text(String rule) throws Throwable {
+		//	setText(By.xpath("//div[contains(@class, 'autosearch')]"), text);
 			clickElement(By.xpath("//div[contains(@class, 'autosearch')]//input"));
-			clickElement(By.xpath("//div[contains(@class, 'autosearch')]//li[.='"+rule+"']"));
+			setText(By.xpath("//div[contains(@class, 'autosearch ')]/input"), rule);
+						
+		//	clickElement(By.xpath("//div[contains(@class, 'autosearch')]//input"));
+		//	clickElement(By.xpath("//div[contains(@class, 'autosearch')]//li[.='"+rule+"']"));
+			
 		
 		}
 		
