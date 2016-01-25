@@ -12,6 +12,7 @@ import com.peerius.utils.Navigation;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 public class EndToEndSteps extends PeeriusDebugInfo {
 
@@ -153,8 +154,26 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 	    
 	}
 	
+	@Given("^I search for \"([^\"]*)\"$")
+	public void i_search_for(String keyword) throws Throwable {
+	    
+		setText(By.id("sb_form_q"), keyword);
+		pressKey("Enter");
+	}
+
+	@When("^I click on the organic link for floridatix website$")
+	public void i_click_on_the_organic_link_for_floridatix_website() throws Throwable {
+	    
+		clickLink("Book Cheap Orlando & Florida Park Tickets - FloridaTix");
+	}
 	
-	
+/* parameterized version	
+ * @When("^I click on the organic link for \"([^\"]*)\" website$")
+	public void i_click_on_the_organic_link_for_website(String serchTerm) throws Throwable {
+	    
+		Context.clickElement(By.xpath(" (//h2/a[contains(., '"+ serchTerm +"')])[1]"));
+	}
+*/	
 	}
 	
 		

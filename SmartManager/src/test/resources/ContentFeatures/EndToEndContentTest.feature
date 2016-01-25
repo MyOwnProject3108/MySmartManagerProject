@@ -128,4 +128,155 @@ Feature: End to End Tests For Smart Content
     Given I navigate to URL "www.floridatix.com?peeriusIPSimulate=12.25.205.51"
     Then I should see campaign name "E2EAutoCampaignWithRule" and Rule "(countrycode="US")" in the debug
     
+  #Ana's changes  
+  @E2ELastViewedCategory
+  Scenario: Verify Content for the rule Last Viewed Category
+    Given I goto URL "www.floridatix.com/orlando-tours"
+    When I goto URL "www.floridatix.com/"
+    Then I should see campaign name "E2EAutoCampaignNoCondition" and Rule "(lastviewedcategory)" in the debug
+    
+  @E2EDefaultRule_setup
+  Scenario: Create Content setup for the rule Default 
+  	Given I goto Content Campaign "E2EAutoCampaignNoCondition"
+  	And I select creative option "Default creative"
+  	And I click on button "Save campaign"
+    Then I should see Message "Successfully saved"
+    
+  @E2EDefaultRule
+  Scenario: Verify Content for the rule Default
+  	Given I navigate to URL "floridatix.com"
+  	Then I should see campaign name "E2EAutoCampaignNoCondition" and Rule "(default)" in the debug
+  
+  @E2ESearchEngineKeywordRule_setup
+  Scenario: Create Content setup for the rule SearchEngineKeyword 
+  	Given I goto Content Campaign "E2EAutoCampaignNoCondition"
+  	And I select creative option "Search-engine keyword (match to Tags)"
+  	And I click on button "Save campaign"
+  	Then I should see Message "Successfully saved"
+  	
+  @E2ESearchEnginekeywordRule	
+  Scenario: Verify Content for the rule SearchEngineKeyword
+    Given I goto URL "www.floridatix.com?peeriusTestGoogle=orlando"
+    Then I should see campaign name "E2EAutoCampaignNoCondition" and Rule "(tags)" in the debug
+    
+  @E2EDirectRule_setup
+  Scenario: Create Content setup for the rule Direct
+  	Given I goto Content Campaign "E2EAutoCampaignNoCondition"
+  	And I select creative option "Arrived direct to site"
+  	And I click on button "Save campaign"
+  	Then I should see Message "Successfully saved"
+  	
+  @E2EDirectRule
+  Scenario: Verify Content for the rule Direct
+  	Given I navigate to URL "floridatix.com"
+  	Then I should see campaign name "E2EAutoCampaignNoCondition" and Rule "(direct)" in the debug
+  	
+  @E2ESmartRule_setup
+  Scenario: Create Content setup for the rule Smart
+  	Given I goto Content Campaign "E2EAutoCampaignNoCondition"
+  	And I select creative option "Smart"
+  	And I click on button "Save campaign"
+  	Then I should see Message "Successfully saved"
+  	
+  @E2ESmartRule
+  Scenario: Verify Content for the rule Smart
+  	Given I navigate to URL "floridatix.com"
+  	Then I should see campaign name "E2EAutoCampaignNoCondition" and Rule "(smart)" in the debug
+  	
+  @E2ECityRule_setup
+  Scenario: Create Content setup for the rule City=London
+  	Given I goto Content Campaign "E2EAutoCampaignWithRule"
+    And I select creative option "City"
+    And I select conditional operator "equals to"
+    And I Enter Criteria rule Text "London"
+    And I click on button "Save campaign"
+    Then I should see Message "Successfully saved"
+    
+  @E2ECityRule
+  	Scenario: Verify Content for the rule City=London
+  	Given I goto URL "www.floridatix.com?peeriusIPSimulate=131.228.17.26"
+  	Then I should see campaign name "E2EAutoCampaignWithRule" and Rule "(city="London")" in the debug
+  
+  @E2EOrganicRule_setup
+  Scenario: Create Content setup for the rule Organic
+  	Given I goto Content Campaign "E2EAutoCampaignNoCondition"
+  	And I select creative option "Arrived from organic search"
+  	And I click on button "Save campaign"
+  	Then I should see Message "Successfully saved"	
+    
+  @E2EOrganicRule
+  Scenario: Verify Content for the rule Organic
+  	Given I goto URL "www.bing.com"
+  	And I search for "floridatix"
+  	When I click on the organic link for floridatix website
+  	Then I should see campaign name "E2EAutoCampaignNoCondition" and Rule "(organic)" in the debug
+    
+  @E2ECurrentSearchEngineKeywordRule_setup
+  Scenario: Create Content setup for the rule CurrentSearchEngineKeyword 
+  	Given I goto Content Campaign "E2EAutoCampaignWithRule"
+    And I select creative option "Search-engine keyword (current)"
+    And I select conditional operator "equals to"
+    And I Enter Criteria rule Text "floridatix"
+    And I click on button "Save campaign"
+    Then I should see Message "Successfully saved"	
+    
+  @E2ECurrentSearchEngineKeywordRule
+  Scenario: Verify Content for the rule CurrentSearchEngineKeyword 
+  	Given I goto URL "www.bing.com"
+  	And I search for "floridatix"
+   	When I click on the organic link for floridatix website
+  	Then I should see campaign name "E2EAutoCampaignWithRule" and Rule "(currentsearchenginekeyword="floridatix")" in the debug
+    
+  @E2ELastSearchEngineKeywordRule_setup
+  Scenario: Create Content setup for the rule LastSearchEngineKeyword 
+  	Given I goto Content Campaign "E2EAutoCampaignWithRule"
+    And I select creative option "Search-engine keyword (last)"
+    And I select conditional operator "equals to"
+    And I Enter Criteria rule Text "floridatix"
+    And I click on button "Save campaign"
+    Then I should see Message "Successfully saved"	
+    
+  #failing as the rule is not followed
+  @E2ELastSearchEngineKeywordRule   
+  Scenario: Verify Content for the rule LastSearchEngineKeyword
+  	Given I goto URL "www.bing.com"
+  	And I search for "floridatix"
+  	When I click on the organic link for floridatix website
+  	Then I should see campaign name "E2EAutoCampaignWithRule" and Rule "(lastsearchenginekeyword="floridatix")" in the debug
+  	
+  #put this scenario at the end as it changes the placement for the campaign which will affect other E2E scenarios   
+  @E2ECurrentCategoryViewedRule_setup
+  Scenario: Create Content setup for the rule CurrentCategoryViewed
+  	Given I goto Content Campaign "E2EAutoCampaignWithRule"
+  	And I select placement option"categoryRecentlyViewed_ip"
+  	And I select creative option "Current category viewed"
+  	And I click on button "Save campaign"
+  	Then I should see Message "Successfully saved"	
+  	
+  @E2ECurrentCategoryViewedRule
+  Scenario: Verify Content for the rule CurrentCategoryViewed
+  	Given I goto URL "www.floridatix.com/orlando-tours"
+  	Then I should see campaign name "E2EAutoCampaignWithRule" and Rule "(currentcategory)" in the debug
+    
+  
+  	
+  	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     

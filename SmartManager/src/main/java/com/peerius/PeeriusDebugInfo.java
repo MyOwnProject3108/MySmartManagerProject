@@ -97,13 +97,8 @@ public class PeeriusDebugInfo extends Context {
 				Assert.fail("Expected "+number+" But Rule "+size+" Was Found");
 				
 			}		
-
 	}
 		
-
-	
-	
-
 	public static void verifyWidgetName(String widget){
 		
 			addCookie("'peerius_pass_peeriusdebug", "1");
@@ -112,13 +107,11 @@ public class PeeriusDebugInfo extends Context {
 			elementIsPresent(By.xpath("//h2[contains(.,'"+widget+"')]"));
 	}
 
-	
 	public static void navigateToURl(String url){
 		
 		driverInstance.get(url);
 		
 	}
-
 
 	public static void verifyContent(String campaignName, String rule) {
 		addCookie("peerius_pass_peeriusdebug", "1");

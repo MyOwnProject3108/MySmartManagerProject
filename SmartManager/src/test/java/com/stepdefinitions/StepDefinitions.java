@@ -900,6 +900,12 @@ public class StepDefinitions extends SmartMerchandising {
 		
 		}
 		
+		@Given("^I select placement option\"([^\"]*)\"$")
+		public void i_select_placement_option(String placement) throws Throwable {
+		    
+			Context.clickElement(By.xpath("//option[.='"+ placement +"']"));
+		}
+		
 		@Given("^I click on \"([^\"]*)\" for the Creative$")
 		public void i_click_on_for_the_Creative(String arg1) throws Throwable {
 		   clickElement(By.xpath("//*[@id='traffic']//tfoot//span"));
