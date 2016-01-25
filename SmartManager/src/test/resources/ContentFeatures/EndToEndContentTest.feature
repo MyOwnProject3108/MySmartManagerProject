@@ -128,6 +128,53 @@ Feature: End to End Tests For Smart Content
     Given I navigate to URL "www.floridatix.com?peeriusIPSimulate=12.25.205.51"
     Then I should see campaign name "E2EAutoCampaignWithRule" and Rule "(countrycode="US")" in the debug
     
+    @E2Ebasketvaluesetup
+  Scenario: Create Content setup for the rule Basketvalue
+    Given I goto Content Campaign "E2EAutoCampaignWithRule"
+    And I select creative option "Basket value"
+    And I select conditional operator "greater than"
+    And I Enter Criteria rule Text "50"
+    And I click on button "Save campaign"
+    Then I should see Message "Successfully saved"
+
+  @E2Ebasketvalue
+  Scenario: Verify Content for the rule Basketvalue
+    Given I navigate to URL "www.floridatix.com/orlando-tours/dolphin-experience-st-augustine"
+    And I add the product to the basket
+    And I navigate to URL "www.floridatix.com"
+   Then I should see campaign name "E2EAutoCampaignWithRule" and Rule "(basketvalue>"50")" in the debug
+  
+  
+  @E2EvisitorReturningsetup
+  Scenario: Create Content setup for the rule Countrycode US
+    Given I goto Content Campaign "E2EAutoCampaignWithRule"
+    And I select creative option "Visitor"
+    And I select conditional operator "equals to"
+    And I Enter Criteria rule Text "returning"
+    And I click on button "Save campaign"
+    Then I should see Message "Successfully saved"
+
+  @E2EVisitorreturning
+  Scenario: Verify visitor=new rule is applied on the client website
+    Given I navigate to URL "www.floridatix.com"
+    And I delete "test_peerius_sess" cookie
+    Then I should see campaign name "E2EAutoCampaignWithRule" and Rule "(u.visitor="returning")" in the debug
+
+  @E2Ecustomernewgsetup
+  Scenario: Create Content setup for the rule Countrycode US
+    Given I goto Content Campaign "E2EAutoCampaignWithRule"
+    And I select creative option "Customer"
+    And I select conditional operator "equals to"
+    And I Enter Criteria rule Text "new"
+    And I click on button "Save campaign"
+    Then I should see Message "Successfully saved"
+
+  @E2Ecustomernew
+  Scenario: Verify visitor=new rule is applied on the client website
+    Given I navigate to URL "www.floridatix.com"
+    And I delete "test_peerius_sess" cookie
+    Then I should see campaign name "E2EAutoCampaignWithRule" and Rule "(u.customer="new")" in the debug
+    
   #Ana's changes  
   @E2ELastViewedCategory
   Scenario: Verify Content for the rule Last Viewed Category

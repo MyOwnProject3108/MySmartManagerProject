@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 
 import com.peerius.PeeriusDebugInfo;
+import com.peerius.SmartContent;
 import com.peerius.SmartMail;
 import com.peerius.SmartMerchandising;
 import com.peerius.utils.Context;
@@ -165,6 +166,17 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 	public void i_click_on_the_organic_link_for_floridatix_website() throws Throwable {
 	    
 		clickLink("Book Cheap Orlando & Florida Park Tickets - FloridaTix");
+	}
+	
+	@Given("^I add the product to the basket$")
+	public void i_add_the_product_to_the_basket() throws Throwable {
+		SmartContent.addToBasket();
+	
+	}
+	
+	@Given("^I delete \"([^\"]*)\" cookie$")
+	public void i_delete_cookie(String sessionCookie) throws Throwable {
+	    driverInstance.manage().deleteCookieNamed(sessionCookie);
 	}
 	
 /* parameterized version	

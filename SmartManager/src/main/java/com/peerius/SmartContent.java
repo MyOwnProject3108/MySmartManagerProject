@@ -3,7 +3,7 @@ package com.peerius;
 import java.util.List;
 
 import org.openqa.selenium.By;
-
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -214,6 +214,17 @@ public class SmartContent extends Context
 		
 		clickElement(By.xpath("//td//a[contains(text(), '"+creative+"')]//following::td//a[@data-original-title='Delete creative']"));
 		
+	}
+	
+	public static void addToBasket() throws InterruptedException{
+		clickElement(By.xpath("//*[@id='dateBox1']"));
+		  clickElement(By.xpath("//div[@id='CalendarForm1']//td[@class='colour1']"));
+		  clickElement(By.xpath("//select[@id='numOfAdults1']"));
+		  WebElement adult= driverInstance.findElement(By.xpath("//*[@id='ticket-panel']//select[@id='numOfAdults1']"));
+		   adult.sendKeys("1");
+		  adult.sendKeys(Keys.ENTER);
+		   clickElement(By.id("BookTickets"));
+		  Thread.sleep(1000);
 	}
 
 	
