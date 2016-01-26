@@ -8,7 +8,9 @@ Feature: End to End Tests for Merchandising
   @setupMaster
   Scenario: End to End Test Set-up for Simple Rule alongwith Master Rule
     Given I Create Simple Campaign with name "E2EMasterRule"
-    Then I click on link "2. Master rules"
+    Then I should see Message "Successfully saved"
+    When I goto Campaign "E2EMasterRule"
+    Then I click on link "Master rules"
     And I click on link "Toggle advanced"
     Then I Set Master Rule "(p.saleprice<"20")"
     And I click on button "Save campaign"
@@ -58,11 +60,11 @@ Feature: End to End Tests for Merchandising
 
   @setupproductset
   Scenario: Setup simple rule with productset for End-End scenario
-    When I click on "Define product sets" option in "Merchandising"
-    And I Create Product Set "TestSetE2E" and products number "2" with Suffix "D"
-    And I Create Simple Campaign with name "E2EProductSet"
+   # When I click on "Product sets" option in "Merchandising"
+    #And I Create Product Set "TestSetE2E" and products number "2" with Suffix "D"
+   And I Create Simple Campaign with name "E2EProductSet"
     And I select option "Handpick"
-    And I select option "r.productset"
+    And I select option "Product set"
     And I select operator "equals to"
     And I Enter rule Text "TestSetE2E"
     And I click on button "Save campaign"

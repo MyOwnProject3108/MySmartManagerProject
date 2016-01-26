@@ -45,7 +45,7 @@ public class StepDefinitions extends SmartMerchandising {
 	@Then("^I Create Simple Campaign with name \"(.*?)\"$")
 	public void I_Create_Simple_Campaign(String campaign) throws Throwable {
 
-		createCampaignSimple(campaign, "Product Page", "producthorizontal",
+		createCampaignSimple(campaign, "Product page", "producthorizontal",
 				"(r.pricerange=\"expensive\")");
 
 	}
@@ -53,7 +53,7 @@ public class StepDefinitions extends SmartMerchandising {
 	@When("^I create simple camapign \"(.*?)\" with no rule$")
 	public void i_create_simple_camapign_with_no_rule(String name) throws Throwable {
 	    
-		SmartMerchandising.createCampaignSimpleNoRule(name, "Product Page", "producthorizontal");
+		SmartMerchandising.createCampaignSimpleNoRule(name, "Product page", "producthorizontal");
 	}
 	
 	@When("^I add \"(.*?)\" for exclusion$")
@@ -65,7 +65,7 @@ public class StepDefinitions extends SmartMerchandising {
 	
 	@Then("^I Create invalid Campaign with name \"(.*?)\"$")
 	public void i_Create_invalid_Campaign_with_name(String campaign) throws Throwable {
-		createCampaignSimple(campaign, "Product Page", "producthorizontal",
+		createCampaignSimple(campaign, "Product page", "producthorizontal",
 				"(r.productset<>\"AJ10043\")");
 	    
 	}
@@ -156,6 +156,7 @@ public class StepDefinitions extends SmartMerchandising {
 	
 	@When("^I click on link \"(.*?)\"$")
 	public void i_click_on_link(String linkName) throws Throwable {
+		
 		clickLink(linkName);
 	}
 	
@@ -187,12 +188,13 @@ public class StepDefinitions extends SmartMerchandising {
 	public void i_Should_Verify(String position) throws Throwable {
 		
 		elementIsPresent(By.xpath("//li["+position+"]//div[contains(@class,'rule')]/p"));
-
+		verifyInnerHTML(By.xpath("//div[contains(@class,'rule')]/p"), "1");
+	
 	}
 	
 	@Given("^I Create Campaign \"(.*?)\" For \"(.*?)\"$")
 	public void i_Create_Campaign_For(String campaign, String position) throws Throwable {
-		createCampaign(campaign, position, "Product Page", "producthorizontal", "(r.gender=\"male\")");
+		createCampaign(campaign, position, "Product page", "producthorizontal", "(r.gender=\"male\")");
 
 	}
 	
@@ -257,8 +259,9 @@ public class StepDefinitions extends SmartMerchandising {
 	
 	@Then("^I Add New Rule \"(.*?)\" with Rule \"(.*?)\"$")
 	public void i_Add_New_Rule(String ruleNumber, String rule) throws Throwable {
-	   clickElement(By.xpath("//ul/li["+ruleNumber+"]//div[contains(@class,'actions')]/button[contains(.,'Edit rule')]"));
-	   clickElement(By.partialLinkText("Toggle"));
+	   //clickElement(By.xpath("//li["+ruleNumber+"]//div[contains(@class,'actions')]/button[contains(@class,'edit')]/i"));
+		clickElement(By.xpath("(//button[contains(@class,'edit')])["+ruleNumber+"]"));
+	   clickElement(By.partialLinkText("Toggle advanced"));
 	   setText(By.xpath("//div/textarea[contains(@id,'advanced_btn_rec_"+ruleNumber+"')]"), rule	);
 	   clickButton("Save campaign");	
 	}
@@ -345,10 +348,12 @@ public class StepDefinitions extends SmartMerchandising {
 		public void apply_To_Position(String ruleNumber, String position) throws Throwable {
 			
 				clickLink("3. Recommendation rules");
-				 clickElement(By.xpath("//ul/li["+ruleNumber+"]//div[contains(@class,'actions')]/button[contains(.,'Edit rule')]"));
-
-				dragAndDrop(By.xpath("//div[contains(@data-original-title,'Drag')]/p[contains(.,'"+ruleNumber+"')]"), 
-						By.xpath("//ul[@class='rules-grid']/li["+position+"]/div[contains(@id,'rule-target')]"));
+				clickElement(By.xpath("//li[1]//div[contains(@class,'actions')]/button[contains(@class,'edit')]"));
+				//Need Refactoring from Valtid on Name Elements
+			
+				dragAndDrop(By.xpath("//div[contains(@data-original-title,'Drag')]/p[contains(.,'"+ruleNumber+"')]"),
+				By.id("//ul[@class='rules-grid']/li["+position+"]/div[contains(@id,'rule-target')]"));
+				elementIsPresent(By.xpath("//ul[@class='rules-grid']/li["+position+"]//p[contains(.,'"+ruleNumber+"')]"));
 				
 				clickButton("Save campaign");
 				
@@ -356,6 +361,7 @@ public class StepDefinitions extends SmartMerchandising {
 		
 		@Then("^I Should Verify Rule  \"(.*?)\" at \"(.*?)\"$")
 		public void should_verify_Rule_at_position(String position, String ruleNumber){
+			
 			
 			elementIsPresent(By.xpath("//ul[@class='rules-grid']/li["+position+"]//p[contains(.,'"+ruleNumber+"')]"));
 			

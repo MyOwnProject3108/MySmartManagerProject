@@ -26,11 +26,7 @@ import com.peerius.COREManager;
 public class Context extends COREManager {
 
 	
-    public enum LocatorType {
-        Xpath, cssSelector, id, LinkedText, className, partialLinkedText, Name, TagName
-    }
-	
-	static {
+  	static {
 
 	}
 
@@ -323,8 +319,8 @@ public static void verifytextContent(By elementlocator, String text) {
 
 	public static void elementIsPresent(By locator) {
 		
-		boolean elementPresent = new WebDriverWait(driverInstance, elementWaitTime)
-		.pollingEvery(implicitWait, TimeUnit.SECONDS)
+		boolean elementPresent = new WebDriverWait(driverInstance, 20L)
+		.pollingEvery(2L, TimeUnit.SECONDS)
 				.until(ExpectedConditions.visibilityOfElementLocated(locator)).isEnabled();
 				
 		Assert.assertTrue(elementPresent);
@@ -469,9 +465,8 @@ public static void verifytextContent(By elementlocator, String text) {
 		
 		Actions dragAndDrop = new Actions(driverInstance);
 	
-		dragAndDrop.clickAndHold(source).moveToElement(target).build().perform();
-
-		dragAndDrop.moveToElement(target, 142, 624).release(target).perform();
+		dragAndDrop.clickAndHold(source).moveToElement(target,142, 624).release(target).build().perform();
+		dragAndDrop.moveToElement(target, 142, 624).dragAndDrop(source, target).click(target).perform();
 		
 	
 	}

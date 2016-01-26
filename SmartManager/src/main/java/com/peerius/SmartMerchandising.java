@@ -27,10 +27,10 @@ public class SmartMerchandising extends Context {
 		clickButton("Next");
 		clickButton("Next");
 		clickElement(By.xpath("//button[contains(@class,'edit-rule')]"));
+		clickLink("Toggle advanced");
 		setText(By.id("advanced_btn_rec_default"), ruleExpression);
 		clickLink("Apply to all");
-		clickElement(By.xpath("//button[contains(.,' Save campaign')]"));
-				
+		clickElement(By.xpath("//button[contains(.,' Save campaign')]"));				
 		
 	}
 	
@@ -54,6 +54,7 @@ public class SmartMerchandising extends Context {
 		clickButton("Next");
 		clickButton("Next");
 		clickElement(By.xpath("//button[contains(@class,'edit-rule')]"));
+		clickLink("Toggle advanced");
 		setText(By.id("advanced_btn_rec_default"), ruleExpression);
 		dragAndDrop(By.xpath("//div[contains(@data-original-title,'Drag')]"), By.xpath("//ul[@class='rules-grid']/li["+position+"]"));
 		clickButton("Save campaign");
@@ -64,7 +65,7 @@ public class SmartMerchandising extends Context {
 		Navigation.gotoURL("/smartmanager/merchandising/list.page");
 		clickLink("Merchandising");
 		elementIsPresent(By.linkText(name));
-		clickElement(By.xpath("//td/a//small[text()='"+name+"']//following::td//a[@data-original-title='Delete']"));
+		clickElement(By.xpath("//td/a[text()='"+name+"']//following::td//a[@data-original-title='Delete']"));
 		clickElement(By.xpath("//div[contains(@class,'yes')]"));
 		verifyErrorMessage(By.className("notification"), "Successfully deleted");
 		elementNotPresent(By.linkText(name));
@@ -84,7 +85,8 @@ public class SmartMerchandising extends Context {
 
 		Navigation.gotoURL("/smartmanager/merchandising/list.page");
 		elementIsPresent(By.linkText(campaign));
-		clickElement(By.xpath("//td/a//small[text()='"+campaign+"']//following::td//a[@data-original-title=' Activate it ']"));
+		clickElement(By.xpath("//td/a[text()='"+campaign+"']//following::td//a[@data-original-title=' Activate it ']"));
+		threadSleep(1000);
 		verifyInnerHTML(By.tagName("div"), "Switched on");
 
 		
@@ -104,7 +106,7 @@ public class SmartMerchandising extends Context {
 		
 		Navigation.gotoURL("/smartmanager/merchandising/list.page");
 		elementIsPresent(By.linkText(campaign));
-		clickElement(By.xpath("//td/a//small[text()='"+campaign+"']//following::td//a[@data-original-title='Edit']"));
+		clickElement(By.xpath("(//a[text()='"+campaign+"']//following::a[@data-original-title='Edit'])[1]"));
 		verifyURlText("edit.page");
 		
 		
@@ -177,6 +179,7 @@ public class SmartMerchandising extends Context {
 	
 		Navigation.gotoURL("/shop-admin/abtesting/abtests.page");
 		setText(By.id("group_a"), group_a_percent);
+		javaScriptExe("window.scrollBy(0,290);");
 		clickElement(By.xpath("//input[@value='Create']"));
 		clickElement(By.xpath("//*[@class='box widgets_"+group+"']//em[.='"+page+"']/following::select[@name='self[PRODUCT-"+group+"-0]']/option[.='"+widget+"']"));
 

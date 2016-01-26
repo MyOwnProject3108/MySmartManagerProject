@@ -58,8 +58,8 @@ Feature: S-Merchandising Functional Tests
 
     Examples: Rule Positions
       | RuleNumber | Rule             | Position |
-      | 2          | (r.saleprice<20) | 2        |
-      | 3          | (r.saleprice<20) | 3        |
+      | 2          | (r.saleprice<20) | 4       |
+   #   | 3          | (r.saleprice<20) | 3        |
 
   @selectrule
   Scenario: Create Simple Merchandising Campaign using select list for the rules

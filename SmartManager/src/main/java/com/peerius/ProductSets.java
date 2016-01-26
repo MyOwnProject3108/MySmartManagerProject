@@ -1,44 +1,62 @@
 package com.peerius;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
 
 public class ProductSets extends Context {
-
+	
+	
 	public static void createProductSet(String title, String productPrefix,	String number) {
-
-		clickButton("Add product set");
-		verifyPageText(By.tagName("h4"), "Define product set");
-		setText(By.name("name"), title);
+		
+		By tagLocator = By.cssSelector(".tags-list.context-menu li");
+		clickButton("Create a product set");
+		verifyPageText(By.tagName("h4"), "Existing product sets");
+		setText(By.id("sku_title"), title);
 
 		int numberOfProduct = Integer.parseInt(number);
 
-		setText(By.className("visual-input"), productPrefix);
+		setText(By.id("prodsettextarea"), productPrefix);
 		pressKey("Enter");
-		elementIsPresent(By.xpath("//ul[contains(@class,'tags')]"));
-		List<WebElement> products = driverInstance.findElements(By.cssSelector(".tags-list.context-menu"));
+		
+		
+		List<WebElement> products = new WebDriverWait(driverInstance, 20L).pollingEvery(2L, TimeUnit.SECONDS)
+				.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(tagLocator));
+				
+	 try{
 
-		for (int i = 0; i < numberOfProduct; i++) {
+		for (int i = 1; i <= numberOfProduct; i++) {
 
 			for (WebElement product : products) {
+				
+				Actions selectProduct = new Actions(driverInstance);
+				selectProduct.moveToElement(product,50,50).click(product).build().perform();
+				pressKey("Enter");
+				clickButton("Save product set");
+						
+				}			
+		}}
+	    catch(StaleElementReferenceException e){
+	    	
+	    	System.out.println("---------------Stale Element Caught ---------------------- And.... Dealt With");
+	    	
+	    }
 
-				Actions doubleClick = new Actions(driverInstance);
-
-				doubleClick.moveToElement(product).doubleClick().sendKeys(Keys.ENTER).build().perform();
-			}
-		}
-		clickLink("Finished");
-
-		clickButton("Save product set");
-
+		
+		
 	}
+	
+
 	
 
 	public static void createProductSetCSV(String title, String filePath) {
