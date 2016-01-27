@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 
 import com.peerius.PeeriusDebugInfo;
+import com.peerius.SmartContent;
 import com.peerius.SmartMail;
 import com.peerius.SmartMerchandising;
 import com.peerius.utils.Context;
@@ -12,6 +13,7 @@ import com.peerius.utils.Navigation;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 public class EndToEndSteps extends PeeriusDebugInfo {
 
@@ -147,10 +149,43 @@ public class EndToEndSteps extends PeeriusDebugInfo {
 		
 	}
 
-	   
+	@Then("^I should see campaign name \"(.*)\" and Rule \"(.*)\" in the debug$")
+	public void i_should_see_campaign_name_and_Rule_new_in_the_debug(String campaignName, String rule) throws Throwable {
+		PeeriusDebugInfo.verifyContent(campaignName,rule);
+	    
+	}
 	
+	@Given("^I search for \"([^\"]*)\"$")
+	public void i_search_for(String keyword) throws Throwable {
+	    
+		setText(By.id("sb_form_q"), keyword);
+		pressKey("Enter");
+	}
+
+	@When("^I click on the organic link for floridatix website$")
+	public void i_click_on_the_organic_link_for_floridatix_website() throws Throwable {
+	    
+		clickLink("Book Cheap Orlando & Florida Park Tickets - FloridaTix");
+	}
 	
+	@Given("^I add the product to the basket$")
+	public void i_add_the_product_to_the_basket() throws Throwable {
+		SmartContent.addToBasket();
 	
+	}
+	
+	@Given("^I delete \"([^\"]*)\" cookie$")
+	public void i_delete_cookie(String sessionCookie) throws Throwable {
+	    driverInstance.manage().deleteCookieNamed(sessionCookie);
+	}
+	
+/* parameterized version	
+ * @When("^I click on the organic link for \"([^\"]*)\" website$")
+	public void i_click_on_the_organic_link_for_website(String serchTerm) throws Throwable {
+	    
+		Context.clickElement(By.xpath(" (//h2/a[contains(., '"+ serchTerm +"')])[1]"));
+	}
+*/	
 	}
 	
 		

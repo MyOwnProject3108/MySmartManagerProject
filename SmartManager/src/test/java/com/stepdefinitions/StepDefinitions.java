@@ -1,13 +1,13 @@
 package com.stepdefinitions;
 
-import org.openqa.selenium.By;
 
+import org.openqa.selenium.By;
 import com.peerius.ProductSets;
+import com.peerius.SmartContent;
 import com.peerius.SmartMail;
 import com.peerius.SmartMerchandising;
 import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
-
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -775,12 +775,277 @@ public class StepDefinitions extends SmartMerchandising {
 			elementNotPresent(By.xpath("//ul[@id='in-use']//i"));
 
 }
-		//Use to Wait for Element with ClassName
+		
 		@Then("^I Wait for Element \"(.*?)\"$")
 		public void i_Wait_for_Element(String className) throws Throwable {
 			elementIsPresent(By.xpath("//*[contains(@class,'"+className+"')]"));
 		  
 		}
+		
+		
+		@Then("^I should be on Content \"([^\"]*)\" page$")
+		public void i_should_be_on_Content_page(String page) throws Throwable {
+			verifyContentPage(page);
+		}
+		
+		@When("^I Set Campaign Name as \"([^\"]*)\"$")
+		public void i_Set_Campaign_Name_as(String camapaignName) throws Throwable {
+		    setText(By.id("name"), camapaignName);
+		}
+		
+		@When("^I Select Placement \"([^\"]*)\"$")
+		public void i_Select_Placement(String placement) throws Throwable {
+			clickElement(By.xpath("//*[@id='htmlInjectionPoint']/option[contains(text(), '"+placement+"')]"));
+		}
+		
+					
+			@Given("^I Select Creative Rule \"([^\"]*)\" in \"([^\"]*)\" row$")
+			public void i_Select_Creative_Rule_in_row(String criteria, String row) throws Throwable {
+				clickElement(By.xpath("//*[@id='traffic']/table//tr["+row+"]//div[contains(@class, 'rules-panel')]//ul//div[contains(@class,'rule-content')]//option[contains(text(),'"+criteria+"')]"));
+			}
+			
+			
+		@When("^I Create Simple Content Campaign \"([^\"]*)\" with \"([^\"]*)\" for \"([^\"]*)\" of \"([^\"]*)\" and \"([^\"]*)\"$")
+		public void i_Create_Simple_Content_Campaign_with_for_of_and(String name, String placement, String creative, String size, String rule) throws Throwable {
+		    SmartContent.createSimpleCampaign(name,placement,creative,size,rule);
+		}
+		
+		@When("^I Create Simple Content Campaign \"([^\"]*)\" with \"([^\"]*)\" for \"([^\"]*)\" of \"([^\"]*)\" for \"([^\"]*)\" with \"([^\"]*)\" and \"([^\"]*)\"$")
+		public void i_Create_Simple_Content_Campaign_with_for_of_for_with_and(String name, String placement, String creative, String size, String rule, String operator, String attribute) throws Throwable {
+			SmartContent.createSimpleCampaignWithCondition(name,placement,creative,size,rule,operator,attribute);
+		}
+				
+		@Given("^I goto Content Campaign \"([^\"]*)\"$")
+		public void i_goto_Content_Campaign(String campaignName) throws Throwable {
+		  SmartContent.gotoContentCampaign(campaignName);
+		}
+		
+		@When("^I Set ip as \"([^\"]*)\"$")
+		public void i_Set_ip_as(String ip) throws Throwable {
+		    setText(By.id("ipTraps"), ip);
+		}
+		
+		@Given("^I Delete Content Campaign \"([^\"]*)\"$")
+		public void i_Delete_Content_Campaign(String name) throws Throwable {
+		    SmartContent.deleteContentCampaign(name);
+		}
+		
+		@Then("^I should not see Content Campaign \"([^\"]*)\"$")
+		public void i_should_not_see_Content_Campaign(String name) throws Throwable {
+		    Navigation.gotoURL("smartmanager/adaptivecontent/list.page");
+		    elementNotPresent(By.linkText(name));
+		}
+		
+		@Given("^I Activate Content Campaign \"([^\"]*)\"$")
+		public void i_Activate_Content_Campaign(String name) throws Throwable {
+		   SmartContent.activateContentCampaign(name);
+		}
 
+		@Then("^Content Campaign should be Activated$")
+		public void content_Campaign_should_be_Activated() throws Throwable {
+			Navigation.refreshPage();
+			elementIsPresent(By.xpath("//td//a[text()='Desktop_slide1']//following::td//a[@data-original-title=' Pause it ']"));
+		   
+		}
+				
+		@Given("^I Duplicate Content Campaign \"([^\"]*)\"$")
+		public void i_Duplicate_Content_Campaign(String name) throws Throwable {
+		   SmartContent.duplicateContentCampaign(name);
+		}
+
+		@Then("^I Should See Content Campaign \"([^\"]*)\" on list Page$")
+		public void i_Should_See_Content_Campaign_on_list_Page(String name) throws Throwable {
+		 SmartContent.verifyContentCampaign(name);
+		}
+		
+		@Given("^I Edit Content Campaign \"([^\"]*)\"$")
+		public void i_Edit_Content_Campaign(String name) throws Throwable {
+		    SmartContent.editContentCampaign(name);
+		}
+		
+		@Given("^I say No to Delete Content Campaign \"([^\"]*)\"$")
+		public void i_say_No_to_Delete_Content_Campaign(String name) throws Throwable {
+		    SmartContent.doNotDeleteContentCampaign(name);
+		}
+		
+		@Then("^Content Campaign \"([^\"]*)\" should not be deleted$")
+		public void content_Campaign_should_not_be_deleted(String name) throws Throwable {
+				elementIsPresent(By.xpath("//td//a[text()='Desktop_slide1']"));
+		}
+
+		@Given("^I Enter criteria \"([^\"]*)\"$")
+		public void i_Enter_criteria(String text) throws Throwable {
+		     setText(By.xpath("//div/textarea[contains(@name, 'creativeConfigs.itemsForView[0].expression')]"), text);
+		}
+		
+		@Then("^I Set Criteria \"(.*?)\"$")
+		public void i_Set_Criteria_new(String rule) throws Throwable {
+		   setText(By.xpath("//div/textarea[contains(@name,'creativeConfigs.itemsForView[0].expression')]"), rule);
+		}
+		
+		@Given("^I select creative option \"([^\"]*)\"$")
+		public void i_select_creative_option(String rule) throws Throwable {
+				clickElement(By.xpath("//option[.='"+rule+"']"));
+				}
+
+		@Given("^I select conditional operator \"([^\"]*)\"$")
+		public void i_select_conditional_operator(String operator) throws Throwable {
+				clickElement(By.xpath("//div/select[contains(@class, 'exp_op operatoroptions')]/option[.='"+operator+"']"));
+				  
+		}
+		
+		@Given("^I Enter Criteria rule Text \"([^\"]*)\"$")
+		public void i_Enter_Criteria_rule_Text(String rule) throws Throwable {
+		//	setText(By.xpath("//div[contains(@class, 'autosearch')]"), text);
+			clickElement(By.xpath("//div[contains(@class, 'autosearch')]//input"));
+			setText(By.xpath("//div[contains(@class, 'autosearch ')]/input"), rule);
+						
+		//	clickElement(By.xpath("//div[contains(@class, 'autosearch')]//input"));
+		//	clickElement(By.xpath("//div[contains(@class, 'autosearch')]//li[.='"+rule+"']"));
+			
+		
+		}
+		
+		@Given("^I select placement option\"([^\"]*)\"$")
+		public void i_select_placement_option(String placement) throws Throwable {
+		    
+			Context.clickElement(By.xpath("//option[.='"+ placement +"']"));
+		}
+		
+		@Given("^I click on \"([^\"]*)\" for the Creative$")
+		public void i_click_on_for_the_Creative(String arg1) throws Throwable {
+		   clickElement(By.xpath("//*[@id='traffic']//tfoot//span"));
+		}
+				
+		@Given("^I select Creative \"([^\"]*)\" in \"([^\"]*)\" index$")
+		public void i_select_Creative_in_index(String creativeName, String index) throws Throwable {
+			clickElement(By.xpath("//select[@name='creativeConfigs.itemsForView["+index+"].creative']/option[.='"+creativeName+"']")); 
+						
+		}
+
+		@Given("^I select Creative Size \"([^\"]*)\" in \"([^\"]*)\" index$")
+		public void i_select_Creative_Size_in_index(String creativeSize, String index) throws Throwable {
+			clickElement(By.xpath("//select[contains(@name, 'creativeConfigs.itemsForView["+index+"].content')]/option[contains(text(), '"+creativeSize+"')]"));
+		}
+
+
+		@Then("^I Should see \"([^\"]*)\" in \"([^\"]*)\" index$")
+		public void i_Should_see_in_index(String creativeName, String index) throws Throwable {
+			elementIsPresent(By.xpath("//select[@name='creativeConfigs.itemsForView["+index+"].creative']/option[.='"+creativeName+"']"));
+		}
+		
+		
+		@Given("^I select \"([^\"]*)\" with \"([^\"]*)\" for the creative$")
+		public void i_select_with_for_the_creative(String option, String value) throws Throwable {
+		    selectDropList(By.xpath(option), value);
+		}
+		
+		//SmartContent steps: By Ana
+
+		@Then("^I should be on creative \"(.*?)\" page$")
+		public void i_should_be_on_Creative_page(String page) throws Throwable 
+		{
+		   	Context.verifyContentPage(page);
+		}
+		
+		@When("^I add a new creative with field values name \"(.*?)\" image url \"(.*?)\" link url \"(.*?)\" category \"(.*?)\" attribute \"(.*?)\" and tag \"(.*?)\"$")
+		public void i_add_a_new_creative_with_field_values_name_image_url_link_url_category_attribute_and_tag(String name, String imgUrl, String linkUrl, String relCat, String relAtt, String tag) throws Throwable
+		{
+		    SmartContent.addNewCreative(name, imgUrl, linkUrl, relCat, relAtt, tag);
+		}
+		
+		@Then("^I should see creative \"(.*?)\" on Configure Creatives Page$")
+		public void i_should_see_creative_on_Configure_Creatives_Page(String creative) throws Throwable 
+		{
+		   	SmartContent.verifyCreative(creative);
+		}
+
+		@Given("^I goto creative \"(.*?)\"$")
+		public void i_goto_creative(String creative) throws Throwable 
+		{
+		    SmartContent.goToCreative(creative);
+		}
+
+		@When("^I edit creative \"(.*?)\"$")
+		public void i_edit_creative(String creative) throws Throwable 
+		{
+		    SmartContent.editCreative(creative);
+		}
+		
+		@When("^I copy creative \"(.*?)\"$")
+		public void i_copy_creative(String creative) throws Throwable 
+		{
+		    SmartContent.duplicateCreative(creative);
+		}
+		
+		@When("^I delete creative \"(.*?)\"$")
+		public void i_delete_creative(String creative) throws Throwable 
+		{
+		    SmartContent.deleteCreative(creative);
+		}
+		
+		@When("^I select option \"(.*?)\" in confirmation dialog$")
+		public void i_select_option_in_confirmation_dialog(String option) throws Throwable 
+		{
+			clickElement(By.xpath("//div[contains(@class, '"+option+"')]"));
+		}
+
+		@Then("^I should not see creative \"(.*?)\" on Configure Creatives Page$")
+		public void i_should_not_see_creative_on_Configure_Creatives_Page(String creative) throws Throwable 
+		{
+			elementNotPresent(By.linkText(creative));
+		}
+		
+		@Given("^I enter name as \"(.*?)\"$")
+		public void i_enter_name_as(String name) throws Throwable 
+		{
+		    setText(By.id("name"), name);
+		}
+
+		@Given("^I enter image url as \"(.*?)\"$")
+		public void i_enter_image_url_as(String imgUrl) throws Throwable 
+		{
+			setText(By.id("image0"), imgUrl );
+		}
+
+		@Given("^I enter link url as \"(.*?)\"$")
+		public void i_enter_link_url_as(String linkUrl) throws Throwable 
+		{
+			setText(By.id("link0"), linkUrl);
+		}
+		
+		@Given("^I click in the in the img url field and then in link url field$")
+		public void i_click_in_the_in_the_img_url_field_and_then_in_link_url_field() throws Throwable 
+		{
+		    clickElement(By.id("image0"));
+		    clickElement(By.id("link0"));
+		}
+	
+		@Then("^creative preview should be visible$")
+		public void creative_preview_should_be_visible() throws Throwable 
+		{
+		   elementIsPresent(By.tagName("img"));
+		}
+		
+		@Then("^creative preview should not be visible$")
+		public void creative_preview_should_not_be_visible() throws Throwable 
+		{
+		    elementNotPresent(By.tagName("img")); 
+		    verifyInnerHTML(By.xpath("//button[contains(@class,'preview')]"), "Show Preview");		    
+		}
+				
+		@When("^I remove html from advanced html field$")
+		public void i_remove_html_from_advanced_html_field() throws Throwable 
+		{
+		    Context.setText(By.cssSelector(".htmlcode"), "");
+		}
 		
 }
+		
+
+		
+		
+		
+
+		
+
