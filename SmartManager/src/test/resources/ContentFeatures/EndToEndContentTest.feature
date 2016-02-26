@@ -305,25 +305,3 @@ Feature: End to End Tests For Smart Content
   	Given I goto URL "www.floridatix.com/orlando-tours"
   	Then I should see campaign name "E2EAutoCampaignWithRule" and Rule "(currentcategory)" in the debug
     
-  
-  	
-  	
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
