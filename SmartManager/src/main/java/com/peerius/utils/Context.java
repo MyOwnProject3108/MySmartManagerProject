@@ -70,7 +70,7 @@ public class Context extends COREManager {
 		
 			droplistOptions.selectByVisibleText(option);
 						
-			Assert.assertTrue(droplistOptions.getAllSelectedOptions().contains(option));
+			Assert.assertTrue(droplistOptions.getFirstSelectedOption().getText().contains(option));
 				
 	}
 	
