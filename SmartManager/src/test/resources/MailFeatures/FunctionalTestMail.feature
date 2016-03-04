@@ -7,8 +7,8 @@ Feature: S-Mail Functional Tests
 
   @CreateMailCampaign
   Scenario: Create a simple Mail Campaign
-    Given I click on "Create a new campaign" option in "Mail"
-    Then I should be on Mail "Create a New Campaign" page
+    Given I click on "New campaign" option in "Mail"
+    Then I should be on Mail "New campaign" page
     And I Create Simple Mail Campaign with name "AutoCreate"
     Then I should see Message "Successfully saved"
     Then I Should See Mail Campaign "AutoCreate" on Mail Overview Page
@@ -30,6 +30,7 @@ Feature: S-Mail Functional Tests
     Given I goto Mail Campaign "AutoCreate"
     When I Set style with value "200" for clientHeight and ClientWidth
     And I click on button "Save campaign"
+    Then I should see Message "Successfully saved"
     When I goto Mail Campaign "AutoCreate"
     Then I should see the style applied with value "200" in "height" in Widget Content Preview
     Then I should see the style applied with value "200" in "width" in Widget Content Preview
@@ -116,6 +117,7 @@ Feature: S-Mail Functional Tests
     Given I goto Mail Campaign "AutoCreate"
     And I click on link "2. Configuration"
     And I click on button "Next"
+    When I select option "Custom"
     And I click on button " Generate code"
     Then I should see the HTML code for Email Recs
 
@@ -125,8 +127,8 @@ Feature: S-Mail Functional Tests
     When I set Custom Email Attribute "genre"
     And I click on button "Save custom attributes"
     Then I should see Message "Successfully saved"
-    And I click on link "Define product sets"
-    And I click on link "Custom email attributes"
+    And I click on link "Product sets"
+    And I click on link "Customise email attributes"
     Then I should see the saved Custom Email Attribute setting
     And I click on button "genre"
     And I click on button "Save custom attributes"
@@ -147,8 +149,8 @@ Feature: S-Mail Functional Tests
   #Error validation scenarios start here
   @createMailvalidation
   Scenario Outline: Create Mail Message Validation
-    Given I click on "Create a new campaign" option in "Mail"
-    Then I should be on Mail "Create a New Campaign" page
+    Given I click on "New campaign" option in "Mail"
+    Then I should be on Mail "New campaign" page
     When I Set Name as "<Name>"
     And I click on button "Save campaign"
     Then I should see Message "<Message>"
@@ -185,6 +187,7 @@ Feature: S-Mail Functional Tests
     Given I goto Mail Campaign "AutoCreate"
     And I click on link "2. Configuration"
     And I click on button "Next"
+    When I select option "Custom"
     And I Enter Text "" in Email Placeholder
     And I click on button " Generate code"
 

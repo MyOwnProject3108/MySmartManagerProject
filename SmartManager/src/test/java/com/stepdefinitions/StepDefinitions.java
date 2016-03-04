@@ -2,12 +2,14 @@ package com.stepdefinitions;
 
 
 import org.openqa.selenium.By;
+
 import com.peerius.ProductSets;
 import com.peerius.SmartContent;
 import com.peerius.SmartMail;
 import com.peerius.SmartMerchandising;
 import com.peerius.utils.Context;
 import com.peerius.utils.Navigation;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -31,7 +33,7 @@ public class StepDefinitions extends SmartMerchandising {
 
 	@When("^I click on \"([^\"]*)\" option in \"([^\"]*)\"$")
 	public void I_click_on_option_in(String parent, String child) throws Throwable {
-		selectMenuOption(child, parent);
+		selectMainMenuOption(child,parent);
 
 	}
 
@@ -232,7 +234,7 @@ public class StepDefinitions extends SmartMerchandising {
 	
 	@Then("^I Should verify Product Sets \"(.*?)\"$")
 	public void i_Should_verify_Product_Sets(String name) throws Throwable {
-		SmartMerchandising.selectMenuOption("Merchandising", "Define product sets");
+		SmartMerchandising.selectMainMenuOption("Merchandising", "Product sets");
 		clickLink(name);
 		elementIsPresent(By.xpath("//div[@class='visual-tags']//descendant::div"));
 		
@@ -245,13 +247,13 @@ public class StepDefinitions extends SmartMerchandising {
 
 	@Then("^Product Set \"(.*?)\" Should be Deleted$")
 	public void product_Set_Should_be_Deleted(String productSet) throws Throwable {
-	 SmartMerchandising.selectMenuOption("Merchandising", "Define product sets");
+	 SmartMerchandising.selectMainMenuOption("Merchandising", "Product sets");
 	 elementNotPresent(By.linkText(productSet));
 	}
 	
 	@Then("^Product Set \"(.*?)\" is not Deleted$")
 	public void product_Set_is_not_Deleted(String productset) throws Throwable {
-		SmartMerchandising.selectMenuOption("Merchandising", "Define product sets");
+		SmartMerchandising.selectMainMenuOption("Merchandising", "Product sets");
 		elementIsPresent(By.linkText(productset));
 	}
 

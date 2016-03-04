@@ -50,14 +50,18 @@ public class Context extends COREManager {
 				.visibilityOfElementLocated(By.linkText(link)));
 		}
 		
-		catch(Exception e){
+		catch(NoSuchElementException e){
 			wait =  (WebElement) new WebDriverWait(COREManager.driverInstance,
 					COREManager.elementWaitTime).until(ExpectedConditions
 							.visibilityOfElementLocated(By.partialLinkText(link)));
 		}
+		
 							
 		Actions scrollToView = new Actions(driverInstance);
 		scrollToView.moveToElement( wait).click().build().perform();
+		
+		
+		
 	}
 
 	public static void selectDropList(By locator, String option) {
@@ -85,53 +89,36 @@ public class Context extends COREManager {
 		
 	}
 	
-	public static void selectMenuOption(String mainMenuLabel, String subMenu) {
+	
+	public static void selectMainMenuOption(String mainMenuLabel, String subMenu){
 		
-		mainMenuLabel = new String(mainMenuLabel).toLowerCase();
-				
-		Actions hover = new Actions(driverInstance);
-		String mainMenu = "//li[contains(@section,'" + mainMenuLabel + "')]";
-		
+	   Actions hover = new Actions(driverInstance);
+	   WebElement mainOption = new WebDriverWait(driverInstance, 10)
+		.pollingEvery(5, TimeUnit.SECONDS).until(
+				ExpectedConditions.visibilityOfElementLocated(By.linkText(mainMenuLabel)));		
+	   hover.moveToElement(mainOption).build().perform();
+	   
+	   
 		if(browserName.equalsIgnoreCase("chrome")){
 			
-					WebElement menu = new WebDriverWait(driverInstance, elementWaitTime).
-					until(ExpectedConditions.presenceOfElementLocated(By.xpath(mainMenu+"/a")));
-					menu.click();
-					clickLink("Create a new campaign");
-			
-		}
-		else{
-
-		
-
-		WebElement menu = new WebDriverWait(driverInstance, elementWaitTime).
-				until(ExpectedConditions.presenceOfElementLocated(By.xpath(mainMenu)));
-		hover.moveToElement(menu).build().perform();	
-
-		WebElement subMenuOptions =  new WebDriverWait(driverInstance, elementWaitTime).
-				until(ExpectedConditions.visibilityOfElementLocated
-				(By.xpath("//li[contains(@section,'" + mainMenuLabel + "')]"
-						+ "//parent::a[text()='" + subMenu + "']")));
-
-	
-		hover.moveToElement(menu).build().perform();
-
-		WebElement waitForMainMenu = new WebDriverWait(driverInstance, 10)
-				.pollingEvery(5, TimeUnit.SECONDS).until(
-						ExpectedConditions.visibilityOf(subMenuOptions));
-
-		if (waitForMainMenu != null) {
-
-			hover.moveToElement(waitForMainMenu).click().build().perform();
-
-		} else {
-
-			Assert.fail("Failed Selecting Option" + mainMenuLabel + ">"
-					+ subMenu); 
-		}
-		}
+			WebElement menu = new WebDriverWait(driverInstance, elementWaitTime).
+			until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[contains(@section,'"+mainMenuLabel.toLowerCase()+"')]/a")));
+			menu.click();
+			clickLink("New campaign");
 	}
-
+  
+		else{
+			
+			WebElement subOption = new WebDriverWait(driverInstance, 10)
+		
+		.pollingEvery(5, TimeUnit.SECONDS).until(
+				ExpectedConditions.visibilityOfElementLocated(By.linkText(subMenu)));		
+	     
+	   hover.click(subOption).build().perform();
+		}
+}
+	
+	
 	public static void clickButton(String name) {
 
 		WebElement button = COREManager.driverInstance.findElement(By
@@ -244,7 +231,7 @@ public class Context extends COREManager {
 
 		}
 
-		if (page.equalsIgnoreCase("Create a New Campaign")) {
+		if (page.equalsIgnoreCase("New campaign")) {
 
 			boolean newCampaign =currentPage.until(ExpectedConditions.urlContains("edit"));
 			

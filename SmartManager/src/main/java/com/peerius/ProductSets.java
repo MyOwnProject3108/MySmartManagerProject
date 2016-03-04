@@ -21,7 +21,7 @@ public class ProductSets extends Context {
 		
 		By tagLocator = By.cssSelector(".tags-list.context-menu li");
 		clickButton("Create a product set");
-		verifyPageText(By.tagName("h4"), "Existing product sets");
+		verifyPageText(By.tagName("h4"), "Manage your product sets");
 		setText(By.id("sku_title"), title);
 
 		int numberOfProduct = Integer.parseInt(number);
@@ -79,7 +79,7 @@ public class ProductSets extends Context {
 
 	public static void gotoProductSet(String name) {
 
-		SmartMerchandising.selectMenuOption("Merchandising", "Define product sets");
+		SmartMerchandising.selectMainMenuOption("Merchandising", "Product sets");
 		elementIsPresent(By.linkText(name));
 		clickLink(name);
 
