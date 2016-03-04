@@ -75,7 +75,7 @@ public class SmartMerchandising extends Context {
 				
 		Navigation.gotoURL("/smartmanager/merchandising/list.page");
 		elementIsPresent(By.linkText(campaign));
-		clickElement(By.xpath("//td/a//small[text()='"+campaign+"']//following::td//a[@data-original-title='Duplicate']"));
+		clickElement(By.xpath("//td/a[text()='"+campaign+"']//following::td//a[@data-original-title='Duplicate']"));
 		Navigation.refreshPage();
 		elementIsPresent(By.linkText(campaign+" copy"));
 

@@ -20,7 +20,7 @@ public class ProductSets extends Context {
 	public static void createProductSet(String title, String productPrefix,	String number) {
 		
 		By tagLocator = By.cssSelector(".tags-list.context-menu li");
-		clickButton("Create a product set");
+		clickLink("Create a product set");
 		verifyPageText(By.tagName("h4"), "Manage your product sets");
 		setText(By.id("sku_title"), title);
 

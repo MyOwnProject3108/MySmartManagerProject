@@ -60,9 +60,9 @@ Feature: End to End Tests for Merchandising
 
   @setupproductset
   Scenario: Setup simple rule with productset for End-End scenario
-   # When I click on "Product sets" option in "Merchandising"
-    #And I Create Product Set "TestSetE2E" and products number "2" with Suffix "D"
-   And I Create Simple Campaign with name "E2EProductSet"
+    When I click on "Product sets" option in "Merchandising"
+    And I Create Product Set "TestSetE2E" and products number "2" with Suffix "D"
+    And I Create Simple Campaign with name "E2EProductSet"
     And I select option "Handpick"
     And I select option "Product set"
     And I select operator "equals to"
