@@ -113,7 +113,7 @@ public class SmartContent extends Context
 		
 	}
 
-	public static void addNewCreative(String name, String imgUrl, String linkUrl, String relCat, String relAtt, String tag)
+	public static void addNewCreative(String name, String imgUrl, String linkUrl, String relCat, String relAtt, String tag) throws InterruptedException
 	{
 		setText(By.id("name"), name);
 		
@@ -138,9 +138,7 @@ public class SmartContent extends Context
 		
 		clickElement(By.xpath("(//input[@class='visual-input'])[2]"));
 		
-		Context.setText(By.xpath("(//input[@class='visual-input'])[2]"), "location");
-		
-		List<WebElement> attributes = new WebDriverWait(driverInstance,20L)
+		List<WebElement> attributes = new WebDriverWait(driverInstance,10L)
 			.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".attr_list ul.visual-list li")));  //div[contains(@class,'attr_list')]//ul[@class='visual-list context-menu hide']/li
 		
 		for (WebElement attribute: attributes)
@@ -148,19 +146,20 @@ public class SmartContent extends Context
 			if(attribute.getText().equalsIgnoreCase(relAtt))
 			{
 				attribute.click();
+				Thread.sleep(1000);
 			}
 						
 		}
 		
-		
-		clickElement(By.id("name"));
-		//clickElement(By.xpath("link0"));
+		//clickElement(By.id("name")); the name field was hidden behind the top bar so test was failing so commented it out
+		clickElement(By.id("link0"));
 		
 		clickElement(By.xpath("(//input[@class='visual-input'])[3]"));
 		
 		setText(By.xpath("(//input[@class='visual-input'])[3]"), tag);
 		
-		clickElement(By.id("name"));
+		clickElement(By.id("link0"));
+		//clickElement(By.id("name")); the name field was hidden behind the top bar so test was failing so commented it out
 		
 		clickButton("Save creative");
 	
