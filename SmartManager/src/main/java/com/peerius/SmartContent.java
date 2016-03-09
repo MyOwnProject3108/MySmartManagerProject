@@ -138,7 +138,9 @@ public class SmartContent extends Context
 		
 		clickElement(By.xpath("(//input[@class='visual-input'])[2]"));
 		
-		List<WebElement> attributes = new WebDriverWait(driverInstance,10L)
+		Context.setText(By.xpath("(//input[@class='visual-input'])[2]"), "location");
+		
+		List<WebElement> attributes = new WebDriverWait(driverInstance,20L)
 			.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".attr_list ul.visual-list li")));  //div[contains(@class,'attr_list')]//ul[@class='visual-list context-menu hide']/li
 		
 		for (WebElement attribute: attributes)
@@ -150,7 +152,9 @@ public class SmartContent extends Context
 						
 		}
 		
+		
 		clickElement(By.id("name"));
+		//clickElement(By.xpath("link0"));
 		
 		clickElement(By.xpath("(//input[@class='visual-input'])[3]"));
 		
