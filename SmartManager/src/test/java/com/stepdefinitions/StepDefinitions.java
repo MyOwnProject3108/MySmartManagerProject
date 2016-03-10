@@ -842,23 +842,12 @@ public class StepDefinitions extends SmartMerchandising {
 		public void i_Activate_Content_Campaign(String name) throws Throwable {
 		   SmartContent.activateContentCampaign(name);
 		}
-
-	/*	@Then("^Content Campaign should be Activated$")
-		public void content_Campaign_should_be_Activated() throws Throwable {
-		//	Navigation.refreshPage();
-		//	elementIsPresent(By.xpath("//td//a[text()='Desktop_slide1']//following::td//a[@data-original-title=' Pause it ']"));
-			elementIsPresent(By
-					.xpath("//td//a[@data-original-title='Pause it']"));
-		  		}*/
 		
 	    @Then("^Content Campaign \"([^\"]*)\" should be Activated$")
 		public void content_Campaign_should_be_Activated(String campaignName) throws Throwable {
 			elementIsPresent(By.xpath("//td//a[text()= '"+campaignName+"']//following::td//a[@data-original-title=' Pause it ']"));
 		}
-		
-		
-		
-				
+						
 		@Given("^I Duplicate Content Campaign \"([^\"]*)\"$")
 		public void i_Duplicate_Content_Campaign(String name) throws Throwable {
 		   SmartContent.duplicateContentCampaign(name);

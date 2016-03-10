@@ -80,8 +80,7 @@ public class SmartContent extends Context
 		elementIsPresent(By.linkText(name));
 		clickElement(By.xpath("//td//small/a[text()= '"+name+"']//following::td//a[@data-original-title=' Activate it ']"));
 		Thread.sleep(1000);
-	//	verifyInnerHTML(By.tagName("div"),"Switched on");
-		verifytextContent(By.tagName("div"), "Switched on");
+		verifyErrorMessage(By.className("notification"), "Switched on");
 	
 		
 	}
