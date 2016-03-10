@@ -52,7 +52,7 @@ Feature: Smart Content Functional tests
   Scenario: Activate Content Campaign
     Given I goto Content Campaign "AutoContentCampaign"
     And I Activate Content Campaign "AutoContentCampaign"
-    Then Content Campaign should be Activated
+    Then Content Campaign "AutoContentCampaign" should be Activated
 
   @DuplicateContentcampaign
   Scenario: Duplicate Content Campaign

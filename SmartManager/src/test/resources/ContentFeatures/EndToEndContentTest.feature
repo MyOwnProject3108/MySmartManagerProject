@@ -33,7 +33,7 @@ Feature: End to End Tests For Smart Content
   Scenario: Activate Content Campaign
     Given I goto Content Campaign "E2EAutoCampaignNoCondition"
     And I Activate Content Campaign "E2EAutoCampaignNoCondition"
-    Then Content Campaign should be Activated
+   Then Content Campaign "E2EAutoCampaignNoCondition" should be Activated
 
   @E2E_CreateCampaignWithRule
   Scenario Outline: Create Simple Content Campaign with Condition
@@ -50,7 +50,7 @@ Feature: End to End Tests For Smart Content
   Scenario: Activate Content Campaign
     Given I goto Content Campaign "E2EAutoCampaignWithRule"
     And I Activate Content Campaign "E2EAutoCampaignWithRule"
-    Then Content Campaign should be Activated
+   Then Content Campaign "E2EAutoCampaignWithRule" should be Activated
 
   @E2EVisitorNew
   Scenario: Verify visitor=new rule is applied on the client website

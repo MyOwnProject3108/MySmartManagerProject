@@ -75,11 +75,14 @@ public class SmartContent extends Context
 				
 	}
 
-	public static void activateContentCampaign(String name) {
+	public static void activateContentCampaign(String name) throws InterruptedException {
 		Navigation.gotoURL("smartmanager/adaptivecontent/list.page");
 		elementIsPresent(By.linkText(name));
 		clickElement(By.xpath("//td//small/a[text()= '"+name+"']//following::td//a[@data-original-title=' Activate it ']"));
-		verifyInnerHTML(By.tagName("div"),"Switched on");
+		Thread.sleep(1000);
+	//	verifyInnerHTML(By.tagName("div"),"Switched on");
+		verifytextContent(By.tagName("div"), "Switched on");
+	
 		
 	}
 
